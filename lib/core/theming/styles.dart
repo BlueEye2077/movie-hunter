@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_hunter/core/theming/colors.dart';
 import 'font_weight_helper.dart';
 
 class TextStyles {
@@ -50,6 +51,7 @@ class TextStyles {
     fontSize: 18.sp,
     fontWeight: FontWeightHelper.semiBold,
     letterSpacing: defaultLetterSpacing,
+    color: AppColors.textWhite,
   );
 
   static TextStyle font18Medium = GoogleFonts.montserrat(
@@ -94,6 +96,7 @@ class TextStyles {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.medium,
     letterSpacing: defaultLetterSpacing,
+    color: AppColors.textGrey,
   );
 
   static TextStyle font14Regular = GoogleFonts.montserrat(
