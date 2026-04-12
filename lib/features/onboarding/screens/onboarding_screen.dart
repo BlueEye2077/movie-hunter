@@ -29,7 +29,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     } else {
       // TODO: Navigate to subsequent flow (e.g. login/home)
-      debugPrint('Navigate out of onboarding!');
+      Navigator.of(context).pushReplacementNamed('/home');
     }
   }
 
