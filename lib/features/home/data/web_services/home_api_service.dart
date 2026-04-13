@@ -11,6 +11,7 @@ abstract class HomeApiService {
   factory HomeApiService(Dio dio, {String? baseUrl}) =
       _HomeApiService; // Generated
 
+  // Get upcoming movies
   @GET(HomeApiConstants.upcoming)
   Future<MovieApiResponse> getUpcomingMovies(
     @Header("Authorization") String token,
@@ -24,6 +25,7 @@ abstract class HomeApiService {
 }
 
 
+// Create and setup dio
 Dio createAndSetupDio() {
   Dio dio = Dio();
 

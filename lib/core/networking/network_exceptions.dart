@@ -112,7 +112,8 @@ abstract class NetworkExceptions with _$NetworkExceptions {
               networkExceptions = const NetworkExceptions.unexpectedError();
               break;
             case DioExceptionType.connectionError:
-              networkExceptions = const NetworkExceptions.noInternetConnection();
+              networkExceptions =
+                  const NetworkExceptions.noInternetConnection();
               break;
           }
         } else if (error is SocketException) {

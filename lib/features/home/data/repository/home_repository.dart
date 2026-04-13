@@ -11,6 +11,7 @@ class HomeRepository {
 
   final token = ApiConstants.apiKey;
 
+  // Get upcoming movies
   Future<ApiResult<MovieApiResponse>> getUpcomingMovies() async {
     try {
       var respone = await homeApiService.getUpcomingMovies(token);
@@ -20,6 +21,7 @@ class HomeRepository {
     }
   }
 
+  // Get popular movies
   Future<ApiResult<MovieApiResponse>> getPopularMovies() async {
     try {
       var respone = await homeApiService.getPopularMovies(token);
