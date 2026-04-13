@@ -4,7 +4,7 @@ import 'package:movie_hunter/core/di/dependency_injection.dart';
 import 'package:movie_hunter/features/home/logic/cubit/upcoming_movies_cubit.dart';
 import 'package:movie_hunter/features/home/logic/cubit/popular_movies_cubit.dart';
 import 'package:movie_hunter/features/home/ui/screens/home_screen.dart';
-import 'package:movie_hunter/features/onboarding/screens/onboarding_screen.dart';
+import 'package:movie_hunter/features/onboarding/ui/screens/onboarding_screen.dart';
 import 'routes.dart';
 
 class AppRouter {
