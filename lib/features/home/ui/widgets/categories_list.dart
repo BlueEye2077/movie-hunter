@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/core/theming/colors.dart';
+import 'package:movie_hunter/core/theming/styles.dart';
+
+class CategoriesList extends StatefulWidget {
+  const CategoriesList({super.key});
+
+  @override
+  State<CategoriesList> createState() => _CategoriesListState();
+}
+
+class _CategoriesListState extends State<CategoriesList> {
+  final List<String> categories = ['All', 'Comedy', 'Animation', 'Documentary'];
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // The categories title
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: TextStyles.horizontalPadding,
+          ),
+          child: Text(
+            'Categories',
+            style: TextStyles.font16SemiBold.copyWith(
+              color: AppColors.textWhite,
+            ),
+          ),
+        ),
+        SizedBox(height: 16.h),
+        // The categories list
+        SizedBox(
+          height: 40.h,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(
+              horizontal: TextStyles.horizontalPadding,
+            ),
+            scrollDirection: Axis.horizontal,
+            clipBehavior:
+                Clip.none, // Allows items to scroll into screen margins
+            itemCount: categories.length,
+            // add a fixed space between every element
+            separatorBuilder: (context, index) => SizedBox(width: 8.w),
+            itemBuilder: (context, index) {
+              final isSelected = index == selectedIndex;
+              return GestureDetector(
+                onTap: () {
+                  // TODO: implement category filtering
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                // The categories animation when select a category item
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isSelected ? 32.w : 12.w,
+                    vertical: 8.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? AppColors.primarySoft
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Center(
+                    // Added center for alignment
+                    child: Text(
+                      categories[index],
+                      style: TextStyles.font12Medium.copyWith(
+                        color: isSelected
+                            ? AppColors.primaryBlueAccent
+                            : AppColors.textWhiteGrey,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

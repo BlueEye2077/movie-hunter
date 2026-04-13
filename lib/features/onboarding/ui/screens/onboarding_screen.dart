@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/theming/colors.dart';
-import '../onboarding_data.dart';
+import '../../../../core/theming/colors.dart';
+import '../../onboarding_data.dart';
 import '../widgets/onboarding_background.dart';
 import '../widgets/onboarding_content_box.dart';
 
@@ -29,7 +29,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     } else {
       // TODO: Navigate to subsequent flow (e.g. login/home)
-      debugPrint('Navigate out of onboarding!');
+      Navigator.of(context).pushReplacementNamed('/home');
     }
   }
 

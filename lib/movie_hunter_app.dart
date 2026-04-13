@@ -3,12 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hunter/core/routing/app_router.dart';
 
 class MovieHunterApp extends StatelessWidget {
-  const MovieHunterApp({super.key});
+  final AppRouter appRouter;
+
+  const MovieHunterApp({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
-    final AppRouter appRouter = AppRouter();
     return ScreenUtilInit(
+      // set the design size to 375x812 from the figma design
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,

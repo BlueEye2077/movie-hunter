@@ -7,6 +7,7 @@ import 'font_weight_helper.dart';
 class TextStyles {
   // Common properties
   static const double defaultLetterSpacing = 0.12;
+  static double horizontalPadding = 24.w;
 
   // H1: 28px
   static TextStyle font28SemiBold = GoogleFonts.montserrat(
@@ -103,6 +104,7 @@ class TextStyles {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
     letterSpacing: defaultLetterSpacing,
+    color: AppColors.textWhite,
   );
 
   // H6: 12px
@@ -116,6 +118,7 @@ class TextStyles {
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.medium,
     letterSpacing: defaultLetterSpacing,
+    color: AppColors.textGrey,
   );
 
   static TextStyle font12Regular = GoogleFonts.montserrat(
