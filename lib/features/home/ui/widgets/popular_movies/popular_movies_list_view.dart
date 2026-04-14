@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/core/helpers/helpers.dart';
+import 'package:movie_hunter/core/networking/api_constants.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
+import 'package:movie_hunter/features/home/data/models/genre.dart';
 import 'package:movie_hunter/features/home/data/models/movie.dart';
+import 'package:movie_hunter/features/home/logic/cubit/popular_movies_cubit.dart';
 import 'package:movie_hunter/features/home/ui/widgets/popular_movies/popular_movie_item.dart';
 
 class PopularMoviesListView extends StatelessWidget {
@@ -11,6 +16,10 @@ class PopularMoviesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get all genres from the cubit
+    final List<Genre> allGenres = context
+        .read<PopularMoviesCubit>()
+        .getGenreTitles();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -18,6 +27,7 @@ class PopularMoviesListView extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: TextStyles.horizontalPadding,
           ),
+          // Title and See All Button
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -46,18 +56,30 @@ class PopularMoviesListView extends StatelessWidget {
         SizedBox(height: 16.h),
         // Horizontal List View of Popular Movies
         SizedBox(
-          height: 231.h,
+          height: 245.h,
           child: ListView.separated(
             padding: EdgeInsets.symmetric(
               horizontal: TextStyles.horizontalPadding,
             ),
             scrollDirection: Axis.horizontal,
-            clipBehavior:
-                Clip.none, // Allows items to scroll into screen margins
+            clipBehavior: Clip.none,
             itemCount: movies.length,
             separatorBuilder: (context, index) => SizedBox(width: 12.w),
             itemBuilder: (context, index) {
-              return PopularMovieItem(movie: movies[index]);
+              final movie = movies[index];
+              // Genres are guaranteed to be cached by the time movies are displayed
+              final genreNames = Helpers.getGenreTitles(
+                allGenres: allGenres,
+                genreIds: movie.genreIds,
+              );
+              return PopularMovieItem(
+                title: movie.title ?? '',
+                genres: genreNames,
+                posterPath: movie.posterPath != null
+                    ? '${ApiConstants.imagesUrl}${movie.posterPath}'
+                    : '',
+                rating: movie.tmdbRating ?? 0,
+              );
             },
           ),
         ),

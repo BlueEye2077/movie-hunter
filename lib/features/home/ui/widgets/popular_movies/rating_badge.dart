@@ -10,36 +10,32 @@ class RatingBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 8.h,
-      right: 8.w,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-        decoration: BoxDecoration(
-          color: AppColors.primarySoft.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SvgPicture.asset(
-              'assets/svgs/star.svg',
-              width: 12.w,
-              height: 12.w,
-              colorFilter: const ColorFilter.mode(
-                AppColors.secondaryOrange,
-                BlendMode.srcIn,
-              ),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: AppColors.primarySoft.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.asset(
+            'assets/svgs/star.svg',
+            width: 12.w,
+            height: 12.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.secondaryOrange,
+              BlendMode.srcIn,
             ),
-            SizedBox(width: 4.w),
-            Text(
-              (rating).toStringAsFixed(1),
-              style: TextStyles.font12SemiBold.copyWith(
-                color: AppColors.secondaryOrange,
-              ),
+          ),
+          SizedBox(width: 4.w),
+          Text(
+            (rating).toStringAsFixed(1),
+            style: TextStyles.font12SemiBold.copyWith(
+              color: AppColors.secondaryOrange,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

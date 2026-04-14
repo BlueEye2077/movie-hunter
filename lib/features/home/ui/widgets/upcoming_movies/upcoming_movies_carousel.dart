@@ -29,6 +29,7 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
   int _currentIndex = 0;
 
   bool get _isShimmer => widget.upComingMovies.isEmpty;
+  List<Movie> get _movies => widget.upComingMovies;
 
   // Shared carousel slider — single source of truth for layout.
   Widget _buildSlider({
@@ -50,11 +51,6 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
             : null,
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _isShimmer ? _buildShimmer() : _buildCarousel();
   }
 
   Widget _buildShimmer() {
@@ -97,10 +93,10 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
     return Column(
       children: [
         _buildSlider(
-          itemCount: widget.upComingMovies.length,
+          itemCount: _movies.length,
           autoPlay: true,
           itemBuilder: (context, index, realIndex) {
-            final movie = widget.upComingMovies[index];
+            final movie = _movies[index];
             return UpcomingMovieItem(
               posterUrl:
                   '${ApiConstants.imagesUrl}${movie.horizontalPoster ?? movie.posterPath ?? ''}',
@@ -112,11 +108,14 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
         const SizedBox(height: 11),
         AnimatedSliderDots(
           currentIndex: _currentIndex,
-          totalDots: widget.upComingMovies.length > 5
-              ? 5
-              : widget.upComingMovies.length,
+          totalDots: _movies.length > 5 ? 5 : _movies.length,
         ),
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _isShimmer ? _buildShimmer() : _buildCarousel();
   }
 }
