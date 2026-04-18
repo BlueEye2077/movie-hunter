@@ -28,7 +28,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      // TODO: Navigate to subsequent flow (e.g. login/home)
       Navigator.of(context).pushReplacementNamed('/home');
     }
   }
