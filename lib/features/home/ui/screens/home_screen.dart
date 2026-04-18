@@ -6,8 +6,10 @@ import 'package:movie_hunter/features/home/ui/widgets/categories_list.dart';
 import 'package:movie_hunter/features/home/ui/widgets/home_bottom_nav_bar.dart';
 import 'package:movie_hunter/features/home/ui/widgets/home_search_bar.dart';
 import 'package:movie_hunter/features/home/ui/widgets/home_top_bar.dart';
-import 'package:movie_hunter/features/home/ui/widgets/popular_movies/most_popular_section.dart';
-import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movies_section.dart';
+import 'package:movie_hunter/features/home/ui/widgets/most_popular_movies_builder.dart';
+import 'package:movie_hunter/features/home/ui/widgets/now_playing_movies_builder.dart';
+import 'package:movie_hunter/features/home/ui/widgets/top_rated_movies_builder.dart';
+import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movies_builder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -39,11 +41,15 @@ class HomeScreen extends StatelessWidget {
                   child: const HomeSearchBar(),
                 ),
                 SizedBox(height: 24.h),
-                const UpcomingMoviesSection(),
+                const UpcomingMoviesBuilder(),
                 SizedBox(height: 24.h),
                 const CategoriesList(),
                 SizedBox(height: 24.h),
-                const MostPopularSection(),
+                const NowPlayingMoviesBuilder(),
+                SizedBox(height: 24.h),
+                const MostPopularMoviesBuilder(),
+                SizedBox(height: 24.h),
+                const TopRatedMoviesBuilder(),
                 SizedBox(height: 24.h),
               ],
             ),

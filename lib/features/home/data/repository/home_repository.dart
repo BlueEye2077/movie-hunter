@@ -32,6 +32,26 @@ class HomeRepository {
     }
   }
 
+  // Get top rated movies
+  Future<ApiResult<MovieApiResponse>> getTopRatedMovies() async {
+    try {
+      var respone = await homeApiService.getTopRatedMovies(token);
+      return ApiResult.success(respone);
+    } catch (error) {
+      return ApiResult.failure(NetworkExceptions.getDioException(error));
+    }
+  }
+
+  // Get now playing movies
+  Future<ApiResult<MovieApiResponse>> getNowPlayingMovies() async {
+    try {
+      var respone = await homeApiService.getNowPlayingMovies(token);
+      return ApiResult.success(respone);
+    } catch (error) {
+      return ApiResult.failure(NetworkExceptions.getDioException(error));
+    }
+  }
+
   // Get genres list
   Future<ApiResult<List<Genre>>> getGenres() async {
     try {

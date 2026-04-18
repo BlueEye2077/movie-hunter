@@ -22,6 +22,19 @@ abstract class HomeApiService {
   Future<MovieApiResponse> getPopularMovies(
     @Header("Authorization") String token,
   );
+
+  // Get the top rated movies list
+  @GET(HomeApiConstants.topRated)
+  Future<MovieApiResponse> getTopRatedMovies(
+    @Header("Authorization") String token,
+  );
+
+  // Get the now playing movies list
+  @GET(HomeApiConstants.nowPlaying)
+  Future<MovieApiResponse> getNowPlayingMovies(
+    @Header("Authorization") String token,
+  );
+
   // Get the genres list
   @GET(HomeApiConstants.genres)
   Future<Map<String, List<Genre>>> getGenres(

@@ -4,18 +4,18 @@ import 'package:movie_hunter/features/home/data/models/movie_api_response.dart';
 import 'package:movie_hunter/features/home/data/repository/home_repository.dart';
 import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
 
-class PopularMoviesCubit extends Cubit<RequestsState<MovieApiResponse>> {
-  PopularMoviesCubit({required this.homeRepository})
-    : super(RequestsState.idle());
+class TopRatedMoviesCubit extends Cubit<RequestsState<MovieApiResponse>> {
+  TopRatedMoviesCubit({required this.homeRepository}) : super(RequestsState.idle());
 
   final HomeRepository homeRepository;
 
-  void getPopularMovies() async {
+  // Get top rated movies
+  void getTopRatedMovies() async {
     emit(RequestsState.loading());
-    
-    ApiResult<MovieApiResponse> response = await homeRepository.getPopularMovies();
+    ApiResult<MovieApiResponse> response = await homeRepository.getTopRatedMovies();
     response.when(
-      success: (movies) => emit(RequestsState.success(movies)),
+      success: (MovieApiResponse topRatedMovies) =>
+          emit(RequestsState.success(topRatedMovies)),
       failure: (networkExceptions) =>
           emit(RequestsState.error(networkExceptions)),
     );

@@ -4,28 +4,43 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hunter/core/networking/network_exceptions.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
+import 'package:movie_hunter/features/home/data/models/genre.dart';
 import 'package:movie_hunter/features/home/data/models/movie_api_response.dart';
+import 'package:movie_hunter/features/home/logic/cubit/now_playing_movies_cubit.dart';
 import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
-import 'package:movie_hunter/features/home/logic/cubit/popular_movies_cubit.dart';
-import 'package:movie_hunter/features/home/ui/widgets/popular_movies/popular_movies_list_view.dart';
+import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_section.dart';
+import 'package:movie_hunter/features/home/logic/cubit/genres_cubit.dart';
 
-class MostPopularSection extends StatelessWidget {
-  const MostPopularSection({super.key});
+class NowPlayingMoviesBuilder extends StatelessWidget {
+  const NowPlayingMoviesBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final genresState = context.watch<GenresCubit>().state;
+    final List<Genre> genres = genresState.when(
+      idle: () => [],
+      loading: () => [],
+      success: (g) => g,
+      error: (_) => [],
+    );
     // The bloc that controls the popular movies
-    return BlocBuilder<PopularMoviesCubit, RequestsState<MovieApiResponse>>(
+    return BlocBuilder<NowPlayingMoviesCubit, RequestsState<MovieApiResponse>>(
       builder: (context, state) {
         return state.when(
           idle: () => const SizedBox.shrink(),
-          loading: () => SizedBox(
-            height: 270.h,
-            child: const Center(child: CircularProgressIndicator()),
+          loading: () => MoviesSection(
+            title: 'Now Playing',
+            movies: [],
+            genres: [],
+            isShimmer: true,
           ),
           success: (response) {
-            final movies = response.movies ?? [];
-            return PopularMoviesListView(movies: movies);
+            return MoviesSection(
+              title: 'Now Playing',
+              movies: response.movies ?? [],
+              genres: genres,
+              isShimmer: false,
+            );
           },
           error: (error) => SizedBox(
             height: 270.h,

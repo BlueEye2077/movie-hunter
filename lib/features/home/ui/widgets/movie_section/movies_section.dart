@@ -1,0 +1,68 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/core/theming/colors.dart';
+import 'package:movie_hunter/core/theming/styles.dart';
+import 'package:movie_hunter/features/home/data/models/genre.dart';
+import 'package:movie_hunter/features/home/data/models/movie.dart';
+import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_list_view.dart';
+
+class MoviesSection extends StatelessWidget {
+  final String title;
+  final List<Movie> movies;
+  final List<Genre> genres;
+  final bool isShimmer;
+  const MoviesSection({
+    super.key,
+    required this.title,
+    required this.movies,
+    required this.genres,
+    required this.isShimmer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: TextStyles.horizontalPadding,
+          ),
+          // Title and See All Button
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Title
+              Text(
+                title,
+                style: TextStyles.font16SemiBold.copyWith(
+                  color: AppColors.textWhite,
+                ),
+              ),
+              // See All Button
+              GestureDetector(
+                onTap: () {
+                  // TODO: Navigate to see all popular movies
+                },
+                child: Text(
+                  'See All',
+                  style: TextStyles.font14Medium.copyWith(
+                    color: AppColors.primaryBlueAccent,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 16.h),
+        // Horizontal List View of Popular Movies
+        isShimmer
+            ? MoviesListView.shimmer()
+            : MoviesListView.showMovies(
+                movies: movies,
+                genres: genres,
+              ),
+      ],
+    );
+  }
+}

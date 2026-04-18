@@ -8,8 +8,8 @@ import 'package:movie_hunter/features/home/logic/cubit/upcoming_movies_cubit.dar
 import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
 import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movies_carousel.dart';
 
-class UpcomingMoviesSection extends StatelessWidget {
-  const UpcomingMoviesSection({super.key});
+class UpcomingMoviesBuilder extends StatelessWidget {
+  const UpcomingMoviesBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
