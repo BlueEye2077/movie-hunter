@@ -5,7 +5,8 @@ import 'package:movie_hunter/core/networking/network_exceptions.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
 import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/models/movie_api_response.dart';
+import 'package:movie_hunter/core/networking/api_response.dart';
+import 'package:movie_hunter/features/home/data/models/movie.dart';
 import 'package:movie_hunter/features/home/logic/cubit/now_playing_movies_cubit.dart';
 import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
 import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_section.dart';
@@ -25,7 +26,7 @@ class NowPlayingMoviesBuilder extends StatelessWidget {
       error: (_) => [],
     );
     // The bloc that controls the popular movies
-    return BlocBuilder<NowPlayingMoviesCubit, RequestsState<MovieApiResponse>>(
+    return BlocBuilder<NowPlayingMoviesCubit, RequestsState<ApiResponse<Movie>>>(
       builder: (context, state) {
         return state.when(
           idle: () => const SizedBox.shrink(),
@@ -37,7 +38,7 @@ class NowPlayingMoviesBuilder extends StatelessWidget {
             return MoviesSection(
               title: 'Now Playing',
               child: MoviesListView.showMovies(
-                movies: response.movies ?? [],
+                movies: response.results ?? [],
                 genres: genres,
               ),
             );

@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:movie_hunter/core/networking/api_constants.dart';
 import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/models/movie_api_response.dart';
+import 'package:movie_hunter/core/networking/api_response.dart';
 import 'package:movie_hunter/features/home/data/web_services/home_api_constants.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:movie_hunter/features/home/data/models/movie.dart';
 
 part 'home_api_service.g.dart';
 
@@ -13,25 +14,25 @@ abstract class HomeApiService {
 
   // Get the upcoming movies list
   @GET(HomeApiConstants.upcoming)
-  Future<MovieApiResponse> getUpcomingMovies(
+  Future<ApiResponse<Movie>> getUpcomingMovies(
     @Header("Authorization") String token,
   );
 
   // Get the popular movies list
   @GET(HomeApiConstants.popular)
-  Future<MovieApiResponse> getPopularMovies(
+  Future<ApiResponse<Movie>> getPopularMovies(
     @Header("Authorization") String token,
   );
 
   // Get the top rated movies list
   @GET(HomeApiConstants.topRated)
-  Future<MovieApiResponse> getTopRatedMovies(
+  Future<ApiResponse<Movie>> getTopRatedMovies(
     @Header("Authorization") String token,
   );
 
   // Get the now playing movies list
   @GET(HomeApiConstants.nowPlaying)
-  Future<MovieApiResponse> getNowPlayingMovies(
+  Future<ApiResponse<Movie>> getNowPlayingMovies(
     @Header("Authorization") String token,
   );
 

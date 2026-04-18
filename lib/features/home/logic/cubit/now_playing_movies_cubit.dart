@@ -1,10 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/features/home/data/models/movie_api_response.dart';
+import 'package:movie_hunter/core/networking/api_response.dart';
+import 'package:movie_hunter/features/home/data/models/movie.dart';
 import 'package:movie_hunter/features/home/data/repository/home_repository.dart';
 import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
 
-class NowPlayingMoviesCubit extends Cubit<RequestsState<MovieApiResponse>> {
+class NowPlayingMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
   final HomeRepository homeRepository;
   NowPlayingMoviesCubit({required this.homeRepository})
     : super(const RequestsState.idle());
