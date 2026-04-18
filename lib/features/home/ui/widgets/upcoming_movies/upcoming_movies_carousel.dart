@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/common/common_widgets/animated_slider_dots.dart';
+import 'package:movie_hunter/core/common/animated_slider_dots.dart';
 import 'package:movie_hunter/core/networking/api_constants.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/features/home/data/models/movie.dart';
