@@ -9,6 +9,7 @@ import 'package:movie_hunter/features/home/data/models/movie_api_response.dart';
 import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
 import 'package:movie_hunter/features/home/logic/cubit/top_rated_movies_cubit.dart';
 import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_section.dart';
+import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_list_view.dart';
 import 'package:movie_hunter/features/home/logic/cubit/genres_cubit.dart';
 
 class TopRatedMoviesBuilder extends StatelessWidget {
@@ -30,25 +31,27 @@ class TopRatedMoviesBuilder extends StatelessWidget {
           idle: () => const SizedBox.shrink(),
           loading: () => MoviesSection(
             title: 'Top Rated',
-            movies: [],
-            genres: [],
-            isShimmer: true,
+            child: const MoviesListView.shimmer(),
           ),
           success: (response) {
             return MoviesSection(
               title: 'Top Rated',
-              movies: response.movies ?? [],
-              genres: genres,
-              isShimmer: false,
+              child: MoviesListView.showMovies(
+                movies: response.movies ?? [],
+                genres: genres,
+              ),
             );
           },
-          error: (error) => SizedBox(
-            height: 270.h,
-            child: Center(
-              child: Text(
-                NetworkExceptions.getErrorMessage(error),
-                style: TextStyles.font14Regular.copyWith(
-                  color: AppColors.textWhite,
+          error: (error) => MoviesSection(
+            title: 'Top Rated',
+            child: SizedBox(
+              height: 245.h,
+              child: Center(
+                child: Text(
+                  NetworkExceptions.getErrorMessage(error),
+                  style: TextStyles.font14Regular.copyWith(
+                    color: AppColors.textWhite,
+                  ),
                 ),
               ),
             ),

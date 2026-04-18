@@ -42,7 +42,7 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
       itemBuilder: itemBuilder,
       options: CarouselOptions(
         height: 154.h,
-        viewportFraction: 0.8.r,
+        viewportFraction: 0.7.r,
         enlargeCenterPage: true,
         autoPlay: autoPlay,
         onPageChanged: autoPlay

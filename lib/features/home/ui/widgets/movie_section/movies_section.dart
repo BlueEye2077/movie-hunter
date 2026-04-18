@@ -2,21 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_list_view.dart';
 
 class MoviesSection extends StatelessWidget {
   final String title;
-  final List<Movie> movies;
-  final List<Genre> genres;
-  final bool isShimmer;
+  final Widget child;
+
   const MoviesSection({
     super.key,
     required this.title,
-    required this.movies,
-    required this.genres,
-    required this.isShimmer,
+    required this.child,
   });
 
   @override
@@ -55,13 +49,8 @@ class MoviesSection extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16.h),
-        // Horizontal List View of Popular Movies
-        isShimmer
-            ? MoviesListView.shimmer()
-            : MoviesListView.showMovies(
-                movies: movies,
-                genres: genres,
-              ),
+        // The dynamic content of the section
+        child,
       ],
     );
   }
