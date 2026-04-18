@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+<<<<<<< Updated upstream:lib/features/onboarding/widgets/onboarding_content_box.dart
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import '../onboarding_data.dart';
+=======
+import 'package:movie_hunter/core/common/animated_slider_dots.dart';
+import '../../../../../core/theming/colors.dart';
+import '../../../../../core/theming/styles.dart';
+import '../../onboarding_data.dart';
+>>>>>>> Stashed changes:lib/features/onboarding/ui/widgets/onboarding_content_box.dart
 import 'onboarding_next_button.dart';
 import 'onboarding_slider_dots.dart';
 

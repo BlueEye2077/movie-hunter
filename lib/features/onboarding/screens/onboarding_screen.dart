@@ -28,8 +28,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
+<<<<<<< Updated upstream:lib/features/onboarding/screens/onboarding_screen.dart
       // TODO: Navigate to subsequent flow (e.g. login/home)
       debugPrint('Navigate out of onboarding!');
+=======
+      Navigator.of(context).pushReplacementNamed('/home');
+>>>>>>> Stashed changes:lib/features/onboarding/ui/screens/onboarding_screen.dart
     }
   }
 
