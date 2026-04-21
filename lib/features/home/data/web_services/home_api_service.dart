@@ -41,6 +41,13 @@ abstract class HomeApiService {
   Future<Map<String, List<Genre>>> getGenres(
     @Header("Authorization") String token,
   );
+
+  // Search for movies, tv shows, and people [multi search]
+  @GET(HomeApiConstants.search)
+  Future<ApiResponse<dynamic>> search(
+    @Header("Authorization") String token,
+    @Query("query") String query,
+  );
 }
 
 // Create and setup dio
