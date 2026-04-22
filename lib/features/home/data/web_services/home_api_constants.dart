@@ -4,5 +4,4 @@ class HomeApiConstants {
   static const String topRated = '/movie/top_rated';
   static const String nowPlaying = '/movie/now_playing';
   static const String genres = '/genre/movie/list';
-  static const String search = '/search/multi';
 }
