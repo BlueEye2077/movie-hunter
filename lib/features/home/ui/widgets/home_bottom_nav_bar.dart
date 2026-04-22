@@ -5,7 +5,9 @@ import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
 
 class HomeBottomNavBar extends StatefulWidget {
-  const HomeBottomNavBar({super.key});
+  final ValueChanged<int> onTabSelected;
+
+  const HomeBottomNavBar({super.key, required this.onTabSelected});
 
   @override
   State<HomeBottomNavBar> createState() => _HomeBottomNavBarState();
@@ -14,7 +16,7 @@ class HomeBottomNavBar extends StatefulWidget {
 class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   int _selectedIndex = 0;
 
-  final List<_NavItem> _items = [
+  static const List<_NavItem> _items = [
     _NavItem(icon: 'assets/svgs/home.svg', label: 'Home'),
     _NavItem(icon: 'assets/svgs/search.svg', label: 'Search'),
     _NavItem(icon: 'assets/svgs/download.svg', label: 'Download'),
@@ -32,18 +34,13 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
         children: List.generate(_items.length, (index) {
           final isSelected = index == _selectedIndex;
           return GestureDetector(
-            // todo: add navigation to the selected item
             onTap: () {
-              setState(() {
-                _selectedIndex = index;
-              });
+              _selectedIndex = index;
+              widget.onTabSelected(index);
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 250),
-              padding: EdgeInsets.symmetric(
-                horizontal: 12.w,
-                vertical: 8.h,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
               decoration: BoxDecoration(
                 color: isSelected ? AppColors.primarySoft : Colors.transparent,
                 borderRadius: BorderRadius.circular(16.r),

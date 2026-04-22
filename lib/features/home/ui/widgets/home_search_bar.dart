@@ -5,7 +5,10 @@ import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
 
 class HomeSearchBar extends StatelessWidget {
-  const HomeSearchBar({super.key});
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+
+  const HomeSearchBar({super.key, this.controller, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +30,9 @@ class HomeSearchBar extends StatelessWidget {
           SizedBox(width: 8.w),
           Expanded(
             child: TextField(
+              //Todo: implement onTap
+              controller: controller,
+              onChanged: onChanged,
               style: TextStyles.font14Medium.copyWith(color: AppColors.textWhite),
               decoration: InputDecoration(
                 hintText: 'Search a title..',

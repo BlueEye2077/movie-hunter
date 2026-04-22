@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
 import 'package:movie_hunter/features/home/ui/widgets/categories_list.dart';
-import 'package:movie_hunter/features/home/ui/widgets/home_bottom_nav_bar.dart';
-import 'package:movie_hunter/features/home/ui/widgets/home_search_bar.dart';
+import 'package:movie_hunter/features/home/ui/widgets/clickable_search_bar.dart';
 import 'package:movie_hunter/features/home/ui/widgets/home_top_bar.dart';
 import 'package:movie_hunter/features/home/ui/widgets/most_popular_movies_builder.dart';
 import 'package:movie_hunter/features/home/ui/widgets/now_playing_movies_builder.dart';
@@ -16,47 +14,48 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primaryDark,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Top Bar
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: TextStyles.horizontalPadding,
-                  ),
-                  child: const HomeTopBar(),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Top Bar
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: TextStyles.horizontalPadding,
                 ),
-                SizedBox(height: 32.h),
-                // Search Bar
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: TextStyles.horizontalPadding,
-                  ),
-                  child: const HomeSearchBar(),
+                child: const HomeTopBar(),
+              ),
+              SizedBox(height: 32.h),
+              // Clickable Search Bar
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: TextStyles.horizontalPadding,
                 ),
-                SizedBox(height: 24.h),
-                const UpcomingMoviesBuilder(),
-                SizedBox(height: 24.h),
-                const CategoriesList(),
-                SizedBox(height: 24.h),
-                const NowPlayingMoviesBuilder(),
-                SizedBox(height: 24.h),
-                const MostPopularMoviesBuilder(),
-                SizedBox(height: 24.h),
-                const TopRatedMoviesBuilder(),
-                SizedBox(height: 24.h),
-              ],
-            ),
+                child: const ClickableSearchBar(),
+              ),
+              SizedBox(height: 24.h),
+              // Upcoming Movies
+              const UpcomingMoviesBuilder(),
+              SizedBox(height: 24.h),
+              // Categories List
+              const CategoriesList(),
+              SizedBox(height: 24.h),
+              // Now Playing Movies
+              const NowPlayingMoviesBuilder(),
+              SizedBox(height: 24.h),
+              // Most Popular Movies
+              const MostPopularMoviesBuilder(),
+              SizedBox(height: 24.h),
+              // Top Rated Movies
+              const TopRatedMoviesBuilder(),
+              SizedBox(height: 24.h),
+            ],
           ),
         ),
       ),
-      bottomNavigationBar: const HomeBottomNavBar(),
     );
   }
 }
