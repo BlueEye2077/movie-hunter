@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/features/search/ui/widgets/empty_search.dart';
+import 'package:movie_hunter/features/search/logic/cubit/search_cubit.dart';
+import 'package:movie_hunter/features/search/ui/widgets/search_results.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
-import 'package:movie_hunter/features/home/ui/widgets/home_search_bar.dart';
+import 'package:movie_hunter/core/common/custom_search_bar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -13,27 +16,50 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  final TextEditingController textController = TextEditingController();
+  Timer? _debounce;
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    textController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if (query.isNotEmpty) {
+        context.read<SearchCubit>().search(query);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryDark,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: TextStyles.horizontalPadding,
-            vertical: 16.h,
-          ),
-          child: Column(
-            children: [
-              // Search bar + Cancel
-              Row(
+        child: Column(
+          children: [
+            // Search bar + Cancel
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: TextStyles.horizontalPadding,
+                vertical: 16.h,
+              ),
+              child: Row(
                 children: [
                   Expanded(
                     child: Hero(
                       tag: 'search_bar',
                       child: Material(
                         type: MaterialType.transparency,
-                        child: const HomeSearchBar(),
+                        child: CustomSearchBar(
+                          controller: textController,
+                          onChanged: _onSearchChanged,
+                          autofocus: true,
+                        ),
                       ),
                     ),
                   ),
@@ -49,23 +75,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ],
               ),
-              //Todo: implement search
-              // Body — empty state for now
-              Expanded(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
-                    child: const EmptySearch(
-                      svgPath: 'assets/svgs/no_results_large.svg',
-                      title: 'we are sorry, we can\nnot find the movie :(',
-                      subtitle:
-                          'Find your movie by Type title,\ncategories, years, etc ',
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: 24.h),
+            // Body
+            Expanded(child: const SearchResults()),
+          ],
         ),
       ),
     );
