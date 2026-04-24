@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/core/common/poster_image.dart';
+import 'package:movie_hunter/core/common/rating_badge.dart';
 import 'package:movie_hunter/features/home/ui/widgets/movie_section/movie_title_and_genre.dart';
-import 'package:movie_hunter/features/home/ui/widgets/movie_section/poster_image.dart';
-import 'package:movie_hunter/features/home/ui/widgets/movie_section/rating_badge.dart';
 import '../../../../../core/theming/colors.dart';
 
 class MovieItem extends StatelessWidget {

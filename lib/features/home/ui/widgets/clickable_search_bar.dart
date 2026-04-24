@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hunter/core/routing/routes.dart';
-import 'package:movie_hunter/features/home/ui/widgets/home_search_bar.dart';
+import 'package:movie_hunter/core/common/custom_search_bar.dart';
 
 class ClickableSearchBar extends StatelessWidget {
   const ClickableSearchBar({super.key});
@@ -17,7 +17,7 @@ class ClickableSearchBar extends StatelessWidget {
         child: Material(
           type: MaterialType.transparency,
           // [AbsorbPointer] disable the home search bar functionality as a text field
-          child: const AbsorbPointer(child: HomeSearchBar()),
+          child: const AbsorbPointer(child: CustomSearchBar()),
         ),
       ),
     );

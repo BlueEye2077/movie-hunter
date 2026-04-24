@@ -4,11 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
 
-class HomeSearchBar extends StatelessWidget {
+class CustomSearchBar extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
+  final bool autofocus;
 
-  const HomeSearchBar({super.key, this.controller, this.onChanged});
+  const CustomSearchBar({
+    super.key,
+    this.controller,
+    this.onChanged,
+    this.autofocus = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +36,17 @@ class HomeSearchBar extends StatelessWidget {
           SizedBox(width: 8.w),
           Expanded(
             child: TextField(
-              //Todo: implement onTap
               controller: controller,
               onChanged: onChanged,
-              style: TextStyles.font14Medium.copyWith(color: AppColors.textWhite),
+              autofocus: autofocus,
+              style: TextStyles.font14Medium.copyWith(
+                color: AppColors.textWhite,
+              ),
               decoration: InputDecoration(
                 hintText: 'Search a title..',
-                hintStyle: TextStyles.font14Medium.copyWith(color: AppColors.textGrey),
+                hintStyle: TextStyles.font14Medium.copyWith(
+                  color: AppColors.textGrey,
+                ),
                 border: InputBorder.none,
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
@@ -44,11 +54,7 @@ class HomeSearchBar extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8.w),
-          Container(
-            width: 1.w,
-            height: 16.h,
-            color: AppColors.textDarkGrey,
-          ),
+          Container(width: 1.w, height: 16.h, color: AppColors.textDarkGrey),
           SizedBox(width: 8.w),
           SvgPicture.asset(
             'assets/svgs/options.svg',
