@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hunter/core/common/animated_slider_dots.dart';
 import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/features/home/data/models/movie.dart';
 import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movie_item.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movies_shimmer.dart';
 
 class UpcomingMoviesCarousel extends StatefulWidget {
   final List<Movie> upComingMovies;
@@ -53,42 +52,6 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
     );
   }
 
-  Widget _buildShimmer() {
-    return Shimmer.fromColors(
-      baseColor: AppColors.primarySoft,
-      highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
-      child: Column(
-        children: [
-          _buildSlider(
-            itemCount: 5,
-            itemBuilder: (context, index, realIndex) => Container(
-              height: 154.h,
-              decoration: BoxDecoration(
-                color: AppColors.primarySoft,
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-            ),
-          ),
-          const SizedBox(height: 11),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(5, (index) {
-              return Container(
-                margin: EdgeInsets.only(right: index == 4 ? 0 : 8.w),
-                height: 10.h,
-                width: index == 0 ? 32.w : 10.w,
-                decoration: BoxDecoration(
-                  color: AppColors.primarySoft,
-                  borderRadius: BorderRadius.circular(100.r),
-                ),
-              );
-            }),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildCarousel() {
     return Column(
       children: [
@@ -116,6 +79,6 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return _isShimmer ? _buildShimmer() : _buildCarousel();
+    return _isShimmer ? const UpcomingMoviesShimmer() : _buildCarousel();
   }
 }

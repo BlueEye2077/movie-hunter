@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hunter/core/helpers/helpers.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
 import 'package:movie_hunter/features/home/data/models/genre.dart';
 import 'package:movie_hunter/features/home/data/models/movie.dart';
 import 'package:shimmer/shimmer.dart';
@@ -71,9 +70,7 @@ class MoviesListView extends StatelessWidget {
             return MovieItem(
               title: movie.title ?? '',
               genres: genreNames,
-              posterPath: movie.posterPath != null
-                  ? '${ApiConstants.imagesUrl}${movie.posterPath}'
-                  : '',
+              posterPath: movie.posterPath ?? "",
               rating: movie.tmdbRating ?? 0,
             );
           },

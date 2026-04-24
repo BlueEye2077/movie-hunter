@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hunter/core/theming/colors.dart';
 import 'package:movie_hunter/core/theming/styles.dart';
+import 'package:movie_hunter/features/home/ui/widgets/category_pill.dart';
 
 class CategoriesList extends StatefulWidget {
   const CategoriesList({super.key});
@@ -55,29 +56,9 @@ class _CategoriesListState extends State<CategoriesList> {
                   });
                 },
                 // The categories animation when select a category item
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isSelected ? 32.w : 12.w,
-                    vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppColors.primarySoft
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Center(
-                    // Added center for alignment
-                    child: Text(
-                      categories[index],
-                      style: TextStyles.font12Medium.copyWith(
-                        color: isSelected
-                            ? AppColors.primaryBlueAccent
-                            : AppColors.textWhiteGrey,
-                      ),
-                    ),
-                  ),
+                child: CategoryPill(
+                  category: categories[index],
+                  isSelected: isSelected,
                 ),
               );
             },
