@@ -1,8 +1,8 @@
 import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
+import '../../../../../core/theming/colors.dart';
+import '../../../../../core/theming/styles.dart';
 
 class UpcomingMovieItem extends StatelessWidget {
   final String posterUrl;

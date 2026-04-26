@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_hunter/features/home/data/models/known_for.dart';
+import 'known_for.dart';
 
 part 'actor.g.dart';
 

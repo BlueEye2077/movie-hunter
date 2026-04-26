@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/repository/home_repository.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../data/models/genre.dart';
+import '../../data/repository/home_repository.dart';
+import 'requests_state.dart';
 
 class GenresCubit extends Cubit<RequestsState<List<Genre>>> {
   final HomeRepository homeRepository;

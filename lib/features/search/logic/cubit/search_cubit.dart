@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/networking/api_response.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
-import 'package:movie_hunter/features/search/data/repository/search_repository.dart';
+
+import '../../../../core/networking/api_response.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../home/logic/cubit/requests_state.dart';
+import '../../data/repository/search_repository.dart';
 
 class SearchCubit extends Cubit<RequestsState<ApiResponse<dynamic>>> {
   final SearchRepository searchRepository;

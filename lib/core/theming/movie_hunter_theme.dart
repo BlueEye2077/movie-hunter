@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
+import 'colors.dart';
 
 final ThemeData kMovieHunterTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.primaryDark,

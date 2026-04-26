@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/theming/colors.dart';
 import '../../data/onboarding_data.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingBackground extends StatelessWidget {
   final OnboardingData data;

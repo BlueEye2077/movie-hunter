@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
+import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/styles.dart';
 
 class EmptySearch extends StatelessWidget {
   final String svgPath;

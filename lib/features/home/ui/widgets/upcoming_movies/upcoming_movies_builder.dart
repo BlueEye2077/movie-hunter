@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/networking/network_exceptions.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
-import 'package:movie_hunter/core/networking/api_response.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/logic/cubit/upcoming_movies_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
-import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movies_carousel.dart';
+import '../../../../../core/networking/network_exceptions.dart';
+import '../../../../../core/theming/styles.dart';
+import '../../../../../core/networking/api_response.dart';
+import '../../../data/models/movie.dart';
+import '../../../logic/cubit/upcoming_movies_cubit.dart';
+import '../../../logic/cubit/requests_state.dart';
+import 'upcoming_movies_carousel.dart';
+import 'upcoming_movies_shimmer.dart';
 
 class UpcomingMoviesBuilder extends StatelessWidget {
   const UpcomingMoviesBuilder({super.key});
@@ -19,7 +20,7 @@ class UpcomingMoviesBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.when(
           idle: () => const SizedBox.shrink(),
-          loading: () => const UpcomingMoviesCarousel.showShimmer(),
+          loading: () => const UpcomingMoviesShimmer(),
           success: (response) {
             final movies = response.results ?? [];
             return UpcomingMoviesCarousel.showCarousel(upComingMovies: movies);

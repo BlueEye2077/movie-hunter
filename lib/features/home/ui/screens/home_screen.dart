@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
-import 'package:movie_hunter/features/home/ui/widgets/categories_list.dart';
-import 'package:movie_hunter/features/home/ui/widgets/clickable_search_bar.dart';
-import 'package:movie_hunter/features/home/ui/widgets/home_top_bar.dart';
-import 'package:movie_hunter/features/home/ui/widgets/most_popular_movies_builder.dart';
-import 'package:movie_hunter/features/home/ui/widgets/now_playing_movies_builder.dart';
-import 'package:movie_hunter/features/home/ui/widgets/top_rated_movies_builder.dart';
-import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movies_builder.dart';
+import '../../../../core/theming/styles.dart';
+import '../widgets/categories_list.dart';
+import '../widgets/clickable_search_bar.dart';
+import '../widgets/home_top_bar.dart';
+import '../widgets/most_popular_movies_builder.dart';
+import '../widgets/now_playing_movies_builder.dart';
+import '../widgets/top_rated_movies_builder.dart';
+import '../widgets/upcoming_movies/upcoming_movies_builder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

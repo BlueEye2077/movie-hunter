@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/di/dependency_injection.dart';
-import 'package:movie_hunter/features/home/logic/cubit/genres_cubit.dart';
-import 'package:movie_hunter/features/search/logic/cubit/search_cubit.dart';
-import 'package:movie_hunter/main_screen.dart';
-import 'package:movie_hunter/features/onboarding/ui/screens/onboarding_screen.dart';
-import 'package:movie_hunter/features/search/ui/screens/search_screen.dart';
+import '../di/dependency_injection.dart';
+import '../../features/home/logic/cubit/genres_cubit.dart';
+import '../../features/search/logic/cubit/search_cubit.dart';
+import '../../main_screen.dart';
+import '../../features/onboarding/ui/screens/onboarding_screen.dart';
+import '../../features/search/ui/screens/search_screen.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -13,8 +13,9 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
-      case Routes.home:
-        // BlocProviders are now scoped inside MainScreen per-tab (Option B)
+      case Routes.mainScreen:
+        // BlocProviders are passed through the main screen for better performance and state management
+        // and to avoid unnecessary rebuilds when switching between tabs.
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case Routes.search:
         return MaterialPageRoute(

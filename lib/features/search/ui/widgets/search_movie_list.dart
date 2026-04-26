@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
+import '../../../home/data/models/movie.dart';
+import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/styles.dart';
 
-import 'package:movie_hunter/features/search/ui/widgets/search_movie_item.dart';
+import 'search_movie_item.dart';
 
 class SearchMovieList extends StatelessWidget {
   final List<Movie> movies;

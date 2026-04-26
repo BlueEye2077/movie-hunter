@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
+import '../../../../../core/theming/colors.dart';
+import '../../../../../core/theming/styles.dart';
 
 class MoviesSection extends StatelessWidget {
   final String title;
@@ -33,7 +33,7 @@ class MoviesSection extends StatelessWidget {
                   color: AppColors.textWhite,
                 ),
               ),
-              // See All Button
+              // See All Movies Button
               GestureDetector(
                 onTap: () {
                   // TODO: Navigate to see all popular movies

@@ -1,4 +1,4 @@
-import 'package:movie_hunter/features/home/data/models/genre.dart';
+import '../../features/home/data/models/genre.dart';
 
 class Helpers {
   static List<String> getGenreTitles({

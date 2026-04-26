@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
+import '../networking/api_constants.dart';
+import '../theming/colors.dart';
 
 class PosterImage extends StatelessWidget {
   final String? imageUrl;

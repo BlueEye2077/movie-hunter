@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/logic/cubit/genres_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
-import 'package:movie_hunter/features/search/ui/widgets/search_movie_info_row.dart';
+import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/styles.dart';
+import '../../../home/data/models/genre.dart';
+import '../../../home/data/models/movie.dart';
+import '../../../home/logic/cubit/genres_cubit.dart';
+import '../../../home/logic/cubit/requests_state.dart';
+import 'search_movie_info_row.dart';
 
 class SearchMovieDetails extends StatelessWidget {
   final Movie movie;

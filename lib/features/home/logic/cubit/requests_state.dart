@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_hunter/core/networking/network_exceptions.dart';
+import '../../../../core/networking/network_exceptions.dart';
 
 part 'requests_state.freezed.dart';
 

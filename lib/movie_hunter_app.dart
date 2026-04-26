@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/routing/app_router.dart';
-import 'package:movie_hunter/core/theming/movie_hunter_theme.dart';
+import 'core/routing/app_router.dart';
+import 'core/theming/movie_hunter_theme.dart';
 
 class MovieHunterApp extends StatelessWidget {
   final AppRouter appRouter;

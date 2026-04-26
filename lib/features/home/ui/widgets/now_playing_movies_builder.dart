@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/networking/network_exceptions.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/core/networking/api_response.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/logic/cubit/now_playing_movies_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
-import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_section.dart';
-import 'package:movie_hunter/features/home/ui/widgets/movie_section/movies_list_view.dart';
-import 'package:movie_hunter/features/home/logic/cubit/genres_cubit.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/styles.dart';
+import '../../data/models/genre.dart';
+import '../../../../core/networking/api_response.dart';
+import '../../data/models/movie.dart';
+import '../../logic/cubit/now_playing_movies_cubit.dart';
+import '../../logic/cubit/requests_state.dart';
+import 'movie_section/movies_section.dart';
+import 'movie_section/movies_list_view.dart';
+import '../../logic/cubit/genres_cubit.dart';
 
 class NowPlayingMoviesBuilder extends StatelessWidget {
   const NowPlayingMoviesBuilder({super.key});

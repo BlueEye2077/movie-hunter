@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/core/networking/api_response.dart';
-import 'package:movie_hunter/features/home/data/web_services/home_api_constants.dart';
+import '../../../../core/networking/api_constants.dart';
+import '../models/genre.dart';
+import '../../../../core/networking/api_response.dart';
+import 'home_api_constants.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
+import '../models/movie.dart';
 
 part 'home_api_service.g.dart';
 

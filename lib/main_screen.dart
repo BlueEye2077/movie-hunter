@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hunter/core/common/placeholder_tab.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/features/home/ui/screens/home_screen.dart';
-import 'package:movie_hunter/features/home/ui/widgets/home_bottom_nav_bar.dart';
-import 'package:movie_hunter/features/home/ui/widgets/home_tab_providers.dart';
+import 'core/common/placeholder_tab.dart';
+import 'core/theming/colors.dart';
+import 'features/home/ui/screens/home_screen.dart';
+import 'features/home/ui/widgets/home_bottom_nav_bar.dart';
+import 'features/home/ui/widgets/home_tab_bloc_providers.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,10 +22,8 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: const [
-          // Tab 0 — Home: all movie-list cubits scoped here
-          HomeTabProviders(
-            child: HomeScreen(),
-          ),
+          // Widget with all the bloc providers for the home tab
+          HomeTabBlocProviders(child: HomeScreen()),
 
           // Tab 1 — Search: accessed via pushed route from search bar
           // TODO: create the screen
@@ -40,6 +38,7 @@ class _MainScreenState extends State<MainScreen> {
           PlaceholderTab(label: 'Profile'),
         ],
       ),
+      // Bottom navigation bar
       bottomNavigationBar: HomeBottomNavBar(
         onTabSelected: (index) {
           setState(() => _selectedIndex = index);

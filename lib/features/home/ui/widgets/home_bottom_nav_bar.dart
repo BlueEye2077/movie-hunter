@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/features/home/ui/widgets/bottom_nav_item.dart';
+import '../../../../core/theming/colors.dart';
+import 'bottom_nav_item.dart';
 
 class HomeBottomNavBar extends StatefulWidget {
   final ValueChanged<int> onTabSelected;
@@ -15,6 +15,7 @@ class HomeBottomNavBar extends StatefulWidget {
 class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   int _selectedIndex = 0;
 
+  // List of navigation items
   static const List<_NavItem> _items = [
     _NavItem(icon: 'assets/svgs/home.svg', label: 'Home'),
     _NavItem(icon: 'assets/svgs/search.svg', label: 'Search'),
@@ -24,6 +25,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    // Build the bottom navigation bar
     return Container(
       height: 72.h,
       color: AppColors.primaryDark,
@@ -49,6 +51,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   }
 }
 
+// Private class to hold the data for each navigation item
 class _NavItem {
   final String icon;
   final String label;

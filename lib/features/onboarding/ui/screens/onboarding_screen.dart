@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../data/onboarding_data.dart';
 import '../widgets/onboarding_background.dart';
@@ -28,7 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushReplacementNamed(Routes.mainScreen);
     }
   }
 
@@ -39,7 +41,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: PageView.builder(
         controller: _pageController,
         onPageChanged: (index) {
-          //todo: manage the state here
+          //TODO: manage the state here
           setState(() {
             _currentIndex = index;
           });

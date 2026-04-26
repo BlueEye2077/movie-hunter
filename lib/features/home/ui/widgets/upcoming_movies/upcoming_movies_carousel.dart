@@ -1,11 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/common/animated_slider_dots.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movie_item.dart';
-import 'package:movie_hunter/features/home/ui/widgets/upcoming_movies/upcoming_movies_shimmer.dart';
+import '../../../../../core/common/animated_slider_dots.dart';
+import '../../../../../core/networking/api_constants.dart';
+import '../../../data/models/movie.dart';
+import 'upcoming_movie_item.dart';
 
 class UpcomingMoviesCarousel extends StatefulWidget {
   final List<Movie> upComingMovies;
@@ -16,18 +15,12 @@ class UpcomingMoviesCarousel extends StatefulWidget {
     required this.upComingMovies,
   });
 
-  // Constructor for showing the shimmer
-  const UpcomingMoviesCarousel.showShimmer({super.key})
-    : upComingMovies = const [];
-
   @override
   State<UpcomingMoviesCarousel> createState() => _UpcomingMoviesCarouselState();
 }
 
 class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
   int _currentIndex = 0;
-
-  bool get _isShimmer => widget.upComingMovies.isEmpty;
   List<Movie> get _movies => widget.upComingMovies;
 
   // Shared carousel slider — single source of truth for layout.
@@ -45,14 +38,15 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
         enlargeCenterPage: true,
         autoPlay: autoPlay,
         onPageChanged: autoPlay
-            // todo: manage the set state here
+            // TODO: manage the set state here
             ? (index, _) => setState(() => _currentIndex = index)
             : null,
       ),
     );
   }
 
-  Widget _buildCarousel() {
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         _buildSlider(
@@ -75,10 +69,5 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
         ),
       ],
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _isShimmer ? const UpcomingMoviesShimmer() : _buildCarousel();
   }
 }

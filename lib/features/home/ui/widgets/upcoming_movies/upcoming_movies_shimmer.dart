@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
+import '../../../../../core/theming/colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class UpcomingMoviesShimmer extends StatelessWidget {

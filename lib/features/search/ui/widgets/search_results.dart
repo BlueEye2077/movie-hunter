@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/features/search/logic/cubit/search_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
-import 'package:movie_hunter/features/search/ui/widgets/empty_search.dart';
-import 'package:movie_hunter/features/search/ui/widgets/search_actor_list.dart';
-import 'package:movie_hunter/features/search/ui/widgets/search_movie_list.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/data/models/actor.dart';
+import '../../logic/cubit/search_cubit.dart';
+import '../../../home/logic/cubit/requests_state.dart';
+import 'empty_search.dart';
+import 'search_actor_list.dart';
+import 'search_loading_shimmer.dart';
+import 'search_movie_list.dart';
+import '../../../home/data/models/movie.dart';
+import '../../../home/data/models/actor.dart';
 
 class SearchResults extends StatelessWidget {
   const SearchResults({super.key});
@@ -23,7 +24,7 @@ class SearchResults extends StatelessWidget {
               style: TextStyle(color: Colors.white54),
             ),
           ),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const SearchLoadingShimmer(),
           success: (response) {
             final List<dynamic> results = response.results ?? [];
             if (results.isEmpty) {
