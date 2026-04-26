@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/common/animated_slider_dots.dart';
 import '../../../../../core/networking/api_constants.dart';
 import '../../../data/models/movie.dart';

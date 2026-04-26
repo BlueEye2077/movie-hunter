@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/routing/routes.dart';
+
 import '../../../../core/common/custom_search_bar.dart';
+import '../../../../core/routing/routes.dart';
 
 class ClickableSearchBar extends StatelessWidget {
   const ClickableSearchBar({super.key});

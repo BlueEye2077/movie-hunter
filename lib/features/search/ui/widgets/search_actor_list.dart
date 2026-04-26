@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../home/data/models/actor.dart';
+
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
-
+import '../../../home/data/models/actor.dart';
 import 'search_actor_item.dart';
 
 class SearchActorList extends StatelessWidget {

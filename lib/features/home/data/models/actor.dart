@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'known_for.dart';
 
 part 'actor.g.dart';

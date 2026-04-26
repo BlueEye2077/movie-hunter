@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/common/poster_image.dart';
 import '../../../../core/common/rating_badge.dart';
 import '../../../home/data/models/movie.dart';

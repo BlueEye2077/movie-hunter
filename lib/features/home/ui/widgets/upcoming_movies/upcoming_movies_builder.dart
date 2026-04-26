@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../core/networking/api_response.dart';
 import '../../../../../core/networking/network_exceptions.dart';
 import '../../../../../core/theming/styles.dart';
-import '../../../../../core/networking/api_response.dart';
 import '../../../data/models/movie.dart';
-import '../../../logic/cubit/upcoming_movies_cubit.dart';
 import '../../../logic/cubit/requests_state.dart';
+import '../../../logic/cubit/upcoming_movies_cubit.dart';
 import 'upcoming_movies_carousel.dart';
 import 'upcoming_movies_shimmer.dart';
 

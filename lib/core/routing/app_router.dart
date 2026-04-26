@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../di/dependency_injection.dart';
+
 import '../../features/home/logic/cubit/genres_cubit.dart';
-import '../../features/search/logic/cubit/search_cubit.dart';
-import '../../main_screen.dart';
 import '../../features/onboarding/ui/screens/onboarding_screen.dart';
+import '../../features/search/logic/cubit/search_cubit.dart';
 import '../../features/search/ui/screens/search_screen.dart';
+import '../../main_screen.dart';
+import '../di/dependency_injection.dart';
 import 'routes.dart';
 
 class AppRouter {

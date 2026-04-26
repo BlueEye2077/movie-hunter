@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../logic/cubit/search_cubit.dart';
+
+import '../../../home/data/models/actor.dart';
+import '../../../home/data/models/movie.dart';
 import '../../../home/logic/cubit/requests_state.dart';
+import '../../logic/cubit/search_cubit.dart';
 import 'empty_search.dart';
 import 'search_actor_list.dart';
 import 'search_loading_shimmer.dart';
 import 'search_movie_list.dart';
-import '../../../home/data/models/movie.dart';
-import '../../../home/data/models/actor.dart';
 
 class SearchResults extends StatelessWidget {
   const SearchResults({super.key});

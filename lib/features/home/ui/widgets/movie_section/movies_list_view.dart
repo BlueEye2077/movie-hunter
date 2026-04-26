@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/helpers/helpers.dart';
-import '../../../data/models/genre.dart';
-import '../../../data/models/movie.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../../../core/helpers/helpers.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
+import '../../../data/models/genre.dart';
+import '../../../data/models/movie.dart';
 import 'movie_item.dart';
 
 class MoviesListView extends StatelessWidget {

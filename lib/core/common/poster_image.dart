@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image_ce/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+
 import '../networking/api_constants.dart';
 import '../theming/colors.dart';
 
@@ -35,11 +37,10 @@ class PosterImage extends StatelessWidget {
             ? CachedNetworkImage(
                 imageUrl: "${ApiConstants.imagesUrl}$imageUrl",
                 fit: BoxFit.cover,
-                placeholder: (context, url) => Container(
-                  color: AppColors.primarySoft,
-                  child: const Center(
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  ),
+                placeholder: (context, url) => Shimmer.fromColors(
+                  baseColor: AppColors.primarySoft,
+                  highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
+                  child: Container(color: AppColors.primarySoft),
                 ),
                 errorBuilder: (context, url, error) => Container(
                   color: AppColors.primarySoft,

@@ -1,15 +1,16 @@
 import 'package:get_it/get_it.dart';
-import '../networking/dio_factory.dart';
+
 import '../../features/home/data/repository/home_repository.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
+import '../../features/home/logic/cubit/genres_cubit.dart';
 import '../../features/home/logic/cubit/now_playing_movies_cubit.dart';
+import '../../features/home/logic/cubit/popular_movies_cubit.dart';
 import '../../features/home/logic/cubit/top_rated_movies_cubit.dart';
 import '../../features/home/logic/cubit/upcoming_movies_cubit.dart';
-import '../../features/home/logic/cubit/popular_movies_cubit.dart';
-import '../../features/home/logic/cubit/genres_cubit.dart';
-import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/data/repository/search_repository.dart';
+import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
+import '../networking/dio_factory.dart';
 
 GetIt getIt = GetIt.instance;
 

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import 'search_actor_shimmer_item.dart';
 import 'search_movie_shimmer_item.dart';
-import 'package:shimmer/shimmer.dart';
 
 class SearchLoadingShimmer extends StatelessWidget {
   const SearchLoadingShimmer({super.key});
