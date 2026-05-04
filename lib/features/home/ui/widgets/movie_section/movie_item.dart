@@ -11,6 +11,7 @@ class MovieItem extends StatelessWidget {
   final List<String> genres;
   final String posterPath;
   final double rating;
+  final VoidCallback? onTap;
 
   const MovieItem({
     super.key,
@@ -18,40 +19,45 @@ class MovieItem extends StatelessWidget {
     required this.genres,
     required this.posterPath,
     required this.rating,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 135.w,
-      height: 231.h,
-      child: Stack(
-        children: [
-          // Background card
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.primarySoft,
-              borderRadius: BorderRadius.circular(12.r),
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        width: 135.w,
+        height: 231.h,
+        child: Stack(
+          children: [
+            // Background card
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.primarySoft,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
             ),
-          ),
-          // Poster image
-          PosterImage(imageUrl: posterPath, height: 178.h, width: 135.w),
-          // Rating badge
-          Positioned(
-            top: 8.h,
-            right: 8.w,
-            child: RatingBadge(rating: rating),
-          ),
-          // Title and genre
-          Positioned(
-            // bottom: 8.h,
-            top: 189.h,
-            left: 8.w,
-            right: 8.w,
-            child: MovieTitleAndGenre(title: title, genres: genres),
-          ),
-        ],
+            // Poster image
+            PosterImage(imageUrl: posterPath, height: 178.h, width: 135.w),
+            // Rating badge
+            Positioned(
+              top: 8.h,
+              right: 8.w,
+              child: RatingBadge(rating: rating),
+            ),
+            // Title and genre
+            Positioned(
+              // bottom: 8.h,
+              top: 189.h,
+              left: 8.w,
+              right: 8.w,
+              child: MovieTitleAndGenre(title: title, genres: genres),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
