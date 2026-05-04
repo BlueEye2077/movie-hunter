@@ -1,12 +1,14 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../logic/cubit/search_cubit.dart';
-import '../widgets/search_results.dart';
+
+import '../../../../core/common/custom_search_bar.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
-import '../../../../core/common/custom_search_bar.dart';
+import '../../logic/cubit/search_cubit.dart';
+import '../widgets/search_results.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

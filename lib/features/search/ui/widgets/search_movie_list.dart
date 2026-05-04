@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../home/data/models/movie.dart';
+
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
-
+import '../../../home/data/models/movie.dart';
 import 'search_movie_item.dart';
 
 class SearchMovieList extends StatelessWidget {
