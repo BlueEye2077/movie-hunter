@@ -7,6 +7,8 @@ import '../../features/home/logic/cubit/now_playing_movies_cubit.dart';
 import '../../features/home/logic/cubit/popular_movies_cubit.dart';
 import '../../features/home/logic/cubit/top_rated_movies_cubit.dart';
 import '../../features/home/logic/cubit/upcoming_movies_cubit.dart';
+import '../../features/movie_details/data/repository/movie_details_repository.dart';
+import '../../features/movie_details/data/web_services/details_api_service.dart';
 import '../../features/search/data/repository/search_repository.dart';
 import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
@@ -61,4 +63,15 @@ void initGetIt() {
   getIt.registerFactory<SearchCubit>(
     () => SearchCubit(searchRepository: getIt()),
   );
+
+  // ── Movie Details Feature ──
+  // register details api service
+  getIt.registerLazySingleton<DetailsApiService>(
+    () => DetailsApiService(dio),
+  );
+  // register movie details repository
+  getIt.registerLazySingleton<MovieDetailsRepository>(
+    () => MovieDetailsRepository(detailsApiService: getIt()),
+  );
 }
+

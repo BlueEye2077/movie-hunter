@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/home/data/models/movie.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
+import '../../features/movie_details/data/models/cast_and_crew_args.dart';
+import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
+import '../../features/movie_details/ui/screens/cast_and_crew_screen.dart';
+import '../../features/movie_details/ui/screens/movie_details_screen.dart';
 import '../../features/onboarding/ui/screens/onboarding_screen.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
 import '../../features/search/ui/screens/search_screen.dart';
@@ -25,11 +30,25 @@ class AppRouter {
               BlocProvider(
                 create: (context) => SearchCubit(searchRepository: getIt()),
               ),
-              BlocProvider.value(
-                value: getIt<GenresCubit>(),
-              ),
+              BlocProvider.value(value: getIt<GenresCubit>()),
             ],
             child: const SearchScreen(),
+          ),
+        );
+      case Routes.movieDetails:
+        final movie = settings.arguments as Movie;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => MovieDetailsCubit(movieDetailsRepository: getIt()),
+            child: MovieDetailsScreen(movie: movie),
+          ),
+        );
+      case Routes.castAndCrew:
+        final args = settings.arguments as CastAndCrewArgs;
+        return MaterialPageRoute(
+          builder: (_) => CastAndCrewScreen(
+            cast: args.cast,
+            crew: args.crew,
           ),
         );
       default:

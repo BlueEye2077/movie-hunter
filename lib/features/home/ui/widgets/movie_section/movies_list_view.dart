@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../core/helpers/helpers.dart';
+import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
 import '../../../data/models/genre.dart';
@@ -73,6 +74,11 @@ class MoviesListView extends StatelessWidget {
               genres: genreNames,
               posterPath: movie.posterPath ?? "",
               rating: movie.tmdbRating ?? 0,
+              onTap: () => Navigator.pushNamed(
+                context,
+                Routes.movieDetails,
+                arguments: movie,
+              ),
             );
           },
         ),
@@ -80,3 +86,4 @@ class MoviesListView extends StatelessWidget {
     }
   }
 }
+
