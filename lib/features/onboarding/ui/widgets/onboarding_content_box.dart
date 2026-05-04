@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/common/animated_slider_dots.dart';
+
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
-import '../../onboarding_data.dart';
+import '../../../../core/common/animated_slider_dots.dart';
+import '../../data/onboarding_data.dart';
 import 'onboarding_next_button.dart';
 
 class OnboardingContentBox extends StatelessWidget {

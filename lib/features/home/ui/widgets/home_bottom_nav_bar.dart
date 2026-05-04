@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
+
+import '../../../../core/theming/colors.dart';
+import 'bottom_nav_item.dart';
 
 class HomeBottomNavBar extends StatefulWidget {
-  const HomeBottomNavBar({super.key});
+  final ValueChanged<int> onTabSelected;
+
+  const HomeBottomNavBar({super.key, required this.onTabSelected});
 
   @override
   State<HomeBottomNavBar> createState() => _HomeBottomNavBarState();
@@ -14,7 +16,8 @@ class HomeBottomNavBar extends StatefulWidget {
 class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   int _selectedIndex = 0;
 
-  final List<_NavItem> _items = [
+  // List of navigation items
+  static const List<_NavItem> _items = [
     _NavItem(icon: 'assets/svgs/home.svg', label: 'Home'),
     _NavItem(icon: 'assets/svgs/search.svg', label: 'Search'),
     _NavItem(icon: 'assets/svgs/download.svg', label: 'Download'),
@@ -23,6 +26,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    // Build the bottom navigation bar
     return Container(
       height: 72.h,
       color: AppColors.primaryDark,
@@ -32,47 +36,14 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
         children: List.generate(_items.length, (index) {
           final isSelected = index == _selectedIndex;
           return GestureDetector(
-            // todo: add navigation to the selected item
             onTap: () {
-              setState(() {
-                _selectedIndex = index;
-              });
+              _selectedIndex = index;
+              widget.onTabSelected(index);
             },
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 250),
-              padding: EdgeInsets.symmetric(
-                horizontal: 12.w,
-                vertical: 8.h,
-              ),
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.primarySoft : Colors.transparent,
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    _items[index].icon,
-                    width: 24.w,
-                    height: 24.w,
-                    colorFilter: ColorFilter.mode(
-                      isSelected
-                          ? AppColors.primaryBlueAccent
-                          : AppColors.textGrey,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  if (isSelected) ...[
-                    SizedBox(width: 4.w),
-                    Text(
-                      _items[index].label,
-                      style: TextStyles.font12Medium.copyWith(
-                        color: AppColors.primaryBlueAccent,
-                      ),
-                    ),
-                  ],
-                ],
-              ),
+            child: BottomNavItem(
+              icon: _items[index].icon,
+              label: _items[index].label,
+              isSelected: isSelected,
             ),
           );
         }),
@@ -81,6 +52,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   }
 }
 
+// Private class to hold the data for each navigation item
 class _NavItem {
   final String icon;
   final String label;

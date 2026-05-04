@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/di/dependency_injection.dart';
-import 'package:movie_hunter/features/home/logic/cubit/now_playing_movies_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/top_rated_movies_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/upcoming_movies_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/popular_movies_cubit.dart';
-import 'package:movie_hunter/features/home/logic/cubit/genres_cubit.dart';
-import 'package:movie_hunter/features/home/ui/screens/home_screen.dart';
-import 'package:movie_hunter/features/onboarding/ui/screens/onboarding_screen.dart';
+
+import '../../features/home/logic/cubit/genres_cubit.dart';
+import '../../features/onboarding/ui/screens/onboarding_screen.dart';
+import '../../features/search/logic/cubit/search_cubit.dart';
+import '../../features/search/ui/screens/search_screen.dart';
+import '../../main_screen.dart';
+import '../di/dependency_injection.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -15,39 +14,24 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
-      case Routes.home:
+      case Routes.mainScreen:
+        // BlocProviders are passed through the main screen for better performance and state management
+        // and to avoid unnecessary rebuilds when switching between tabs.
+        return MaterialPageRoute(builder: (_) => const MainScreen());
+      case Routes.search:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                // get upcoming movies [run the getUpComingMovies method right away]
-                create: (context) =>
-                    getIt<UpComingMoviesCubit>()..getUpComingMovies(),
+                create: (context) => SearchCubit(searchRepository: getIt()),
               ),
-              BlocProvider(
-                // get popular movies [run the getPopularMovies method right away]
-                create: (context) =>
-                    getIt<PopularMoviesCubit>()..getPopularMovies(),
-              ),
-              BlocProvider(
-                // get top rated movies [run the getTopRatedMovies method right away]
-                create: (context) =>
-                    getIt<TopRatedMoviesCubit>()..getTopRatedMovies(),
-              ),
-              BlocProvider(
-                // get now playing movies [run the getNowPlayingMovies method right away]
-                create: (context) =>
-                    getIt<NowPlayingMoviesCubit>()..getNowPlayingMovies(),
-              ),
-              BlocProvider(
-                // get genres [run the getGenres method right away]
-                create: (context) => getIt<GenresCubit>()..getGenres(),
+              BlocProvider.value(
+                value: getIt<GenresCubit>(),
               ),
             ],
-            child: const HomeScreen(),
+            child: const SearchScreen(),
           ),
         );
-
       default:
         return null;
     }

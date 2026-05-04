@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hunter/core/helpers/helpers.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
-import 'package:movie_hunter/features/home/ui/widgets/movie_section/movie_item.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../../../../../core/helpers/helpers.dart';
+import '../../../../../core/theming/colors.dart';
+import '../../../../../core/theming/styles.dart';
+import '../../../data/models/genre.dart';
+import '../../../data/models/movie.dart';
+import 'movie_item.dart';
 
 class MoviesListView extends StatelessWidget {
   final List<Movie> movies;
@@ -71,9 +71,7 @@ class MoviesListView extends StatelessWidget {
             return MovieItem(
               title: movie.title ?? '',
               genres: genreNames,
-              posterPath: movie.posterPath != null
-                  ? '${ApiConstants.imagesUrl}${movie.posterPath}'
-                  : '',
+              posterPath: movie.posterPath ?? "",
               rating: movie.tmdbRating ?? 0,
             );
           },

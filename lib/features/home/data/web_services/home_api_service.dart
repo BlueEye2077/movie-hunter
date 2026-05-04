@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/core/networking/api_response.dart';
-import 'package:movie_hunter/features/home/data/web_services/home_api_constants.dart';
+import '../../../../core/networking/api_constants.dart';
+import '../models/genre.dart';
+import '../../../../core/networking/api_response.dart';
+import 'home_api_constants.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
+import '../models/movie.dart';
 
 part 'home_api_service.g.dart';
 
@@ -41,26 +41,4 @@ abstract class HomeApiService {
   Future<Map<String, List<Genre>>> getGenres(
     @Header("Authorization") String token,
   );
-}
-
-// Create and setup dio
-Dio createAndSetupDio() {
-  Dio dio = Dio();
-
-  dio
-    ..options.connectTimeout = Duration(seconds: 6)
-    ..options.receiveTimeout = Duration(seconds: 10);
-
-  dio.interceptors.add(
-    LogInterceptor(
-      responseBody: true,
-      error: true,
-      requestHeader: false,
-      responseHeader: false,
-      request: true,
-      requestBody: true,
-    ),
-  );
-
-  return dio;
 }
