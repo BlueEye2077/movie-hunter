@@ -48,9 +48,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
         centerTitle: true,
         title: Text(
           widget.args.title,
-          style: TextStyles.font16SemiBold.copyWith(
-            color: AppColors.textWhite,
-          ),
+          style: TextStyles.font16SemiBold.copyWith(color: AppColors.textWhite),
         ),
         actions: [
           IconButton(
