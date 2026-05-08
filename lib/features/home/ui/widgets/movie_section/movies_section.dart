@@ -7,11 +7,13 @@ import '../../../../../core/theming/styles.dart';
 class MoviesSection extends StatelessWidget {
   final String title;
   final Widget child;
+  final VoidCallback? onSeeAllTap;
 
   const MoviesSection({
     super.key,
     required this.title,
     required this.child,
+    this.onSeeAllTap,
   });
 
   @override
@@ -36,9 +38,7 @@ class MoviesSection extends StatelessWidget {
               ),
               // See All Movies Button
               GestureDetector(
-                onTap: () {
-                  // TODO: Navigate to see all popular movies
-                },
+                onTap: onSeeAllTap,
                 child: Text(
                   'See All',
                   style: TextStyles.font14Medium.copyWith(
