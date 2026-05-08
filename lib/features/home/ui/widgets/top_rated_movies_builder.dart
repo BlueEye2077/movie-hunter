@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
+import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../data/models/genre.dart';
 import '../../data/models/movie.dart';
 import '../../logic/cubit/genres_cubit.dart';
@@ -36,10 +38,19 @@ class TopRatedMoviesBuilder extends StatelessWidget {
             child: const MoviesListView.shimmer(),
           ),
           success: (response) {
+            final movies = response.results ?? [];
             return MoviesSection(
               title: 'Top Rated',
+              onSeeAllTap: () => Navigator.pushNamed(
+                context,
+                Routes.allMovies,
+                arguments: AllMoviesArgs(
+                  title: 'Top Rated',
+                  movies: movies,
+                ),
+              ),
               child: MoviesListView.showMovies(
-                movies: response.results ?? [],
+                movies: movies,
                 genres: genres,
               ),
             );
