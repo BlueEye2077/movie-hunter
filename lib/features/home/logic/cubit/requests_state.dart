@@ -9,5 +9,6 @@ class RequestsState<T> with _$RequestsState<T> {
   const factory RequestsState.idle() = Idle<T>;
   const factory RequestsState.loading() = Loading<T>;
   const factory RequestsState.success(T data) = Success<T>;
-  const factory RequestsState.error(NetworkExceptions networkException) = Error<T>;
+  const factory RequestsState.error(NetworkExceptions networkException) =
+      Error<T>;
 }

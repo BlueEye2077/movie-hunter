@@ -7,7 +7,8 @@ import 'requests_state.dart';
 
 class GenresCubit extends Cubit<RequestsState<List<Genre>>> {
   final HomeRepository homeRepository;
-  GenresCubit({required this.homeRepository}) : super(const RequestsState.idle());
+  GenresCubit({required this.homeRepository})
+    : super(const RequestsState.idle());
 
   void getGenres() async {
     final result = await homeRepository.getGenres();

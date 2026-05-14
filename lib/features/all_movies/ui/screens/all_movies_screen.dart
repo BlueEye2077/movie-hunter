@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/features/home/data/models/movie.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
@@ -22,6 +23,8 @@ class AllMoviesScreen extends StatefulWidget {
 
 class _AllMoviesScreenState extends State<AllMoviesScreen> {
   bool _isGridView = false;
+  String get title => widget.args.title;
+  List<Movie> get movies => widget.args.movies;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
         ),
         centerTitle: true,
         title: Text(
-          widget.args.title,
+          title,
           style: TextStyles.font16SemiBold.copyWith(color: AppColors.textWhite),
         ),
         actions: [
@@ -77,12 +80,12 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
         child: _isGridView
             ? AllMoviesGridView(
                 key: const ValueKey('grid'),
-                movies: widget.args.movies,
+                movies: movies,
                 genres: genres,
               )
             : AllMoviesListView(
                 key: const ValueKey('list'),
-                movies: widget.args.movies,
+                movies: movies,
                 genres: genres,
               ),
       ),

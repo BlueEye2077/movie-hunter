@@ -16,24 +16,28 @@ abstract class HomeApiService {
   @GET(HomeApiConstants.upcoming)
   Future<ApiResponse<Movie>> getUpcomingMovies(
     @Header("Authorization") String token,
+    @Query("page") int page,
   );
 
   // Get the popular movies list
   @GET(HomeApiConstants.popular)
   Future<ApiResponse<Movie>> getPopularMovies(
     @Header("Authorization") String token,
+    @Query("page") int page,
   );
 
   // Get the top rated movies list
   @GET(HomeApiConstants.topRated)
   Future<ApiResponse<Movie>> getTopRatedMovies(
     @Header("Authorization") String token,
+    @Query("page") int page,
   );
 
   // Get the now playing movies list
   @GET(HomeApiConstants.nowPlaying)
   Future<ApiResponse<Movie>> getNowPlayingMovies(
     @Header("Authorization") String token,
+    @Query("page") int page,
   );
 
   // Get the genres list

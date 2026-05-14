@@ -6,7 +6,8 @@ import '../../data/repository/home_repository.dart';
 import 'requests_state.dart';
 
 class UpComingMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
-  UpComingMoviesCubit({required this.homeRepository}) : super(RequestsState.idle());
+  UpComingMoviesCubit({required this.homeRepository})
+    : super(RequestsState.idle());
 
   final HomeRepository homeRepository;
 
