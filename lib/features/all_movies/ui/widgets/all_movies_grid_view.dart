@@ -9,11 +9,13 @@ import 'all_movies_grid_item.dart';
 class AllMoviesGridView extends StatelessWidget {
   final List<Movie> movies;
   final List<Genre> genres;
+  final bool isLoadingmore;
 
   const AllMoviesGridView({
     super.key,
     required this.movies,
     required this.genres,
+    required this.isLoadingmore,
   });
 
   @override
@@ -26,12 +28,16 @@ class AllMoviesGridView extends StatelessWidget {
         mainAxisSpacing: 16.h,
         childAspectRatio: 100 / 185,
       ),
-      itemCount: movies.length,
+      itemCount: isLoadingmore ? movies.length + 1 : movies.length,
       itemBuilder: (context, index) {
         final movie = movies[index];
         final year = movie.releaseDate?.isNotEmpty == true
             ? movie.releaseDate!.substring(0, 4)
             : '—';
+
+        if (index == movies.length) {
+          return Center(child: CircularProgressIndicator());
+        }
         return AllMoviesGridItem(
           posterPath: movie.posterPath ?? '',
           title: movie.title ?? movie.originalTitle ?? 'Unknown',

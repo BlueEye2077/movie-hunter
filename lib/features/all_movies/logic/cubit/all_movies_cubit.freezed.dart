@@ -55,17 +55,17 @@ extension AllMoviesStatePatterns<T> on AllMoviesState<T> {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Idle<T> value)?  idle,TResult Function( Loading<T> value)?  loading,TResult Function( LoadingAllMovies<T> value)?  loadingAllMovies,TResult Function( LoadingPaginationAllMovies<T> value)?  loadingPaginationAllMovies,TResult Function( SuccessPaginationAllMovies<T> value)?  successPaginationAllMovies,TResult Function( SuccessAllMovies<T> value)?  successAllMovies,TResult Function( Error<T> value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Idle<T> value)?  idle,TResult Function( LoadingAllMovies<T> value)?  loadingAllMovies,TResult Function( SuccessAllMovies<T> value)?  successAllMovies,TResult Function( ErrorAllMovies<T> value)?  errorAllMovies,TResult Function( LoadingPaginationAllMovies<T> value)?  loadingPaginationAllMovies,TResult Function( SuccessPaginationAllMovies<T> value)?  successPaginationAllMovies,TResult Function( ErrorPaginationAllMovies<T> value)?  errorPaginationAllMovies,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Idle() when idle != null:
-return idle(_that);case Loading() when loading != null:
-return loading(_that);case LoadingAllMovies() when loadingAllMovies != null:
-return loadingAllMovies(_that);case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
+return idle(_that);case LoadingAllMovies() when loadingAllMovies != null:
+return loadingAllMovies(_that);case SuccessAllMovies() when successAllMovies != null:
+return successAllMovies(_that);case ErrorAllMovies() when errorAllMovies != null:
+return errorAllMovies(_that);case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
 return loadingPaginationAllMovies(_that);case SuccessPaginationAllMovies() when successPaginationAllMovies != null:
-return successPaginationAllMovies(_that);case SuccessAllMovies() when successAllMovies != null:
-return successAllMovies(_that);case Error() when error != null:
-return error(_that);case _:
+return successPaginationAllMovies(_that);case ErrorPaginationAllMovies() when errorPaginationAllMovies != null:
+return errorPaginationAllMovies(_that);case _:
   return orElse();
 
 }
@@ -83,17 +83,17 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Idle<T> value)  idle,required TResult Function( Loading<T> value)  loading,required TResult Function( LoadingAllMovies<T> value)  loadingAllMovies,required TResult Function( LoadingPaginationAllMovies<T> value)  loadingPaginationAllMovies,required TResult Function( SuccessPaginationAllMovies<T> value)  successPaginationAllMovies,required TResult Function( SuccessAllMovies<T> value)  successAllMovies,required TResult Function( Error<T> value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Idle<T> value)  idle,required TResult Function( LoadingAllMovies<T> value)  loadingAllMovies,required TResult Function( SuccessAllMovies<T> value)  successAllMovies,required TResult Function( ErrorAllMovies<T> value)  errorAllMovies,required TResult Function( LoadingPaginationAllMovies<T> value)  loadingPaginationAllMovies,required TResult Function( SuccessPaginationAllMovies<T> value)  successPaginationAllMovies,required TResult Function( ErrorPaginationAllMovies<T> value)  errorPaginationAllMovies,}){
 final _that = this;
 switch (_that) {
 case Idle():
-return idle(_that);case Loading():
-return loading(_that);case LoadingAllMovies():
-return loadingAllMovies(_that);case LoadingPaginationAllMovies():
+return idle(_that);case LoadingAllMovies():
+return loadingAllMovies(_that);case SuccessAllMovies():
+return successAllMovies(_that);case ErrorAllMovies():
+return errorAllMovies(_that);case LoadingPaginationAllMovies():
 return loadingPaginationAllMovies(_that);case SuccessPaginationAllMovies():
-return successPaginationAllMovies(_that);case SuccessAllMovies():
-return successAllMovies(_that);case Error():
-return error(_that);case _:
+return successPaginationAllMovies(_that);case ErrorPaginationAllMovies():
+return errorPaginationAllMovies(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -110,17 +110,17 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Idle<T> value)?  idle,TResult? Function( Loading<T> value)?  loading,TResult? Function( LoadingAllMovies<T> value)?  loadingAllMovies,TResult? Function( LoadingPaginationAllMovies<T> value)?  loadingPaginationAllMovies,TResult? Function( SuccessPaginationAllMovies<T> value)?  successPaginationAllMovies,TResult? Function( SuccessAllMovies<T> value)?  successAllMovies,TResult? Function( Error<T> value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Idle<T> value)?  idle,TResult? Function( LoadingAllMovies<T> value)?  loadingAllMovies,TResult? Function( SuccessAllMovies<T> value)?  successAllMovies,TResult? Function( ErrorAllMovies<T> value)?  errorAllMovies,TResult? Function( LoadingPaginationAllMovies<T> value)?  loadingPaginationAllMovies,TResult? Function( SuccessPaginationAllMovies<T> value)?  successPaginationAllMovies,TResult? Function( ErrorPaginationAllMovies<T> value)?  errorPaginationAllMovies,}){
 final _that = this;
 switch (_that) {
 case Idle() when idle != null:
-return idle(_that);case Loading() when loading != null:
-return loading(_that);case LoadingAllMovies() when loadingAllMovies != null:
-return loadingAllMovies(_that);case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
+return idle(_that);case LoadingAllMovies() when loadingAllMovies != null:
+return loadingAllMovies(_that);case SuccessAllMovies() when successAllMovies != null:
+return successAllMovies(_that);case ErrorAllMovies() when errorAllMovies != null:
+return errorAllMovies(_that);case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
 return loadingPaginationAllMovies(_that);case SuccessPaginationAllMovies() when successPaginationAllMovies != null:
-return successPaginationAllMovies(_that);case SuccessAllMovies() when successAllMovies != null:
-return successAllMovies(_that);case Error() when error != null:
-return error(_that);case _:
+return successPaginationAllMovies(_that);case ErrorPaginationAllMovies() when errorPaginationAllMovies != null:
+return errorPaginationAllMovies(_that);case _:
   return null;
 
 }
@@ -137,16 +137,16 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  loading,TResult Function()?  loadingAllMovies,TResult Function()?  loadingPaginationAllMovies,TResult Function( T data)?  successPaginationAllMovies,TResult Function( T data)?  successAllMovies,TResult Function( NetworkExceptions networkExceptions)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  loadingAllMovies,TResult Function()?  successAllMovies,TResult Function( NetworkExceptions networkExceptions)?  errorAllMovies,TResult Function()?  loadingPaginationAllMovies,TResult Function( T data)?  successPaginationAllMovies,TResult Function( NetworkExceptions networkExceptions)?  errorPaginationAllMovies,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Idle() when idle != null:
-return idle();case Loading() when loading != null:
-return loading();case LoadingAllMovies() when loadingAllMovies != null:
-return loadingAllMovies();case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
+return idle();case LoadingAllMovies() when loadingAllMovies != null:
+return loadingAllMovies();case SuccessAllMovies() when successAllMovies != null:
+return successAllMovies();case ErrorAllMovies() when errorAllMovies != null:
+return errorAllMovies(_that.networkExceptions);case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
 return loadingPaginationAllMovies();case SuccessPaginationAllMovies() when successPaginationAllMovies != null:
-return successPaginationAllMovies(_that.data);case SuccessAllMovies() when successAllMovies != null:
-return successAllMovies(_that.data);case Error() when error != null:
-return error(_that.networkExceptions);case _:
+return successPaginationAllMovies(_that.data);case ErrorPaginationAllMovies() when errorPaginationAllMovies != null:
+return errorPaginationAllMovies(_that.networkExceptions);case _:
   return orElse();
 
 }
@@ -164,16 +164,16 @@ return error(_that.networkExceptions);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  loading,required TResult Function()  loadingAllMovies,required TResult Function()  loadingPaginationAllMovies,required TResult Function( T data)  successPaginationAllMovies,required TResult Function( T data)  successAllMovies,required TResult Function( NetworkExceptions networkExceptions)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  loadingAllMovies,required TResult Function()  successAllMovies,required TResult Function( NetworkExceptions networkExceptions)  errorAllMovies,required TResult Function()  loadingPaginationAllMovies,required TResult Function( T data)  successPaginationAllMovies,required TResult Function( NetworkExceptions networkExceptions)  errorPaginationAllMovies,}) {final _that = this;
 switch (_that) {
 case Idle():
-return idle();case Loading():
-return loading();case LoadingAllMovies():
-return loadingAllMovies();case LoadingPaginationAllMovies():
+return idle();case LoadingAllMovies():
+return loadingAllMovies();case SuccessAllMovies():
+return successAllMovies();case ErrorAllMovies():
+return errorAllMovies(_that.networkExceptions);case LoadingPaginationAllMovies():
 return loadingPaginationAllMovies();case SuccessPaginationAllMovies():
-return successPaginationAllMovies(_that.data);case SuccessAllMovies():
-return successAllMovies(_that.data);case Error():
-return error(_that.networkExceptions);case _:
+return successPaginationAllMovies(_that.data);case ErrorPaginationAllMovies():
+return errorPaginationAllMovies(_that.networkExceptions);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -190,16 +190,16 @@ return error(_that.networkExceptions);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  loading,TResult? Function()?  loadingAllMovies,TResult? Function()?  loadingPaginationAllMovies,TResult? Function( T data)?  successPaginationAllMovies,TResult? Function( T data)?  successAllMovies,TResult? Function( NetworkExceptions networkExceptions)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  loadingAllMovies,TResult? Function()?  successAllMovies,TResult? Function( NetworkExceptions networkExceptions)?  errorAllMovies,TResult? Function()?  loadingPaginationAllMovies,TResult? Function( T data)?  successPaginationAllMovies,TResult? Function( NetworkExceptions networkExceptions)?  errorPaginationAllMovies,}) {final _that = this;
 switch (_that) {
 case Idle() when idle != null:
-return idle();case Loading() when loading != null:
-return loading();case LoadingAllMovies() when loadingAllMovies != null:
-return loadingAllMovies();case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
+return idle();case LoadingAllMovies() when loadingAllMovies != null:
+return loadingAllMovies();case SuccessAllMovies() when successAllMovies != null:
+return successAllMovies();case ErrorAllMovies() when errorAllMovies != null:
+return errorAllMovies(_that.networkExceptions);case LoadingPaginationAllMovies() when loadingPaginationAllMovies != null:
 return loadingPaginationAllMovies();case SuccessPaginationAllMovies() when successPaginationAllMovies != null:
-return successPaginationAllMovies(_that.data);case SuccessAllMovies() when successAllMovies != null:
-return successAllMovies(_that.data);case Error() when error != null:
-return error(_that.networkExceptions);case _:
+return successPaginationAllMovies(_that.data);case ErrorPaginationAllMovies() when errorPaginationAllMovies != null:
+return errorPaginationAllMovies(_that.networkExceptions);case _:
   return null;
 
 }
@@ -242,38 +242,6 @@ String toString() {
 /// @nodoc
 
 
-class Loading<T> implements AllMoviesState<T> {
-  const Loading();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Loading<T>);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'AllMoviesState<$T>.loading()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
 class LoadingAllMovies<T> implements AllMoviesState<T> {
   const LoadingAllMovies();
   
@@ -302,6 +270,113 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class SuccessAllMovies<T> implements AllMoviesState<T> {
+  const SuccessAllMovies();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuccessAllMovies<T>);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AllMoviesState<$T>.successAllMovies()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class ErrorAllMovies<T> implements AllMoviesState<T> {
+  const ErrorAllMovies(this.networkExceptions);
+  
+
+ final  NetworkExceptions networkExceptions;
+
+/// Create a copy of AllMoviesState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ErrorAllMoviesCopyWith<T, ErrorAllMovies<T>> get copyWith => _$ErrorAllMoviesCopyWithImpl<T, ErrorAllMovies<T>>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorAllMovies<T>&&(identical(other.networkExceptions, networkExceptions) || other.networkExceptions == networkExceptions));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,networkExceptions);
+
+@override
+String toString() {
+  return 'AllMoviesState<$T>.errorAllMovies(networkExceptions: $networkExceptions)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ErrorAllMoviesCopyWith<T,$Res> implements $AllMoviesStateCopyWith<T, $Res> {
+  factory $ErrorAllMoviesCopyWith(ErrorAllMovies<T> value, $Res Function(ErrorAllMovies<T>) _then) = _$ErrorAllMoviesCopyWithImpl;
+@useResult
+$Res call({
+ NetworkExceptions networkExceptions
+});
+
+
+$NetworkExceptionsCopyWith<$Res> get networkExceptions;
+
+}
+/// @nodoc
+class _$ErrorAllMoviesCopyWithImpl<T,$Res>
+    implements $ErrorAllMoviesCopyWith<T, $Res> {
+  _$ErrorAllMoviesCopyWithImpl(this._self, this._then);
+
+  final ErrorAllMovies<T> _self;
+  final $Res Function(ErrorAllMovies<T>) _then;
+
+/// Create a copy of AllMoviesState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? networkExceptions = null,}) {
+  return _then(ErrorAllMovies<T>(
+null == networkExceptions ? _self.networkExceptions : networkExceptions // ignore: cast_nullable_to_non_nullable
+as NetworkExceptions,
+  ));
+}
+
+/// Create a copy of AllMoviesState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$NetworkExceptionsCopyWith<$Res> get networkExceptions {
+  
+  return $NetworkExceptionsCopyWith<$Res>(_self.networkExceptions, (value) {
+    return _then(_self.copyWith(networkExceptions: value));
+  });
+}
+}
 
 /// @nodoc
 
@@ -404,74 +479,8 @@ as T,
 /// @nodoc
 
 
-class SuccessAllMovies<T> implements AllMoviesState<T> {
-  const SuccessAllMovies(this.data);
-  
-
- final  T data;
-
-/// Create a copy of AllMoviesState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SuccessAllMoviesCopyWith<T, SuccessAllMovies<T>> get copyWith => _$SuccessAllMoviesCopyWithImpl<T, SuccessAllMovies<T>>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuccessAllMovies<T>&&const DeepCollectionEquality().equals(other.data, data));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data));
-
-@override
-String toString() {
-  return 'AllMoviesState<$T>.successAllMovies(data: $data)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $SuccessAllMoviesCopyWith<T,$Res> implements $AllMoviesStateCopyWith<T, $Res> {
-  factory $SuccessAllMoviesCopyWith(SuccessAllMovies<T> value, $Res Function(SuccessAllMovies<T>) _then) = _$SuccessAllMoviesCopyWithImpl;
-@useResult
-$Res call({
- T data
-});
-
-
-
-
-}
-/// @nodoc
-class _$SuccessAllMoviesCopyWithImpl<T,$Res>
-    implements $SuccessAllMoviesCopyWith<T, $Res> {
-  _$SuccessAllMoviesCopyWithImpl(this._self, this._then);
-
-  final SuccessAllMovies<T> _self;
-  final $Res Function(SuccessAllMovies<T>) _then;
-
-/// Create a copy of AllMoviesState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? data = freezed,}) {
-  return _then(SuccessAllMovies<T>(
-freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as T,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class Error<T> implements AllMoviesState<T> {
-  const Error(this.networkExceptions);
+class ErrorPaginationAllMovies<T> implements AllMoviesState<T> {
+  const ErrorPaginationAllMovies(this.networkExceptions);
   
 
  final  NetworkExceptions networkExceptions;
@@ -480,13 +489,13 @@ class Error<T> implements AllMoviesState<T> {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ErrorCopyWith<T, Error<T>> get copyWith => _$ErrorCopyWithImpl<T, Error<T>>(this, _$identity);
+$ErrorPaginationAllMoviesCopyWith<T, ErrorPaginationAllMovies<T>> get copyWith => _$ErrorPaginationAllMoviesCopyWithImpl<T, ErrorPaginationAllMovies<T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Error<T>&&(identical(other.networkExceptions, networkExceptions) || other.networkExceptions == networkExceptions));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorPaginationAllMovies<T>&&(identical(other.networkExceptions, networkExceptions) || other.networkExceptions == networkExceptions));
 }
 
 
@@ -495,15 +504,15 @@ int get hashCode => Object.hash(runtimeType,networkExceptions);
 
 @override
 String toString() {
-  return 'AllMoviesState<$T>.error(networkExceptions: $networkExceptions)';
+  return 'AllMoviesState<$T>.errorPaginationAllMovies(networkExceptions: $networkExceptions)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ErrorCopyWith<T,$Res> implements $AllMoviesStateCopyWith<T, $Res> {
-  factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) _then) = _$ErrorCopyWithImpl;
+abstract mixin class $ErrorPaginationAllMoviesCopyWith<T,$Res> implements $AllMoviesStateCopyWith<T, $Res> {
+  factory $ErrorPaginationAllMoviesCopyWith(ErrorPaginationAllMovies<T> value, $Res Function(ErrorPaginationAllMovies<T>) _then) = _$ErrorPaginationAllMoviesCopyWithImpl;
 @useResult
 $Res call({
  NetworkExceptions networkExceptions
@@ -514,17 +523,17 @@ $NetworkExceptionsCopyWith<$Res> get networkExceptions;
 
 }
 /// @nodoc
-class _$ErrorCopyWithImpl<T,$Res>
-    implements $ErrorCopyWith<T, $Res> {
-  _$ErrorCopyWithImpl(this._self, this._then);
+class _$ErrorPaginationAllMoviesCopyWithImpl<T,$Res>
+    implements $ErrorPaginationAllMoviesCopyWith<T, $Res> {
+  _$ErrorPaginationAllMoviesCopyWithImpl(this._self, this._then);
 
-  final Error<T> _self;
-  final $Res Function(Error<T>) _then;
+  final ErrorPaginationAllMovies<T> _self;
+  final $Res Function(ErrorPaginationAllMovies<T>) _then;
 
 /// Create a copy of AllMoviesState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? networkExceptions = null,}) {
-  return _then(Error<T>(
+  return _then(ErrorPaginationAllMovies<T>(
 null == networkExceptions ? _self.networkExceptions : networkExceptions // ignore: cast_nullable_to_non_nullable
 as NetworkExceptions,
   ));

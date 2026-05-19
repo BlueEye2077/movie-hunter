@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:movie_hunter/features/all_movies/logic/cubit/all_movies_cubit.dart';
 
 import '../../features/home/data/repository/home_repository.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
@@ -22,9 +23,7 @@ void initGetIt() {
 
   // ── Home Feature ──
   // register home api service
-  getIt.registerLazySingleton<HomeApiService>(
-    () => HomeApiService(dio),
-  );
+  getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   // register home repository
   getIt.registerLazySingleton<HomeRepository>(
     () => HomeRepository(homeApiService: getIt()),
@@ -52,9 +51,7 @@ void initGetIt() {
 
   // ── Search Feature ──
   // register search api service
-  getIt.registerLazySingleton<SearchApiService>(
-    () => SearchApiService(dio),
-  );
+  getIt.registerLazySingleton<SearchApiService>(() => SearchApiService(dio));
   // register search repository
   getIt.registerLazySingleton<SearchRepository>(
     () => SearchRepository(searchApiService: getIt()),
@@ -66,12 +63,15 @@ void initGetIt() {
 
   // ── Movie Details Feature ──
   // register details api service
-  getIt.registerLazySingleton<DetailsApiService>(
-    () => DetailsApiService(dio),
-  );
+  getIt.registerLazySingleton<DetailsApiService>(() => DetailsApiService(dio));
   // register movie details repository
   getIt.registerLazySingleton<MovieDetailsRepository>(
     () => MovieDetailsRepository(detailsApiService: getIt()),
   );
-}
 
+  // ── All Movies Feature ──
+  // register the all movies cubit
+  getIt.registerFactory<AllMoviesCubit>(
+    () => AllMoviesCubit(homeRepository: getIt()),
+  );
+}

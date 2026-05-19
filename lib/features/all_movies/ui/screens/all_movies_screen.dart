@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/features/all_movies/logic/cubit/all_movies_cubit.dart';
 import 'package:movie_hunter/features/home/data/models/movie.dart';
 
 import '../../../../core/theming/colors.dart';
@@ -24,7 +25,16 @@ class AllMoviesScreen extends StatefulWidget {
 class _AllMoviesScreenState extends State<AllMoviesScreen> {
   bool _isGridView = false;
   String get title => widget.args.title;
-  List<Movie> get movies => widget.args.movies;
+  // List<Movie> get movies => widget.args.movies;
+  bool _isLoadingPagination = false;
+
+  List<Movie> _movies = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _movies = widget.args.movies;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,19 +85,46 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
           SizedBox(width: 8.w),
         ],
       ),
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 250),
-        child: _isGridView
-            ? AllMoviesGridView(
-                key: const ValueKey('grid'),
-                movies: movies,
-                genres: genres,
-              )
-            : AllMoviesListView(
-                key: const ValueKey('list'),
-                movies: movies,
-                genres: genres,
-              ),
+      body: BlocBuilder<AllMoviesCubit, AllMoviesState>(
+        builder: (context, state) {
+          state.maybeWhen(
+            successPaginationAllMovies: (data) => _movies = data,
+            orElse: () => _movies,
+          );
+          state is LoadingPaginationAllMovies
+              ? _isLoadingPagination = true
+              : _isLoadingPagination = false;
+          return NotificationListener(
+            onNotification: (ScrollNotification notification) {
+              if (notification is ScrollEndNotification) {
+                final double pixels = notification.metrics.pixels;
+                final double max = notification.metrics.maxScrollExtent;
+                final int trigger = 200;
+
+                if (pixels >= max - trigger) {
+                  context.read<AllMoviesCubit>().fetchNextPage();
+                }
+              }
+              return false;
+            },
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              child: _isGridView
+                  ? AllMoviesGridView(
+                      key: const ValueKey('grid'),
+                      movies: _movies,
+                      genres: genres,
+                      isLoadingmore: _isLoadingPagination,
+                    )
+                  : AllMoviesListView(
+                      key: const ValueKey('list'),
+                      movies: _movies,
+                      genres: genres,
+                      isLoadingmore: _isLoadingPagination,
+                    ),
+            ),
+          );
+        },
       ),
     );
   }
