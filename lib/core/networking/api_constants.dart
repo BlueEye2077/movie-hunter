@@ -1,4 +1,4 @@
-import 'package:movie_hunter/core/env/env.dart';
+import '../env/env.dart';
 
 class ApiConstants {
   static const String baseUrl = 'https://api.themoviedb.org/3/';

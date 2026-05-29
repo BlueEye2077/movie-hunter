@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/common/movie_shimmer_list.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import 'search_actor_shimmer_item.dart';
-import 'search_movie_shimmer_item.dart';
 
 class SearchLoadingShimmer extends StatelessWidget {
   const SearchLoadingShimmer({super.key});
@@ -67,19 +67,9 @@ class SearchLoadingShimmer extends StatelessWidget {
                   ),
                 ),
               ),
-              Shimmer.fromColors(
-                baseColor: AppColors.primarySoft,
-                highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
-                child: ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 5,
-                  separatorBuilder: (context, index) => SizedBox(height: 16.h),
-                  itemBuilder: (context, index) {
-                    return const SearchMovieShimmerItem();
-                  },
-                ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: const MovieShimmerList(),
               ),
             ],
           ),

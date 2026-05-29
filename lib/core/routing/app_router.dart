@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/features/all_movies/logic/cubit/all_movies_cubit.dart';
 
+import '../../features/all_movies/data/models/all_movies_args.dart';
+import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
+import '../../features/all_movies/ui/screens/all_movies_screen.dart';
 import '../../features/home/data/models/movie.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
-import '../../features/all_movies/data/models/all_movies_args.dart';
-import '../../features/all_movies/ui/screens/all_movies_screen.dart';
 import '../../features/movie_details/data/models/cast_and_crew_args.dart';
 import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
 import '../../features/movie_details/ui/screens/cast_and_crew_screen.dart';
@@ -58,7 +58,6 @@ class AppRouter {
             providers: [
               BlocProvider.value(
                 value: getIt<GenresCubit>(),
-                child: AllMoviesScreen(args: args),
               ),
               BlocProvider(
                 create: (_) => AllMoviesCubit(homeRepository: getIt())

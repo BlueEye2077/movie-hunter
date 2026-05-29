@@ -1,16 +1,17 @@
-import 'dart:math';
+import 'dart:collection';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_hunter/core/networking/api_response.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/core/networking/network_exceptions.dart';
-import 'package:movie_hunter/features/all_movies/data/models/all_movies_args.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/data/repository/home_repository.dart';
 
-part 'all_movies_state.dart';
+import '../../../../core/networking/api_response.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../../../home/data/models/movie.dart';
+import '../../../home/data/repository/home_repository.dart';
+import '../../data/models/all_movies_args.dart';
+
 part 'all_movies_cubit.freezed.dart';
+part 'all_movies_state.dart';
 
 class AllMoviesCubit extends Cubit<AllMoviesState> {
   final HomeRepository homeRepository;
@@ -20,6 +21,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
   int _currentPage = 1;
   int _totalPages = 2;
   final List<Movie> _movies = [];
+  List<Movie> get movies => UnmodifiableListView(_movies);
   bool _isFetching = false;
 
   void setInitial({
@@ -28,8 +30,9 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
   }) {
     if (_isFetching) return;
     if (_currentPage >= _totalPages) return;
-
-    _movies.addAll(movies);
+    if (_movies.isEmpty) {
+      _movies.addAll(movies);
+    }
     _category = category;
 
     emit(AllMoviesState.successAllMovies());
@@ -45,13 +48,15 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
     ApiResult<ApiResponse<Movie>> result = await getMoviesByCategory(
       _currentPage + 1,
     );
+
+    if (isClosed) return;
+
     result.when(
       success: (data) {
         _currentPage = data.page ?? 1;
         _totalPages = data.totalPages ?? 1;
         _movies.addAll(data.results ?? []);
         _isFetching = false;
-        log(_currentPage);
         emit(AllMoviesState.successPaginationAllMovies(_movies));
       },
       failure: (NetworkExceptions networkExceptions) {

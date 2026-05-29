@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:movie_hunter/features/all_movies/logic/cubit/all_movies_cubit.dart';
 
+import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
 import '../../features/home/data/repository/home_repository.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
