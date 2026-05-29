@@ -7,14 +7,16 @@ import '../../data/repository/home_repository.dart';
 import 'requests_state.dart';
 
 class TopRatedMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
-  TopRatedMoviesCubit({required this.homeRepository}) : super(RequestsState.idle());
+  TopRatedMoviesCubit({required this.homeRepository})
+    : super(RequestsState.idle());
 
   final HomeRepository homeRepository;
 
   // Get top rated movies
   void getTopRatedMovies() async {
     emit(RequestsState.loading());
-    ApiResult<ApiResponse<Movie>> response = await homeRepository.getTopRatedMovies();
+    ApiResult<ApiResponse<Movie>> response = await homeRepository
+        .getTopRatedMovies();
     response.when(
       success: (ApiResponse<Movie> topRatedMovies) =>
           emit(RequestsState.success(topRatedMovies)),

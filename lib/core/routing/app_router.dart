@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/all_movies/data/models/all_movies_args.dart';
+import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
+import '../../features/all_movies/ui/screens/all_movies_screen.dart';
 import '../../features/home/data/models/movie.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
-import '../../features/all_movies/data/models/all_movies_args.dart';
-import '../../features/all_movies/ui/screens/all_movies_screen.dart';
 import '../../features/movie_details/data/models/cast_and_crew_args.dart';
 import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
 import '../../features/movie_details/ui/screens/cast_and_crew_screen.dart';
@@ -48,19 +49,25 @@ class AppRouter {
       case Routes.castAndCrew:
         final args = settings.arguments as CastAndCrewArgs;
         return MaterialPageRoute(
-          builder: (_) => CastAndCrewScreen(
-            cast: args.cast,
-            crew: args.crew,
-          ),
+          builder: (_) => CastAndCrewScreen(cast: args.cast, crew: args.crew),
         );
       case Routes.allMovies:
         final args = settings.arguments as AllMoviesArgs;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: getIt<GenresCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: getIt<GenresCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => AllMoviesCubit(homeRepository: getIt())
+                  ..setInitial(movies: args.movies, category: args.category),
+              ),
+            ],
             child: AllMoviesScreen(args: args),
           ),
         );
+
       default:
         return null;
     }

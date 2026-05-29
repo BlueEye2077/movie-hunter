@@ -14,8 +14,9 @@ class PopularMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
 
   void getPopularMovies() async {
     emit(RequestsState.loading());
-    
-    ApiResult<ApiResponse<Movie>> response = await homeRepository.getPopularMovies();
+
+    ApiResult<ApiResponse<Movie>> response = await homeRepository
+        .getPopularMovies();
     response.when(
       success: (movies) => emit(RequestsState.success(movies)),
       failure: (networkExceptions) =>

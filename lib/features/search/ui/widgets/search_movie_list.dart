@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../home/data/models/movie.dart';
-import 'search_movie_item.dart';
+import '../../../../core/common/search_movie_item.dart';
 
 class SearchMovieList extends StatelessWidget {
   final List<Movie> movies;
@@ -39,7 +39,7 @@ class SearchMovieList extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(height: 16.h),
           itemBuilder: (context, index) {
             final movie = movies[index];
-            return SearchMovieItem(movie: movie);
+            return GeneralMovieItem(movie: movie);
           },
         ),
       ],

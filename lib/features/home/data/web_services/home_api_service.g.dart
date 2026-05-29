@@ -22,9 +22,9 @@ class _HomeApiService implements HomeApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ApiResponse<Movie>> getUpcomingMovies(String token) async {
+  Future<ApiResponse<Movie>> getUpcomingMovies(String token, int page) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -53,9 +53,9 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getPopularMovies(String token) async {
+  Future<ApiResponse<Movie>> getPopularMovies(String token, int page) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -84,9 +84,9 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getTopRatedMovies(String token) async {
+  Future<ApiResponse<Movie>> getTopRatedMovies(String token, int page) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -115,9 +115,9 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getNowPlayingMovies(String token) async {
+  Future<ApiResponse<Movie>> getNowPlayingMovies(String token, int page) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;

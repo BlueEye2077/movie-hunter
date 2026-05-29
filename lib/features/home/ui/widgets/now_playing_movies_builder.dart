@@ -47,6 +47,7 @@ class NowPlayingMoviesBuilder extends StatelessWidget {
                 arguments: AllMoviesArgs(
                   title: 'Now Playing',
                   movies: movies,
+                  category: .nowPlayingMovies
                 ),
               ),
               child: MoviesListView.showMovies(

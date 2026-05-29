@@ -14,9 +14,11 @@ class HomeRepository {
   final token = ApiConstants.apiKey;
 
   // Get upcoming movies
-  Future<ApiResult<ApiResponse<Movie>>> getUpcomingMovies() async {
+  Future<ApiResult<ApiResponse<Movie>>> getUpcomingMovies({
+    int page = 1,
+  }) async {
     try {
-      var respone = await homeApiService.getUpcomingMovies(token);
+      var respone = await homeApiService.getUpcomingMovies(token, page);
       return ApiResult.success(respone);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
@@ -24,9 +26,9 @@ class HomeRepository {
   }
 
   // Get popular movies
-  Future<ApiResult<ApiResponse<Movie>>> getPopularMovies() async {
+  Future<ApiResult<ApiResponse<Movie>>> getPopularMovies({int page = 1}) async {
     try {
-      var respone = await homeApiService.getPopularMovies(token);
+      var respone = await homeApiService.getPopularMovies(token, page);
       return ApiResult.success(respone);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
@@ -34,9 +36,11 @@ class HomeRepository {
   }
 
   // Get top rated movies
-  Future<ApiResult<ApiResponse<Movie>>> getTopRatedMovies() async {
+  Future<ApiResult<ApiResponse<Movie>>> getTopRatedMovies({
+    int page = 1,
+  }) async {
     try {
-      var respone = await homeApiService.getTopRatedMovies(token);
+      var respone = await homeApiService.getTopRatedMovies(token, page);
       return ApiResult.success(respone);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
@@ -44,9 +48,11 @@ class HomeRepository {
   }
 
   // Get now playing movies
-  Future<ApiResult<ApiResponse<Movie>>> getNowPlayingMovies() async {
+  Future<ApiResult<ApiResponse<Movie>>> getNowPlayingMovies({
+    int page = 1,
+  }) async {
     try {
-      var respone = await homeApiService.getNowPlayingMovies(token);
+      var respone = await homeApiService.getNowPlayingMovies(token, page);
       return ApiResult.success(respone);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
@@ -62,5 +68,4 @@ class HomeRepository {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
   }
-
 }

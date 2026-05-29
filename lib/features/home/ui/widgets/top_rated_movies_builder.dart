@@ -47,12 +47,10 @@ class TopRatedMoviesBuilder extends StatelessWidget {
                 arguments: AllMoviesArgs(
                   title: 'Top Rated',
                   movies: movies,
+                  category: .topRatedMovies,
                 ),
               ),
-              child: MoviesListView.showMovies(
-                movies: movies,
-                genres: genres,
-              ),
+              child: MoviesListView.showMovies(movies: movies, genres: genres),
             );
           },
           error: (error) => MoviesSection(

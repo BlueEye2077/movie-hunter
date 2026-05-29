@@ -47,6 +47,7 @@ class MostPopularMoviesBuilder extends StatelessWidget {
                 arguments: AllMoviesArgs(
                   title: 'Most Popular',
                   movies: movies,
+                  category: .popularMovies
                 ),
               ),
               child: MoviesListView.showMovies(
