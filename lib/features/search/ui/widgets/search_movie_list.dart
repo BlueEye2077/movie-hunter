@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../home/data/models/movie.dart';
 import '../../../../core/common/search_movie_item.dart';
@@ -25,7 +26,7 @@ class SearchMovieList extends StatelessWidget {
             bottom: 16.h,
           ),
           child: Text(
-            'Movie Related',
+            AppStrings.movieRelated,
             style: TextStyles.font16SemiBold.copyWith(
               color: AppColors.textWhite,
             ),

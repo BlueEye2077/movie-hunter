@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../home/data/models/actor.dart';
 import 'search_actor_item.dart';
@@ -25,7 +26,7 @@ class SearchActorList extends StatelessWidget {
             bottom: 16.h,
           ),
           child: Text(
-            'Actors',
+            AppStrings.actors,
             style: TextStyles.font16SemiBold.copyWith(color: AppColors.textWhite),
           ),
         ),

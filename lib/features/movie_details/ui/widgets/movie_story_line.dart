@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 
 class MovieStoryLine extends StatelessWidget {
@@ -17,7 +18,7 @@ class MovieStoryLine extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Story Line',
+          AppStrings.storyLine,
             style: TextStyles.font16SemiBold.copyWith(
               color: AppColors.textWhite,
             ),

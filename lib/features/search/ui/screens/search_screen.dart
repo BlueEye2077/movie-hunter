@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/custom_search_bar.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../logic/cubit/search_cubit.dart';
 import '../widgets/search_results.dart';
@@ -70,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: Text(
-                      'Cancel',
+                      AppStrings.cancel,
                       style: TextStyles.font12Medium.copyWith(
                         color: AppColors.textWhite,
                       ),

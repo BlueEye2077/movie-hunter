@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 
 class HomeTopBar extends StatelessWidget {
@@ -34,14 +35,14 @@ class HomeTopBar extends StatelessWidget {
               children: [
                 Text(
                   // TODO: get user name from api
-                  'Hello, Smith',
+                  AppStrings.helloUser,
                   style: TextStyles.font16SemiBold.copyWith(
                     color: AppColors.textWhite,
                   ),
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'Let\'s stream your favorite movie',
+                  AppStrings.letsStream,
                   style: TextStyles.font12Medium,
                 ),
               ],
