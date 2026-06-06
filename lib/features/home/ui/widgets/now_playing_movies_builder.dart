@@ -6,6 +6,7 @@ import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../data/models/genre.dart';
@@ -34,18 +35,18 @@ class NowPlayingMoviesBuilder extends StatelessWidget {
         return state.when(
           idle: () => const SizedBox.shrink(),
           loading: () => MoviesSection(
-            title: 'Now Playing',
+            title: AppStrings.nowPlaying,
             child: const MoviesListView.shimmer(),
           ),
           success: (response) {
             final movies = response.results ?? [];
             return MoviesSection(
-              title: 'Now Playing',
+              title: AppStrings.nowPlaying,
               onSeeAllTap: () => Navigator.pushNamed(
                 context,
                 Routes.allMovies,
                 arguments: AllMoviesArgs(
-                  title: 'Now Playing',
+                  title: AppStrings.nowPlaying,
                   movies: movies,
                   category: .nowPlayingMovies
                 ),
@@ -57,7 +58,7 @@ class NowPlayingMoviesBuilder extends StatelessWidget {
             );
           },
           error: (error) => MoviesSection(
-            title: 'Now Playing',
+            title: AppStrings.nowPlaying,
             child: SizedBox(
               height: 245.h,
               child: Center(

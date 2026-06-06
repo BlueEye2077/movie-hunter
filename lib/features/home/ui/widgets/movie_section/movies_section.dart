@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/theming/colors.dart';
+import '../../../../../core/theming/strings.dart';
 import '../../../../../core/theming/styles.dart';
 
 class MoviesSection extends StatelessWidget {
@@ -40,7 +41,7 @@ class MoviesSection extends StatelessWidget {
               GestureDetector(
                 onTap: onSeeAllTap,
                 child: Text(
-                  'See All',
+                  AppStrings.seeAll,
                   style: TextStyles.font14Medium.copyWith(
                     color: AppColors.primaryBlueAccent,
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import 'movie_circle_action_button.dart';
 
@@ -25,7 +26,7 @@ class MovieActionButtons extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
           ),
           icon: Icon(Icons.play_arrow, size: 24.w),
-          label: Text('Play', style: TextStyles.font16Medium),
+          label: Text(AppStrings.play, style: TextStyles.font16Medium),
         ),
         SizedBox(width: 16.w),
         // Download button

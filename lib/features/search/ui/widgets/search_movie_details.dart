@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
@@ -37,21 +38,21 @@ class SearchMovieDetails extends StatelessWidget {
     final genreNames = movie.genreIds?.map((id) {
           return allGenres.firstWhere(
             (g) => g.id == id,
-            orElse: () => Genre(id: -1, name: 'Unknown'),
+            orElse: () => Genre(id: -1, name: AppStrings.unknown),
           ).name;
-        }).where((name) => name != 'Unknown').toList() ??
+        }).where((name) => name != AppStrings.unknown).toList() ??
         [];
 
     final genresString = genreNames.isNotEmpty
         ? genreNames.take(2).join(', ')
-        : 'Unknown Genre';
+        : AppStrings.unknownGenre;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          movie.title ?? movie.originalTitle ?? 'Unknown',
+          movie.title ?? movie.originalTitle ?? AppStrings.unknown,
           style: TextStyles.font16SemiBold.copyWith(
             color: AppColors.textWhite,
           ),
@@ -66,12 +67,12 @@ class SearchMovieDetails extends StatelessWidget {
         SizedBox(height: 8.h),
         SearchMovieInfoRow(
           iconData: Icons.language,
-          text: 'Language: $language',
+          text: '${AppStrings.languagePrefix}$language',
         ),
         SizedBox(height: 8.h),
         SearchMovieInfoRow(
           iconData: isAdult ? Icons.explicit : Icons.family_restroom,
-          text: isAdult ? 'Adult 18+' : 'Family Friendly',
+          text: isAdult ? AppStrings.adultLabel : AppStrings.familyFriendly,
         ),
         SizedBox(height: 8.h),
         SearchMovieInfoRow(

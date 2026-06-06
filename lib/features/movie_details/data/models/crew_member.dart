@@ -4,6 +4,10 @@ part 'crew_member.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class CrewMember {
+  // TMDB API Job Identifiers
+  static const String jobDirector = 'Director';
+  static const String jobWriter = 'Writer';
+  static const String jobScreenplay = 'Screenplay';
   int? id;
   String? name;
   String? profilePath;

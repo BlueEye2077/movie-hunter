@@ -4,6 +4,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/common/movie_shimmer_list.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import 'search_actor_shimmer_item.dart';
 
@@ -26,7 +27,7 @@ class SearchLoadingShimmer extends StatelessWidget {
                   bottom: 16.h,
                 ),
                 child: Text(
-                  'Actors',
+                  AppStrings.actors,
                   style: TextStyles.font16SemiBold.copyWith(
                     color: AppColors.textWhite,
                   ),
@@ -61,7 +62,7 @@ class SearchLoadingShimmer extends StatelessWidget {
                   bottom: 16.h,
                 ),
                 child: Text(
-                  'Movie Related',
+                  AppStrings.movieRelated,
                   style: TextStyles.font16SemiBold.copyWith(
                     color: AppColors.textWhite,
                   ),

@@ -6,6 +6,7 @@ import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../data/models/genre.dart';
@@ -34,18 +35,18 @@ class MostPopularMoviesBuilder extends StatelessWidget {
         return state.when(
           idle: () => const SizedBox.shrink(),
           loading: () => MoviesSection(
-            title: 'Most Popular',
+            title: AppStrings.mostPopular,
             child: const MoviesListView.shimmer(),
           ),
           success: (response) {
             final movies = response.results ?? [];
             return MoviesSection(
-              title: 'Most Popular',
+              title: AppStrings.mostPopular,
               onSeeAllTap: () => Navigator.pushNamed(
                 context,
                 Routes.allMovies,
                 arguments: AllMoviesArgs(
-                  title: 'Most Popular',
+                  title: AppStrings.mostPopular,
                   movies: movies,
                   category: .popularMovies
                 ),
@@ -57,7 +58,7 @@ class MostPopularMoviesBuilder extends StatelessWidget {
             );
           },
           error: (error) => MoviesSection(
-            title: 'Most Popular',
+            title: AppStrings.mostPopular,
             child: SizedBox(
               height: 245.h,
               child: Center(

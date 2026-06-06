@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import 'movie_cast_item_shimmer.dart';
 
@@ -22,13 +23,13 @@ class CastAndCrewShimmer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Cast and Crew',
+                AppStrings.castAndCrew,
                 style: TextStyles.font16SemiBold.copyWith(
                   color: AppColors.textWhite,
                 ),
               ),
               Text(
-                'See All',
+                AppStrings.seeAll,
                 style: TextStyles.font14Medium.copyWith(
                   color: AppColors.primaryBlueAccent,
                 ),
