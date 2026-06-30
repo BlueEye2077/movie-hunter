@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_hunter/core/helpers/shared_preferance_helper.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
@@ -23,14 +24,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  void _onNextPressed() {
+  void _onNextPressed() async {
     if (_currentIndex < onboardingPages.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.mainScreen);
+      await SharedPreferanceHelper.saveSeenOnBoarding();
+      if (!mounted) return;
+      Navigator.of(context).pushReplacementNamed(Routes.login);
     }
   }
 

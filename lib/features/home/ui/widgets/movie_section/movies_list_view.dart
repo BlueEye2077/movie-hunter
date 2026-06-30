@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../../core/helpers/helpers.dart';
+import '../../../../../core/helpers/generes_helpers.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
@@ -65,7 +65,7 @@ class MoviesListView extends StatelessWidget {
           itemBuilder: (context, index) {
             final movie = movies[index];
             // Genres are guaranteed to be cached by the time movies are displayed
-            final genreNames = Helpers.getGenreTitles(
+            final genreNames = GeneresHelpers.getGenreTitles(
               allGenres: genres,
               genreIds: movie.genreIds,
             );
@@ -86,4 +86,3 @@ class MoviesListView extends StatelessWidget {
     }
   }
 }
-
