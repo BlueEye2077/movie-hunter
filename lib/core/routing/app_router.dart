@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_hunter/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:movie_hunter/features/auth/ui/screens/login_screen.dart';
 
 import '../../features/all_movies/data/models/all_movies_args.dart';
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
@@ -26,41 +28,49 @@ class AppRouter {
         // BlocProviders are passed through the main screen for better performance and state management
         // and to avoid unnecessary rebuilds when switching between tabs.
         return MaterialPageRoute(builder: (_) => const MainScreen());
+
       case Routes.search:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) => SearchCubit(searchRepository: getIt()),
-              ),
+              BlocProvider(create: (context) => getIt<SearchCubit>()),
               BlocProvider.value(value: getIt<GenresCubit>()),
             ],
             child: const SearchScreen(),
           ),
         );
+
+      case Routes.login:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AuthCubit>(),
+            child: const LoginScreen(),
+          ),
+        );
+
       case Routes.movieDetails:
         final movie = settings.arguments as Movie;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => MovieDetailsCubit(movieDetailsRepository: getIt()),
+            create: (_) => getIt<MovieDetailsCubit>(),
             child: MovieDetailsScreen(movie: movie),
           ),
         );
+
       case Routes.castAndCrew:
         final args = settings.arguments as CastAndCrewArgs;
         return MaterialPageRoute(
           builder: (_) => CastAndCrewScreen(cast: args.cast, crew: args.crew),
         );
+
       case Routes.allMovies:
         final args = settings.arguments as AllMoviesArgs;
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: getIt<GenresCubit>(),
-              ),
+              BlocProvider.value(value: getIt<GenresCubit>()),
               BlocProvider(
-                create: (_) => AllMoviesCubit(homeRepository: getIt())
+                create: (_) => getIt<AllMoviesCubit>()
                   ..setInitial(movies: args.movies, category: args.category),
               ),
             ],

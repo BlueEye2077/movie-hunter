@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/core/constants/constants.dart';
+import 'package:movie_hunter/core/routing/routes.dart';
 
 import 'core/routing/app_router.dart';
 import 'core/theming/movie_hunter_theme.dart';
@@ -21,9 +23,20 @@ class MovieHunterApp extends StatelessWidget {
           title: 'Movie Hunter',
           debugShowCheckedModeBanner: false,
           theme: kMovieHunterTheme,
+          initialRoute: getInitialRoute(),
           onGenerateRoute: appRouter.generateRoute,
         );
       },
     );
+  }
+}
+
+String getInitialRoute() {
+  if (isLoggedInUser && isSeenOnBoarding) {
+    return Routes.mainScreen;
+  } else if (!isLoggedInUser && isSeenOnBoarding) {
+    return Routes.login;
+  } else {
+    return Routes.onboarding;
   }
 }

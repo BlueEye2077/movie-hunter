@@ -1,4 +1,7 @@
 import 'package:get_it/get_it.dart';
+import 'package:movie_hunter/features/auth/data/repository/auth_repository.dart';
+import 'package:movie_hunter/features/auth/data/web_services/auth_api_services.dart';
+import 'package:movie_hunter/features/auth/logic/cubit/auth_cubit.dart';
 
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
 import '../../features/home/data/repository/home_repository.dart';
@@ -74,4 +77,11 @@ void initGetIt() {
   getIt.registerFactory<AllMoviesCubit>(
     () => AllMoviesCubit(homeRepository: getIt()),
   );
+
+  // ── Auth Feature ──
+  getIt.registerLazySingleton<AuthApiService>(() => AuthApiService(dio));
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepository(authApiService: getIt()),
+  );
+  getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepository: getIt()));
 }
