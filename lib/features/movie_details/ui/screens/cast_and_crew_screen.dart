@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../data/models/cast_member.dart';
 import '../../data/models/crew_member.dart';
@@ -15,9 +16,9 @@ class CastAndCrewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final directors = crew.where((c) => c.job == 'Director').toList();
+    final directors = crew.where((c) => c.job == CrewMember.jobDirector).toList();
     final writers = crew
-        .where((c) => c.job == 'Writer' || c.job == 'Screenplay')
+        .where((c) => c.job == CrewMember.jobWriter || c.job == CrewMember.jobScreenplay)
         .toList();
 
     return Scaffold(
@@ -31,7 +32,7 @@ class CastAndCrewScreen extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'Cast and Crew',
+          AppStrings.castAndCrew,
           style: TextStyles.font16SemiBold.copyWith(
             color: AppColors.textWhite,
           ),
@@ -40,15 +41,15 @@ class CastAndCrewScreen extends StatelessWidget {
       body: ListView(
         children: [
           if (directors.isNotEmpty) ...[
-            _buildSectionHeader('Directors'),
+            _buildSectionHeader(AppStrings.directors),
             ...directors.map(_buildCrewItem),
           ],
           if (writers.isNotEmpty) ...[
-            _buildSectionHeader('Writers'),
+            _buildSectionHeader(AppStrings.writers),
             ...writers.map(_buildCrewItem),
           ],
           if (cast.isNotEmpty) ...[
-            _buildSectionHeader('Cast'),
+            _buildSectionHeader(AppStrings.cast),
             ...cast.map(_buildCastItem),
           ],
           SizedBox(height: 32.h),

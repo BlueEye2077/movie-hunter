@@ -5,6 +5,7 @@ import 'package:movie_hunter/core/routing/routes.dart';
 
 import 'core/routing/app_router.dart';
 import 'core/theming/movie_hunter_theme.dart';
+import 'core/theming/strings.dart';
 
 class MovieHunterApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -20,7 +21,7 @@ class MovieHunterApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
-          title: 'Movie Hunter',
+          title: AppStrings.appName,
           debugShowCheckedModeBanner: false,
           theme: kMovieHunterTheme,
           initialRoute: getInitialRoute(),

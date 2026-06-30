@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/strings.dart';
 import '../../../../core/theming/styles.dart';
 import '../../data/models/cast_and_crew_args.dart';
 import '../../data/models/cast_member.dart';
@@ -18,9 +19,9 @@ class MovieCastAndCrew extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Combine directors/writers from crew with the cast
-    final directors = crew.where((c) => c.job == 'Director').toList();
+    final directors = crew.where((c) => c.job == CrewMember.jobDirector).toList();
     final writers = crew
-        .where((c) => c.job == 'Writer' || c.job == 'Screenplay')
+        .where((c) => c.job == CrewMember.jobWriter || c.job == CrewMember.jobScreenplay)
         .toList();
 
     return Padding(
@@ -32,7 +33,7 @@ class MovieCastAndCrew extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Cast and Crew',
+                AppStrings.castAndCrew,
                 style: TextStyles.font16SemiBold.copyWith(
                   color: AppColors.textWhite,
                 ),
@@ -47,7 +48,7 @@ class MovieCastAndCrew extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  'See All',
+                  AppStrings.seeAll,
                   style: TextStyles.font14Medium.copyWith(
                     color: AppColors.primaryBlueAccent,
                   ),
@@ -69,7 +70,7 @@ class MovieCastAndCrew extends StatelessWidget {
                   final director = directors[index];
                   return MovieCastItem(
                     name: director.name ?? '',
-                    role: 'Director',
+                    role: AppStrings.roleDirector,
                     profilePath: director.profilePath,
                   );
                 }
@@ -78,7 +79,7 @@ class MovieCastAndCrew extends StatelessWidget {
                   final writer = writers[writerIndex];
                   return MovieCastItem(
                     name: writer.name ?? '',
-                    role: writer.job ?? 'Writer',
+                    role: writer.job ?? AppStrings.roleWriter,
                     profilePath: writer.profilePath,
                   );
                 }

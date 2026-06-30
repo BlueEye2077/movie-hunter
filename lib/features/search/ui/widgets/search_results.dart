@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/theming/strings.dart';
+
 import '../../../home/data/models/actor.dart';
 import '../../../home/data/models/movie.dart';
 import '../../../home/logic/cubit/requests_state.dart';
@@ -21,7 +23,7 @@ class SearchResults extends StatelessWidget {
         return state.when(
           idle: () => const Center(
             child: Text(
-              'Type to search...',
+              AppStrings.typeToSearch,
               style: TextStyle(color: Colors.white54),
             ),
           ),
@@ -34,9 +36,8 @@ class SearchResults extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 24.0),
                   child: EmptySearch(
                     svgPath: 'assets/svgs/no_results_large.svg',
-                    title: 'we are sorry, we can\nnot find the movie :(',
-                    subtitle:
-                        'Find your movie by Type title,\ncategories, years, etc ',
+                    title: AppStrings.searchErrorTitle,
+                    subtitle: AppStrings.searchErrorSubtitle,
                   ),
                 ),
               );
@@ -58,7 +59,7 @@ class SearchResults extends StatelessWidget {
           },
           error: (error) => const Center(
             child: Text(
-              'An error occurred.',
+              AppStrings.anErrorOccurred,
               style: TextStyle(color: Colors.red),
             ),
           ),
