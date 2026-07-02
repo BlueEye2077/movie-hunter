@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/routing/routes.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/features/auth/data/models/create_new_session_model.dart';
-import 'package:movie_hunter/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:movie_hunter/features/auth/ui/widgets/login_app_bar.dart';
-import 'package:movie_hunter/features/auth/ui/widgets/login_button.dart';
-import 'package:movie_hunter/features/auth/ui/widgets/login_form.dart';
-import 'package:movie_hunter/features/auth/ui/widgets/welcome_text.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
+
+import '../../../../core/networking/network_exceptions.dart';
+import '../../../../core/networking/requests_state.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/colors.dart';
+import '../../data/models/create_new_session_model.dart';
+import '../../logic/cubit/auth_cubit.dart';
+import '../widgets/login_app_bar.dart';
+import '../widgets/login_button.dart';
+import '../widgets/login_form.dart';
+import '../widgets/welcome_text.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -65,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           error: (networkExceptions) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Login Failed!')),
+                            SnackBar(content: Text(NetworkExceptions.getErrorMessage(networkExceptions))),
                             );
                           },
                         );

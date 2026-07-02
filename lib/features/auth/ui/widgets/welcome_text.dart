@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/helpers/app_strings.dart';
-import 'package:movie_hunter/core/theming/colors.dart';
-import 'package:movie_hunter/core/theming/styles.dart';
+
+import '../../../../core/theming/app_strings.dart';
+import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/text_styles.dart';
 
 class WelcomeText extends StatelessWidget {
   const WelcomeText({super.key});

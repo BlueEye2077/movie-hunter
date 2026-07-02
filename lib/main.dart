@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/core/constants/constants.dart';
-import 'package:movie_hunter/core/helpers/secure_storage_helper.dart';
+import 'core/constants/constants.dart';
+import 'core/helpers/secure_storage_helper.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/helpers/shared_preferance_helper.dart';

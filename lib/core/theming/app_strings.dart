@@ -3,13 +3,22 @@ abstract final class AppStrings {
   static const String appName = 'Movie Hunter';
 
   // ── Home ──
-  // TODO: replace with real user name from API
-  static const String helloUser = 'Hello, Smith';
+  static const String helloGuestUser = 'Hello, guest ';
+  static const String helloUser = 'Hello, ';
   static const String letsStream = "Let's stream your favorite movie";
   static const String seeAll = 'See All';
   static const String mostPopular = 'Most Popular';
   static const String nowPlaying = 'Now Playing';
   static const String topRated = 'Top Rated';
+
+  // ── Auth ──
+  static const String login = "Login";
+  static const String welcomeTitle = "Welcome to Movie Hunter";
+  static const String welcomeSubtitle =
+      "Welcome back! Please enter your details.";
+  static const String emailAddress = "Email Address";
+  static const String password = "Password";
+  static const String forgotPassword = "Forgot Password?";
 
   // ── Movie Details ──
   static const String storyLine = 'Story Line';
@@ -40,4 +49,14 @@ abstract final class AppStrings {
   static const String adultLabel = 'Adult 18+';
   static const String familyFriendly = 'Family Friendly';
   static const String languagePrefix = 'Language: ';
+
+  // ── Profile ──
+  static const String favorites = 'Favorites';
+  static const String watchlist = 'Watchlist';
+  static const String logout = 'Logout';
+  static const String noFavorites = 'No favorites yet';
+  static const String noFavoritesSubtitle = 'Movies you heart will appear here';
+  static const String noWatchlist = 'Nothing saved yet';
+  static const String noWatchlistSubtitle =
+      'Add movies to your watchlist to watch them later';
 }

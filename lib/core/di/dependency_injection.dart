@@ -1,9 +1,15 @@
 import 'package:get_it/get_it.dart';
-import 'package:movie_hunter/features/auth/data/repository/auth_repository.dart';
-import 'package:movie_hunter/features/auth/data/web_services/auth_api_services.dart';
-import 'package:movie_hunter/features/auth/logic/cubit/auth_cubit.dart';
+import 'package:movie_hunter/features/movie_details/logic/cubit/movie_details_cubit.dart';
 
+import '../../features/account/data/repository/profile_repository.dart';
+import '../../features/account/data/web_services/profile_api_services.dart';
+import '../../features/account/logic/cubit/favorite_movies_cubit.dart';
+import '../../features/account/logic/cubit/profile_cubit.dart';
+import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
+import '../../features/auth/data/repository/auth_repository.dart';
+import '../../features/auth/data/web_services/auth_api_services.dart';
+import '../../features/auth/logic/cubit/auth_cubit.dart';
 import '../../features/home/data/repository/home_repository.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
@@ -71,6 +77,10 @@ void initGetIt() {
   getIt.registerLazySingleton<MovieDetailsRepository>(
     () => MovieDetailsRepository(detailsApiService: getIt()),
   );
+  // register movie details cubit
+  getIt.registerFactory<MovieDetailsCubit>(
+    () => MovieDetailsCubit(movieDetailsRepository: getIt()),
+  );
 
   // ── All Movies Feature ──
   // register the all movies cubit
@@ -84,4 +94,21 @@ void initGetIt() {
     () => AuthRepository(authApiService: getIt()),
   );
   getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepository: getIt()));
+
+  // ── Account Feature ──
+  getIt.registerLazySingleton<ProfileApiServices>(
+    () => ProfileApiServices(dio),
+  );
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepository(profileApiService: getIt()),
+  );
+  getIt.registerFactory<ProfileCubit>(
+    () => ProfileCubit(profileRepository: getIt()),
+  );
+  getIt.registerFactory<FavoriteMoviesCubit>(
+    () => FavoriteMoviesCubit(profileRepository: getIt()),
+  );
+  getIt.registerFactory<WatchlistMoviesCubit>(
+    () => WatchlistMoviesCubit(profileRepository: getIt()),
+  );
 }

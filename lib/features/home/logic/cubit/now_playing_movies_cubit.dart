@@ -4,7 +4,7 @@ import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../data/models/movie.dart';
 import '../../data/repository/home_repository.dart';
-import 'requests_state.dart';
+import '../../../../core/networking/requests_state.dart';
 
 class NowPlayingMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
   final HomeRepository homeRepository;

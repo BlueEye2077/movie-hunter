@@ -10,6 +10,13 @@ class TextStyles {
   static const double defaultLetterSpacing = 0.12;
   static double horizontalPadding = 24.w;
 
+  static TextStyle font22CaveatPrimary = GoogleFonts.caveat(
+    fontSize: 22.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: AppColors.textWhite,
+    height: 1.0,
+  );
+
   // H1: 28px
   static TextStyle font28SemiBold = GoogleFonts.montserrat(
     fontSize: 28.sp,

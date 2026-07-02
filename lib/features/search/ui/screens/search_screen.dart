@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/custom_search_bar.dart';
+import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/strings.dart';
-import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/text_styles.dart';
 import '../../logic/cubit/search_cubit.dart';
 import '../widgets/search_results.dart';
 

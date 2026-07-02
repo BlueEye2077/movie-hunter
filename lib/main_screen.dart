@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'core/common/placeholder_tab.dart';
 import 'core/theming/colors.dart';
+import 'features/account/ui/screens/profile_screen.dart';
+import 'features/account/ui/widgets/profile_tab_bloc_providers.dart';
 import 'features/home/ui/screens/home_screen.dart';
 import 'features/home/ui/widgets/home_bottom_nav_bar.dart';
 import 'features/home/ui/widgets/home_tab_bloc_providers.dart';
@@ -34,9 +36,8 @@ class _MainScreenState extends State<MainScreen> {
           // TODO: create the screen
           PlaceholderTab(label: 'Downloads'),
 
-          // Tab 3 — Profile: placeholder
-          // TODO: create the screen
-          PlaceholderTab(label: 'Profile'),
+          // Tab 3 — Profile
+          ProfileTabBlocProviders(child: ProfileScreen()),
         ],
       ),
       // Bottom navigation bar

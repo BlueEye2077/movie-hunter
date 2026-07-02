@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/poster_image.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/text_styles.dart';
 
 class AllMoviesGridItem extends StatelessWidget {
   final String posterPath;

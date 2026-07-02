@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/common/movie_shimmer_list.dart';
+import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/strings.dart';
-import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/text_styles.dart';
 import 'search_actor_shimmer_item.dart';
 
 class SearchLoadingShimmer extends StatelessWidget {
