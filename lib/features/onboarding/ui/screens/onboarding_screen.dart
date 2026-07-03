@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hunter/core/helpers/shared_preferance_helper.dart';
 
+import '../../../../core/helpers/shared_preferance_helper.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../data/onboarding_data.dart';

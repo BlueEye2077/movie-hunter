@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/networking/api_result.dart';
-import '../../../home/logic/cubit/requests_state.dart';
+import '../../../../core/networking/requests_state.dart';
 import '../../data/models/movie_credits_response.dart';
 import '../../data/models/movie_details_response.dart';
 import '../../data/repository/movie_details_repository.dart';

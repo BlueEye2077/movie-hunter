@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'poster_image.dart';
-import 'rating_badge.dart';
-import '../routing/routes.dart';
 import '../../features/home/data/models/movie.dart';
 import '../../features/search/ui/widgets/search_movie_details.dart';
+import '../routing/routes.dart';
+import 'poster_image.dart';
+import 'rating_badge.dart';
 
 class GeneralMovieItem extends StatelessWidget {
   final Movie movie;

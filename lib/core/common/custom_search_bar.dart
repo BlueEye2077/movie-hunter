@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../theming/colors.dart';
-import '../theming/styles.dart';
+import '../theming/text_styles.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController? controller;

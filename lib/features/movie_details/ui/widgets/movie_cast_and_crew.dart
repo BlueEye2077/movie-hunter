@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/strings.dart';
-import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/text_styles.dart';
 import '../../data/models/cast_and_crew_args.dart';
 import '../../data/models/cast_member.dart';
 import '../../data/models/crew_member.dart';

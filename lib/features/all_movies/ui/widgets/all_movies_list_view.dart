@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/common/movie_shimmer_list.dart';
-import '../../helpers/scroll_index_calculator.dart';
 
+import '../../../../core/common/movie_shimmer_list.dart';
+import '../../../../core/common/search_movie_item.dart';
 import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
-import '../../../../core/common/search_movie_item.dart';
+import '../../helpers/scroll_index_calculator.dart';
 
 class AllMoviesListView extends StatefulWidget {
   final List<Movie> movies;

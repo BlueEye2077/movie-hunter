@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/features/auth/logic/cubit/auth_cubit.dart';
-import 'package:movie_hunter/features/auth/ui/screens/login_screen.dart';
+import '../../features/account/logic/cubit/profile_cubit.dart';
+import '../../features/auth/logic/cubit/auth_cubit.dart';
+import '../../features/auth/ui/screens/login_screen.dart';
 
 import '../../features/all_movies/data/models/all_movies_args.dart';
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
@@ -27,14 +28,19 @@ class AppRouter {
       case Routes.mainScreen:
         // BlocProviders are passed through the main screen for better performance and state management
         // and to avoid unnecessary rebuilds when switching between tabs.
-        return MaterialPageRoute(builder: (_) => const MainScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ProfileCubit>()..getAccountDetails(),
+            child: const MainScreen(),
+          ),
+        );
 
       case Routes.search:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => getIt<SearchCubit>()),
-              BlocProvider.value(value: getIt<GenresCubit>()),
+              BlocProvider(create: (context) => getIt<GenresCubit>()..getGenres()),
             ],
             child: const SearchScreen(),
           ),
@@ -68,7 +74,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(value: getIt<GenresCubit>()),
+              BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
               BlocProvider(
                 create: (_) => getIt<AllMoviesCubit>()
                   ..setInitial(movies: args.movies, category: args.category),

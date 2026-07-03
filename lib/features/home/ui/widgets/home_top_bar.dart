@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../account/data/models/account_details_model.dart';
+import '../../../account/logic/cubit/profile_cubit.dart';
+import '../../../../core/networking/requests_state.dart';
 
 import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/strings.dart';
-import '../../../../core/theming/styles.dart';
+import 'home_top_bar_profile_info.dart';
+import 'home_top_bar_shimmer.dart';
 
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
@@ -14,40 +18,18 @@ class HomeTopBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 20.r,
-              backgroundColor: AppColors.primarySoft,
-              child: SvgPicture.asset(
-                'assets/svgs/person.svg',
-                width: 24.w,
-                height: 24.w,
-                colorFilter: ColorFilter.mode(
-                  AppColors.textGrey,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            SizedBox(width: 16.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  // TODO: get user name from api
-                  AppStrings.helloUser,
-                  style: TextStyles.font16SemiBold.copyWith(
-                    color: AppColors.textWhite,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  AppStrings.letsStream,
-                  style: TextStyles.font12Medium,
-                ),
-              ],
-            ),
-          ],
+        BlocBuilder<ProfileCubit, RequestsState<AccountDetailsModel>>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () => const HomeTopBarShimmer(),
+              success: (userData) {
+                final name = userData.name ?? userData.username ?? '';
+                final avatarPath = userData.avatar?.tmdb?.avatarPath;
+                return HomeTopBarProfileInfo(name: name, avatarPath: avatarPath);
+              },
+              orElse: () => const HomeTopBarProfileInfo(name: '', avatarPath: null),
+            );
+          },
         ),
         Container(
           width: 32.w,
@@ -61,7 +43,7 @@ class HomeTopBar extends StatelessWidget {
               'assets/svgs/heart.svg',
               width: 20.w,
               height: 20.w,
-              colorFilter: ColorFilter.mode(
+              colorFilter: const ColorFilter.mode(
                 AppColors.secondaryRed,
                 BlendMode.srcIn,
               ),

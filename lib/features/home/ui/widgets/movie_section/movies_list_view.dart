@@ -5,7 +5,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../../core/helpers/generes_helpers.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/colors.dart';
-import '../../../../../core/theming/styles.dart';
+import '../../../../../core/theming/text_styles.dart';
 import '../../../data/models/genre.dart';
 import '../../../data/models/movie.dart';
 import 'movie_item.dart';

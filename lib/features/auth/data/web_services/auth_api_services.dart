@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/features/auth/data/models/create_new_session_model.dart';
-import 'package:movie_hunter/features/auth/data/models/create_request_token_model.dart';
-import 'package:movie_hunter/features/auth/data/models/login_model.dart';
-import 'package:movie_hunter/features/auth/data/web_services/auth_api_constants.dart';
+import '../../../../core/networking/api_constants.dart';
+import '../models/create_new_session_model.dart';
+import '../models/create_request_token_model.dart';
+import '../models/login_model.dart';
+import 'auth_api_constants.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'auth_api_services.g.dart';

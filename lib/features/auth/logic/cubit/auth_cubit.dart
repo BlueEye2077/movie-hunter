@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/features/auth/data/models/create_new_session_model.dart';
 
-import 'package:movie_hunter/features/auth/data/repository/auth_repository.dart';
-import 'package:movie_hunter/features/home/logic/cubit/requests_state.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/requests_state.dart';
+import '../../data/models/create_new_session_model.dart';
+import '../../data/repository/auth_repository.dart';
 
 class AuthCubit extends Cubit<RequestsState<CreateNewSessionModel>> {
   AuthCubit({required this.authRepository}) : super(RequestsState.idle());

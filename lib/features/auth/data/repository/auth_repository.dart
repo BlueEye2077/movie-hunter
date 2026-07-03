@@ -1,11 +1,11 @@
-import 'package:movie_hunter/core/helpers/secure_storage_helper.dart';
-import 'package:movie_hunter/core/networking/api_constants.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/core/networking/network_exceptions.dart';
-import 'package:movie_hunter/features/auth/data/models/create_new_session_model.dart';
-import 'package:movie_hunter/features/auth/data/models/create_request_token_model.dart';
-import 'package:movie_hunter/features/auth/data/models/login_model.dart';
-import 'package:movie_hunter/features/auth/data/web_services/auth_api_services.dart';
+import '../../../../core/helpers/secure_storage_helper.dart';
+import '../../../../core/networking/api_constants.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../models/create_new_session_model.dart';
+import '../models/create_request_token_model.dart';
+import '../models/login_model.dart';
+import '../web_services/auth_api_services.dart';
 
 class AuthRepository {
   final AuthApiService authApiService;
@@ -33,7 +33,9 @@ class AuthRepository {
 
       final CreateNewSessionModel sessionResponse = await authApiService
           .createSession(token, {"request_token": requestToken});
-      await SecureStorageHelper.saveSessionId(sessionResponse.sessionId!);
+      
+      final sessionId = sessionResponse.sessionId!;
+      await SecureStorageHelper.saveSessionId(sessionId);
 
       return ApiResult.success(sessionResponse);
     } catch (e) {

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
-import '../../../home/logic/cubit/requests_state.dart';
+import '../../../../core/networking/requests_state.dart';
 import '../../data/repository/search_repository.dart';
 
 class SearchCubit extends Cubit<RequestsState<ApiResponse<dynamic>>> {
