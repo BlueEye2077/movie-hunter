@@ -5,9 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
+import '../../../../features/all_movies/data/models/all_movies_args.dart';
 import '../../../../features/home/data/models/movie.dart';
 import '../../../../features/home/ui/widgets/movie_section/movies_list_view.dart';
 import '../../../../features/home/ui/widgets/movie_section/movies_section.dart';
@@ -47,7 +49,19 @@ class ProfileFavoritesSection extends StatelessWidget {
             }
             return MoviesSection(
               title: AppStrings.favorites,
-              child: MoviesListView.showMovies(movies: movies, genres: const []),
+              onSeeAllTap: () => Navigator.pushNamed(
+                context,
+                Routes.allMovies,
+                arguments: AllMoviesArgs(
+                  title: AppStrings.favorites,
+                  movies: movies,
+                  category: MovieCategory.favoriteMovies,
+                ),
+              ),
+              child: MoviesListView.showMovies(
+                movies: movies,
+                genres: const [],
+              ),
             );
           },
           error: (error) => MoviesSection(
