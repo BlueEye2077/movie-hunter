@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../../../core/helpers/secure_storage_helper.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
@@ -14,6 +16,11 @@ class ProfileRepository {
   final _token = ApiConstants.apiKey;
 
   AccountDetailsModel? _cachedAccountDetails;
+  final StreamController<MovieStateChangeEvent> _moviesStreamController =
+      StreamController<MovieStateChangeEvent>.broadcast();
+
+  Stream<MovieStateChangeEvent> get movieStateStreamGetter =>
+      _moviesStreamController.stream;
 
   ProfileRepository({required this.profileApiService});
 
@@ -98,6 +105,9 @@ class ProfileRepository {
         sessionId,
         {"media_type": "movie", "media_id": movieId, "favorite": isFavorite},
       );
+      _moviesStreamController.add(
+        MovieStateChangeEvent(movieId: movieId, isFavorite: isFavorite),
+      );
       return ApiResult.success(response);
     } catch (e) {
       return ApiResult.failure(NetworkExceptions.getDioException(e));
@@ -153,6 +163,9 @@ class ProfileRepository {
           "watchlist": isWatchlisted,
         },
       );
+      _moviesStreamController.add(
+        MovieStateChangeEvent(movieId: movieId, isWatchlisted: isWatchlisted),
+      );
       return ApiResult.success(response);
     } catch (e) {
       return ApiResult.failure(NetworkExceptions.getDioException(e));
@@ -182,4 +195,16 @@ class ProfileRepository {
       return ApiResult.failure(NetworkExceptions.getDioException(e));
     }
   }
+}
+
+class MovieStateChangeEvent {
+  final int movieId;
+  final bool? isFavorite;
+  final bool? isWatchlisted;
+
+  MovieStateChangeEvent({
+    required this.movieId,
+    this.isFavorite,
+    this.isWatchlisted,
+  });
 }

@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:movie_hunter/features/account/logic/cubit/favourites_cubit.dart';
+import 'package:movie_hunter/features/account/logic/cubit/watchlist_cubit.dart';
 import 'package:movie_hunter/features/movie_details/logic/cubit/movie_details_cubit.dart';
 
 import '../../features/account/data/repository/profile_repository.dart';
@@ -86,7 +87,10 @@ void initGetIt() {
   // ── All Movies Feature ──
   // register the all movies cubit
   getIt.registerFactory<AllMoviesCubit>(
-    () => AllMoviesCubit(homeRepository: getIt()),
+    () => AllMoviesCubit(
+      homeRepository: getIt(),
+      profileRepository: getIt(),
+    ),
   );
 
   // ── Auth Feature ──
@@ -116,5 +120,10 @@ void initGetIt() {
   // ── Favourites Feature ──
   getIt.registerFactory<FavouritesCubit>(
     () => FavouritesCubit(profileRepository: getIt()),
+  );
+
+  // ── Watchlist Feature ──
+  getIt.registerFactory<WatchlistCubit>(
+    () => WatchlistCubit(profileRepository: getIt()),
   );
 }

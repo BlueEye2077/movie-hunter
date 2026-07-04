@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../account/data/repository/profile_repository.dart';
 import '../../../home/data/models/movie.dart';
 import '../../../home/data/repository/home_repository.dart';
 import '../../data/models/all_movies_args.dart';
@@ -15,7 +16,12 @@ part 'all_movies_state.dart';
 
 class AllMoviesCubit extends Cubit<AllMoviesState> {
   final HomeRepository homeRepository;
-  AllMoviesCubit({required this.homeRepository}) : super(AllMoviesState.idle());
+  final ProfileRepository? profileRepository;
+
+  AllMoviesCubit({
+    required this.homeRepository,
+    this.profileRepository,
+  }) : super(AllMoviesState.idle());
 
   late MovieCategory _category;
   int _currentPage = 1;
@@ -76,6 +82,10 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
         return homeRepository.getTopRatedMovies(page: page);
       case MovieCategory.upcomingMovies:
         return homeRepository.getUpcomingMovies(page: page);
+      case MovieCategory.favoriteMovies:
+        return profileRepository!.getFavoriteMovies(page);
+      case MovieCategory.watchlistMovies:
+        return profileRepository!.getWatchlistMovies(page);
     }
   }
 }

@@ -5,6 +5,8 @@ enum MovieCategory {
   popularMovies,
   topRatedMovies,
   upcomingMovies,
+  favoriteMovies,
+  watchlistMovies,
 }
 
 /// Type-safe navigation arguments for the All Movies screen.

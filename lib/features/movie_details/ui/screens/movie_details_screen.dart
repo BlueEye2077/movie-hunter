@@ -61,7 +61,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
             Center(child: RatingBadge(rating: movie.tmdbRating ?? 0)),
             SizedBox(height: 24.h),
             // Action buttons
-            const MovieActionButtons(),
+            MovieActionButtons(movieId: movie.id!),
             SizedBox(height: 24.h),
             // Story line
             MovieStoryLine(overview: movie.overview ?? ''),
