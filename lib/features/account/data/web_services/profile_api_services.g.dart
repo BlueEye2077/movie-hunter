@@ -53,7 +53,7 @@ class _ProfileApiServices implements ProfileApiServices {
   }
 
   @override
-  Future<dynamic> getMovieAccountStates(
+  Future<MovieAccountStateResponse> getMovieAccountStates(
     String token,
     int movieId,
     String sessionId,
@@ -63,7 +63,7 @@ class _ProfileApiServices implements ProfileApiServices {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<dynamic>(
+    final _options = _setStreamType<MovieAccountStateResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -73,13 +73,19 @@ class _ProfileApiServices implements ProfileApiServices {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MovieAccountStateResponse _value;
+    try {
+      _value = MovieAccountStateResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
     return _value;
   }
 
   @override
-  Future<dynamic> toggleFavorite(
+  Future<MovieActionStatusResponse> toggleFavorite(
     String token,
     int accountId,
     String sessionId,
@@ -91,7 +97,7 @@ class _ProfileApiServices implements ProfileApiServices {
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<dynamic>(
+    final _options = _setStreamType<MovieActionStatusResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -101,8 +107,14 @@ class _ProfileApiServices implements ProfileApiServices {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MovieActionStatusResponse _value;
+    try {
+      _value = MovieActionStatusResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
     return _value;
   }
 
@@ -146,7 +158,7 @@ class _ProfileApiServices implements ProfileApiServices {
   }
 
   @override
-  Future<dynamic> toggleWatchlist(
+  Future<MovieActionStatusResponse> toggleWatchlist(
     String token,
     int accountId,
     String sessionId,
@@ -158,7 +170,7 @@ class _ProfileApiServices implements ProfileApiServices {
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<dynamic>(
+    final _options = _setStreamType<MovieActionStatusResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -168,8 +180,14 @@ class _ProfileApiServices implements ProfileApiServices {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late MovieActionStatusResponse _value;
+    try {
+      _value = MovieActionStatusResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
     return _value;
   }
 

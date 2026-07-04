@@ -5,6 +5,8 @@ import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../home/data/models/movie.dart';
 import '../models/account_details_model.dart';
+import '../models/movie_action_status_response.dart';
+import '../models/movie_account_state_response.dart';
 import 'profile_api_constants.dart';
 
 part 'profile_api_services.g.dart';
@@ -24,7 +26,7 @@ abstract class ProfileApiServices {
   /// Checks the current status of a specific movie for the logged-in user.
   /// Use this when opening a MovieDetailsScreen to see if the movie is already Favorited or Watchlisted!
   @GET(ProfileApiConstants.accountStates)
-  Future<dynamic> getMovieAccountStates(
+  Future<MovieAccountStateResponse> getMovieAccountStates(
     @Header("Authorization") String token,
     @Path("movie_id") int movieId,
     @Query("session_id") String sessionId,
@@ -33,7 +35,7 @@ abstract class ProfileApiServices {
   /// Toggles the Favorite status of a movie (The Heart Button).
   /// Pass a JSON body like: {"media_type": "movie", "media_id": 123, "favorite": true}
   @POST(ProfileApiConstants.favorite)
-  Future<dynamic> toggleFavorite(
+  Future<MovieActionStatusResponse> toggleFavorite(
     @Header("Authorization") String token,
     @Path("account_id") int accountId,
     @Query("session_id") String sessionId,
@@ -53,7 +55,7 @@ abstract class ProfileApiServices {
   /// Toggles the Watchlist status of a movie (The Save for Later Button).
   /// Pass a JSON body like: {"media_type": "movie", "media_id": 123, "watchlist": true}
   @POST(ProfileApiConstants.watchlist)
-  Future<dynamic> toggleWatchlist(
+  Future<MovieActionStatusResponse> toggleWatchlist(
     @Header("Authorization") String token,
     @Path("account_id") int accountId,
     @Query("session_id") String sessionId,

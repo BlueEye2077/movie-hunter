@@ -49,6 +49,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   child: MovieDetailsAppBar(
                     title: movie.title ?? '',
                     onBackPressed: () => Navigator.pop(context),
+                    movieId: movie.id!,
                   ),
                 ),
               ],

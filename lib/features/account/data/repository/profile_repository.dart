@@ -5,12 +5,14 @@ import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../home/data/models/movie.dart';
 import '../models/account_details_model.dart';
+import '../models/movie_action_status_response.dart';
+import '../models/movie_account_state_response.dart';
 import '../web_services/profile_api_services.dart';
 
 class ProfileRepository {
   final ProfileApiServices profileApiService;
   final _token = ApiConstants.apiKey;
-  
+
   AccountDetailsModel? _cachedAccountDetails;
 
   ProfileRepository({required this.profileApiService});
@@ -27,17 +29,22 @@ class ProfileRepository {
       final sessionId = await SecureStorageHelper.getSessionId();
       if (sessionId == null) {
         return ApiResult.failure(
-          const NetworkExceptions.unauthorizedRequest('Session expired. Please log in again.'),
+          const NetworkExceptions.unauthorizedRequest(
+            'Session expired. Please log in again.',
+          ),
         );
       }
 
-      final response = await profileApiService.getAccountDetails(_token, sessionId);
-      
+      final response = await profileApiService.getAccountDetails(
+        _token,
+        sessionId,
+      );
+
       // Save the account ID so other methods can use it instantly!
       if (response.id != null) {
         await SecureStorageHelper.saveAccountId(response.id!);
       }
-      
+
       _cachedAccountDetails = response;
 
       return ApiResult.success(response);
@@ -46,12 +53,16 @@ class ProfileRepository {
     }
   }
 
-  Future<ApiResult<dynamic>> getMovieAccountStates(int movieId) async {
+  Future<ApiResult<MovieAccountStateResponse>> getMovieAccountStates(
+    int movieId,
+  ) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
       if (sessionId == null) {
         return ApiResult.failure(
-          const NetworkExceptions.unauthorizedRequest('Session expired. Please log in again.'),
+          const NetworkExceptions.unauthorizedRequest(
+            'Session expired. Please log in again.',
+          ),
         );
       }
 
@@ -66,13 +77,18 @@ class ProfileRepository {
     }
   }
 
-  Future<ApiResult<dynamic>> toggleFavorite(int movieId, bool isFavorite) async {
+  Future<ApiResult<MovieActionStatusResponse>> toggleFavorite(
+    int movieId,
+    bool isFavorite,
+  ) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
       final accountIdStr = await SecureStorageHelper.getAccountId();
       if (sessionId == null || accountIdStr == null) {
         return ApiResult.failure(
-          const NetworkExceptions.unauthorizedRequest('Session expired. Please log in again.'),
+          const NetworkExceptions.unauthorizedRequest(
+            'Session expired. Please log in again.',
+          ),
         );
       }
 
@@ -80,11 +96,7 @@ class ProfileRepository {
         _token,
         int.parse(accountIdStr),
         sessionId,
-        {
-          "media_type": "movie",
-          "media_id": movieId,
-          "favorite": isFavorite,
-        },
+        {"media_type": "movie", "media_id": movieId, "favorite": isFavorite},
       );
       return ApiResult.success(response);
     } catch (e) {
@@ -98,7 +110,9 @@ class ProfileRepository {
       final accountIdStr = await SecureStorageHelper.getAccountId();
       if (sessionId == null || accountIdStr == null) {
         return ApiResult.failure(
-          const NetworkExceptions.unauthorizedRequest('Session expired. Please log in again.'),
+          const NetworkExceptions.unauthorizedRequest(
+            'Session expired. Please log in again.',
+          ),
         );
       }
 
@@ -114,13 +128,18 @@ class ProfileRepository {
     }
   }
 
-  Future<ApiResult<dynamic>> toggleWatchlist(int movieId, bool isWatchlisted) async {
+  Future<ApiResult<MovieActionStatusResponse>> toggleWatchlist(
+    int movieId,
+    bool isWatchlisted,
+  ) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
       final accountIdStr = await SecureStorageHelper.getAccountId();
       if (sessionId == null || accountIdStr == null) {
         return ApiResult.failure(
-          const NetworkExceptions.unauthorizedRequest('Session expired. Please log in again.'),
+          const NetworkExceptions.unauthorizedRequest(
+            'Session expired. Please log in again.',
+          ),
         );
       }
 
@@ -146,7 +165,9 @@ class ProfileRepository {
       final accountIdStr = await SecureStorageHelper.getAccountId();
       if (sessionId == null || accountIdStr == null) {
         return ApiResult.failure(
-          const NetworkExceptions.unauthorizedRequest('Session expired. Please log in again.'),
+          const NetworkExceptions.unauthorizedRequest(
+            'Session expired. Please log in again.',
+          ),
         );
       }
 
