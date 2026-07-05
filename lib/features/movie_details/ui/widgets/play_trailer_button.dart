@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../logic/cubit/movie_trailer_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/di/dependency_injection.dart';
@@ -10,6 +9,7 @@ import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
+import '../../logic/cubit/movie_trailer_cubit.dart';
 
 class PlayTrailerButton extends StatelessWidget {
   final int movieId;

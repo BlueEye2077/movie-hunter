@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/networking/requests_state.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
+import '../../../../core/networking/requests_state.dart';
+import '../../../home/data/models/genre.dart';
 
 import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../../../core/routing/routes.dart';

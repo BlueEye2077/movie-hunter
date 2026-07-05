@@ -14,7 +14,7 @@ void main() async {
   await checkIfLoggedInUser();
   checkSeenOnBoarding();
   await ScreenUtil.ensureScreenSize();
-   initGetIt();
+  initGetIt();
   runApp(MovieHunterApp(appRouter: AppRouter()));
 }
 

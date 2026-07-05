@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
@@ -10,13 +11,12 @@ import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../features/all_movies/data/models/all_movies_args.dart';
+import '../../../../features/home/data/models/genre.dart';
 import '../../../../features/home/data/models/movie.dart';
+import '../../../../features/home/logic/cubit/genres_cubit.dart';
 import '../../../../features/home/ui/widgets/movie_section/movies_list_view.dart';
 import '../../../../features/home/ui/widgets/movie_section/movies_section.dart';
 import '../../../../features/search/ui/widgets/empty_search.dart';
-import '../../../../core/di/dependency_injection.dart';
-import '../../../../features/home/data/models/genre.dart';
-import '../../../../features/home/logic/cubit/genres_cubit.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
 
 class ProfileWatchlistSection extends StatelessWidget {

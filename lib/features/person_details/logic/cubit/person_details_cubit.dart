@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
+import '../../../../core/networking/api_result.dart';
 
 import '../../../../core/networking/requests_state.dart';
 import '../../data/models/person_details_response.dart';
