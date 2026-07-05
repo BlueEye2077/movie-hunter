@@ -66,12 +66,22 @@ class MovieCastAndCrew extends StatelessWidget {
               itemCount: directors.length + writers.length + cast.length,
               separatorBuilder: (context, index) => SizedBox(width: 16.w),
               itemBuilder: (context, index) {
+                void navigateToPerson(int? id, String? name) {
+                  if (id == null) return;
+                  Navigator.pushNamed(
+                    context,
+                    Routes.personDetails,
+                    arguments: (id, name ?? ''),
+                  );
+                }
+
                 if (index < directors.length) {
                   final director = directors[index];
                   return MovieCastItem(
                     name: director.name ?? '',
                     role: AppStrings.roleDirector,
                     profilePath: director.profilePath,
+                    onTap: () => navigateToPerson(director.id, director.name),
                   );
                 }
                 final writerIndex = index - directors.length;
@@ -81,6 +91,7 @@ class MovieCastAndCrew extends StatelessWidget {
                     name: writer.name ?? '',
                     role: writer.job ?? AppStrings.roleWriter,
                     profilePath: writer.profilePath,
+                    onTap: () => navigateToPerson(writer.id, writer.name),
                   );
                 }
                 final castIndex = writerIndex - writers.length;
@@ -89,6 +100,7 @@ class MovieCastAndCrew extends StatelessWidget {
                   name: castMember.name ?? '',
                   role: castMember.character ?? '',
                   profilePath: castMember.profilePath,
+                  onTap: () => navigateToPerson(castMember.id, castMember.name),
                 );
               },
             ),

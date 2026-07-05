@@ -6,6 +6,7 @@ import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../data/models/cast_member.dart';
 import '../../data/models/crew_member.dart';
+import '../../../../core/routing/routes.dart';
 import '../widgets/cast_and_crew_list_item.dart';
 
 class CastAndCrewScreen extends StatelessWidget {
@@ -42,15 +43,15 @@ class CastAndCrewScreen extends StatelessWidget {
         children: [
           if (directors.isNotEmpty) ...[
             _buildSectionHeader(AppStrings.directors),
-            ...directors.map(_buildCrewItem),
+            ...directors.map((d) => _buildCrewItem(context, d)),
           ],
           if (writers.isNotEmpty) ...[
             _buildSectionHeader(AppStrings.writers),
-            ...writers.map(_buildCrewItem),
+            ...writers.map((w) => _buildCrewItem(context, w)),
           ],
           if (cast.isNotEmpty) ...[
             _buildSectionHeader(AppStrings.cast),
-            ...cast.map(_buildCastItem),
+            ...cast.map((c) => _buildCastItem(context, c)),
           ],
           SizedBox(height: 32.h),
         ],
@@ -75,19 +76,33 @@ class CastAndCrewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCrewItem(CrewMember member) {
+  Widget _buildCrewItem(BuildContext context, CrewMember member) {
     return CastAndCrewListItem(
       name: member.name ?? '',
       role: member.job ?? '',
       profilePath: member.profilePath,
+      onTap: member.id != null
+          ? () => Navigator.pushNamed(
+                context,
+                Routes.personDetails,
+                arguments: (member.id, member.name ?? ''),
+              )
+          : null,
     );
   }
 
-  Widget _buildCastItem(CastMember member) {
+  Widget _buildCastItem(BuildContext context, CastMember member) {
     return CastAndCrewListItem(
       name: member.name ?? '',
       role: member.character ?? '',
       profilePath: member.profilePath,
+      onTap: member.id != null
+          ? () => Navigator.pushNamed(
+                context,
+                Routes.personDetails,
+                arguments: (member.id, member.name ?? ''),
+              )
+          : null,
     );
   }
 }

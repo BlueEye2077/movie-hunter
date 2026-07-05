@@ -23,6 +23,9 @@ import '../../features/movie_details/data/web_services/details_api_service.dart'
 import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
 import '../../features/movie_details/logic/cubit/movie_trailer_cubit.dart';
 import '../../features/movie_details/logic/cubit/similar_movies_cubit.dart';
+import '../../features/person_details/data/repository/person_repository.dart';
+import '../../features/person_details/data/web_services/person_api_service.dart';
+import '../../features/person_details/logic/cubit/person_details_cubit.dart';
 import '../../features/search/data/repository/search_repository.dart';
 import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
@@ -92,6 +95,18 @@ void initGetIt() {
   // register similar movies cubit
   getIt.registerFactory<SimilarMoviesCubit>(
     () => SimilarMoviesCubit(movieDetailsRepository: getIt()),
+  );
+
+  // ── Person Details Feature ──
+  // register person api service
+  getIt.registerLazySingleton<PersonApiService>(() => PersonApiService(dio));
+  // register person repository
+  getIt.registerLazySingleton<PersonRepository>(
+    () => PersonRepository(personApiService: getIt()),
+  );
+  // register person details cubit
+  getIt.registerFactory<PersonDetailsCubit>(
+    () => PersonDetailsCubit(personRepository: getIt()),
   );
 
   // ── All Movies Feature ──

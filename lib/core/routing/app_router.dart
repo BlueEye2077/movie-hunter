@@ -14,6 +14,8 @@ import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
 import '../../features/movie_details/ui/screens/cast_and_crew_screen.dart';
 import '../../features/movie_details/ui/screens/movie_details_screen.dart';
 import '../../features/onboarding/ui/screens/onboarding_screen.dart';
+import '../../features/person_details/logic/cubit/person_details_cubit.dart';
+import '../../features/person_details/ui/screens/person_details_screen.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
 import '../../features/search/ui/screens/search_screen.dart';
 import '../../main_screen.dart';
@@ -84,6 +86,21 @@ class AppRouter {
               ),
             ],
             child: AllMoviesScreen(args: args),
+          ),
+        );
+
+      case Routes.personDetails:
+        final args = settings.arguments as (int, String);
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => getIt<PersonDetailsCubit>()),
+              BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
+            ],
+            child: PersonDetailsScreen(
+              personId: args.$1,
+              personName: args.$2,
+            ),
           ),
         );
 

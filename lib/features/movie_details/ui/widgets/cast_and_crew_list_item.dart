@@ -10,61 +10,66 @@ class CastAndCrewListItem extends StatelessWidget {
   final String name;
   final String role;
   final String? profilePath;
+  final VoidCallback? onTap;
 
   const CastAndCrewListItem({
     super.key,
     required this.name,
     required this.role,
     this.profilePath,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: TextStyles.horizontalPadding,
-        vertical: 8.h,
-      ),
-      child: Row(
-        children: [
-          ClipOval(
-            child: SizedBox(
-              width: 56.w,
-              height: 56.w,
-              child: profilePath != null
-                  ? CachedNetworkImage(
-                      imageUrl: '${ApiConstants.imagesUrl}$profilePath',
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) =>
-                          _avatarPlaceholder(),
-                    )
-                  : _avatarPlaceholder(),
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: TextStyles.horizontalPadding,
+          vertical: 8.h,
+        ),
+        child: Row(
+          children: [
+            ClipOval(
+              child: SizedBox(
+                width: 56.w,
+                height: 56.w,
+                child: profilePath != null
+                    ? CachedNetworkImage(
+                        imageUrl: '${ApiConstants.imagesUrl}$profilePath',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            _avatarPlaceholder(),
+                      )
+                    : _avatarPlaceholder(),
+              ),
             ),
-          ),
-          SizedBox(width: 16.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyles.font14SemiBold.copyWith(
-                    color: AppColors.textWhite,
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font14SemiBold.copyWith(
+                      color: AppColors.textWhite,
+                    ),
                   ),
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  role,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyles.font12Medium,
-                ),
-              ],
+                  SizedBox(height: 4.h),
+                  Text(
+                    role,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.font12Medium,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
