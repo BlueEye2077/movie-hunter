@@ -18,7 +18,10 @@ class LoginButton extends StatelessWidget {
         onPressed: onPressed,
         style: TextButton.styleFrom(
           backgroundColor: AppColors.primaryBlueAccent,
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h), // adjusted for height matching Figma
+          padding: EdgeInsets.symmetric(
+            horizontal: 24.w,
+            vertical: 16.h,
+          ), // adjusted for height matching Figma
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(32.r),
           ),
