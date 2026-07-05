@@ -66,9 +66,7 @@ void initGetIt() {
     () => GenresCubit(homeRepository: getIt()),
   );
   // register categories cubit
-  getIt.registerFactory<CategoriesCubit>(
-    () => CategoriesCubit(getIt()),
-  );
+  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
 
   // ── Search Feature ──
   // register search api service
@@ -137,10 +135,10 @@ void initGetIt() {
   getIt.registerFactory<ProfileCubit>(
     () => ProfileCubit(profileRepository: getIt()),
   );
-  getIt.registerFactory<FavoriteMoviesCubit>(
+  getIt.registerLazySingleton<FavoriteMoviesCubit>(
     () => FavoriteMoviesCubit(profileRepository: getIt()),
   );
-  getIt.registerFactory<WatchlistMoviesCubit>(
+  getIt.registerLazySingleton<WatchlistMoviesCubit>(
     () => WatchlistMoviesCubit(profileRepository: getIt()),
   );
 

@@ -14,6 +14,9 @@ import '../../../../features/home/data/models/movie.dart';
 import '../../../../features/home/ui/widgets/movie_section/movies_list_view.dart';
 import '../../../../features/home/ui/widgets/movie_section/movies_section.dart';
 import '../../../../features/search/ui/widgets/empty_search.dart';
+import '../../../../core/di/dependency_injection.dart';
+import '../../../../features/home/data/models/genre.dart';
+import '../../../../features/home/logic/cubit/genres_cubit.dart';
 import '../../logic/cubit/favorite_movies_cubit.dart';
 
 class ProfileFavoritesSection extends StatelessWidget {
@@ -47,6 +50,11 @@ class ProfileFavoritesSection extends StatelessWidget {
                 ),
               );
             }
+            final genresState = getIt<GenresCubit>().state;
+            final List<Genre> genresList = genresState.whenOrNull(
+              success: (g) => g,
+            ) ?? [];
+
             return MoviesSection(
               title: AppStrings.favorites,
               onSeeAllTap: () => Navigator.pushNamed(
@@ -60,7 +68,7 @@ class ProfileFavoritesSection extends StatelessWidget {
               ),
               child: MoviesListView.showMovies(
                 movies: movies,
-                genres: const [],
+                genres: genresList,
               ),
             );
           },
