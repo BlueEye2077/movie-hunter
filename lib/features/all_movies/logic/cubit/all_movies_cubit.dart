@@ -40,6 +40,9 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
       _movies.addAll(movies);
     }
     _category = category;
+    if (category == MovieCategory.staticList) {
+      _totalPages = 1;
+    }
 
     emit(AllMoviesState.successAllMovies());
   }
@@ -86,6 +89,8 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
         return profileRepository!.getFavoriteMovies(page);
       case MovieCategory.watchlistMovies:
         return profileRepository!.getWatchlistMovies(page);
+      case MovieCategory.staticList:
+        return Future.value(ApiResult.success(ApiResponse(page: 1, totalPages: 1, results: [])));
     }
   }
 }

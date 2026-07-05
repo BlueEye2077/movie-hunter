@@ -1,0 +1,614 @@
+diff --git a/lib/core/di/dependency_injection.dart b/lib/core/di/dependency_injection.dart
+index 8c2e51c..e6a1f96 100644
+--- a/lib/core/di/dependency_injection.dart
++++ b/lib/core/di/dependency_injection.dart
+@@ -23,6 +23,9 @@ import '../../features/movie_details/data/web_services/details_api_service.dart'
+ import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
+ import '../../features/movie_details/logic/cubit/movie_trailer_cubit.dart';
+ import '../../features/movie_details/logic/cubit/similar_movies_cubit.dart';
++import '../../features/person_details/data/repository/person_repository.dart';
++import '../../features/person_details/data/web_services/person_api_service.dart';
++import '../../features/person_details/logic/cubit/person_details_cubit.dart';
+ import '../../features/search/data/repository/search_repository.dart';
+ import '../../features/search/data/web_services/search_api_service.dart';
+ import '../../features/search/logic/cubit/search_cubit.dart';
+@@ -94,6 +97,18 @@ void initGetIt() {
+     () => SimilarMoviesCubit(movieDetailsRepository: getIt()),
+   );
+ 
++  // ── Person Details Feature ──
++  // register person api service
++  getIt.registerLazySingleton<PersonApiService>(() => PersonApiService(dio));
++  // register person repository
++  getIt.registerLazySingleton<PersonRepository>(
++    () => PersonRepository(personApiService: getIt()),
++  );
++  // register person details cubit
++  getIt.registerFactory<PersonDetailsCubit>(
++    () => PersonDetailsCubit(personRepository: getIt()),
++  );
++
+   // ── All Movies Feature ──
+   // register the all movies cubit
+   getIt.registerFactory<AllMoviesCubit>(
+diff --git a/lib/core/routing/app_router.dart b/lib/core/routing/app_router.dart
+index 466053b..cf4d509 100644
+--- a/lib/core/routing/app_router.dart
++++ b/lib/core/routing/app_router.dart
+@@ -14,6 +14,8 @@ import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
+ import '../../features/movie_details/ui/screens/cast_and_crew_screen.dart';
+ import '../../features/movie_details/ui/screens/movie_details_screen.dart';
+ import '../../features/onboarding/ui/screens/onboarding_screen.dart';
++import '../../features/person_details/logic/cubit/person_details_cubit.dart';
++import '../../features/person_details/ui/screens/person_details_screen.dart';
+ import '../../features/search/logic/cubit/search_cubit.dart';
+ import '../../features/search/ui/screens/search_screen.dart';
+ import '../../main_screen.dart';
+@@ -87,6 +89,21 @@ class AppRouter {
+           ),
+         );
+ 
++      case Routes.personDetails:
++        final args = settings.arguments as (int, String);
++        return MaterialPageRoute(
++          builder: (_) => MultiBlocProvider(
++            providers: [
++              BlocProvider(create: (_) => getIt<PersonDetailsCubit>()),
++              BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
++            ],
++            child: PersonDetailsScreen(
++              personId: args.$1,
++              personName: args.$2,
++            ),
++          ),
++        );
++
+       default:
+         return null;
+     }
+diff --git a/lib/core/routing/routes.dart b/lib/core/routing/routes.dart
+index 7901ee3..c1849ef 100644
+--- a/lib/core/routing/routes.dart
++++ b/lib/core/routing/routes.dart
+@@ -6,4 +6,5 @@ class Routes {
+   static const String movieDetails = '/movie-details';
+   static const String castAndCrew = '/cast-and-crew';
+   static const String allMovies = '/all-movies';
++  static const String personDetails = '/person-details';
+ }
+diff --git a/lib/features/all_movies/data/models/all_movies_args.dart b/lib/features/all_movies/data/models/all_movies_args.dart
+index 1c6062b..8e7b172 100644
+--- a/lib/features/all_movies/data/models/all_movies_args.dart
++++ b/lib/features/all_movies/data/models/all_movies_args.dart
+@@ -7,6 +7,7 @@ enum MovieCategory {
+   upcomingMovies,
+   favoriteMovies,
+   watchlistMovies,
++  staticList,
+ }
+ 
+ /// Type-safe navigation arguments for the All Movies screen.
+diff --git a/lib/features/all_movies/logic/cubit/all_movies_cubit.dart b/lib/features/all_movies/logic/cubit/all_movies_cubit.dart
+index 362a6c7..e69efc3 100644
+--- a/lib/features/all_movies/logic/cubit/all_movies_cubit.dart
++++ b/lib/features/all_movies/logic/cubit/all_movies_cubit.dart
+@@ -40,6 +40,9 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
+       _movies.addAll(movies);
+     }
+     _category = category;
++    if (category == MovieCategory.staticList) {
++      _totalPages = 1;
++    }
+ 
+     emit(AllMoviesState.successAllMovies());
+   }
+@@ -86,6 +89,8 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
+         return profileRepository!.getFavoriteMovies(page);
+       case MovieCategory.watchlistMovies:
+         return profileRepository!.getWatchlistMovies(page);
++      case MovieCategory.staticList:
++        return Future.value(ApiResult.success(ApiResponse(page: 1, totalPages: 1, results: [])));
+     }
+   }
+ }
+diff --git a/lib/features/home/logic/cubit/genres_cubit.dart b/lib/features/home/logic/cubit/genres_cubit.dart
+index a38271a..ae16c3c 100644
+--- a/lib/features/home/logic/cubit/genres_cubit.dart
++++ b/lib/features/home/logic/cubit/genres_cubit.dart
+@@ -12,6 +12,7 @@ class GenresCubit extends Cubit<RequestsState<List<Genre>>> {
+ 
+   void getGenres() async {
+     final result = await homeRepository.getGenres();
++    if (isClosed) return;
+     result.when(
+       success: (genres) => emit(RequestsState.success(genres)),
+       failure: (networkExceptions) =>
+diff --git a/lib/features/movie_details/logic/cubit/similar_movies_cubit.dart b/lib/features/movie_details/logic/cubit/similar_movies_cubit.dart
+index 64f131e..16a0f72 100644
+--- a/lib/features/movie_details/logic/cubit/similar_movies_cubit.dart
++++ b/lib/features/movie_details/logic/cubit/similar_movies_cubit.dart
+@@ -1,6 +1,5 @@
+ import 'package:flutter_bloc/flutter_bloc.dart';
+ import '../../../../core/networking/api_result.dart';
+-import '../../../../core/networking/network_exceptions.dart';
+ import '../../../../core/networking/requests_state.dart';
+ import '../../../home/data/models/movie.dart';
+ import '../../data/repository/movie_details_repository.dart';
+@@ -9,7 +8,7 @@ class SimilarMoviesCubit extends Cubit<RequestsState<List<Movie>>> {
+   final MovieDetailsRepository movieDetailsRepository;
+ 
+   SimilarMoviesCubit({required this.movieDetailsRepository})
+-      : super(const RequestsState.idle());
++    : super(const RequestsState.idle());
+ 
+   void getSimilarMovies(int movieId) async {
+     emit(const RequestsState.loading());
+@@ -17,13 +16,7 @@ class SimilarMoviesCubit extends Cubit<RequestsState<List<Movie>>> {
+ 
+     result.when(
+       success: (data) {
+-        final movies = data.results ?? [];
+-        if (movies.isEmpty) {
+-          emit(const RequestsState.error(
+-              NetworkExceptions.defaultError("No similar movies found")));
+-        } else {
+-          emit(RequestsState.success(movies));
+-        }
++        emit(RequestsState.success(data.results ?? []));
+       },
+       failure: (error) {
+         emit(RequestsState.error(error));
+diff --git a/lib/features/movie_details/ui/screens/cast_and_crew_screen.dart b/lib/features/movie_details/ui/screens/cast_and_crew_screen.dart
+index 5195fa4..ab79edb 100644
+--- a/lib/features/movie_details/ui/screens/cast_and_crew_screen.dart
++++ b/lib/features/movie_details/ui/screens/cast_and_crew_screen.dart
+@@ -6,6 +6,7 @@ import '../../../../core/theming/colors.dart';
+ import '../../../../core/theming/text_styles.dart';
+ import '../../data/models/cast_member.dart';
+ import '../../data/models/crew_member.dart';
++import '../../../../core/routing/routes.dart';
+ import '../widgets/cast_and_crew_list_item.dart';
+ 
+ class CastAndCrewScreen extends StatelessWidget {
+@@ -42,15 +43,15 @@ class CastAndCrewScreen extends StatelessWidget {
+         children: [
+           if (directors.isNotEmpty) ...[
+             _buildSectionHeader(AppStrings.directors),
+-            ...directors.map(_buildCrewItem),
++            ...directors.map((d) => _buildCrewItem(context, d)),
+           ],
+           if (writers.isNotEmpty) ...[
+             _buildSectionHeader(AppStrings.writers),
+-            ...writers.map(_buildCrewItem),
++            ...writers.map((w) => _buildCrewItem(context, w)),
+           ],
+           if (cast.isNotEmpty) ...[
+             _buildSectionHeader(AppStrings.cast),
+-            ...cast.map(_buildCastItem),
++            ...cast.map((c) => _buildCastItem(context, c)),
+           ],
+           SizedBox(height: 32.h),
+         ],
+@@ -75,19 +76,33 @@ class CastAndCrewScreen extends StatelessWidget {
+     );
+   }
+ 
+-  Widget _buildCrewItem(CrewMember member) {
++  Widget _buildCrewItem(BuildContext context, CrewMember member) {
+     return CastAndCrewListItem(
+       name: member.name ?? '',
+       role: member.job ?? '',
+       profilePath: member.profilePath,
++      onTap: member.id != null
++          ? () => Navigator.pushNamed(
++                context,
++                Routes.personDetails,
++                arguments: (member.id, member.name ?? ''),
++              )
++          : null,
+     );
+   }
+ 
+-  Widget _buildCastItem(CastMember member) {
++  Widget _buildCastItem(BuildContext context, CastMember member) {
+     return CastAndCrewListItem(
+       name: member.name ?? '',
+       role: member.character ?? '',
+       profilePath: member.profilePath,
++      onTap: member.id != null
++          ? () => Navigator.pushNamed(
++                context,
++                Routes.personDetails,
++                arguments: (member.id, member.name ?? ''),
++              )
++          : null,
+     );
+   }
+ }
+diff --git a/lib/features/movie_details/ui/widgets/cast_and_crew_list_item.dart b/lib/features/movie_details/ui/widgets/cast_and_crew_list_item.dart
+index 1c4a2be..fc39066 100644
+--- a/lib/features/movie_details/ui/widgets/cast_and_crew_list_item.dart
++++ b/lib/features/movie_details/ui/widgets/cast_and_crew_list_item.dart
+@@ -10,61 +10,66 @@ class CastAndCrewListItem extends StatelessWidget {
+   final String name;
+   final String role;
+   final String? profilePath;
++  final VoidCallback? onTap;
+ 
+   const CastAndCrewListItem({
+     super.key,
+     required this.name,
+     required this.role,
+     this.profilePath,
++    this.onTap,
+   });
+ 
+   @override
+   Widget build(BuildContext context) {
+-    return Padding(
+-      padding: EdgeInsets.symmetric(
+-        horizontal: TextStyles.horizontalPadding,
+-        vertical: 8.h,
+-      ),
+-      child: Row(
+-        children: [
+-          ClipOval(
+-            child: SizedBox(
+-              width: 56.w,
+-              height: 56.w,
+-              child: profilePath != null
+-                  ? CachedNetworkImage(
+-                      imageUrl: '${ApiConstants.imagesUrl}$profilePath',
+-                      fit: BoxFit.cover,
+-                      errorBuilder: (context, error, stackTrace) =>
+-                          _avatarPlaceholder(),
+-                    )
+-                  : _avatarPlaceholder(),
++    return InkWell(
++      onTap: onTap,
++      child: Padding(
++        padding: EdgeInsets.symmetric(
++          horizontal: TextStyles.horizontalPadding,
++          vertical: 8.h,
++        ),
++        child: Row(
++          children: [
++            ClipOval(
++              child: SizedBox(
++                width: 56.w,
++                height: 56.w,
++                child: profilePath != null
++                    ? CachedNetworkImage(
++                        imageUrl: '${ApiConstants.imagesUrl}$profilePath',
++                        fit: BoxFit.cover,
++                        errorBuilder: (context, error, stackTrace) =>
++                            _avatarPlaceholder(),
++                      )
++                    : _avatarPlaceholder(),
++              ),
+             ),
+-          ),
+-          SizedBox(width: 16.w),
+-          Expanded(
+-            child: Column(
+-              crossAxisAlignment: CrossAxisAlignment.start,
+-              children: [
+-                Text(
+-                  name,
+-                  maxLines: 1,
+-                  overflow: TextOverflow.ellipsis,
+-                  style: TextStyles.font14SemiBold.copyWith(
+-                    color: AppColors.textWhite,
++            SizedBox(width: 16.w),
++            Expanded(
++              child: Column(
++                crossAxisAlignment: CrossAxisAlignment.start,
++                children: [
++                  Text(
++                    name,
++                    maxLines: 1,
++                    overflow: TextOverflow.ellipsis,
++                    style: TextStyles.font14SemiBold.copyWith(
++                      color: AppColors.textWhite,
++                    ),
++                  ),
++                  SizedBox(height: 4.h),
++                  Text(
++                    role,
++                    maxLines: 1,
++                    overflow: TextOverflow.ellipsis,
++                    style: TextStyles.font12Medium,
+                   ),
+-                ),
+-                SizedBox(height: 4.h),
+-                Text(
+-                  role,
+-                  maxLines: 1,
+-                  overflow: TextOverflow.ellipsis,
+-                  style: TextStyles.font12Medium,
+-                ),
+-              ],
++                ],
++              ),
+             ),
+-          ),
+-        ],
++          ],
++        ),
+       ),
+     );
+   }
+diff --git a/lib/features/movie_details/ui/widgets/movie_cast_and_crew.dart b/lib/features/movie_details/ui/widgets/movie_cast_and_crew.dart
+index 69da5f6..30308bd 100644
+--- a/lib/features/movie_details/ui/widgets/movie_cast_and_crew.dart
++++ b/lib/features/movie_details/ui/widgets/movie_cast_and_crew.dart
+@@ -66,12 +66,22 @@ class MovieCastAndCrew extends StatelessWidget {
+               itemCount: directors.length + writers.length + cast.length,
+               separatorBuilder: (context, index) => SizedBox(width: 16.w),
+               itemBuilder: (context, index) {
++                void navigateToPerson(int? id, String? name) {
++                  if (id == null) return;
++                  Navigator.pushNamed(
++                    context,
++                    Routes.personDetails,
++                    arguments: (id, name ?? ''),
++                  );
++                }
++
+                 if (index < directors.length) {
+                   final director = directors[index];
+                   return MovieCastItem(
+                     name: director.name ?? '',
+                     role: AppStrings.roleDirector,
+                     profilePath: director.profilePath,
++                    onTap: () => navigateToPerson(director.id, director.name),
+                   );
+                 }
+                 final writerIndex = index - directors.length;
+@@ -81,6 +91,7 @@ class MovieCastAndCrew extends StatelessWidget {
+                     name: writer.name ?? '',
+                     role: writer.job ?? AppStrings.roleWriter,
+                     profilePath: writer.profilePath,
++                    onTap: () => navigateToPerson(writer.id, writer.name),
+                   );
+                 }
+                 final castIndex = writerIndex - writers.length;
+@@ -89,6 +100,7 @@ class MovieCastAndCrew extends StatelessWidget {
+                   name: castMember.name ?? '',
+                   role: castMember.character ?? '',
+                   profilePath: castMember.profilePath,
++                  onTap: () => navigateToPerson(castMember.id, castMember.name),
+                 );
+               },
+             ),
+diff --git a/lib/features/movie_details/ui/widgets/movie_cast_item.dart b/lib/features/movie_details/ui/widgets/movie_cast_item.dart
+index 1503efd..9e9da21 100644
+--- a/lib/features/movie_details/ui/widgets/movie_cast_item.dart
++++ b/lib/features/movie_details/ui/widgets/movie_cast_item.dart
+@@ -10,62 +10,67 @@ class MovieCastItem extends StatelessWidget {
+   final String name;
+   final String role;
+   final String? profilePath;
++  final VoidCallback? onTap;
+ 
+   const MovieCastItem({
+     super.key,
+     required this.name,
+     required this.role,
+     this.profilePath,
++    this.onTap,
+   });
+ 
+   @override
+   Widget build(BuildContext context) {
+-    return SizedBox(
+-      width: 140.w,
+-      child: Row(
+-        children: [
+-          // Avatar
+-          ClipOval(
+-            child: SizedBox(
+-              width: 40.w,
+-              height: 40.w,
+-              child: profilePath != null
+-                  ? CachedNetworkImage(
+-                      imageUrl: '${ApiConstants.imagesUrl}$profilePath',
+-                      fit: BoxFit.cover,
+-                      errorBuilder: (context, error, stackTrace) =>
+-                          _avatarPlaceholder(),
+-                    )
+-                  : _avatarPlaceholder(),
++    return GestureDetector(
++      onTap: onTap,
++      child: SizedBox(
++        width: 140.w,
++        child: Row(
++          children: [
++            // Avatar
++            ClipOval(
++              child: SizedBox(
++                width: 40.w,
++                height: 40.w,
++                child: profilePath != null
++                    ? CachedNetworkImage(
++                        imageUrl: '${ApiConstants.imagesUrl}$profilePath',
++                        fit: BoxFit.cover,
++                        errorBuilder: (context, error, stackTrace) =>
++                            _avatarPlaceholder(),
++                      )
++                    : _avatarPlaceholder(),
++              ),
+             ),
+-          ),
+-          SizedBox(width: 8.w),
+-          // Name and role
+-          Expanded(
+-            child: Column(
+-              crossAxisAlignment: CrossAxisAlignment.start,
+-              mainAxisAlignment: MainAxisAlignment.center,
+-              children: [
+-                Text(
+-                  name,
+-                  maxLines: 1,
+-                  overflow: TextOverflow.ellipsis,
+-                  style: TextStyles.font14SemiBold.copyWith(
+-                    color: AppColors.textWhite,
++            SizedBox(width: 8.w),
++            // Name and role
++            Expanded(
++              child: Column(
++                crossAxisAlignment: CrossAxisAlignment.start,
++                mainAxisAlignment: MainAxisAlignment.center,
++                children: [
++                  Text(
++                    name,
++                    maxLines: 1,
++                    overflow: TextOverflow.ellipsis,
++                    style: TextStyles.font14SemiBold.copyWith(
++                      color: AppColors.textWhite,
++                    ),
+                   ),
+-                ),
+-                Text(
+-                  role,
+-                  maxLines: 1,
+-                  overflow: TextOverflow.ellipsis,
+-                  style: TextStyles.font10Medium.copyWith(
+-                    color: AppColors.textGrey,
++                  Text(
++                    role,
++                    maxLines: 1,
++                    overflow: TextOverflow.ellipsis,
++                    style: TextStyles.font10Medium.copyWith(
++                      color: AppColors.textGrey,
++                    ),
+                   ),
+-                ),
+-              ],
++                ],
++              ),
+             ),
+-          ),
+-        ],
++          ],
++        ),
+       ),
+     );
+   }
+diff --git a/lib/features/movie_details/ui/widgets/similar_movies_section.dart b/lib/features/movie_details/ui/widgets/similar_movies_section.dart
+index d311840..8052182 100644
+--- a/lib/features/movie_details/ui/widgets/similar_movies_section.dart
++++ b/lib/features/movie_details/ui/widgets/similar_movies_section.dart
+@@ -9,6 +9,11 @@ import '../../../home/data/models/movie.dart';
+ import '../../../home/logic/cubit/genres_cubit.dart';
+ import '../../../home/ui/widgets/movie_section/movies_list_view.dart';
+ import '../../../home/ui/widgets/movie_section/movies_section.dart';
++import '../../../../core/routing/routes.dart';
++import '../../../../core/theming/colors.dart';
++import '../../../../core/theming/text_styles.dart';
++import 'package:flutter_screenutil/flutter_screenutil.dart';
++import '../../../all_movies/data/models/all_movies_args.dart';
+ import '../../logic/cubit/similar_movies_cubit.dart';
+ 
+ class SimilarMoviesSection extends StatelessWidget {
+@@ -21,38 +26,68 @@ class SimilarMoviesSection extends StatelessWidget {
+     return BlocProvider(
+       create: (context) =>
+           getIt<SimilarMoviesCubit>()..getSimilarMovies(movieId),
+-      child: MoviesSection(
+-        title: "Similar Movies",
+-        child: BlocBuilder<SimilarMoviesCubit, RequestsState<List<Movie>>>(
+-          builder: (context, moviesState) {
+-            return moviesState.when(
+-              idle: () => const SizedBox.shrink(),
+-              loading: () => const MoviesListView.shimmer(),
+-              success: (movies) {
+-                if (movies.isEmpty) {
+-                  return const Center(child: Text("No similar movies"));
+-                }
+-                return BlocBuilder<GenresCubit, RequestsState<List<Genre>>>(
+-                  builder: (context, genresState) {
+-                    final genres = genresState.maybeWhen(
+-                      success: (g) => g,
+-                      orElse: () => <Genre>[],
+-                    );
+-                    return MoviesListView.showMovies(
+-                      movies: movies,
+-                      genres: genres,
+-                    );
+-                  },
+-                );
+-              },
+-              error: (error) {
+-                return Center(
+-                  child: Text(NetworkExceptions.getErrorMessage(error)),
+-                );
+-              },
+-            );
+-          },
+-        ),
++      child: BlocBuilder<SimilarMoviesCubit, RequestsState<List<Movie>>>(
++        builder: (context, moviesState) {
++          return moviesState.when(
++            idle: () => const SizedBox.shrink(),
++            loading: () => const MoviesSection(
++              title: "Similar Movies",
++              child: MoviesListView.shimmer(),
++            ),
++            success: (movies) {
++              return MoviesSection(
++                title: "Similar Movies",
++                onSeeAllTap: movies.isEmpty
++                    ? null
++                    : () {
++                        Navigator.pushNamed(
++                          context,
++                          Routes.allMovies,
++                          arguments: AllMoviesArgs(
++                            title: "Similar Movies",
++                            movies: movies,
++                            category: MovieCategory.staticList,
++                          ),
++                        );
++                      },
++                child: movies.isEmpty
++                    ? SizedBox(
++                        height: 245.h,
++                        child: Center(
++                          child: Text(
++                            "No similar movies found",
++                            style: TextStyles.font14Regular
++                                .copyWith(color: AppColors.textDarkGrey),
++                          ),
++                        ),
++                      )
++                    : BlocBuilder<GenresCubit, RequestsState<List<Genre>>>(
++                        builder: (context, genresState) {
++                          final genres = genresState.maybeWhen(
++                            success: (g) => g,
++                            orElse: () => <Genre>[],
++                          );
++                          return MoviesListView.showMovies(
++                            movies: movies,
++                            genres: genres,
++                          );
++                        },
++                      ),
++              );
++            },
++            error: (error) {
++              return MoviesSection(
++                title: "Similar Movies",
++                child: SizedBox(
++                  height: 245.h,
++                  child: Center(
++                    child: Text(NetworkExceptions.getErrorMessage(error)),
++                  ),
++                ),
++              );
++            },
++          );
++        },
+       ),
+     );
+   }

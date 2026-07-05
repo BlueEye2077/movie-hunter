@@ -12,6 +12,7 @@ class GenresCubit extends Cubit<RequestsState<List<Genre>>> {
 
   void getGenres() async {
     final result = await homeRepository.getGenres();
+    if (isClosed) return;
     result.when(
       success: (genres) => emit(RequestsState.success(genres)),
       failure: (networkExceptions) =>

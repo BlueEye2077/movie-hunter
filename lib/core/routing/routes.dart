@@ -6,4 +6,5 @@ class Routes {
   static const String movieDetails = '/movie-details';
   static const String castAndCrew = '/cast-and-crew';
   static const String allMovies = '/all-movies';
+  static const String personDetails = '/person-details';
 }
