@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../../core/networking/network_exceptions.dart';
 
 part 'categories_state.freezed.dart';

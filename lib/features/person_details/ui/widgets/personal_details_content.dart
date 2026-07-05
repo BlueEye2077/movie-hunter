@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/person_details/data/models/person_details_response.dart';
-import 'package:movie_hunter/features/person_details/ui/widgets/person_biography.dart';
-import 'package:movie_hunter/features/person_details/ui/widgets/person_known_for_section.dart';
-import 'package:movie_hunter/features/person_details/ui/widgets/person_info_header.dart';
+import '../../../home/data/models/movie.dart';
+import '../../data/models/person_details_response.dart';
+import 'person_biography.dart';
+import 'person_known_for_section.dart';
+import 'person_info_header.dart';
 
 class PersonDetailsContent extends StatelessWidget {
   final PersonDetailsResponse person;
