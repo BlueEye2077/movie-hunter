@@ -46,4 +46,12 @@ abstract class HomeApiService {
   Future<Map<String, List<Genre>>> getGenres(
     @Header("Authorization") String token,
   );
+
+  // Get movies by genre
+  @GET(HomeApiConstants.discoverMovie)
+  Future<ApiResponse<Movie>> getMoviesByGenre(
+    @Header("Authorization") String token,
+    @Query("with_genres") int genreId,
+    @Query("page") int page,
+  );
 }

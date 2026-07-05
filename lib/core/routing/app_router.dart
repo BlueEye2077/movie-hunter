@@ -82,7 +82,11 @@ class AppRouter {
               BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
               BlocProvider(
                 create: (_) => getIt<AllMoviesCubit>()
-                  ..setInitial(movies: args.movies, category: args.category),
+                  ..setInitial(
+                    movies: args.movies,
+                    category: args.category,
+                    entityId: args.entityId,
+                  ),
               ),
             ],
             child: AllMoviesScreen(args: args),

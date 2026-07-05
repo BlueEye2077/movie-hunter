@@ -11,6 +11,7 @@ import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
 import '../../features/auth/data/repository/auth_repository.dart';
 import '../../features/auth/data/web_services/auth_api_services.dart';
 import '../../features/auth/logic/cubit/auth_cubit.dart';
+import '../../features/categories/logic/cubit/categories_cubit.dart';
 import '../../features/home/data/repository/home_repository.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
@@ -63,6 +64,10 @@ void initGetIt() {
   // register genres cubit
   getIt.registerLazySingleton<GenresCubit>(
     () => GenresCubit(homeRepository: getIt()),
+  );
+  // register categories cubit
+  getIt.registerFactory<CategoriesCubit>(
+    () => CategoriesCubit(getIt()),
   );
 
   // ── Search Feature ──
