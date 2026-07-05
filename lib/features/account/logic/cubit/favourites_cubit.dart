@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/core/networking/network_exceptions.dart';
-import 'package:movie_hunter/features/account/data/models/movie_action_status_response.dart';
-import 'package:movie_hunter/features/account/data/repository/profile_repository.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../../data/models/movie_action_status_response.dart';
+import '../../data/repository/profile_repository.dart';
 
 part 'favourites_state.dart';
 part 'favourites_cubit.freezed.dart';
