@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/text_styles.dart';
-import '../widgets/categories_list.dart';
 import '../widgets/clickable_search_bar.dart';
 import '../widgets/home_top_bar.dart';
 import '../widgets/most_popular_movies_builder.dart';
@@ -42,8 +41,8 @@ class HomeScreen extends StatelessWidget {
               const UpcomingMoviesBuilder(),
               SizedBox(height: 24.h),
               // Categories List
-              const CategoriesList(),
-              SizedBox(height: 24.h),
+              // const CategoriesList(),
+              // SizedBox(height: 24.h),
               // Now Playing Movies
               const NowPlayingMoviesBuilder(),
               SizedBox(height: 24.h),
