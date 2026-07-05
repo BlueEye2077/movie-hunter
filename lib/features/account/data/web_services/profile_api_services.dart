@@ -5,8 +5,8 @@ import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../home/data/models/movie.dart';
 import '../models/account_details_model.dart';
-import '../models/movie_action_status_response.dart';
 import '../models/movie_account_state_response.dart';
+import '../models/movie_action_status_response.dart';
 import 'profile_api_constants.dart';
 
 part 'profile_api_services.g.dart';

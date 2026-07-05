@@ -1,13 +1,11 @@
 import 'package:get_it/get_it.dart';
-import '../../features/account/logic/cubit/favourites_cubit.dart';
-import '../../features/account/logic/cubit/watchlist_cubit.dart';
-import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
-import '../../features/movie_details/logic/cubit/movie_trailer_cubit.dart';
 
 import '../../features/account/data/repository/profile_repository.dart';
 import '../../features/account/data/web_services/profile_api_services.dart';
 import '../../features/account/logic/cubit/favorite_movies_cubit.dart';
+import '../../features/account/logic/cubit/favourites_cubit.dart';
 import '../../features/account/logic/cubit/profile_cubit.dart';
+import '../../features/account/logic/cubit/watchlist_cubit.dart';
 import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
 import '../../features/auth/data/repository/auth_repository.dart';
@@ -22,6 +20,9 @@ import '../../features/home/logic/cubit/top_rated_movies_cubit.dart';
 import '../../features/home/logic/cubit/upcoming_movies_cubit.dart';
 import '../../features/movie_details/data/repository/movie_details_repository.dart';
 import '../../features/movie_details/data/web_services/details_api_service.dart';
+import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
+import '../../features/movie_details/logic/cubit/movie_trailer_cubit.dart';
+import '../../features/movie_details/logic/cubit/similar_movies_cubit.dart';
 import '../../features/search/data/repository/search_repository.dart';
 import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
@@ -88,14 +89,15 @@ void initGetIt() {
   getIt.registerFactory<MovieTrailerCubit>(
     () => MovieTrailerCubit(movieDetailsRepository: getIt()),
   );
+  // register similar movies cubit
+  getIt.registerFactory<SimilarMoviesCubit>(
+    () => SimilarMoviesCubit(movieDetailsRepository: getIt()),
+  );
 
   // ── All Movies Feature ──
   // register the all movies cubit
   getIt.registerFactory<AllMoviesCubit>(
-    () => AllMoviesCubit(
-      homeRepository: getIt(),
-      profileRepository: getIt(),
-    ),
+    () => AllMoviesCubit(homeRepository: getIt(), profileRepository: getIt()),
   );
 
   // ── Auth Feature ──

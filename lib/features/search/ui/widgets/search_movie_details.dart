@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theming/colors.dart';
+import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_strings.dart';
+import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
 import '../../../home/logic/cubit/genres_cubit.dart';
-import '../../../../core/networking/requests_state.dart';
 import 'search_movie_info_row.dart';
 
 class SearchMovieDetails extends StatelessWidget {

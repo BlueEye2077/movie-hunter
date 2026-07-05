@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'core/constants/constants.dart';
-import 'core/helpers/secure_storage_helper.dart';
 
+import 'core/constants/constants.dart';
 import 'core/di/dependency_injection.dart';
+import 'core/helpers/secure_storage_helper.dart';
 import 'core/helpers/shared_preferance_helper.dart';
 import 'core/routing/app_router.dart';
 import 'movie_hunter_app.dart';

@@ -12,6 +12,7 @@ import '../widgets/movie_details_app_bar.dart';
 import '../widgets/movie_info_section.dart';
 import '../widgets/movie_poster_header.dart';
 import '../widgets/movie_story_line.dart';
+import '../widgets/similar_movies_section.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   final Movie movie;
@@ -68,6 +69,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
             SizedBox(height: 24.h),
             // Cast and Crew — loaded from API
             const CastAndCrewSection(),
+            SizedBox(height: 32.h),
+            // Similar Movies
+            SimilarMoviesSection(movieId: movie.id!),
             SizedBox(height: 32.h),
           ],
         ),

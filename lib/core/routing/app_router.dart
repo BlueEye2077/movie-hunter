@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/account/logic/cubit/profile_cubit.dart';
-import '../../features/auth/logic/cubit/auth_cubit.dart';
-import '../../features/auth/ui/screens/login_screen.dart';
 
+import '../../features/account/logic/cubit/profile_cubit.dart';
 import '../../features/all_movies/data/models/all_movies_args.dart';
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
 import '../../features/all_movies/ui/screens/all_movies_screen.dart';
+import '../../features/auth/logic/cubit/auth_cubit.dart';
+import '../../features/auth/ui/screens/login_screen.dart';
 import '../../features/home/data/models/movie.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
 import '../../features/movie_details/data/models/cast_and_crew_args.dart';
@@ -57,8 +57,11 @@ class AppRouter {
       case Routes.movieDetails:
         final movie = settings.arguments as Movie;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => getIt<MovieDetailsCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => getIt<MovieDetailsCubit>()),
+              BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
+            ],
             child: MovieDetailsScreen(movie: movie),
           ),
         );

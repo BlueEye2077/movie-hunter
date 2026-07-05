@@ -1,6 +1,8 @@
 import '../../../../core/networking/api_constants.dart';
+import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../home/data/models/movie.dart';
 import '../models/movie_credits_response.dart';
 import '../models/movie_details_response.dart';
 import '../models/movie_videos_response.dart';
@@ -37,6 +39,16 @@ class MovieDetailsRepository {
   Future<ApiResult<MovieVideosResponse>> getMovieVideos(int movieId) async {
     try {
       final response = await detailsApiService.getMovieVideos(_token, movieId);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(NetworkExceptions.getDioException(error));
+    }
+  }
+
+  // get similar movies
+  Future<ApiResult<ApiResponse<Movie>>> getSimilarMovies(int movieId) async {
+    try {
+      final response = await detailsApiService.getSimilarMovies(_token, movieId);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));

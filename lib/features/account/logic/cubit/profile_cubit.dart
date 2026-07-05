@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/requests_state.dart';
 import '../../data/models/account_details_model.dart';
 import '../../data/repository/profile_repository.dart';
-import '../../../../core/networking/requests_state.dart';
 
 class ProfileCubit extends Cubit<RequestsState<AccountDetailsModel>> {
   final ProfileRepository profileRepository;
