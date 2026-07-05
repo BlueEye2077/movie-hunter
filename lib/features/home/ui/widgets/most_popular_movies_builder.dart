@@ -4,16 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
-import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/app_strings.dart';
+import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../data/models/genre.dart';
 import '../../data/models/movie.dart';
 import '../../logic/cubit/genres_cubit.dart';
 import '../../logic/cubit/popular_movies_cubit.dart';
-import '../../../../core/networking/requests_state.dart';
 import 'movie_section/movies_list_view.dart';
 import 'movie_section/movies_section.dart';
 

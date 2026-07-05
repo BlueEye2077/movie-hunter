@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../data/models/movie_action_status_response.dart';
 import '../../data/repository/profile_repository.dart';
 
-part 'favourites_state.dart';
 part 'favourites_cubit.freezed.dart';
+part 'favourites_state.dart';
 
 class FavouritesCubit extends Cubit<FavouritesState> {
   final ProfileRepository profileRepository;
