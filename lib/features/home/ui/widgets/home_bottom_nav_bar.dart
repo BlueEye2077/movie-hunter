@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import '../../../../core/theming/colors.dart';
-import 'bottom_nav_item.dart';
+import '../../../../core/theming/text_styles.dart';
 
 class HomeBottomNavBar extends StatefulWidget {
   final ValueChanged<int> onTabSelected;
@@ -16,46 +18,111 @@ class HomeBottomNavBar extends StatefulWidget {
 class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
   int _selectedIndex = 0;
 
-  // List of navigation items
-  static const List<_NavItem> _items = [
-    _NavItem(icon: 'assets/svgs/home.svg', label: 'Home'),
-    _NavItem(icon: 'assets/svgs/search.svg', label: 'Search'),
-    _NavItem(icon: 'assets/svgs/download.svg', label: 'Download'),
-    _NavItem(icon: 'assets/svgs/person.svg', label: 'Profile'),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    // Build the bottom navigation bar
-    return Container(
-      height: 72.h,
-      color: AppColors.primaryDark,
-      padding: EdgeInsets.symmetric(horizontal: 39.w, vertical: 16.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(_items.length, (index) {
-          final isSelected = index == _selectedIndex;
-          return GestureDetector(
-            onTap: () {
-              _selectedIndex = index;
-              widget.onTabSelected(index);
-            },
-            child: BottomNavItem(
-              icon: _items[index].icon,
-              label: _items[index].label,
-              isSelected: isSelected,
-            ),
-          );
-        }),
+    return StylishBottomBar(
+      backgroundColor: AppColors.primaryDark,
+      currentIndex: _selectedIndex,
+      onTap: (index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+        widget.onTabSelected(index);
+      },
+      option: BubbleBarOptions(
+        barStyle: BubbleBarStyle.horizontal,
+        bubbleFillStyle: BubbleFillStyle.fill,
+        opacity: 1.0,
       ),
+      items: [
+        BottomBarItem(
+          backgroundColor: AppColors.primarySoft,
+          icon: SvgPicture.asset(
+            'assets/svgs/home.svg',
+            width: 24.w,
+            height: 24.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.textGrey,
+              BlendMode.srcIn,
+            ),
+          ),
+          selectedIcon: SvgPicture.asset(
+            'assets/svgs/home.svg',
+            width: 24.w,
+            height: 24.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.primaryBlueAccent,
+              BlendMode.srcIn,
+            ),
+          ),
+          selectedColor: AppColors.primarySoft,
+          unSelectedColor: AppColors.textGrey,
+          title: Text(
+            'Home',
+            style: TextStyles.font12Medium.copyWith(
+              color: AppColors.primaryBlueAccent,
+            ),
+          ),
+        ),
+        BottomBarItem(
+          backgroundColor: AppColors.primarySoft,
+          icon: SvgPicture.asset(
+            'assets/svgs/category.svg',
+            width: 24.w,
+            height: 24.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.textGrey,
+              BlendMode.srcIn,
+            ),
+          ),
+          selectedIcon: SvgPicture.asset(
+            'assets/svgs/category.svg',
+            width: 24.w,
+            height: 24.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.primaryBlueAccent,
+              BlendMode.srcIn,
+            ),
+          ),
+          selectedColor: AppColors.primarySoft,
+          unSelectedColor: AppColors.textGrey,
+          title: Text(
+            'Categories',
+            style: TextStyles.font12Medium.copyWith(
+              color: AppColors.primaryBlueAccent,
+            ),
+          ),
+        ),
+        BottomBarItem(
+          backgroundColor: AppColors.primarySoft,
+          icon: SvgPicture.asset(
+            'assets/svgs/person.svg',
+            width: 24.w,
+            height: 24.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.textGrey,
+              BlendMode.srcIn,
+            ),
+          ),
+          selectedIcon: SvgPicture.asset(
+            'assets/svgs/person.svg',
+            width: 24.w,
+            height: 24.w,
+            colorFilter: const ColorFilter.mode(
+              AppColors.primaryBlueAccent,
+              BlendMode.srcIn,
+            ),
+          ),
+          selectedColor: AppColors.primarySoft,
+          unSelectedColor: AppColors.textGrey,
+          title: Text(
+            'Profile',
+            style: TextStyles.font12Medium.copyWith(
+              color: AppColors.primaryBlueAccent,
+            ),
+          ),
+        ),
+      ],
     );
   }
-}
-
-// Private class to hold the data for each navigation item
-class _NavItem {
-  final String icon;
-  final String label;
-
-  const _NavItem({required this.icon, required this.label});
 }

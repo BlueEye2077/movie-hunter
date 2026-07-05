@@ -68,4 +68,17 @@ class HomeRepository {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
   }
+
+  // Get movies by genre
+  Future<ApiResult<ApiResponse<Movie>>> getMoviesByGenre({
+    required int genreId,
+    int page = 1,
+  }) async {
+    try {
+      var respone = await homeApiService.getMoviesByGenre(token, genreId, page);
+      return ApiResult.success(respone);
+    } catch (error) {
+      return ApiResult.failure(NetworkExceptions.getDioException(error));
+    }
+  }
 }

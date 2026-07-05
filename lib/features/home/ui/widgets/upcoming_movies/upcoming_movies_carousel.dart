@@ -39,7 +39,6 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
         enlargeCenterPage: true,
         autoPlay: autoPlay,
         onPageChanged: autoPlay
-            // TODO: manage the set state here
             ? (index, _) => setState(() => _currentIndex = index)
             : null,
       ),

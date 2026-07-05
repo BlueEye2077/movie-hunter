@@ -8,6 +8,7 @@ enum MovieCategory {
   favoriteMovies,
   watchlistMovies,
   staticList,
+  genreMovies,
 }
 
 /// Type-safe navigation arguments for the All Movies screen.
@@ -15,10 +16,12 @@ class AllMoviesArgs {
   final String title;
   final List<Movie> movies;
   final MovieCategory category;
+  final int? entityId;
 
   const AllMoviesArgs({
     required this.title,
     required this.movies,
     required this.category,
+    this.entityId,
   });
 }

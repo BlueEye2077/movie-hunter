@@ -18,12 +18,11 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
   final HomeRepository homeRepository;
   final ProfileRepository? profileRepository;
 
-  AllMoviesCubit({
-    required this.homeRepository,
-    this.profileRepository,
-  }) : super(AllMoviesState.idle());
+  AllMoviesCubit({required this.homeRepository, this.profileRepository})
+    : super(AllMoviesState.idle());
 
   late MovieCategory _category;
+  int? _entityId;
   int _currentPage = 1;
   int _totalPages = 2;
   final List<Movie> _movies = [];
@@ -33,6 +32,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
   void setInitial({
     required List<Movie> movies,
     required MovieCategory category,
+    int? entityId,
   }) {
     if (_isFetching) return;
     if (_currentPage >= _totalPages) return;
@@ -40,6 +40,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
       _movies.addAll(movies);
     }
     _category = category;
+    _entityId = entityId;
     if (category == MovieCategory.staticList) {
       _totalPages = 1;
     }
@@ -89,8 +90,15 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
         return profileRepository!.getFavoriteMovies(page);
       case MovieCategory.watchlistMovies:
         return profileRepository!.getWatchlistMovies(page);
+      case MovieCategory.genreMovies:
+        return homeRepository.getMoviesByGenre(
+          genreId: _entityId ?? 0,
+          page: page,
+        );
       case MovieCategory.staticList:
-        return Future.value(ApiResult.success(ApiResponse(page: 1, totalPages: 1, results: [])));
+        return Future.value(
+          ApiResult.success(ApiResponse(page: 1, totalPages: 1, results: [])),
+        );
     }
   }
 }

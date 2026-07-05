@@ -44,7 +44,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: PageView.builder(
         controller: _pageController,
         onPageChanged: (index) {
-          //TODO: manage the state here
           setState(() {
             _currentIndex = index;
           });
