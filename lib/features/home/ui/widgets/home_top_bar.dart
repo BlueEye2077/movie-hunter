@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
-import '../../../account/logic/cubit/favorite_movies_cubit.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../account/data/models/account_details_model.dart';
-import '../../../account/logic/cubit/profile_cubit.dart';
-import '../../../../core/networking/requests_state.dart';
-
 import '../../../../core/theming/colors.dart';
+import '../../../account/data/models/account_details_model.dart';
+import '../../../account/logic/cubit/favorite_movies_cubit.dart';
+import '../../../account/logic/cubit/profile_cubit.dart';
+import '../../../all_movies/data/models/all_movies_args.dart';
 import 'home_top_bar_profile_info.dart';
 import 'home_top_bar_shimmer.dart';
 

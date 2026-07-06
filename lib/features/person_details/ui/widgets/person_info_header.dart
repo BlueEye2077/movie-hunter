@@ -1,12 +1,12 @@
 import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'stats_chip.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../data/models/person_details_response.dart';
+import 'stats_chip.dart';
 
 class PersonInfoHeader extends StatelessWidget {
   final PersonDetailsResponse person;

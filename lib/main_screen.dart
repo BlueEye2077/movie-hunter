@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'core/theming/colors.dart';
 import 'features/account/ui/screens/profile_screen.dart';
 import 'features/account/ui/widgets/profile_tab_bloc_providers.dart';

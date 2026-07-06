@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../widgets/login_app_bar.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -24,7 +23,6 @@ class SignUpScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const LoginAppBar(),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),

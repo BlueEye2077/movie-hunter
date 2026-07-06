@@ -10,7 +10,6 @@ import '../../../../core/theming/colors.dart';
 import '../../data/models/create_new_session_model.dart';
 import '../../logic/cubit/auth_cubit.dart';
 import '../widgets/dont_have_account_text.dart';
-import '../widgets/login_app_bar.dart';
 import '../widgets/login_button.dart';
 import '../widgets/login_form.dart';
 import '../widgets/welcome_text.dart';
@@ -42,12 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const LoginAppBar(),
               SizedBox(height: 16.h),
-              SvgPicture.asset(
-                'assets/svgs/app_logo.svg',
-                height: 80.h,
-              ),
+              SvgPicture.asset('assets/svgs/app_logo.svg', height: 80.h),
               SizedBox(height: 24.h),
               const WelcomeText(),
               SizedBox(height: 48.h),
@@ -74,7 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           error: (networkExceptions) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(NetworkExceptions.getErrorMessage(networkExceptions))),
+                              SnackBar(
+                                content: Text(
+                                  NetworkExceptions.getErrorMessage(
+                                    networkExceptions,
+                                  ),
+                                ),
+                              ),
                             );
                           },
                         );

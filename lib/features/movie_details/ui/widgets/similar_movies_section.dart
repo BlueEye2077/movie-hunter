@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/text_styles.dart';
+import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
 import '../../../home/logic/cubit/genres_cubit.dart';
 import '../../../home/ui/widgets/movie_section/movies_list_view.dart';
 import '../../../home/ui/widgets/movie_section/movies_section.dart';
-import '../../../../core/routing/routes.dart';
-import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../logic/cubit/similar_movies_cubit.dart';
 
 class SimilarMoviesSection extends StatelessWidget {
