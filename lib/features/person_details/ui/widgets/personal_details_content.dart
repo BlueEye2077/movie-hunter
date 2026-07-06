@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../home/data/models/movie.dart';
 import '../../data/models/person_details_response.dart';
 import 'person_biography.dart';
-import 'person_known_for_section.dart';
 import 'person_info_header.dart';
+import 'person_known_for_section.dart';
 
 class PersonDetailsContent extends StatelessWidget {
   final PersonDetailsResponse person;
