@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/images/splash.png" alt="movie_hunter logo" width="150" />
+  <img src="assets/svgs/app_logo.svg" alt="movie_hunter logo" width="150" />
 
   # movie_hunter
 
