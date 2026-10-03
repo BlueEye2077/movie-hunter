@@ -14,8 +14,7 @@ class ProfileLogoutButton extends StatelessWidget {
   const ProfileLogoutButton({super.key});
 
   Future<void> _performLogout(BuildContext context) async {
-    await SecureStorageHelper.deleteSessionId();
-    await SecureStorageHelper.deleteAccountId();
+    await SecureStorageHelper.clearAll();
     getIt<ProfileRepository>().clearCache();
     isLoggedInUser = false;
 

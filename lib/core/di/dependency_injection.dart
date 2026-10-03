@@ -46,19 +46,19 @@ void initGetIt() {
     () => HomeRepository(homeApiService: getIt()),
   );
   // register upcoming movies cubit
-  getIt.registerLazySingleton<UpComingMoviesCubit>(
+  getIt.registerFactory<UpComingMoviesCubit>(
     () => UpComingMoviesCubit(homeRepository: getIt()),
   );
   // register popular movies cubit
-  getIt.registerLazySingleton<PopularMoviesCubit>(
+  getIt.registerFactory<PopularMoviesCubit>(
     () => PopularMoviesCubit(homeRepository: getIt()),
   );
   // register top rated movies cubit
-  getIt.registerLazySingleton<TopRatedMoviesCubit>(
+  getIt.registerFactory<TopRatedMoviesCubit>(
     () => TopRatedMoviesCubit(homeRepository: getIt()),
   );
   // register now playing movies cubit
-  getIt.registerLazySingleton<NowPlayingMoviesCubit>(
+  getIt.registerFactory<NowPlayingMoviesCubit>(
     () => NowPlayingMoviesCubit(homeRepository: getIt()),
   );
   // register genres cubit

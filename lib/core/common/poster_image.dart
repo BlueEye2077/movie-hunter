@@ -33,7 +33,7 @@ class PosterImage extends StatelessWidget {
       child: SizedBox(
         height: height,
         width: width,
-        child: imageUrl != null
+        child: (imageUrl != null && imageUrl!.trim().isNotEmpty)
             ? CachedNetworkImage(
                 imageUrl: "${ApiConstants.imagesUrl}$imageUrl",
                 fit: BoxFit.cover,
@@ -42,23 +42,20 @@ class PosterImage extends StatelessWidget {
                   highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
                   child: Container(color: AppColors.primarySoft),
                 ),
-                errorBuilder: (context, url, error) => Container(
-                  color: AppColors.primarySoft,
-                  child: Icon(
-                    Icons.movie,
-                    color: AppColors.textDarkGrey,
-                    size: 40.w,
-                  ),
-                ),
+                errorBuilder: (context, url, error) => _buildPlaceholder(),
               )
-            : Container(
-                color: AppColors.primarySoft,
-                child: Icon(
-                  Icons.movie,
-                  color: AppColors.textDarkGrey,
-                  size: 40.w,
-                ),
-              ),
+            : _buildPlaceholder(),
+      ),
+    );
+  }
+
+  Widget _buildPlaceholder() {
+    return Container(
+      color: AppColors.primarySoft,
+      child: Icon(
+        Icons.movie,
+        color: AppColors.textDarkGrey,
+        size: 40.w,
       ),
     );
   }
