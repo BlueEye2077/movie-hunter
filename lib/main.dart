@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/constants/constants.dart';
 import 'core/di/dependency_injection.dart';
 import 'core/helpers/secure_storage_helper.dart';
-import 'core/helpers/shared_preferance_helper.dart';
+import 'core/helpers/shared_preference_helper.dart';
 import 'core/routing/app_router.dart';
 import 'movie_hunter_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPreferanceHelper.prefsInit();
+  await SharedPreferenceHelper.prefsInit();
   await checkIfLoggedInUser();
   checkSeenOnBoarding();
   await ScreenUtil.ensureScreenSize();
@@ -28,6 +28,6 @@ Future<void> checkIfLoggedInUser() async {
 }
 
 void checkSeenOnBoarding() {
-  bool seenOnBoardingValue = SharedPreferanceHelper.getSeenOnBoarding();
+  bool seenOnBoardingValue = SharedPreferenceHelper.getSeenOnBoarding();
   isSeenOnBoarding = seenOnBoardingValue;
 }
