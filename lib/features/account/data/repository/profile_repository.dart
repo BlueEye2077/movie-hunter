@@ -90,8 +90,8 @@ class ProfileRepository {
   ) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountIdStr = await SecureStorageHelper.getAccountId();
-      if (sessionId == null || accountIdStr == null) {
+      final accountId = await SecureStorageHelper.getAccountId();
+      if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(
             'Session expired. Please log in again.',
@@ -101,7 +101,7 @@ class ProfileRepository {
 
       final response = await profileApiService.toggleFavorite(
         _token,
-        int.parse(accountIdStr),
+        accountId,
         sessionId,
         {"media_type": "movie", "media_id": movieId, "favorite": isFavorite},
       );
@@ -117,8 +117,8 @@ class ProfileRepository {
   Future<ApiResult<ApiResponse<Movie>>> getFavoriteMovies(int page) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountIdStr = await SecureStorageHelper.getAccountId();
-      if (sessionId == null || accountIdStr == null) {
+      final accountId = await SecureStorageHelper.getAccountId();
+      if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(
             'Session expired. Please log in again.',
@@ -128,7 +128,7 @@ class ProfileRepository {
 
       final response = await profileApiService.getFavoriteMovies(
         _token,
-        int.parse(accountIdStr),
+        accountId,
         sessionId,
         page,
       );
@@ -144,8 +144,8 @@ class ProfileRepository {
   ) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountIdStr = await SecureStorageHelper.getAccountId();
-      if (sessionId == null || accountIdStr == null) {
+      final accountId = await SecureStorageHelper.getAccountId();
+      if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(
             'Session expired. Please log in again.',
@@ -155,7 +155,7 @@ class ProfileRepository {
 
       final response = await profileApiService.toggleWatchlist(
         _token,
-        int.parse(accountIdStr),
+        accountId,
         sessionId,
         {
           "media_type": "movie",
@@ -175,8 +175,8 @@ class ProfileRepository {
   Future<ApiResult<ApiResponse<Movie>>> getWatchlistMovies(int page) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountIdStr = await SecureStorageHelper.getAccountId();
-      if (sessionId == null || accountIdStr == null) {
+      final accountId = await SecureStorageHelper.getAccountId();
+      if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(
             'Session expired. Please log in again.',
@@ -186,7 +186,7 @@ class ProfileRepository {
 
       final response = await profileApiService.getWatchlistMovies(
         _token,
-        int.parse(accountIdStr),
+        accountId,
         sessionId,
         page,
       );
