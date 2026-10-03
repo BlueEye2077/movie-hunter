@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
@@ -13,9 +14,7 @@ class CastAndCrewShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: TextStyles.horizontalPadding,
-      ),
+      padding: AppSpacing.screenPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

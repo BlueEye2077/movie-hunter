@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theming/text_styles.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../widgets/clickable_search_bar.dart';
 import '../widgets/home_top_bar.dart';
 import '../widgets/most_popular_movies_builder.dart';
@@ -23,17 +23,13 @@ class HomeScreen extends StatelessWidget {
             children: [
               // Top Bar
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: TextStyles.horizontalPadding,
-                ),
+                padding: AppSpacing.screenPadding,
                 child: const HomeTopBar(),
               ),
               SizedBox(height: 32.h),
               // Clickable Search Bar
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: TextStyles.horizontalPadding,
-                ),
+                padding: AppSpacing.screenPadding,
                 child: const ClickableSearchBar(),
               ),
               SizedBox(height: 24.h),

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../../data/models/create_new_session_model.dart';
 import '../../logic/cubit/auth_cubit.dart';
@@ -47,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const WelcomeText(),
               SizedBox(height: 48.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                padding: AppSpacing.screenPadding,
                 child: LoginForm(
                   emailController: _emailController,
                   passwordController: _passwordController,
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 32.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                padding: AppSpacing.screenPadding,
                 child:
                     BlocConsumer<
                       AuthCubit,

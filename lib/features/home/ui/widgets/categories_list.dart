@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
+import '../../../../core/theming/app_spacing.dart';
 import 'category_pill.dart';
 
 class CategoriesList extends StatefulWidget {
@@ -23,9 +24,7 @@ class _CategoriesListState extends State<CategoriesList> {
       children: [
         // The categories title
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: TextStyles.horizontalPadding,
-          ),
+          padding: AppSpacing.screenPadding,
           child: Text(
             'Categories',
             style: TextStyles.font16SemiBold.copyWith(
@@ -38,9 +37,7 @@ class _CategoriesListState extends State<CategoriesList> {
         SizedBox(
           height: 40.h,
           child: ListView.separated(
-            padding: EdgeInsets.symmetric(
-              horizontal: TextStyles.horizontalPadding,
-            ),
+            padding: AppSpacing.screenPadding,
             scrollDirection: Axis.horizontal,
             clipBehavior:
                 Clip.none, // Allows items to scroll into screen margins

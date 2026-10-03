@@ -4,6 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
+
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/text_styles.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -25,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                padding: AppSpacing.screenPadding,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

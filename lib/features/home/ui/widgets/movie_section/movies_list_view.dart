@@ -4,8 +4,8 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../../core/helpers/generes_helpers.dart';
 import '../../../../../core/routing/routes.dart';
+import '../../../../../core/theming/app_spacing.dart';
 import '../../../../../core/theming/colors.dart';
-import '../../../../../core/theming/text_styles.dart';
 import '../../../data/models/genre.dart';
 import '../../../data/models/movie.dart';
 import 'movie_item.dart';
@@ -33,9 +33,7 @@ class MoviesListView extends StatelessWidget {
         child: SizedBox(
           height: 245.h,
           child: ListView.separated(
-            padding: EdgeInsets.symmetric(
-              horizontal: TextStyles.horizontalPadding,
-            ),
+            padding: AppSpacing.screenPadding,
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
             itemCount: 5,
@@ -55,9 +53,7 @@ class MoviesListView extends StatelessWidget {
       return SizedBox(
         height: 245.h,
         child: ListView.separated(
-          padding: EdgeInsets.symmetric(
-            horizontal: TextStyles.horizontalPadding,
-          ),
+          padding: AppSpacing.screenPadding,
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.none,
           itemCount: movies.length,

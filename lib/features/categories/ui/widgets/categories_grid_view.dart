@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../home/data/models/genre.dart';
+import '../../../../core/theming/app_spacing.dart';
 import 'category_card.dart';
 
 class CategoriesGridView extends StatelessWidget {
@@ -17,7 +18,7 @@ class CategoriesGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      padding: AppSpacing.screenPadding,
       child: GridView.builder(
         padding: EdgeInsets.only(top: 24.h, bottom: 40.h),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

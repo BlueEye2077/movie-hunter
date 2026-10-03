@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/requests_state.dart';
-import '../../../../core/theming/text_styles.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../data/models/account_details_model.dart';
 import '../../logic/cubit/favorite_movies_cubit.dart';
 import '../../logic/cubit/profile_cubit.dart';
@@ -41,9 +41,7 @@ class ProfileScreen extends StatelessWidget {
 
                 // Favorites & Watchlist count cards
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: TextStyles.horizontalPadding,
-                  ),
+                  padding: AppSpacing.screenPadding,
                   child: const ProfileStatsRow(),
                 ),
                 SizedBox(height: 32.h),
@@ -58,9 +56,7 @@ class ProfileScreen extends StatelessWidget {
 
                 // Logout Button
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: TextStyles.horizontalPadding,
-                  ),
+                  padding: AppSpacing.screenPadding,
                   child: const ProfileLogoutButton(),
                 ),
                 SizedBox(height: 16.h),
