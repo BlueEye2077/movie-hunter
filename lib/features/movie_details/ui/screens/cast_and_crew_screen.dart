@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
@@ -62,8 +63,8 @@ class CastAndCrewScreen extends StatelessWidget {
   Widget _buildSectionHeader(String title) {
     return Padding(
       padding: EdgeInsets.only(
-        left: TextStyles.horizontalPadding,
-        right: TextStyles.horizontalPadding,
+        left: AppSpacing.horizontalPadding,
+        right: AppSpacing.horizontalPadding,
         top: 16.h,
         bottom: 8.h,
       ),

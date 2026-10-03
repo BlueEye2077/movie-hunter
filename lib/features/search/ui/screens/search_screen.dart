@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/custom_search_bar.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
@@ -49,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
             // Search bar + Cancel
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: TextStyles.horizontalPadding,
+                horizontal: AppSpacing.horizontalPadding,
                 vertical: 16.h,
               ),
               child: Row(

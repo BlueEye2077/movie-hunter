@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/movie_shimmer_list.dart';
 import '../../../../core/common/search_movie_item.dart';
+
+import '../../../../core/theming/app_spacing.dart';
 import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
 import '../../helpers/scroll_index_calculator.dart';
@@ -51,7 +53,7 @@ class _AllMoviesListViewState extends State<AllMoviesListView> {
   Widget build(BuildContext context) {
     return ListView.separated(
       controller: _scrollController,
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.horizontalPadding, vertical: 16.h),
       itemCount: widget.isLoadingMore
           ? widget.movies.length + 1
           : widget.movies.length,

@@ -8,7 +8,6 @@ import 'font_weight_helper.dart';
 class TextStyles {
   // Common properties
   static const double defaultLetterSpacing = 0.12;
-  static double horizontalPadding = 24.w;
 
   static TextStyle font22CaveatPrimary = GoogleFonts.caveat(
     fontSize: 22.sp,

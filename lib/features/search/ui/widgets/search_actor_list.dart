@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
@@ -21,8 +22,8 @@ class SearchActorList extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            left: TextStyles.horizontalPadding,
-            right: TextStyles.horizontalPadding,
+            left: AppSpacing.horizontalPadding,
+            right: AppSpacing.horizontalPadding,
             bottom: 16.h,
           ),
           child: Text(
@@ -33,7 +34,7 @@ class SearchActorList extends StatelessWidget {
         SizedBox(
           height: 90.h,
           child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: AppSpacing.screenPadding,
             scrollDirection: Axis.horizontal,
             itemCount: actors.length,
             separatorBuilder: (context, index) => SizedBox(width: 16.w),

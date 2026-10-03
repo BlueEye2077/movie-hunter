@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../../home/ui/widgets/movie_section/movies_list_view.dart';
 import '../../../home/ui/widgets/movie_section/movies_section.dart';
 
@@ -69,9 +69,7 @@ class PersonDetailsShimmer extends StatelessWidget {
 
           // Biography Shimmer
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: TextStyles.horizontalPadding,
-            ),
+            padding: AppSpacing.screenPadding,
             child: Shimmer.fromColors(
               baseColor: AppColors.primarySoft,
               highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/common/movie_shimmer_list.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
@@ -22,8 +23,8 @@ class SearchLoadingShimmer extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  left: TextStyles.horizontalPadding,
-                  right: TextStyles.horizontalPadding,
+                  left: AppSpacing.horizontalPadding,
+                  right: AppSpacing.horizontalPadding,
                   bottom: 16.h,
                 ),
                 child: Text(
@@ -39,7 +40,7 @@ class SearchLoadingShimmer extends StatelessWidget {
                   baseColor: AppColors.primarySoft,
                   highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
                   child: ListView.separated(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    padding: AppSpacing.screenPadding,
                     scrollDirection: Axis.horizontal,
                     itemCount: 5,
                     separatorBuilder: (context, index) => SizedBox(width: 16.w),
@@ -57,8 +58,8 @@ class SearchLoadingShimmer extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  left: TextStyles.horizontalPadding,
-                  right: TextStyles.horizontalPadding,
+                  left: AppSpacing.horizontalPadding,
+                  right: AppSpacing.horizontalPadding,
                   bottom: 16.h,
                 ),
                 child: Text(
@@ -69,7 +70,7 @@ class SearchLoadingShimmer extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                padding: AppSpacing.screenPadding,
                 child: const MovieShimmerList(),
               ),
             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/theming/app_spacing.dart';
 import '../../../../../core/theming/app_strings.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/text_styles.dart';
@@ -23,9 +24,7 @@ class MoviesSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: TextStyles.horizontalPadding,
-          ),
+          padding: AppSpacing.screenPadding,
           // Title and See All Button
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

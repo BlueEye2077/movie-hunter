@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/api_constants.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 
@@ -26,7 +27,7 @@ class CastAndCrewListItem extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: TextStyles.horizontalPadding,
+          horizontal: AppSpacing.horizontalPadding,
           vertical: 8.h,
         ),
         child: Row(

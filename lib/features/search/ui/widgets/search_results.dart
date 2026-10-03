@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/requests_state.dart';
+
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../home/data/models/actor.dart';
 import '../../../home/data/models/movie.dart';
@@ -30,10 +32,10 @@ class SearchResults extends StatelessWidget {
           success: (response) {
             final List<dynamic> results = response.results ?? [];
             if (results.isEmpty) {
-              return const Center(
+              return Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.0),
-                  child: EmptySearch(
+                  padding: AppSpacing.screenPadding,
+                  child: const EmptySearch(
                     svgPath: 'assets/svgs/no_results_large.svg',
                     title: AppStrings.searchErrorTitle,
                     subtitle: AppStrings.searchErrorSubtitle,
