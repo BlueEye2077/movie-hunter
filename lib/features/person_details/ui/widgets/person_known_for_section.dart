@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/networking/requests_state.dart';
-import '../../../home/data/models/genre.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../all_movies/data/models/all_movies_args.dart';
+import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../all_movies/data/models/all_movies_args.dart';
+import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
 import '../../../home/logic/cubit/genres_cubit.dart';
 import '../../../home/ui/widgets/movie_section/movies_list_view.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/common/movie_shimmer_list.dart';
+import '../../../../core/common/movie_shimmer_list_view.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
@@ -71,7 +71,7 @@ class SearchLoadingShimmer extends StatelessWidget {
               ),
               Padding(
                 padding: AppSpacing.screenPadding,
-                child: const MovieShimmerList(),
+                child: const MovieShimmerListView(),
               ),
             ],
           ),

@@ -3,9 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/routing/routes.dart';
-import '../../../../core/theming/colors.dart';
-
 import '../../../../core/theming/app_spacing.dart';
+import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 
 class SignUpScreen extends StatelessWidget {
