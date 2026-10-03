@@ -1,6 +1,6 @@
 import '../../features/home/data/models/genre.dart';
 
-class GeneresHelpers {
+class GenresHelper {
   static List<String> getGenreTitles({
     required List<int>? genreIds,
     required List<Genre> allGenres,

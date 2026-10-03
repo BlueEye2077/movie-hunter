@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/helpers/genres_helper.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
@@ -35,16 +36,14 @@ class SearchMovieDetails extends StatelessWidget {
       error: (_) => [],
     );
 
-    final genreNames = movie.genreIds?.map((id) {
-          return allGenres.firstWhere(
-            (g) => g.id == id,
-            orElse: () => Genre(id: -1, name: AppStrings.unknown),
-          ).name;
-        }).where((name) => name != AppStrings.unknown).toList() ??
-        [];
+    final genreNames = GenresHelper.getGenreTitles(
+      genreIds: movie.genreIds,
+      allGenres: allGenres,
+      limit: 2,
+    );
 
     final genresString = genreNames.isNotEmpty
-        ? genreNames.take(2).join(', ')
+        ? genreNames.join(', ')
         : AppStrings.unknownGenre;
 
     return Column(

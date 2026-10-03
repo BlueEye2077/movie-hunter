@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/helpers/shared_preferance_helper.dart';
+import '../../../../core/helpers/shared_preference_helper.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../data/onboarding_data.dart';
@@ -31,7 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      await SharedPreferanceHelper.saveSeenOnBoarding();
+      await SharedPreferenceHelper.saveSeenOnBoarding();
       if (!mounted) return;
       Navigator.of(context).pushReplacementNamed(Routes.login);
     }
