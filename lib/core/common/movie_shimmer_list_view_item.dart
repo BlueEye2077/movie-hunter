@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theming/colors.dart';
+import '../theming/colors.dart';
 
-class SearchMovieShimmerItem extends StatelessWidget {
-  const SearchMovieShimmerItem({super.key});
+class MovieShimmerListViewItem extends StatelessWidget {
+  const MovieShimmerListViewItem({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/common/movie_shimmer_list.dart';
+import '../../../../core/common/movie_shimmer_list_view.dart';
 import '../../../../core/common/search_movie_item.dart';
-
 import '../../../../core/theming/app_spacing.dart';
 import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
@@ -60,7 +59,7 @@ class _AllMoviesListViewState extends State<AllMoviesListView> {
       separatorBuilder: (_, _) => SizedBox(height: 16.h),
       itemBuilder: (context, index) {
         if (index == widget.movies.length) {
-          return const MovieShimmerList(itemCount: 3);
+          return const MovieShimmerListView(itemCount: 3);
         }
         return GeneralMovieItem(movie: widget.movies[index]);
       },

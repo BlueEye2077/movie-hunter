@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../home/data/models/genre.dart';
 import '../../../../core/theming/app_spacing.dart';
+import '../../../home/data/models/genre.dart';
 import 'category_card.dart';
 
 class CategoriesGridView extends StatelessWidget {

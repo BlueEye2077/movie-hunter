@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../features/search/ui/widgets/search_movie_shimmer_item.dart';
 import '../theming/colors.dart';
+import 'movie_shimmer_list_view_item.dart';
 
-class MovieShimmerList extends StatelessWidget {
+class MovieShimmerListView extends StatelessWidget {
   final int itemCount;
 
-  const MovieShimmerList({super.key, this.itemCount = 5});
+  const MovieShimmerListView({super.key, this.itemCount = 5});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MovieShimmerList extends StatelessWidget {
         shrinkWrap: true,
         itemCount: itemCount,
         separatorBuilder: (_, _) => SizedBox(height: 16.h),
-        itemBuilder: (_, _) => const SearchMovieShimmerItem(),
+        itemBuilder: (_, _) => const MovieShimmerListViewItem(),
       ),
     );
   }
