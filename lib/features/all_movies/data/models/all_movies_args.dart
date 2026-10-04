@@ -5,8 +5,6 @@ enum MovieCategory {
   popularMovies,
   topRatedMovies,
   upcomingMovies,
-  favoriteMovies,
-  watchlistMovies,
   staticList,
   genreMovies,
 }

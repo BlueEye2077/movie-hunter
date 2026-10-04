@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_hunter/features/account/logic/cubit/favorite_movies_cubit.dart';
+import 'package:movie_hunter/features/account/logic/cubit/watchlist_movies_cubit.dart';
+import 'package:movie_hunter/features/account/ui/screens/favorites_screen.dart';
+import 'package:movie_hunter/features/account/ui/screens/watchlist_screen.dart';
 
 import '../../features/account/logic/cubit/profile_cubit.dart';
 import '../../features/all_movies/data/models/all_movies_args.dart';
@@ -43,7 +47,8 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => getIt<SearchCubit>()),
-              BlocProvider(create: (context) => getIt<GenresCubit>()..getGenres()),
+              // Use .value so the route borrows the singleton GenresCubit without closing it when popped.
+              BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
             ],
             child: const SearchScreen(),
           ),
@@ -58,9 +63,7 @@ class AppRouter {
         );
 
       case Routes.signUp:
-        return MaterialPageRoute(
-          builder: (_) => const SignUpScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const SignUpScreen());
 
       case Routes.movieDetails:
         final movie = settings.arguments as Movie;
@@ -68,7 +71,8 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => getIt<MovieDetailsCubit>()),
-              BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
+              // Use .value so the route borrows the singleton GenresCubit without closing it when popped.
+              BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
             ],
             child: MovieDetailsScreen(movie: movie),
           ),
@@ -85,7 +89,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
+              // Use .value so the route borrows the singleton GenresCubit without closing it when popped.
+              BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
               BlocProvider(
                 create: (_) => getIt<AllMoviesCubit>()
                   ..setInitial(
@@ -105,12 +110,36 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => getIt<PersonDetailsCubit>()),
-              BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
+              // Use .value so the route borrows the singleton GenresCubit without closing it when popped.
+              BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
             ],
-            child: PersonDetailsScreen(
-              personId: args.$1,
-              personName: args.$2,
-            ),
+            child: PersonDetailsScreen(personId: args.$1, personName: args.$2),
+          ),
+        );
+
+      case Routes.favorites:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: getIt<FavoriteMoviesCubit>()..getFavoriteMovies(),
+              ),
+              BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
+            ],
+            child: const FavoritesScreen(),
+          ),
+        );
+
+      case Routes.watchlist:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: getIt<WatchlistMoviesCubit>()..getWatchlistMovies(),
+              ),
+              BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
+            ],
+            child: const WatchlistScreen(),
           ),
         );
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../home/data/models/genre.dart';
-import '../../../home/data/models/movie.dart';
-import 'all_movies_grid_view.dart';
-import 'all_movies_list_view.dart';
+import '../../features/home/data/models/genre.dart';
+import '../../features/home/data/models/movie.dart';
+import 'movies_browser_grid_view.dart';
+import 'movies_browser_list_view.dart';
 
-class AllMoviesSwitcher extends StatelessWidget {
-  const AllMoviesSwitcher({
+class MoviesBrowserSwitcher extends StatelessWidget {
+  const MoviesBrowserSwitcher({
     super.key,
     required this.isGridView,
     required this.movies,
@@ -25,14 +25,14 @@ class AllMoviesSwitcher extends StatelessWidget {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 250),
       child: isGridView
-          ? AllMoviesGridView(
+          ? MoviesBrowserGridView(
               key: const ValueKey('grid'),
               movies: movies,
               genres: genres,
               isLoadingMore: isLoadingPagination,
               scrolledMovieIndex: scrolledMovieIndex,
             )
-          : AllMoviesListView(
+          : MoviesBrowserListView(
               key: const ValueKey('list'),
               movies: movies,
               genres: genres,

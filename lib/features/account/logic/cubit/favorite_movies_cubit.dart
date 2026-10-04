@@ -13,29 +13,45 @@ class FavoriteMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
   late final StreamSubscription _movieStateStreamSubscription;
 
   FavoriteMoviesCubit({required this.profileRepository})
-      : super(const RequestsState.idle()) {
-    _movieStateStreamSubscription =
-        profileRepository.movieStateStreamGetter.listen((event) {
-      if (event.isFavorite == false) {
-        state.maybeWhen(
-          success: (data) {
-            final currentList = data.results?.toList() ?? [];
-            currentList.removeWhere((movie) => movie.id == event.movieId);
-            emit(RequestsState.success(ApiResponse(
-              page: data.page,
-              totalPages: data.totalPages,
-              totalResultsItems: (data.totalResultsItems ?? 1) - 1,
-              results: currentList,
-            )));
-          },
-          orElse: () {},
-        );
-      } else if (event.isFavorite == true) {
-        getFavoriteMovies();
-      }
-    });
+    : super(const RequestsState.idle()) {
+    _movieStateStreamSubscription = profileRepository.movieStateStreamGetter
+        .listen((event) {
+          if (event.isFavorite == false) {
+            state.maybeWhen(
+              success: (data) {
+                final currentList = data.results?.toList() ?? [];
+                currentList.removeWhere((movie) => movie.id == event.movieId);
+                emit(
+                  RequestsState.success(
+                    ApiResponse(
+                      page: data.page,
+                      totalPages: data.totalPages,
+                      totalResultsItems: (data.totalResultsItems ?? 1) - 1,
+                      results: currentList,
+                    ),
+                  ),
+                );
+              },
+              orElse: () {},
+            );
+          } else if (event.isFavorite == true) {
+            getFavoriteMovies(forceReload: true);
+          }
+        });
   }
-  Future<void> getFavoriteMovies({int page = 1}) async {
+  // Todo: Add pagination support for favorite movies
+  Future<void> getFavoriteMovies({
+    int page = 1,
+    bool forceReload = false,
+  }) async {
+    final isAlreadyLoaded = state.maybeWhen(
+      success: (_) => true,
+      orElse: () => false,
+    );
+    if (isAlreadyLoaded && !forceReload) {
+      return;
+    }
+
     emit(const RequestsState.loading());
     final result = await profileRepository.getFavoriteMovies(page);
     result.when(
@@ -50,5 +66,3 @@ class FavoriteMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
     return super.close();
   }
 }
-
-

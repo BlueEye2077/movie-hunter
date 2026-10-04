@@ -14,8 +14,8 @@ class ProfileTabBlocProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(value: getIt<FavoriteMoviesCubit>()),
-        BlocProvider.value(value: getIt<WatchlistMoviesCubit>()),
+        BlocProvider.value(value: getIt<FavoriteMoviesCubit>()..getFavoriteMovies()),
+        BlocProvider.value(value: getIt<WatchlistMoviesCubit>()..getWatchlistMovies()),
       ],
       child: child,
     );

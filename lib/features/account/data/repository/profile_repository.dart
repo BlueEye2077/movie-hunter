@@ -19,6 +19,9 @@ class ProfileRepository {
   final StreamController<MovieStateChangeEvent> _moviesStreamController =
       StreamController<MovieStateChangeEvent>.broadcast();
 
+  Future<ApiResult<AccountDetailsModel>>?
+  _accountDetailsInFlight; // the request currently running
+
   Stream<MovieStateChangeEvent> get movieStateStreamGetter =>
       _moviesStreamController.stream;
 
@@ -26,12 +29,25 @@ class ProfileRepository {
 
   void clearCache() {
     _cachedAccountDetails = null;
+    _accountDetailsInFlight = null;
   }
 
   Future<ApiResult<AccountDetailsModel>> getAccountDetails() async {
     if (_cachedAccountDetails != null) {
       return ApiResult.success(_cachedAccountDetails!);
+    } else if (_accountDetailsInFlight != null) {
+      return _accountDetailsInFlight!;
+    } else {
+      _accountDetailsInFlight = _fetchAccountDetails();
+      try {
+        return await _accountDetailsInFlight!;
+      } finally {
+        _accountDetailsInFlight = null;
+      }
     }
+  }
+
+  Future<ApiResult<AccountDetailsModel>> _fetchAccountDetails() async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
       if (sessionId == null) {
@@ -58,6 +74,17 @@ class ProfileRepository {
     } catch (e) {
       return ApiResult.failure(NetworkExceptions.getDioException(e));
     }
+  }
+
+  Future<int?> _resolveAccountId() async {
+    final cachedId = _cachedAccountDetails?.id;
+    if (cachedId != null) return cachedId;
+
+    final storedId = await SecureStorageHelper.getAccountId();
+    if (storedId != null) return storedId;
+
+    final result = await getAccountDetails();
+    return result.whenOrNull(success: (accountDetails) => accountDetails.id);
   }
 
   Future<ApiResult<MovieAccountStateResponse>> getMovieAccountStates(
@@ -90,7 +117,7 @@ class ProfileRepository {
   ) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountId = await SecureStorageHelper.getAccountId();
+      final accountId = await _resolveAccountId();
       if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(
@@ -117,7 +144,7 @@ class ProfileRepository {
   Future<ApiResult<ApiResponse<Movie>>> getFavoriteMovies(int page) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountId = await SecureStorageHelper.getAccountId();
+      final accountId = await _resolveAccountId();
       if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(
@@ -144,7 +171,7 @@ class ProfileRepository {
   ) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountId = await SecureStorageHelper.getAccountId();
+      final accountId = await _resolveAccountId();
       if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(
@@ -175,7 +202,7 @@ class ProfileRepository {
   Future<ApiResult<ApiResponse<Movie>>> getWatchlistMovies(int page) async {
     try {
       final sessionId = await SecureStorageHelper.getSessionId();
-      final accountId = await SecureStorageHelper.getAccountId();
+      final accountId = await _resolveAccountId();
       if (sessionId == null || accountId == null) {
         return ApiResult.failure(
           const NetworkExceptions.unauthorizedRequest(

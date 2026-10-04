@@ -35,12 +35,24 @@ class WatchlistMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
               orElse: () {},
             );
           } else if (event.isWatchlisted == true) {
-            getWatchlistMovies();
+            getWatchlistMovies(forceReload: true);
           }
         });
   }
 
-  Future<void> getWatchlistMovies({int page = 1}) async {
+  // Todo: Add pagination support for watchlist movies
+  Future<void> getWatchlistMovies({
+    int page = 1,
+    bool forceReload = false,
+  }) async {
+    final isAlreadyLoaded = state.maybeWhen(
+      success: (_) => true,
+      orElse: () => false,
+    );
+    if (isAlreadyLoaded && !forceReload) {
+      return;
+    }
+
     emit(const RequestsState.loading());
     final result = await profileRepository.getWatchlistMovies(page);
     result.when(

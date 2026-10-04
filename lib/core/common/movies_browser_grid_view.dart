@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/routing/routes.dart';
-import '../../../../core/theming/colors.dart';
-import '../../../home/data/models/genre.dart';
-import '../../../home/data/models/movie.dart';
-import '../../helpers/scroll_index_calculator.dart';
-import 'all_movies_grid_item.dart';
-import 'all_movies_grid_item_shimmer.dart';
+import '../../features/home/data/models/genre.dart';
+import '../../features/home/data/models/movie.dart';
+import '../routing/routes.dart';
+import '../theming/colors.dart';
+import 'movies_browser_grid_item.dart';
+import 'movies_browser_grid_item_shimmer.dart';
+import 'scroll_index_calculator.dart';
 
-class AllMoviesGridView extends StatefulWidget {
+class MoviesBrowserGridView extends StatefulWidget {
   final List<Movie> movies;
   final List<Genre> genres;
   final bool isLoadingMore;
@@ -18,7 +18,7 @@ class AllMoviesGridView extends StatefulWidget {
 
   static const int _shimmerCount = 5;
 
-  const AllMoviesGridView({
+  const MoviesBrowserGridView({
     super.key,
     required this.movies,
     required this.genres,
@@ -27,11 +27,12 @@ class AllMoviesGridView extends StatefulWidget {
   });
 
   @override
-  State<AllMoviesGridView> createState() => _AllMoviesGridViewState();
+  State<MoviesBrowserGridView> createState() => _MoviesBrowserGridViewState();
 }
 
-class _AllMoviesGridViewState extends State<AllMoviesGridView> {
+class _MoviesBrowserGridViewState extends State<MoviesBrowserGridView> {
   ScrollController? _scrollController;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -63,22 +64,23 @@ class _AllMoviesGridViewState extends State<AllMoviesGridView> {
         childAspectRatio: 100 / 185,
       ),
       itemCount: widget.isLoadingMore
-          ? widget.movies.length + AllMoviesGridView._shimmerCount
+          ? widget.movies.length + MoviesBrowserGridView._shimmerCount
           : widget.movies.length,
       itemBuilder: (context, index) {
         if (index >= widget.movies.length) {
           return Shimmer.fromColors(
             baseColor: AppColors.primarySoft,
             highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
-            child: const AllMoviesGridItemShimmer(),
+            child: const MoviesBrowserGridItemShimmer(),
           );
         }
 
         final movie = widget.movies[index];
-        final year = movie.releaseDate?.isNotEmpty == true
-            ? movie.releaseDate!.substring(0, 4)
-            : '—';
-        return AllMoviesGridItem(
+        final releaseDate = movie.releaseDate;
+        final year = (releaseDate == null || releaseDate.length < 4)
+            ? '—'
+            : releaseDate.substring(0, 4);
+        return MoviesBrowserGridItem(
           posterPath: movie.posterPath ?? '',
           title: movie.title ?? movie.originalTitle ?? 'Unknown',
           year: year,

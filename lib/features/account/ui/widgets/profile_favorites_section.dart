@@ -10,7 +10,6 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../../features/all_movies/data/models/all_movies_args.dart';
 import '../../../../features/home/data/models/genre.dart';
 import '../../../../features/home/data/models/movie.dart';
 import '../../../../features/home/logic/cubit/genres_cubit.dart';
@@ -27,11 +26,15 @@ class ProfileFavoritesSection extends StatelessWidget {
     return BlocBuilder<FavoriteMoviesCubit, RequestsState<ApiResponse<Movie>>>(
       builder: (context, state) {
         return state.when(
-          idle: () => const SizedBox.shrink(),
+          idle: () => MoviesSection(
+            title: AppStrings.favorites,
+            child: const MoviesListView.shimmer(),
+          ),
           loading: () => MoviesSection(
             title: AppStrings.favorites,
             child: const MoviesListView.shimmer(),
           ),
+
           success: (response) {
             final movies = response.results ?? [];
             if (movies.isEmpty) {
@@ -56,15 +59,7 @@ class ProfileFavoritesSection extends StatelessWidget {
 
             return MoviesSection(
               title: AppStrings.favorites,
-              onSeeAllTap: () => Navigator.pushNamed(
-                context,
-                Routes.allMovies,
-                arguments: AllMoviesArgs(
-                  title: AppStrings.favorites,
-                  movies: movies,
-                  category: MovieCategory.favoriteMovies,
-                ),
-              ),
+              onSeeAllTap: () => Navigator.pushNamed(context, Routes.favorites),
               child: MoviesListView.showMovies(
                 movies: movies,
                 genres: genresList,

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/common/poster_image.dart';
-import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
+import '../theming/colors.dart';
+import '../theming/text_styles.dart';
+import 'poster_image.dart';
 
-class AllMoviesGridItem extends StatelessWidget {
+class MoviesBrowserGridItem extends StatelessWidget {
   final String posterPath;
   final String title;
   final String year;
   final VoidCallback? onTap;
 
-  const AllMoviesGridItem({
+  const MoviesBrowserGridItem({
     super.key,
     required this.posterPath,
     required this.title,
