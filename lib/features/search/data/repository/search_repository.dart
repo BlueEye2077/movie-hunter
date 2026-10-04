@@ -1,4 +1,3 @@
-import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
@@ -10,8 +9,6 @@ class SearchRepository {
   final SearchApiService searchApiService;
 
   SearchRepository({required this.searchApiService});
-
-  final token = ApiConstants.apiKey;
 
   List<dynamic> _mapSearchResults(List<dynamic> response) {
     return response.map((e) {
@@ -29,7 +26,7 @@ class SearchRepository {
   // Search for movies, tv shows, and people
   Future<ApiResult<ApiResponse<dynamic>>> search(String query) async {
     try {
-      var response = await searchApiService.search(token, query);
+      var response = await searchApiService.search(query);
 
       return ApiResult.success(
         ApiResponse(

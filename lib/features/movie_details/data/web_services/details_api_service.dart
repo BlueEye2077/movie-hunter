@@ -17,25 +17,21 @@ abstract class DetailsApiService {
 
   @GET(DetailsApiConstants.movieDetails)
   Future<MovieDetailsResponse> getMovieDetails(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 
   @GET(DetailsApiConstants.movieCredits)
   Future<MovieCreditsResponse> getMovieCredits(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 
   @GET(DetailsApiConstants.movieVideos)
   Future<MovieVideosResponse> getMovieVideos(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 
   @GET(DetailsApiConstants.similarMovies)
   Future<ApiResponse<Movie>> getSimilarMovies(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 }

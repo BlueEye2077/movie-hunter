@@ -15,19 +15,17 @@ abstract class AuthApiService {
 
   // Step 1: Create Request Token
   @GET(AuthApiConstants.createRequestToken)
-  Future<CreateRequestTokenModel> createRequestToken(
-    @Header("Authorization") String token,
-  );
+  Future<CreateRequestTokenModel> createRequestToken();
+
   // Step 2: Validate With Login
   @POST(AuthApiConstants.validateWithLogin)
   Future<CreateRequestTokenModel> login(
-    @Header("Authorization") String token,
     @Body() LoginModel body,
   );
+
   // Step 3: Create Session
   @POST(AuthApiConstants.createSession)
   Future<CreateNewSessionModel> createSession(
-    @Header("Authorization") String token,
     @Body() Map<String, dynamic> body,
   );
 }

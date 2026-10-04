@@ -22,14 +22,10 @@ class _ProfileApiServices implements ProfileApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AccountDetailsModel> getAccountDetails(
-    String token,
-    String sessionId,
-  ) async {
+  Future<AccountDetailsModel> getAccountDetails(String sessionId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<AccountDetailsModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -54,14 +50,12 @@ class _ProfileApiServices implements ProfileApiServices {
 
   @override
   Future<MovieAccountStateResponse> getMovieAccountStates(
-    String token,
     int movieId,
     String sessionId,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MovieAccountStateResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -86,15 +80,13 @@ class _ProfileApiServices implements ProfileApiServices {
 
   @override
   Future<MovieActionStatusResponse> toggleFavorite(
-    String token,
     int accountId,
     String sessionId,
     Map<String, dynamic> body,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _options = _setStreamType<MovieActionStatusResponse>(
@@ -120,7 +112,6 @@ class _ProfileApiServices implements ProfileApiServices {
 
   @override
   Future<ApiResponse<Movie>> getFavoriteMovies(
-    String token,
     int accountId,
     String sessionId,
     int page,
@@ -130,8 +121,7 @@ class _ProfileApiServices implements ProfileApiServices {
       r'session_id': sessionId,
       r'page': page,
     };
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -159,15 +149,13 @@ class _ProfileApiServices implements ProfileApiServices {
 
   @override
   Future<MovieActionStatusResponse> toggleWatchlist(
-    String token,
     int accountId,
     String sessionId,
     Map<String, dynamic> body,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _options = _setStreamType<MovieActionStatusResponse>(
@@ -193,7 +181,6 @@ class _ProfileApiServices implements ProfileApiServices {
 
   @override
   Future<ApiResponse<Movie>> getWatchlistMovies(
-    String token,
     int accountId,
     String sessionId,
     int page,
@@ -203,8 +190,7 @@ class _ProfileApiServices implements ProfileApiServices {
       r'session_id': sessionId,
       r'page': page,
     };
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)

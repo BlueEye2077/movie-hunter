@@ -22,14 +22,10 @@ class _DetailsApiService implements DetailsApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<MovieDetailsResponse> getMovieDetails(
-    String token,
-    int movieId,
-  ) async {
+  Future<MovieDetailsResponse> getMovieDetails(int movieId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MovieDetailsResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -53,14 +49,10 @@ class _DetailsApiService implements DetailsApiService {
   }
 
   @override
-  Future<MovieCreditsResponse> getMovieCredits(
-    String token,
-    int movieId,
-  ) async {
+  Future<MovieCreditsResponse> getMovieCredits(int movieId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MovieCreditsResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -84,11 +76,10 @@ class _DetailsApiService implements DetailsApiService {
   }
 
   @override
-  Future<MovieVideosResponse> getMovieVideos(String token, int movieId) async {
+  Future<MovieVideosResponse> getMovieVideos(int movieId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MovieVideosResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -112,11 +103,10 @@ class _DetailsApiService implements DetailsApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getSimilarMovies(String token, int movieId) async {
+  Future<ApiResponse<Movie>> getSimilarMovies(int movieId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)

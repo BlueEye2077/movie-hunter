@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import '../../../../core/helpers/secure_storage_helper.dart';
-import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
@@ -13,7 +12,6 @@ import '../web_services/profile_api_services.dart';
 
 class ProfileRepository {
   final ProfileApiServices profileApiService;
-  final _token = ApiConstants.apiKey;
 
   AccountDetailsModel? _cachedAccountDetails;
   final StreamController<MovieStateChangeEvent> _moviesStreamController =
@@ -59,7 +57,6 @@ class ProfileRepository {
       }
 
       final response = await profileApiService.getAccountDetails(
-        _token,
         sessionId,
       );
 
@@ -101,7 +98,6 @@ class ProfileRepository {
       }
 
       final response = await profileApiService.getMovieAccountStates(
-        _token,
         movieId,
         sessionId,
       );
@@ -127,7 +123,6 @@ class ProfileRepository {
       }
 
       final response = await profileApiService.toggleFavorite(
-        _token,
         accountId,
         sessionId,
         {"media_type": "movie", "media_id": movieId, "favorite": isFavorite},
@@ -154,7 +149,6 @@ class ProfileRepository {
       }
 
       final response = await profileApiService.getFavoriteMovies(
-        _token,
         accountId,
         sessionId,
         page,
@@ -181,7 +175,6 @@ class ProfileRepository {
       }
 
       final response = await profileApiService.toggleWatchlist(
-        _token,
         accountId,
         sessionId,
         {
@@ -212,7 +205,6 @@ class ProfileRepository {
       }
 
       final response = await profileApiService.getWatchlistMovies(
-        _token,
         accountId,
         sessionId,
         page,
