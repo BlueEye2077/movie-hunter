@@ -22,11 +22,10 @@ class _AuthApiService implements AuthApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<CreateRequestTokenModel> createRequestToken(String token) async {
+  Future<CreateRequestTokenModel> createRequestToken() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<CreateRequestTokenModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -50,11 +49,10 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<CreateRequestTokenModel> login(String token, LoginModel body) async {
+  Future<CreateRequestTokenModel> login(LoginModel body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
     final _options = _setStreamType<CreateRequestTokenModel>(
@@ -79,14 +77,10 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<CreateNewSessionModel> createSession(
-    String token,
-    Map<String, dynamic> body,
-  ) async {
+  Future<CreateNewSessionModel> createSession(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _options = _setStreamType<CreateNewSessionModel>(

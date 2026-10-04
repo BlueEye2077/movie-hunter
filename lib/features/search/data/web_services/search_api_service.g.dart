@@ -22,11 +22,10 @@ class _SearchApiService implements SearchApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ApiResponse<dynamic>> search(String token, String query) async {
+  Future<ApiResponse<dynamic>> search(String query) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'query': query};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<dynamic>>(
       Options(method: 'GET', headers: _headers, extra: _extra)

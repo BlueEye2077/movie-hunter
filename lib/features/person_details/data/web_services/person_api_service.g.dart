@@ -23,7 +23,6 @@ class _PersonApiService implements PersonApiService {
 
   @override
   Future<PersonDetailsResponse> getPersonDetails(
-    String token,
     int personId,
     String appendToResponse,
   ) async {
@@ -31,8 +30,7 @@ class _PersonApiService implements PersonApiService {
     final queryParameters = <String, dynamic>{
       r'append_to_response': appendToResponse,
     };
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<PersonDetailsResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)

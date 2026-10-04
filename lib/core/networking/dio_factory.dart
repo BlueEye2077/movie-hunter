@@ -1,5 +1,7 @@
-﻿import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+
+import 'api_constants.dart';
 
 /// Shared Dio factory — used by all feature API services.
 Dio createAndSetupDio() {
@@ -7,7 +9,8 @@ Dio createAndSetupDio() {
 
   dio
     ..options.connectTimeout = const Duration(seconds: 6)
-    ..options.receiveTimeout = const Duration(seconds: 10);
+    ..options.receiveTimeout = const Duration(seconds: 10)
+    ..options.headers['Authorization'] = ApiConstants.apiKey;
 
   if (kDebugMode) {
     dio.interceptors.add(

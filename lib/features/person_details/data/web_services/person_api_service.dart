@@ -13,7 +13,6 @@ abstract class PersonApiService {
 
   @GET(PersonApiConstants.personDetails)
   Future<PersonDetailsResponse> getPersonDetails(
-    @Header("Authorization") String token,
     @Path("person_id") int personId,
     @Query("append_to_response") String appendToResponse,
   );

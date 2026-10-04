@@ -22,11 +22,10 @@ class _HomeApiService implements HomeApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ApiResponse<Movie>> getUpcomingMovies(String token, int page) async {
+  Future<ApiResponse<Movie>> getUpcomingMovies(int page) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -53,11 +52,10 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getPopularMovies(String token, int page) async {
+  Future<ApiResponse<Movie>> getPopularMovies(int page) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -84,11 +82,10 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getTopRatedMovies(String token, int page) async {
+  Future<ApiResponse<Movie>> getTopRatedMovies(int page) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -115,11 +112,10 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getNowPlayingMovies(String token, int page) async {
+  Future<ApiResponse<Movie>> getNowPlayingMovies(int page) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -146,11 +142,10 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<Map<String, List<Genre>>> getGenres(String token) async {
+  Future<Map<String, List<Genre>>> getGenres() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<Map<String, List<Genre>>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
@@ -181,18 +176,13 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<ApiResponse<Movie>> getMoviesByGenre(
-    String token,
-    int genreId,
-    int page,
-  ) async {
+  Future<ApiResponse<Movie>> getMoviesByGenre(int genreId, int page) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'with_genres': genreId,
       r'page': page,
     };
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<Movie>>(
       Options(method: 'GET', headers: _headers, extra: _extra)

@@ -14,7 +14,6 @@ abstract class SearchApiService {
   // Search for movies, tv shows, and people [multi search]
   @GET(SearchApiConstants.search)
   Future<ApiResponse<dynamic>> search(
-    @Header("Authorization") String token,
     @Query("query") String query,
   );
 }

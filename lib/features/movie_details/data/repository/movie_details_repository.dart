@@ -1,4 +1,3 @@
-import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
@@ -13,12 +12,10 @@ class MovieDetailsRepository {
 
   MovieDetailsRepository({required this.detailsApiService});
 
-  final _token = ApiConstants.apiKey;
-
   // get movie details
   Future<ApiResult<MovieDetailsResponse>> getMovieDetails(int movieId) async {
     try {
-      final response = await detailsApiService.getMovieDetails(_token, movieId);
+      final response = await detailsApiService.getMovieDetails(movieId);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
@@ -28,7 +25,7 @@ class MovieDetailsRepository {
   // get movie credits (cast and crew)
   Future<ApiResult<MovieCreditsResponse>> getMovieCredits(int movieId) async {
     try {
-      final response = await detailsApiService.getMovieCredits(_token, movieId);
+      final response = await detailsApiService.getMovieCredits(movieId);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
@@ -38,7 +35,7 @@ class MovieDetailsRepository {
   // get movie videos (trailers)
   Future<ApiResult<MovieVideosResponse>> getMovieVideos(int movieId) async {
     try {
-      final response = await detailsApiService.getMovieVideos(_token, movieId);
+      final response = await detailsApiService.getMovieVideos(movieId);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
@@ -48,7 +45,7 @@ class MovieDetailsRepository {
   // get similar movies
   Future<ApiResult<ApiResponse<Movie>>> getSimilarMovies(int movieId) async {
     try {
-      final response = await detailsApiService.getSimilarMovies(_token, movieId);
+      final response = await detailsApiService.getSimilarMovies(movieId);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));

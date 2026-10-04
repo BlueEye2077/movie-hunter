@@ -1,4 +1,3 @@
-import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
@@ -11,15 +10,13 @@ class HomeRepository {
 
   HomeRepository({required this.homeApiService});
 
-  final token = ApiConstants.apiKey;
-
   // Get upcoming movies
   Future<ApiResult<ApiResponse<Movie>>> getUpcomingMovies({
     int page = 1,
   }) async {
     try {
-      var respone = await homeApiService.getUpcomingMovies(token, page);
-      return ApiResult.success(respone);
+      var response = await homeApiService.getUpcomingMovies(page);
+      return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
@@ -28,8 +25,8 @@ class HomeRepository {
   // Get popular movies
   Future<ApiResult<ApiResponse<Movie>>> getPopularMovies({int page = 1}) async {
     try {
-      var respone = await homeApiService.getPopularMovies(token, page);
-      return ApiResult.success(respone);
+      var response = await homeApiService.getPopularMovies(page);
+      return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
@@ -40,8 +37,8 @@ class HomeRepository {
     int page = 1,
   }) async {
     try {
-      var respone = await homeApiService.getTopRatedMovies(token, page);
-      return ApiResult.success(respone);
+      var response = await homeApiService.getTopRatedMovies(page);
+      return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
@@ -52,8 +49,8 @@ class HomeRepository {
     int page = 1,
   }) async {
     try {
-      var respone = await homeApiService.getNowPlayingMovies(token, page);
-      return ApiResult.success(respone);
+      var response = await homeApiService.getNowPlayingMovies(page);
+      return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
@@ -62,8 +59,8 @@ class HomeRepository {
   // Get genres list
   Future<ApiResult<List<Genre>>> getGenres() async {
     try {
-      var respone = await homeApiService.getGenres(token);
-      return ApiResult.success(respone["genres"] ?? []);
+      var response = await homeApiService.getGenres();
+      return ApiResult.success(response["genres"] ?? []);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
@@ -75,8 +72,8 @@ class HomeRepository {
     int page = 1,
   }) async {
     try {
-      var respone = await homeApiService.getMoviesByGenre(token, genreId, page);
-      return ApiResult.success(respone);
+      var response = await homeApiService.getMoviesByGenre(genreId, page);
+      return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
