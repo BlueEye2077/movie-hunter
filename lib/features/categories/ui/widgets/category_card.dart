@@ -8,7 +8,7 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../home/data/models/genre.dart';
+import '../../../../core/models/genre.dart';
 
 class CategoryCard extends StatelessWidget {
   final Genre genre;

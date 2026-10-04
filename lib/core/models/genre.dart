@@ -4,12 +4,12 @@ part 'genre.g.dart';
 
 @JsonSerializable()
 class Genre {
-  int? id;
-  String? name;
+  final int? id;
+  final String? name;
 
-  Genre({required this.id, required this.name});
+  const Genre({required this.id, required this.name});
 
-  // fromJsom
+  // fromJson
   factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);
 
   // toJson

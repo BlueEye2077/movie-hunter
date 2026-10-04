@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/features/account/logic/cubit/favorite_movies_cubit.dart';
-import 'package:movie_hunter/features/account/logic/cubit/watchlist_movies_cubit.dart';
-import 'package:movie_hunter/features/account/ui/screens/favorites_screen.dart';
-import 'package:movie_hunter/features/account/ui/screens/watchlist_screen.dart';
+import '../../features/account/logic/cubit/favorite_movies_cubit.dart';
+import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
+import '../../features/account/ui/screens/favorites_screen.dart';
+import '../../features/account/ui/screens/watchlist_screen.dart';
 
 import '../../features/account/logic/cubit/profile_cubit.dart';
 import '../../features/all_movies/data/models/all_movies_args.dart';
@@ -12,7 +12,7 @@ import '../../features/all_movies/ui/screens/all_movies_screen.dart';
 import '../../features/auth/logic/cubit/auth_cubit.dart';
 import '../../features/auth/ui/screens/login_screen.dart';
 import '../../features/auth/ui/screens/sign_up_screen.dart';
-import '../../features/home/data/models/movie.dart';
+import '../models/movie.dart';
 import '../../features/home/logic/cubit/genres_cubit.dart';
 import '../../features/movie_details/data/models/cast_and_crew_args.dart';
 import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';

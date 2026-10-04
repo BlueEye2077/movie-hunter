@@ -1,4 +1,4 @@
-import '../../features/home/data/models/genre.dart';
+import '../models/genre.dart';
 
 class GenresHelper {
   static List<String> getGenreTitles({

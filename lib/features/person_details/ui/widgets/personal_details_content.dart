@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../home/data/models/movie.dart';
+import '../../../../core/models/movie.dart';
 import '../../data/models/person_details_response.dart';
 import 'person_biography.dart';
 import 'person_info_header.dart';

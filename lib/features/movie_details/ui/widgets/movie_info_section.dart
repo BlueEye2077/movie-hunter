@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/networking/requests_state.dart';
-import '../../../home/data/models/movie.dart';
+import '../../../../core/models/movie.dart';
 import '../../logic/cubit/movie_details_cubit.dart';
 import '../../logic/cubit/movie_details_state.dart';
 import 'movie_info_row.dart';

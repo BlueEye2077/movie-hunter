@@ -2,7 +2,7 @@ import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../../home/data/models/movie.dart';
+import '../../../../core/models/movie.dart';
 import '../models/movie_credits_response.dart';
 import '../models/movie_details_response.dart';
 import '../models/movie_videos_response.dart';
