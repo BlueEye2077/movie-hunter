@@ -1,4 +1,4 @@
-import '../../../home/data/models/movie.dart';
+import '../../../../core/models/movie.dart';
 
 enum MovieCategory {
   nowPlayingMovies,

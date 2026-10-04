@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../features/home/data/models/genre.dart';
-import '../../features/home/data/models/movie.dart';
+import '../models/genre.dart';
+import '../models/movie.dart';
 import '../routing/routes.dart';
 import '../theming/colors.dart';
 import 'movies_browser_grid_item.dart';

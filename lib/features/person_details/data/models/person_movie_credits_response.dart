@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../home/data/models/movie.dart';
+import '../../../../core/models/movie.dart';
 
 part 'person_movie_credits_response.g.dart';
 

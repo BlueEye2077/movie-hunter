@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/requests_state.dart';
-import '../../data/models/genre.dart';
+import '../../../../core/models/genre.dart';
 import '../../data/repository/home_repository.dart';
 
 class GenresCubit extends Cubit<RequestsState<List<Genre>>> {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hunter/features/account/logic/cubit/favorite_movies_cubit.dart';
-import 'package:movie_hunter/features/account/logic/cubit/watchlist_movies_cubit.dart';
+import '../../logic/cubit/favorite_movies_cubit.dart';
+import '../../logic/cubit/watchlist_movies_cubit.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/di/dependency_injection.dart';

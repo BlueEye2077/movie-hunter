@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hunter/core/common/movie_shimmer_list_view.dart';
-import 'package:movie_hunter/core/common/movies_browser_app_bar.dart';
-import 'package:movie_hunter/core/common/scroll_index_calculator.dart';
-import 'package:movie_hunter/core/common/movies_browser_switcher.dart';
-import 'package:movie_hunter/core/theming/text_styles.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
+import 'movie_shimmer_list_view.dart';
+import 'movies_browser_app_bar.dart';
+import 'scroll_index_calculator.dart';
+import 'movies_browser_switcher.dart';
+import '../theming/text_styles.dart';
+import '../models/genre.dart';
+import '../models/movie.dart';
 
 import '../../../../core/theming/colors.dart';
 

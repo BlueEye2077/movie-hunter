@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/app_spacing.dart';
+import '../../../../core/theming/colors.dart';
 import '../../../home/ui/widgets/movie_section/movies_list_view.dart';
 import '../../../home/ui/widgets/movie_section/movies_section.dart';
 

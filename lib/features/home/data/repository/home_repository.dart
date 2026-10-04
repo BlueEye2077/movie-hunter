@@ -2,8 +2,8 @@ import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../models/genre.dart';
-import '../models/movie.dart';
+import '../../../../core/models/genre.dart';
+import '../../../../core/models/movie.dart';
 import '../web_services/home_api_service.dart';
 
 class HomeRepository {

@@ -3,7 +3,7 @@ import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../home/data/models/actor.dart';
-import '../../../home/data/models/movie.dart';
+import '../../../../core/models/movie.dart';
 import '../web_services/search_api_service.dart';
 
 class SearchRepository {

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/rating_badge.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../home/data/models/movie.dart';
+import '../../../../core/models/movie.dart';
 import '../../logic/cubit/movie_details_cubit.dart';
 import '../widgets/cast_and_crew_section.dart';
 import '../widgets/movie_action_buttons.dart';

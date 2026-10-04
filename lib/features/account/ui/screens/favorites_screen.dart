@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_hunter/core/common/movies_browser_scaffold.dart';
-import 'package:movie_hunter/core/networking/api_response.dart';
-import 'package:movie_hunter/core/networking/requests_state.dart';
-import 'package:movie_hunter/core/theming/app_strings.dart';
-import 'package:movie_hunter/features/account/logic/cubit/favorite_movies_cubit.dart';
-import 'package:movie_hunter/features/home/data/models/genre.dart';
-import 'package:movie_hunter/features/home/data/models/movie.dart';
-import 'package:movie_hunter/features/home/logic/cubit/genres_cubit.dart';
+import '../../../../core/common/movies_browser_scaffold.dart';
+import '../../../../core/networking/api_response.dart';
+import '../../../../core/networking/requests_state.dart';
+import '../../../../core/theming/app_strings.dart';
+import '../../logic/cubit/favorite_movies_cubit.dart';
+import '../../../../core/models/genre.dart';
+import '../../../../core/models/movie.dart';
+import '../../../home/logic/cubit/genres_cubit.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
