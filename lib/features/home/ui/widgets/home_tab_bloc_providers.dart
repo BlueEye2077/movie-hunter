@@ -30,7 +30,8 @@ class HomeTabBlocProviders extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<NowPlayingMoviesCubit>()..getNowPlayingMovies(),
         ),
-        BlocProvider(create: (_) => getIt<GenresCubit>()..getGenres()),
+        // Use .value so this tab borrows the singleton GenresCubit without closing it on unmount.
+        BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
       ],
       child: child,
     );

@@ -20,7 +20,8 @@ class CategoriesScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<CategoriesCubit>()),
-        BlocProvider.value(value: getIt<GenresCubit>()),
+        // Use .value so this screen borrows the singleton GenresCubit without closing it on unmount.
+        BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
       ],
       child: const _CategoriesScreenContent(),
     );

@@ -3,15 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
-import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../account/data/models/account_details_model.dart';
-import '../../../account/logic/cubit/favorite_movies_cubit.dart';
 import '../../../account/logic/cubit/profile_cubit.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
 import 'home_top_bar_profile_info.dart';
 import 'home_top_bar_shimmer.dart';
 
@@ -48,34 +44,8 @@ class HomeTopBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: GestureDetector(
-            onTap: () async {
-              var favoriteState = getIt<FavoriteMoviesCubit>().state;
-
-              final isLoaded = favoriteState.maybeWhen(
-                success: (_) => true,
-                orElse: () => false,
-              );
-
-              // If the Profile tab hasn't finished loading it yet, fetch it now before navigating!
-              if (!isLoaded) {
-                await getIt<FavoriteMoviesCubit>().getFavoriteMovies();
-                favoriteState = getIt<FavoriteMoviesCubit>().state;
-              }
-
-              favoriteState.maybeWhen(
-                success: (data) {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.allMovies,
-                    arguments: AllMoviesArgs(
-                      title: AppStrings.favorites,
-                      movies: data.results ?? [],
-                      category: MovieCategory.favoriteMovies,
-                    ),
-                  );
-                },
-                orElse: () {},
-              );
+            onTap: () {
+              Navigator.pushNamed(context, Routes.favorites);
             },
             child: Center(
               child: SvgPicture.asset(

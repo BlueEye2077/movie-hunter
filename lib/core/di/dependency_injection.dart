@@ -115,7 +115,7 @@ void initGetIt() {
   // ── All Movies Feature ──
   // register the all movies cubit
   getIt.registerFactory<AllMoviesCubit>(
-    () => AllMoviesCubit(homeRepository: getIt(), profileRepository: getIt()),
+    () => AllMoviesCubit(homeRepository: getIt()),
   );
 
   // ── Auth Feature ──

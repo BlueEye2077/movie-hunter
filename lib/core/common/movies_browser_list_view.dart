@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/common/movie_shimmer_list_view.dart';
-import '../../../../core/common/movie_list_view_item.dart';
-import '../../../../core/theming/app_spacing.dart';
-import '../../../home/data/models/genre.dart';
-import '../../../home/data/models/movie.dart';
-import '../../helpers/scroll_index_calculator.dart';
+import '../../features/home/data/models/genre.dart';
+import '../../features/home/data/models/movie.dart';
+import '../theming/app_spacing.dart';
+import 'movie_list_view_item.dart';
+import 'movie_shimmer_list_view.dart';
+import 'scroll_index_calculator.dart';
 
-class AllMoviesListView extends StatefulWidget {
+class MoviesBrowserListView extends StatefulWidget {
   final List<Movie> movies;
   final List<Genre> genres;
   final bool isLoadingMore;
   final int scrolledMovieIndex;
 
-  const AllMoviesListView({
+  const MoviesBrowserListView({
     super.key,
     required this.movies,
     required this.genres,
@@ -23,18 +23,16 @@ class AllMoviesListView extends StatefulWidget {
   });
 
   @override
-  State<AllMoviesListView> createState() => _AllMoviesListViewState();
+  State<MoviesBrowserListView> createState() => _MoviesBrowserListViewState();
 }
 
-class _AllMoviesListViewState extends State<AllMoviesListView> {
+class _MoviesBrowserListViewState extends State<MoviesBrowserListView> {
   late final ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
 
-    // scroll to the movie that was scrolled on the previous screen
-    // Reconverting the number of the index to a pixels
     final offset = ScrollIndexCalculator.getCurrentListViewScrollMovieOffset(
       scrolledMovieIndex: widget.scrolledMovieIndex,
     );
@@ -52,7 +50,10 @@ class _AllMoviesListViewState extends State<AllMoviesListView> {
   Widget build(BuildContext context) {
     return ListView.separated(
       controller: _scrollController,
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.horizontalPadding, vertical: 16.h),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.horizontalPadding,
+        vertical: 16.h,
+      ),
       itemCount: widget.isLoadingMore
           ? widget.movies.length + 1
           : widget.movies.length,

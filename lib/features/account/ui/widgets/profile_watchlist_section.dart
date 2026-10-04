@@ -10,7 +10,6 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../../features/all_movies/data/models/all_movies_args.dart';
 import '../../../../features/home/data/models/genre.dart';
 import '../../../../features/home/data/models/movie.dart';
 import '../../../../features/home/logic/cubit/genres_cubit.dart';
@@ -27,7 +26,10 @@ class ProfileWatchlistSection extends StatelessWidget {
     return BlocBuilder<WatchlistMoviesCubit, RequestsState<ApiResponse<Movie>>>(
       builder: (context, state) {
         return state.when(
-          idle: () => const SizedBox.shrink(),
+          idle: () => MoviesSection(
+            title: AppStrings.watchlist,
+            child: const MoviesListView.shimmer(),
+          ),
           loading: () => MoviesSection(
             title: AppStrings.watchlist,
             child: const MoviesListView.shimmer(),
@@ -57,15 +59,7 @@ class ProfileWatchlistSection extends StatelessWidget {
 
             return MoviesSection(
               title: AppStrings.watchlist,
-              onSeeAllTap: () => Navigator.pushNamed(
-                context,
-                Routes.allMovies,
-                arguments: AllMoviesArgs(
-                  title: AppStrings.watchlist,
-                  movies: movies,
-                  category: MovieCategory.watchlistMovies,
-                ),
-              ),
+              onSeeAllTap: () => Navigator.pushNamed(context, Routes.watchlist),
               child: MoviesListView.showMovies(movies: movies, genres: genresList),
             );
           },

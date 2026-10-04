@@ -7,10 +7,19 @@ import '../../data/repository/home_repository.dart';
 
 class GenresCubit extends Cubit<RequestsState<List<Genre>>> {
   final HomeRepository homeRepository;
+
   GenresCubit({required this.homeRepository})
-    : super(const RequestsState.idle());
+      : super(const RequestsState.idle());
 
   void getGenres() async {
+    // Avoid redundant network requests if genres are already loaded
+    final isAlreadyLoaded = state.maybeWhen(
+      success: (_) => true,
+      orElse: () => false,
+    );
+    if (isAlreadyLoaded) return;
+
+    emit(const RequestsState.loading());
     final result = await homeRepository.getGenres();
     if (isClosed) return;
     result.when(

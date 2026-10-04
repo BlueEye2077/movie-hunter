@@ -4,6 +4,8 @@ class Routes {
   static const String mainScreen = '/main';
   static const String search = '/search';
   static const String movieDetails = '/movie-details';
+  static const String favorites = '/favorites';
+  static const String watchlist = '/watchlist';
   static const String castAndCrew = '/cast-and-crew';
   static const String allMovies = '/all-movies';
   static const String personDetails = '/person-details';

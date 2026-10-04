@@ -7,10 +7,10 @@ import '../../../home/data/models/genre.dart';
 import '../../../home/data/models/movie.dart';
 import '../../../home/logic/cubit/genres_cubit.dart';
 import '../../data/models/all_movies_args.dart';
-import '../../helpers/scroll_index_calculator.dart';
+import '../../../../core/common/scroll_index_calculator.dart';
 import '../../logic/cubit/all_movies_cubit.dart';
-import '../widgets/all_movies_app_bar.dart';
-import '../widgets/all_movies_switcher.dart';
+import '../../../../core/common/movies_browser_app_bar.dart';
+import '../../../../core/common/movies_browser_switcher.dart';
 
 class AllMoviesScreen extends StatefulWidget {
   final AllMoviesArgs args;
@@ -38,7 +38,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.primaryDark,
-      appBar: AllMoviesAppBar(
+      appBar: MoviesBrowserAppBar(
         title: title,
         isGridView: _isGridView,
         onViewChanged: (isGrid) => setState(() => _isGridView = isGrid),
@@ -87,7 +87,7 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
               }
               return false;
             },
-            child: AllMoviesSwitcher(
+            child: MoviesBrowserSwitcher(
               isGridView: _isGridView,
               movies: currentMovies,
               genres: genres,

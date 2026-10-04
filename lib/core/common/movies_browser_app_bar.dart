@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
+import '../theming/colors.dart';
+import '../theming/text_styles.dart';
 
-class AllMoviesAppBar extends StatelessWidget implements PreferredSizeWidget {
+class MoviesBrowserAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isGridView;
   final ValueChanged<bool> onViewChanged;
 
-  const AllMoviesAppBar({
+  const MoviesBrowserAppBar({
     super.key,
     required this.title,
     required this.isGridView,

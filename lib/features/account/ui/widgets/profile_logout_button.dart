@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_hunter/features/account/logic/cubit/favorite_movies_cubit.dart';
+import 'package:movie_hunter/features/account/logic/cubit/watchlist_movies_cubit.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/di/dependency_injection.dart';
@@ -16,6 +18,11 @@ class ProfileLogoutButton extends StatelessWidget {
   Future<void> _performLogout(BuildContext context) async {
     await SecureStorageHelper.clearAll();
     getIt<ProfileRepository>().clearCache();
+
+    // Todo: this fix is temporary until the logout process is refactored to be more efficient and not require resetting the cubits.
+    getIt.resetLazySingleton<FavoriteMoviesCubit>();
+    getIt.resetLazySingleton<WatchlistMoviesCubit>();
+
     isLoggedInUser = false;
 
     if (!context.mounted) return;
