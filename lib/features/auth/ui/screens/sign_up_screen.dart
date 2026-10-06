@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_spacing.dart';
+import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 
@@ -37,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 32.h),
                     Text(
-                      'Account Registration',
+                      AppStrings.accountRegistration,
                       style: TextStyles.font24SemiBold.copyWith(
                         color: AppColors.textWhite,
                       ),
@@ -45,7 +46,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      'To create an account, you must register directly on the TMDB website. Once registered, you can log in here using your new credentials.',
+                      AppStrings.tmdbRegistrationNotice,
                       style: TextStyles.font14Medium.copyWith(
                         color: AppColors.textGrey,
                         height: 1.5,
@@ -65,7 +66,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          'Go to TMDB Website',
+                          AppStrings.goToTmdbWebsite,
                           style: TextStyles.font16SemiBold.copyWith(
                             color: Colors.white,
                           ),
@@ -86,7 +87,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          'Back to Login',
+                          AppStrings.backToLogin,
                           style: TextStyles.font16SemiBold.copyWith(
                             color: AppColors.textWhite,
                           ),

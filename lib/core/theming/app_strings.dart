@@ -16,9 +16,19 @@ abstract final class AppStrings {
   static const String welcomeTitle = "Welcome to Movie Hunter";
   static const String welcomeSubtitle =
       "Welcome back! Please enter your details.";
+  static const String username = "Username";
   static const String emailAddress = "Email Address";
   static const String password = "Password";
   static const String forgotPassword = "Forgot Password?";
+  static const String pleaseEnterUsername = "Please enter a valid username";
+  static const String pleaseEnterPassword = "Please enter a valid password";
+  static const String dontHaveAccount = "Don't have an account? ";
+  static const String signUp = "Sign Up";
+  static const String accountRegistration = "Account Registration";
+  static const String tmdbRegistrationNotice =
+      "To create an account, you must register directly on the TMDB website. Once registered, you can log in here using your new credentials.";
+  static const String goToTmdbWebsite = "Go to TMDB Website";
+  static const String backToLogin = "Back to Login";
 
   // ── Movie Details ──
   static const String storyLine = 'Story Line';

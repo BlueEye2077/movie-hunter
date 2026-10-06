@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../../core/networking/api_constants.dart';
-import '../models/create_new_session_model.dart';
-import '../models/create_request_token_model.dart';
-import '../models/login_model.dart';
+import '../models/create_new_session_response_model.dart';
+import '../models/create_request_token_reponse_model.dart';
+import '../models/login_request_model.dart';
 import 'auth_api_constants.dart';
 
 part 'auth_api_services.g.dart';
@@ -15,17 +15,17 @@ abstract class AuthApiService {
 
   // Step 1: Create Request Token
   @GET(AuthApiConstants.createRequestToken)
-  Future<CreateRequestTokenModel> createRequestToken();
+  Future<CreateRequestTokenResponseModel> createRequestToken();
 
   // Step 2: Validate With Login
   @POST(AuthApiConstants.validateWithLogin)
-  Future<CreateRequestTokenModel> login(
-    @Body() LoginModel body,
+  Future<CreateRequestTokenResponseModel> login(
+    @Body() LoginRequestModel body,
   );
 
   // Step 3: Create Session
   @POST(AuthApiConstants.createSession)
-  Future<CreateNewSessionModel> createSession(
+  Future<CreateNewSessionResponseModel> createSession(
     @Body() Map<String, dynamic> body,
   );
 }

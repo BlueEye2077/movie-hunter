@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:movie_hunter/features/auth/domain/repos/auth_repository.dart';
+import 'package:movie_hunter/features/auth/domain/usecases/login_usecase.dart';
 
 import '../../features/account/data/repository/profile_repository.dart';
 import '../../features/account/data/web_services/profile_api_services.dart';
@@ -8,7 +10,7 @@ import '../../features/account/logic/cubit/profile_cubit.dart';
 import '../../features/account/logic/cubit/watchlist_cubit.dart';
 import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
-import '../../features/auth/data/repository/auth_repository.dart';
+import '../../features/auth/data/repository/auth_repository_impl.dart';
 import '../../features/auth/data/web_services/auth_api_services.dart';
 import '../../features/auth/logic/cubit/auth_cubit.dart';
 import '../../features/categories/logic/cubit/categories_cubit.dart';
@@ -121,9 +123,13 @@ void initGetIt() {
   // ── Auth Feature ──
   getIt.registerLazySingleton<AuthApiService>(() => AuthApiService(dio));
   getIt.registerLazySingleton<AuthRepository>(
-    () => AuthRepository(authApiService: getIt()),
+    () => AuthRepositoryImpl(authApiService: getIt()),
   );
-  getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepository: getIt()));
+
+  getIt.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(authRepository: getIt()),
+  );
+  getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt()));
 
   // ── Account Feature ──
   getIt.registerLazySingleton<ProfileApiServices>(

@@ -1,21 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_new_session_model.dart';
+part of 'create_new_session_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreateNewSessionModel _$CreateNewSessionModelFromJson(
+CreateNewSessionResponseModel _$CreateNewSessionResponseModelFromJson(
   Map<String, dynamic> json,
-) => CreateNewSessionModel(
+) => CreateNewSessionResponseModel(
   success: json['success'] as bool?,
   sessionId: json['session_id'] as String?,
 );
-
-Map<String, dynamic> _$CreateNewSessionModelToJson(
-  CreateNewSessionModel instance,
-) => <String, dynamic>{
-  'success': instance.success,
-  'session_id': instance.sessionId,
-};

@@ -4,11 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/networking/network_exceptions.dart';
-import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
-import '../../data/models/create_new_session_model.dart';
 import '../../logic/cubit/auth_cubit.dart';
 import '../widgets/dont_have_account_text.dart';
 import '../widgets/login_button.dart';
@@ -23,12 +21,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late final TextEditingController _usernameController;
+  late final TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -50,53 +56,47 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: AppSpacing.screenPadding,
                 child: LoginForm(
-                  emailController: _emailController,
+                  formKey: _formKey,
+                  usernameController: _usernameController,
                   passwordController: _passwordController,
                 ),
               ),
               SizedBox(height: 32.h),
               Padding(
                 padding: AppSpacing.screenPadding,
-                child:
-                    BlocConsumer<
-                      AuthCubit,
-                      RequestsState<CreateNewSessionModel>
-                    >(
-                      listener: (context, state) {
-                        state.whenOrNull(
-                          success: (data) => Navigator.pushReplacementNamed(
-                            context,
-                            Routes.mainScreen,
-                          ),
-                          error: (networkExceptions) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  NetworkExceptions.getErrorMessage(
-                                    networkExceptions,
-                                  ),
-                                ),
+                child: BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    state.whenOrNull(
+                      success: (session) => Navigator.pushReplacementNamed(
+                        context,
+                        Routes.mainScreen,
+                      ),
+                      error: (networkExceptions) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              NetworkExceptions.getErrorMessage(
+                                networkExceptions,
                               ),
-                            );
-                          },
-                        );
-                      },
-                      builder: (context, state) {
-                        return state.maybeWhen(
-                          loading: () => const Center(
-                            child: CircularProgressIndicator(
-                              color: AppColors.primaryBlueAccent,
-                            ),
-                          ),
-                          orElse: () => LoginButton(
-                            onPressed: () => context.read<AuthCubit>().login(
-                              _emailController.text,
-                              _passwordController.text,
                             ),
                           ),
                         );
                       },
-                    ),
+                    );
+                  },
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      loading: () => const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryBlueAccent,
+                        ),
+                      ),
+                      orElse: () => LoginButton(
+                        onPressed: () => _validateThenDoLogin(context),
+                      ),
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 24.h),
               const DontHaveAccountText(),
@@ -106,5 +106,14 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _validateThenDoLogin(BuildContext context) {
+    if (_formKey.currentState?.validate() ?? false) {
+      context.read<AuthCubit>().login(
+        _usernameController.text,
+        _passwordController.text,
+      );
+    }
   }
 }
