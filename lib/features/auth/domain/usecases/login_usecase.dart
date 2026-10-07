@@ -1,5 +1,5 @@
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/features/auth/domain/entities/user_session_entity.dart';
+import '../../../../core/networking/api_result.dart';
+import '../entities/user_session_entity.dart';
 
 import '../repos/auth_repository.dart';
 

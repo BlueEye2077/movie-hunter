@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/core/networking/network_exceptions.dart';
-import 'package:movie_hunter/features/auth/domain/entities/user_session_entity.dart';
-import 'package:movie_hunter/features/auth/domain/usecases/login_usecase.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../../domain/entities/user_session_entity.dart';
+import '../../domain/usecases/login_usecase.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
@@ -19,6 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
       username.trim(),
       password,
     );
+    // Safe guard against the user navigating away from the login screen before the login request completes
     if (isClosed) return;
     result.when(
       success: (data) => emit(AuthState.success(data)),
@@ -26,4 +27,3 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 }
-

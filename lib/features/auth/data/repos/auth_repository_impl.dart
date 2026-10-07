@@ -1,10 +1,9 @@
 import '../../../../core/constants/constants.dart';
-import '../../../../features/auth/domain/entities/user_session_entity.dart';
-import '../../../../features/auth/domain/repos/auth_repository.dart';
-
 import '../../../../core/helpers/secure_storage_helper.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../domain/entities/user_session_entity.dart';
+import '../../domain/repos/auth_repository.dart';
 import '../models/create_new_session_response_model.dart';
 import '../models/create_request_token_response_model.dart';
 import '../models/create_session_request_model.dart';

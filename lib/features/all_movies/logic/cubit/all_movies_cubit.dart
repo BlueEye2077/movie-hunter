@@ -3,10 +3,10 @@ import 'dart:collection';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../../../core/models/movie.dart';
 import '../../../home/data/repository/home_repository.dart';
 import '../../data/models/all_movies_args.dart';
 

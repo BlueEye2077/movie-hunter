@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../core/helpers/genres_helper.dart';
+import '../../../../../core/models/genre.dart';
+import '../../../../../core/models/movie.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_spacing.dart';
 import '../../../../../core/theming/colors.dart';
-import '../../../../../core/models/genre.dart';
-import '../../../../../core/models/movie.dart';
 import 'movie_item.dart';
 
 class MoviesListView extends StatelessWidget {
