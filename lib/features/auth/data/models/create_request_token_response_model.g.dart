@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_request_token_reponse_model.dart';
+part of 'create_request_token_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

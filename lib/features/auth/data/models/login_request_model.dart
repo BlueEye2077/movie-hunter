@@ -4,11 +4,11 @@ part 'login_request_model.g.dart';
 
 @JsonSerializable(fieldRename: .snake, createFactory: false)
 class LoginRequestModel {
-  String? username;
-  String? password;
-  String? requestToken;
+  final String? username;
+  final String? password;
+  final String? requestToken;
 
-  LoginRequestModel({this.username, this.password, this.requestToken});
+  const LoginRequestModel({this.username, this.password, this.requestToken});
 
   Map<String, dynamic> toJson() => _$LoginRequestModelToJson(this);
 }

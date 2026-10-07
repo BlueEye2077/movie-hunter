@@ -44,64 +44,73 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: AppColors.primaryDark,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 16.h),
-              SvgPicture.asset('assets/svgs/app_logo.svg', height: 80.h),
-              SizedBox(height: 24.h),
-              const WelcomeText(),
-              SizedBox(height: 48.h),
-              Padding(
-                padding: AppSpacing.screenPadding,
-                child: LoginForm(
-                  formKey: _formKey,
-                  usernameController: _usernameController,
-                  passwordController: _passwordController,
+        child: GestureDetector(
+          // Tells the GestureDetector to interact with the whole screen
+          behavior: HitTestBehavior.opaque,
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 16.h),
+                SvgPicture.asset('assets/svgs/app_logo.svg', height: 80.h),
+                SizedBox(height: 24.h),
+                const WelcomeText(),
+                SizedBox(height: 48.h),
+                Padding(
+                  padding: AppSpacing.screenPadding,
+                  child: LoginForm(
+                    formKey: _formKey,
+                    usernameController: _usernameController,
+                    passwordController: _passwordController,
+                    onLoginSubmitted: () => _validateThenDoLogin(context),
+                  ),
                 ),
-              ),
-              SizedBox(height: 32.h),
-              Padding(
-                padding: AppSpacing.screenPadding,
-                child: BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {
-                    state.whenOrNull(
-                      success: (session) => Navigator.pushReplacementNamed(
-                        context,
-                        Routes.mainScreen,
-                      ),
-                      error: (networkExceptions) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              NetworkExceptions.getErrorMessage(
-                                networkExceptions,
+                SizedBox(height: 32.h),
+                Padding(
+                  padding: AppSpacing.screenPadding,
+                  child: BlocConsumer<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      state.whenOrNull(
+                        success: (session) => Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          Routes.mainScreen,
+                          // Tells Flutter: "Do not keep any previous route. Wipe them all out."
+                          (route) => false,
+                        ),
+                        error: (networkExceptions) {
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                NetworkExceptions.getErrorMessage(
+                                  networkExceptions,
+                                ),
                               ),
                             ),
+                          );
+                        },
+                      );
+                    },
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryBlueAccent,
                           ),
-                        );
-                      },
-                    );
-                  },
-                  builder: (context, state) {
-                    return state.maybeWhen(
-                      loading: () => const Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.primaryBlueAccent,
                         ),
-                      ),
-                      orElse: () => LoginButton(
-                        onPressed: () => _validateThenDoLogin(context),
-                      ),
-                    );
-                  },
+                        orElse: () => LoginButton(
+                          onPressed: () => _validateThenDoLogin(context),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(height: 24.h),
-              const DontHaveAccountText(),
-              SizedBox(height: 24.h),
-            ],
+                SizedBox(height: 24.h),
+                const DontHaveAccountText(),
+                SizedBox(height: 24.h),
+              ],
+            ),
           ),
         ),
       ),

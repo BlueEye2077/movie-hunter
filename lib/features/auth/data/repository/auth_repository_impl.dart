@@ -6,7 +6,8 @@ import '../../../../core/helpers/secure_storage_helper.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../models/create_new_session_response_model.dart';
-import '../models/create_request_token_reponse_model.dart';
+import '../models/create_request_token_response_model.dart';
+import '../models/create_session_request_model.dart';
 import '../models/login_request_model.dart';
 import '../web_services/auth_api_services.dart';
 
@@ -24,7 +25,9 @@ class AuthRepositoryImpl implements AuthRepository {
       final CreateRequestTokenResponseModel tokenResponse = await authApiService
           .createRequestToken();
       final String? requestToken = tokenResponse.requestToken;
-      if (requestToken == null || requestToken.isEmpty) {
+      if (tokenResponse.success != true ||
+          requestToken == null ||
+          requestToken.isEmpty) {
         return ApiResult.failure(
           const NetworkExceptions.defaultError(
             "Failed to obtain request token",
@@ -41,10 +44,14 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       final CreateNewSessionResponseModel sessionResponse = await authApiService
-          .createSession({"request_token": requestToken});
+          .createSession(
+            CreateSessionRequestModel(requestToken: requestToken),
+          );
 
       final sessionId = sessionResponse.sessionId;
-      if (sessionId == null || sessionId.isEmpty) {
+      if (sessionResponse.success != true ||
+          sessionId == null ||
+          sessionId.isEmpty) {
         return ApiResult.failure(
           const NetworkExceptions.defaultError("Failed to create session"),
         );
