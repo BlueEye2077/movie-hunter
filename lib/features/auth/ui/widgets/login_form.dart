@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
@@ -11,12 +12,13 @@ class LoginForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController usernameController;
   final TextEditingController passwordController;
-
+  final VoidCallback onLoginSubmitted;
   const LoginForm({
     super.key,
     required this.formKey,
     required this.usernameController,
     required this.passwordController,
+    required this.onLoginSubmitted,
   });
 
   @override
@@ -27,7 +29,7 @@ class _LoginFormState extends State<LoginForm> {
   bool _isObscure = true;
 
   Future<void> _launchForgotPassword() async {
-    final Uri url = Uri.parse('https://www.themoviedb.org/reset-password');
+    final Uri url = Uri.parse(ApiConstants.tmdbResetPasswordUrl);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       debugPrint('Could not launch $url');
     }
@@ -50,6 +52,7 @@ class _LoginFormState extends State<LoginForm> {
             controller: widget.usernameController,
             label: AppStrings.username,
             keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.next,
           ),
           SizedBox(height: 24.h),
           CustomTextField(
@@ -74,6 +77,8 @@ class _LoginFormState extends State<LoginForm> {
                 size: 20.sp,
               ),
             ),
+            textInputAction: TextInputAction.done,
+            onFieldSubmitted: (_) => widget.onLoginSubmitted(),
           ),
           SizedBox(height: 8.h),
           GestureDetector(

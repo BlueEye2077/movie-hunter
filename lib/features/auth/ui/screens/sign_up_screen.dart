@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/networking/api_constants.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
@@ -12,7 +13,7 @@ class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   Future<void> _launchTMDBRegistration() async {
-    final Uri url = Uri.parse('https://www.themoviedb.org/signup');
+    final Uri url = Uri.parse(ApiConstants.tmdbSignupUrl);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       debugPrint('Could not launch $url');
     }

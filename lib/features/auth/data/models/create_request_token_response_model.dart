@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'create_request_token_reponse_model.g.dart';
+part 'create_request_token_response_model.g.dart';
 
 @JsonSerializable(fieldRename: .snake, createToJson: false)
 class CreateRequestTokenResponseModel {
