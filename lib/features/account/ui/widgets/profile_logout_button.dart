@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../logic/cubit/favorite_movies_cubit.dart';
-import '../../logic/cubit/watchlist_movies_cubit.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/di/dependency_injection.dart';
@@ -11,6 +9,8 @@ import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../data/repository/profile_repository.dart';
+import '../../logic/cubit/favorite_movies_cubit.dart';
+import '../../logic/cubit/watchlist_movies_cubit.dart';
 
 class ProfileLogoutButton extends StatelessWidget {
   const ProfileLogoutButton({super.key});

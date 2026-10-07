@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/models/genre.dart';
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../../core/models/genre.dart';
-import '../../../../core/models/movie.dart';
 import '../../../home/logic/cubit/genres_cubit.dart';
 import '../../../home/ui/widgets/movie_section/movies_list_view.dart';
 import '../../../home/ui/widgets/movie_section/movies_section.dart';

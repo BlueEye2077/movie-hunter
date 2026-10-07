@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/requests_state.dart';
-import '../../../../core/models/movie.dart';
 import '../../data/repository/movie_details_repository.dart';
 
 class SimilarMoviesCubit extends Cubit<RequestsState<List<Movie>>> {

@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import '../../../../core/helpers/secure_storage_helper.dart';
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../../../core/models/movie.dart';
 import '../models/account_details_model.dart';
 import '../models/movie_account_state_response.dart';
 import '../models/movie_action_status_response.dart';

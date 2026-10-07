@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../home/data/models/actor.dart';
-import '../../../../core/models/movie.dart';
 import '../../logic/cubit/search_cubit.dart';
 import 'empty_search.dart';
 import 'search_actor_list.dart';
