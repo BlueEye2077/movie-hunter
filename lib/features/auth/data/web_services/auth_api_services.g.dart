@@ -22,12 +22,12 @@ class _AuthApiService implements AuthApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<CreateRequestTokenModel> createRequestToken() async {
+  Future<CreateRequestTokenResponseModel> createRequestToken() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<CreateRequestTokenModel>(
+    final _options = _setStreamType<CreateRequestTokenResponseModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -38,9 +38,9 @@ class _AuthApiService implements AuthApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CreateRequestTokenModel _value;
+    late CreateRequestTokenResponseModel _value;
     try {
-      _value = CreateRequestTokenModel.fromJson(_result.data!);
+      _value = CreateRequestTokenResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -49,13 +49,13 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<CreateRequestTokenModel> login(LoginModel body) async {
+  Future<CreateRequestTokenResponseModel> login(LoginRequestModel body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<CreateRequestTokenModel>(
+    final _options = _setStreamType<CreateRequestTokenResponseModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -66,9 +66,9 @@ class _AuthApiService implements AuthApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CreateRequestTokenModel _value;
+    late CreateRequestTokenResponseModel _value;
     try {
-      _value = CreateRequestTokenModel.fromJson(_result.data!);
+      _value = CreateRequestTokenResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -77,13 +77,15 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<CreateNewSessionModel> createSession(Map<String, dynamic> body) async {
+  Future<CreateNewSessionResponseModel> createSession(
+    Map<String, dynamic> body,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<CreateNewSessionModel>(
+    final _options = _setStreamType<CreateNewSessionResponseModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -94,9 +96,9 @@ class _AuthApiService implements AuthApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CreateNewSessionModel _value;
+    late CreateNewSessionResponseModel _value;
     try {
-      _value = CreateNewSessionModel.fromJson(_result.data!);
+      _value = CreateNewSessionResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

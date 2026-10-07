@@ -1,23 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_request_token_model.dart';
+part of 'create_request_token_reponse_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreateRequestTokenModel _$CreateRequestTokenModelFromJson(
+CreateRequestTokenResponseModel _$CreateRequestTokenResponseModelFromJson(
   Map<String, dynamic> json,
-) => CreateRequestTokenModel(
+) => CreateRequestTokenResponseModel(
   success: json['success'] as bool?,
   expiresAt: json['expires_at'] as String?,
   requestToken: json['request_token'] as String?,
 );
-
-Map<String, dynamic> _$CreateRequestTokenModelToJson(
-  CreateRequestTokenModel instance,
-) => <String, dynamic>{
-  'success': instance.success,
-  'expires_at': instance.expiresAt,
-  'request_token': instance.requestToken,
-};

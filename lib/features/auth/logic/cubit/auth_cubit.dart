@@ -1,23 +1,29 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:movie_hunter/core/networking/api_result.dart';
+import 'package:movie_hunter/core/networking/network_exceptions.dart';
+import 'package:movie_hunter/features/auth/domain/entities/user_session_entity.dart';
+import 'package:movie_hunter/features/auth/domain/usecases/login_usecase.dart';
 
-import '../../../../core/networking/api_result.dart';
-import '../../../../core/networking/requests_state.dart';
-import '../../data/models/create_new_session_model.dart';
-import '../../data/repository/auth_repository.dart';
+part 'auth_state.dart';
+part 'auth_cubit.freezed.dart';
 
-class AuthCubit extends Cubit<RequestsState<CreateNewSessionModel>> {
-  AuthCubit({required this.authRepository}) : super(RequestsState.idle());
+class AuthCubit extends Cubit<AuthState> {
+  final LoginUseCase _loginUseCase;
 
-  final AuthRepository authRepository;
+  AuthCubit(this._loginUseCase) : super(const AuthState.idle());
 
-  void login(String username, String password) async {
-    emit(RequestsState.loading());
-    ApiResult<CreateNewSessionModel> response = await authRepository
-        .performFullLogin(username, password);
-    response.when(
-      success: (data) => emit(RequestsState.success(data)),
-      failure: (networkExceptions) =>
-          emit(RequestsState.error(networkExceptions)),
+  Future<void> login(String username, String password) async {
+    emit(const AuthState.loading());
+    final ApiResult<UserSessionEntity> result = await _loginUseCase(
+      username.trim(),
+      password,
+    );
+    if (isClosed) return;
+    result.when(
+      success: (data) => emit(AuthState.success(data)),
+      failure: (networkExceptions) => emit(AuthState.error(networkExceptions)),
     );
   }
 }
+
