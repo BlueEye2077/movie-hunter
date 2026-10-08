@@ -5,7 +5,7 @@ import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../home/data/models/actor.dart';
+import '../../data/models/actor.dart';
 import 'search_actor_item.dart';
 
 class SearchActorList extends StatelessWidget {
