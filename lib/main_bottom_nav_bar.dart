@@ -3,19 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
-import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
+import 'core/theming/colors.dart';
+import 'core/theming/text_styles.dart';
 
-class HomeBottomNavBar extends StatefulWidget {
+class MainBottomNavBar extends StatefulWidget {
   final ValueChanged<int> onTabSelected;
 
-  const HomeBottomNavBar({super.key, required this.onTabSelected});
+  const MainBottomNavBar({super.key, required this.onTabSelected});
 
   @override
-  State<HomeBottomNavBar> createState() => _HomeBottomNavBarState();
+  State<MainBottomNavBar> createState() => _MainBottomNavBarState();
 }
 
-class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
+class _MainBottomNavBarState extends State<MainBottomNavBar> {
   int _selectedIndex = 0;
 
   @override

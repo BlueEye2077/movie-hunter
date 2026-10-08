@@ -4,9 +4,9 @@ import 'core/theming/colors.dart';
 import 'features/account/ui/screens/profile_screen.dart';
 import 'features/account/ui/widgets/profile_tab_bloc_providers.dart';
 import 'features/categories/ui/screens/categories_screen.dart';
-import 'features/home/ui/screens/home_screen.dart';
-import 'features/home/ui/widgets/home_bottom_nav_bar.dart';
-import 'features/home/ui/widgets/home_tab_bloc_providers.dart';
+import 'features/home/presentation/screens/home_screen.dart';
+import 'features/home/presentation/widgets/home_tab_bloc_providers.dart';
+import 'main_bottom_nav_bar.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       // Bottom navigation bar
-      bottomNavigationBar: HomeBottomNavBar(
+      bottomNavigationBar: MainBottomNavBar(
         onTabSelected: (index) {
           setState(() => _selectedIndex = index);
         },
