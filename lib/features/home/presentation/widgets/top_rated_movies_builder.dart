@@ -12,8 +12,8 @@ import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../../../core/models/genre.dart';
 import '../../../../core/models/movie.dart';
-import '../../logic/cubit/genres_cubit.dart';
-import '../../logic/cubit/top_rated_movies_cubit.dart';
+import '../cubit/genres_cubit.dart';
+import '../cubit/top_rated_movies_cubit.dart';
 import 'movie_section/movies_list_view.dart';
 import 'movie_section/movies_section.dart';
 

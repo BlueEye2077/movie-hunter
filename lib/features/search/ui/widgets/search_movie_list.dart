@@ -10,7 +10,7 @@ import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../home/logic/cubit/genres_cubit.dart';
+import '../../../home/presentation/cubit/genres_cubit.dart';
 
 class SearchMovieList extends StatelessWidget {
   final List<Movie> movies;

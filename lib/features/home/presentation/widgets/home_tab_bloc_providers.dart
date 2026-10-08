@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/dependency_injection.dart';
-import '../../logic/cubit/genres_cubit.dart';
-import '../../logic/cubit/now_playing_movies_cubit.dart';
-import '../../logic/cubit/popular_movies_cubit.dart';
-import '../../logic/cubit/top_rated_movies_cubit.dart';
-import '../../logic/cubit/upcoming_movies_cubit.dart';
+import '../cubit/genres_cubit.dart';
+import '../cubit/now_playing_movies_cubit.dart';
+import '../cubit/popular_movies_cubit.dart';
+import '../cubit/top_rated_movies_cubit.dart';
+import '../cubit/upcoming_movies_cubit.dart';
 
 // Bloc providers for the home tab
 class HomeTabBlocProviders extends StatelessWidget {

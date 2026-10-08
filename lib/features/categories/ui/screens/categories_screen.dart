@@ -6,7 +6,7 @@ import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../core/models/genre.dart';
-import '../../../home/logic/cubit/genres_cubit.dart';
+import '../../../home/presentation/cubit/genres_cubit.dart';
 import '../../logic/cubit/categories_cubit.dart';
 import '../../logic/cubit/categories_state.dart';
 import '../widgets/categories_grid_view.dart';

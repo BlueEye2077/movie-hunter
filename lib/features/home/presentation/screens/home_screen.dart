@@ -36,9 +36,6 @@ class HomeScreen extends StatelessWidget {
               // Upcoming Movies
               const UpcomingMoviesBuilder(),
               SizedBox(height: 24.h),
-              // Categories List
-              // const CategoriesList(),
-              // SizedBox(height: 24.h),
               // Now Playing Movies
               const NowPlayingMoviesBuilder(),
               SizedBox(height: 24.h),

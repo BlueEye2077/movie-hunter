@@ -11,9 +11,9 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../home/logic/cubit/genres_cubit.dart';
-import '../../../home/ui/widgets/movie_section/movies_list_view.dart';
-import '../../../home/ui/widgets/movie_section/movies_section.dart';
+import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
+import '../../../home/presentation/widgets/movie_section/movies_section.dart';
 import '../../logic/cubit/similar_movies_cubit.dart';
 
 class SimilarMoviesSection extends StatelessWidget {

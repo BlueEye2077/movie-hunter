@@ -12,9 +12,9 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../../features/home/logic/cubit/genres_cubit.dart';
-import '../../../../features/home/ui/widgets/movie_section/movies_list_view.dart';
-import '../../../../features/home/ui/widgets/movie_section/movies_section.dart';
+import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
+import '../../../home/presentation/widgets/movie_section/movies_section.dart';
 import '../../../../features/search/ui/widgets/empty_search.dart';
 import '../../logic/cubit/favorite_movies_cubit.dart';
 

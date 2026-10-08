@@ -7,7 +7,7 @@ import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
-import '../../logic/cubit/auth_cubit.dart';
+import '../cubit/auth_cubit.dart';
 import '../widgets/dont_have_account_text.dart';
 import '../widgets/login_button.dart';
 import '../widgets/login_form.dart';
