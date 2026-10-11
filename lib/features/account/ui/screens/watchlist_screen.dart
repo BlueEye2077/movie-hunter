@@ -7,7 +7,7 @@ import '../../../../core/theming/app_strings.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
 import '../../../../core/models/genre.dart';
 import '../../../../core/models/movie.dart';
-import '../../../home/logic/cubit/genres_cubit.dart';
+import '../../../home/presentation/cubit/genres_cubit.dart';
 
 class WatchlistScreen extends StatelessWidget {
   const WatchlistScreen({super.key});

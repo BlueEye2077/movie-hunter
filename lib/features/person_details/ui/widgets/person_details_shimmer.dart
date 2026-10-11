@@ -4,8 +4,8 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../home/ui/widgets/movie_section/movies_list_view.dart';
-import '../../../home/ui/widgets/movie_section/movies_section.dart';
+import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
+import '../../../home/presentation/widgets/movie_section/movies_section.dart';
 
 class PersonDetailsShimmer extends StatelessWidget {
   const PersonDetailsShimmer({super.key});

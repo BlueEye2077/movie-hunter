@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'api_constants.dart';
 
@@ -12,18 +12,14 @@ Dio createAndSetupDio() {
     ..options.receiveTimeout = const Duration(seconds: 10)
     ..options.headers['Authorization'] = ApiConstants.apiKey;
 
-  if (kDebugMode) {
-    dio.interceptors.add(
-      LogInterceptor(
-        responseBody: true,
-        error: true,
-        requestHeader: false,
-        responseHeader: false,
-        request: true,
-        requestBody: true,
-      ),
-    );
-  }
-
+  dio.interceptors.add(
+    PrettyDioLogger(
+      requestBody: true,
+      requestHeader: true,
+      responseHeader: true,
+      error: true,
+      request: true,
+    ),
+  );
   return dio;
 }

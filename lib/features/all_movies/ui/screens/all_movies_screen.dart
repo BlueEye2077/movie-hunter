@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/models/genre.dart';
 import '../../../../core/models/movie.dart';
-import '../../../home/logic/cubit/genres_cubit.dart';
+import '../../../home/presentation/cubit/genres_cubit.dart';
 import '../../data/models/all_movies_args.dart';
 import '../../../../core/common/scroll_index_calculator.dart';
 import '../../logic/cubit/all_movies_cubit.dart';

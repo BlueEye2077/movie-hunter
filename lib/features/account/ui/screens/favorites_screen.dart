@@ -7,7 +7,7 @@ import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_strings.dart';
-import '../../../home/logic/cubit/genres_cubit.dart';
+import '../../../home/presentation/cubit/genres_cubit.dart';
 import '../../logic/cubit/favorite_movies_cubit.dart';
 
 class FavoritesScreen extends StatelessWidget {

@@ -9,10 +9,10 @@ import '../../features/account/ui/screens/watchlist_screen.dart';
 import '../../features/all_movies/data/models/all_movies_args.dart';
 import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
 import '../../features/all_movies/ui/screens/all_movies_screen.dart';
-import '../../features/auth/logic/cubit/auth_cubit.dart';
-import '../../features/auth/ui/screens/login_screen.dart';
-import '../../features/auth/ui/screens/sign_up_screen.dart';
-import '../../features/home/logic/cubit/genres_cubit.dart';
+import '../../features/auth/presentation/cubit/auth_cubit.dart';
+import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/auth/presentation/screens/sign_up_screen.dart';
+import '../../features/home/presentation/cubit/genres_cubit.dart';
 import '../../features/movie_details/data/models/cast_and_crew_args.dart';
 import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
 import '../../features/movie_details/ui/screens/cast_and_crew_screen.dart';
@@ -23,6 +23,7 @@ import '../../features/person_details/ui/screens/person_details_screen.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
 import '../../features/search/ui/screens/search_screen.dart';
 import '../../main_screen.dart';
+import '../../features/home/domain/entities/movie_entity.dart';
 import '../di/dependency_injection.dart';
 import '../models/movie.dart';
 import 'routes.dart';
@@ -66,7 +67,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
 
       case Routes.movieDetails:
-        final movie = settings.arguments as Movie;
+      // Todo: temp solution to use in the non refactor modules, we should use the entity class instead of this
+        final dynamic arg = settings.arguments;
+        final Movie movie = arg is MovieEntity ? arg.toMovie() : arg as Movie;
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
