@@ -13,6 +13,6 @@ class LoginUseCase {
     String username,
     String password,
   ) async {
-    return await _authRepository.login(username, password);
+    return _authRepository.login(username, password);
   }
 }

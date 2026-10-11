@@ -3,11 +3,12 @@ import 'dart:collection';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/models/movie.dart';
-import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../../home/data/repository/home_repository.dart';
+import '../../../home/domain/entities/movie_entity.dart';
+import '../../../home/domain/repos/home_repository.dart';
 import '../../data/models/all_movies_args.dart';
 
 part 'all_movies_cubit.freezed.dart';
@@ -53,7 +54,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
     _isFetching = true;
     emit(AllMoviesState.loadingPaginationAllMovies());
 
-    ApiResult<ApiResponse<Movie>> result = await getMoviesByCategory(
+    ApiResult<PaginatedList<MovieEntity>> result = await getMoviesByCategory(
       _currentPage + 1,
     );
 
@@ -61,9 +62,9 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
 
     result.when(
       success: (data) {
-        _currentPage = data.page ?? 1;
-        _totalPages = data.totalPages ?? 1;
-        _movies.addAll(data.results ?? []);
+        _currentPage = data.page;
+        _totalPages = data.totalPages;
+        _movies.addAll(data.results.map((e) => e.toMovie()));
         _isFetching = false;
         emit(AllMoviesState.successPaginationAllMovies(_movies));
       },
@@ -74,7 +75,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
     );
   }
 
-  Future<ApiResult<ApiResponse<Movie>>> getMoviesByCategory(int page) {
+  Future<ApiResult<PaginatedList<MovieEntity>>> getMoviesByCategory(int page) {
     switch (_category) {
       case MovieCategory.nowPlayingMovies:
         return homeRepository.getNowPlayingMovies(page: page);
@@ -91,7 +92,9 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
         );
       case MovieCategory.staticList:
         return Future.value(
-          ApiResult.success(ApiResponse(page: 1, totalPages: 1, results: [])),
+          ApiResult.success(
+            const PaginatedList(page: 1, totalPages: 1, results: []),
+          ),
         );
     }
   }

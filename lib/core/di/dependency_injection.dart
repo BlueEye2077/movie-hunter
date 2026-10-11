@@ -1,6 +1,12 @@
 import 'package:get_it/get_it.dart';
 import '../../features/auth/domain/repos/auth_repository.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
+import '../../features/home/domain/repos/home_repository.dart';
+import '../../features/home/domain/usecases/get_genres_usecase.dart';
+import '../../features/home/domain/usecases/get_popular_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_top_rated_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_upcoming_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_now_playing_movies_usecase.dart';
 
 import '../../features/account/data/repository/profile_repository.dart';
 import '../../features/account/data/web_services/profile_api_services.dart';
@@ -14,7 +20,7 @@ import '../../features/auth/data/repos/auth_repository_impl.dart';
 import '../../features/auth/data/web_services/auth_api_services.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/categories/logic/cubit/categories_cubit.dart';
-import '../../features/home/data/repository/home_repository.dart';
+import '../../features/home/data/repos/home_repository_impl.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
 import '../../features/home/presentation/cubit/genres_cubit.dart';
 import '../../features/home/presentation/cubit/now_playing_movies_cubit.dart';
@@ -45,27 +51,42 @@ void initGetIt() {
   getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   // register home repository
   getIt.registerLazySingleton<HomeRepository>(
-    () => HomeRepository(homeApiService: getIt()),
+    () => HomeRepositoryImpl(homeApiService: getIt()),
   );
-  // register upcoming movies cubit
-  getIt.registerFactory<UpComingMoviesCubit>(
-    () => UpComingMoviesCubit(homeRepository: getIt()),
+
+  // register home use cases
+  getIt.registerLazySingleton<GetUpcomingMoviesUseCase>(
+    () => GetUpcomingMoviesUseCase(homeRepository: getIt()),
   );
-  // register popular movies cubit
+  getIt.registerLazySingleton<GetPopularMoviesUseCase>(
+    () => GetPopularMoviesUseCase(homeRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetTopRatedMoviesUseCase>(
+    () => GetTopRatedMoviesUseCase(homeRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetNowPlayingMoviesUseCase>(
+    () => GetNowPlayingMoviesUseCase(homeRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetGenresUseCase>(
+    () => GetGenresUseCase(homeRepository: getIt()),
+  );
+
+  // register movie cubits
+  getIt.registerFactory<UpcomingMoviesCubit>(
+    () => UpcomingMoviesCubit(getUpcomingMoviesUseCase: getIt()),
+  );
   getIt.registerFactory<PopularMoviesCubit>(
-    () => PopularMoviesCubit(homeRepository: getIt()),
+    () => PopularMoviesCubit(getPopularMoviesUseCase: getIt()),
   );
-  // register top rated movies cubit
   getIt.registerFactory<TopRatedMoviesCubit>(
-    () => TopRatedMoviesCubit(homeRepository: getIt()),
+    () => TopRatedMoviesCubit(getTopRatedMoviesUseCase: getIt()),
   );
-  // register now playing movies cubit
   getIt.registerFactory<NowPlayingMoviesCubit>(
-    () => NowPlayingMoviesCubit(homeRepository: getIt()),
+    () => NowPlayingMoviesCubit(getNowPlayingMoviesUseCase: getIt()),
   );
-  // register genres cubit
+  // register genres cubit (singleton)
   getIt.registerLazySingleton<GenresCubit>(
-    () => GenresCubit(homeRepository: getIt()),
+    () => GenresCubit(getGenresUseCase: getIt()),
   );
   // register categories cubit
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));

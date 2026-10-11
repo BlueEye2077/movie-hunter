@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/models/genre.dart';
 import '../../../../core/models/movie.dart';

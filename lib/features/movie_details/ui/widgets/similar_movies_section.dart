@@ -61,7 +61,7 @@ class SimilarMoviesSection extends StatelessWidget {
                           ),
                         ),
                       )
-                    : BlocBuilder<GenresCubit, RequestsState<List<Genre>>>(
+                    : BlocBuilder<GenresCubit, GenresState>(
                         builder: (context, genresState) {
                           final genres = genresState.maybeWhen(
                             success: (g) => g,
