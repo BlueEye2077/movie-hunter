@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/models/movie.dart';
-import '../../../../../core/networking/api_response.dart';
 import '../../../../../core/networking/network_exceptions.dart';
-import '../../../../../core/networking/requests_state.dart';
 import '../../../../../core/theming/text_styles.dart';
 import '../../cubit/upcoming_movies_cubit.dart';
 import 'upcoming_movies_carousel.dart';
@@ -17,14 +14,15 @@ class UpcomingMoviesBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // The bloc that controls the upcoming movies
-    return BlocBuilder<UpComingMoviesCubit, RequestsState<ApiResponse<Movie>>>(
+    return BlocBuilder<UpcomingMoviesCubit, UpComingMoviesState>(
       builder: (context, state) {
         return state.when(
           idle: () => const SizedBox.shrink(),
           loading: () => const UpcomingMoviesShimmer(),
-          success: (response) {
-            final movies = response.results ?? [];
-            return UpcomingMoviesCarousel.showCarousel(upComingMovies: movies);
+          success: (paginatedList) {
+            return UpcomingMoviesCarousel.showCarousel(
+              upComingMovies: paginatedList.results,
+            );
           },
           error: (error) => SizedBox(
             height: 174.h,

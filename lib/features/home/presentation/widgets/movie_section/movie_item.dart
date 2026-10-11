@@ -48,7 +48,6 @@ class MovieItem extends StatelessWidget {
             ),
             // Title and genre
             Positioned(
-              // bottom: 8.h,
               top: 189.h,
               left: 8.w,
               right: 8.w,

@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/networking/api_response.dart';
-import '../../../../core/networking/network_exceptions.dart';
-import '../../../../core/networking/requests_state.dart';
-import '../../../../core/routing/routes.dart';
-import '../../../../core/theming/app_strings.dart';
-import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
 import '../../../../core/models/genre.dart';
-import '../../../../core/models/movie.dart';
+import '../../../../core/theming/app_strings.dart';
+import '../../../all_movies/data/models/all_movies_args.dart';
 import '../cubit/genres_cubit.dart';
 import '../cubit/top_rated_movies_cubit.dart';
-import 'movie_section/movies_list_view.dart';
-import 'movie_section/movies_section.dart';
+import 'movie_section/home_movie_section_content.dart';
 
 class TopRatedMoviesBuilder extends StatelessWidget {
   const TopRatedMoviesBuilder({super.key});
@@ -29,44 +20,27 @@ class TopRatedMoviesBuilder extends StatelessWidget {
       success: (g) => g,
       error: (_) => [],
     );
-    // The bloc that controls the top rated movies
-    return BlocBuilder<TopRatedMoviesCubit, RequestsState<ApiResponse<Movie>>>(
+    return BlocBuilder<TopRatedMoviesCubit, TopRatedMoviesState>(
       builder: (context, state) {
         return state.when(
           idle: () => const SizedBox.shrink(),
-          loading: () => MoviesSection(
+          loading: () => HomeMovieSectionContent(
             title: AppStrings.topRated,
-            child: const MoviesListView.shimmer(),
+            category: MovieCategory.topRatedMovies,
+            genres: genres,
+            isLoading: true,
           ),
-          success: (response) {
-            final movies = response.results ?? [];
-            return MoviesSection(
-              title: AppStrings.topRated,
-              onSeeAllTap: () => Navigator.pushNamed(
-                context,
-                Routes.allMovies,
-                arguments: AllMoviesArgs(
-                  title: AppStrings.topRated,
-                  movies: movies,
-                  category: .topRatedMovies,
-                ),
-              ),
-              child: MoviesListView.showMovies(movies: movies, genres: genres),
-            );
-          },
-          error: (error) => MoviesSection(
+          success: (response) => HomeMovieSectionContent(
             title: AppStrings.topRated,
-            child: SizedBox(
-              height: 245.h,
-              child: Center(
-                child: Text(
-                  NetworkExceptions.getErrorMessage(error),
-                  style: TextStyles.font14Regular.copyWith(
-                    color: AppColors.textWhite,
-                  ),
-                ),
-              ),
-            ),
+            category: MovieCategory.topRatedMovies,
+            genres: genres,
+            movies: response.results,
+          ),
+          error: (error) => HomeMovieSectionContent(
+            title: AppStrings.topRated,
+            category: MovieCategory.topRatedMovies,
+            genres: genres,
+            error: error,
           ),
         );
       },

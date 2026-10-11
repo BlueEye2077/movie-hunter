@@ -37,15 +37,16 @@ class MoviesSection extends StatelessWidget {
                 ),
               ),
               // See All Movies Button
-              GestureDetector(
-                onTap: onSeeAllTap,
-                child: Text(
-                  AppStrings.seeAll,
-                  style: TextStyles.font14Medium.copyWith(
-                    color: AppColors.primaryBlueAccent,
+              if (onSeeAllTap != null)
+                GestureDetector(
+                  onTap: onSeeAllTap,
+                  child: Text(
+                    AppStrings.seeAll,
+                    style: TextStyles.font14Medium.copyWith(
+                      color: AppColors.primaryBlueAccent,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

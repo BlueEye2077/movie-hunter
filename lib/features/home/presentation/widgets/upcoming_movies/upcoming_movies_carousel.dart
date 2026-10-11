@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/common/animated_slider_dots.dart';
-import '../../../../../core/models/movie.dart';
 import '../../../../../core/networking/api_constants.dart';
+import '../../../../../core/routing/routes.dart';
+import '../../../domain/entities/movie_entity.dart';
 import 'upcoming_movie_item.dart';
 
 class UpcomingMoviesCarousel extends StatefulWidget {
-  final List<Movie> upComingMovies;
+  final List<MovieEntity> upComingMovies;
 
   // Constructor for showing the carousel
   const UpcomingMoviesCarousel.showCarousel({
@@ -22,7 +23,8 @@ class UpcomingMoviesCarousel extends StatefulWidget {
 
 class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
   int _currentIndex = 0;
-  List<Movie> get _movies => widget.upComingMovies;
+  // Used the get instead of late to make sure the data is updated if the a refresh feature is added in the future.
+  List<MovieEntity> get _movies => widget.upComingMovies.take(5).toList();
 
   // Shared carousel slider — single source of truth for layout.
   Widget _buildSlider({
@@ -47,25 +49,36 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    // To avoid calling the getter everytime
+    final movies = _movies;
+    if (movies.isEmpty) return const SizedBox.shrink();
+
     return Column(
       children: [
         _buildSlider(
-          itemCount: _movies.length,
+          itemCount: movies.length,
           autoPlay: true,
           itemBuilder: (context, index, realIndex) {
-            final movie = _movies[index];
-            return UpcomingMovieItem(
-              posterUrl:
-                  '${ApiConstants.imagesUrl}${movie.horizontalPoster ?? movie.posterPath ?? ''}',
-              title: movie.title ?? 'No title',
-              releaseDate: movie.releaseDate ?? '',
+            final movie = movies[index];
+            return GestureDetector(
+              onTap: () => Navigator.pushNamed(
+                context,
+                Routes.movieDetails,
+                arguments: movie,
+              ),
+              child: UpcomingMovieItem(
+                posterUrl:
+                    '${ApiConstants.imagesUrl}${movie.horizontalPoster ?? movie.posterPath ?? ''}',
+                title: movie.title ?? 'No title',
+                releaseDate: movie.releaseDate ?? '',
+              ),
             );
           },
         ),
-        const SizedBox(height: 11),
+        SizedBox(height: 11.h),
         AnimatedSliderDots(
           currentIndex: _currentIndex,
-          totalDots: _movies.length > 5 ? 5 : _movies.length,
+          totalDots: movies.length,
         ),
       ],
     );

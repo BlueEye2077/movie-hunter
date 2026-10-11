@@ -4,14 +4,14 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../../core/helpers/genres_helper.dart';
 import '../../../../../core/models/genre.dart';
-import '../../../../../core/models/movie.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_spacing.dart';
 import '../../../../../core/theming/colors.dart';
 import 'movie_item.dart';
 
 class MoviesListView extends StatelessWidget {
-  final List<Movie> movies;
+  // Todo: invastigate this
+  final List<dynamic> movies;
   final List<Genre> genres;
   final bool isShimmer;
   const MoviesListView.shimmer({super.key})
@@ -39,7 +39,7 @@ class MoviesListView extends StatelessWidget {
             itemCount: 5,
             separatorBuilder: (context, index) => SizedBox(width: 12.w),
             itemBuilder: (context, index) {
-              return MovieItem(
+              return const MovieItem(
                 title: '',
                 genres: [],
                 posterPath: '',
