@@ -23,6 +23,7 @@ import '../../features/person_details/ui/screens/person_details_screen.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
 import '../../features/search/ui/screens/search_screen.dart';
 import '../../main_screen.dart';
+import '../../features/home/domain/entities/movie_entity.dart';
 import '../di/dependency_injection.dart';
 import '../models/movie.dart';
 import 'routes.dart';
@@ -66,7 +67,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
 
       case Routes.movieDetails:
-        final movie = settings.arguments as Movie;
+      // Todo: temp solution to use in the non refactor modules, we should use the entity class instead of this
+        final dynamic arg = settings.arguments;
+        final Movie movie = arg is MovieEntity ? arg.toMovie() : arg as Movie;
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
