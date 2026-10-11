@@ -1,26 +1,31 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/models/movie.dart';
-import '../../../../core/networking/api_response.dart';
+import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/networking/api_result.dart';
-import '../../../../core/networking/requests_state.dart';
-import '../../data/repository/home_repository.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../../domain/entities/movie_entity.dart';
+import '../../domain/usecases/get_popular_movies_usecase.dart';
 
-class PopularMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
-  PopularMoviesCubit({required this.homeRepository})
-    : super(RequestsState.idle());
+part 'popular_movies_cubit.freezed.dart';
+part 'popular_movies_state.dart';
 
-  final HomeRepository homeRepository;
+class PopularMoviesCubit extends Cubit<PopularMoviesState> {
+  final GetPopularMoviesUseCase _getPopularMoviesUseCase;
 
-  void getPopularMovies() async {
-    emit(RequestsState.loading());
+  PopularMoviesCubit({
+    required GetPopularMoviesUseCase getPopularMoviesUseCase,
+  }) : _getPopularMoviesUseCase = getPopularMoviesUseCase,
+       super(const PopularMoviesState.idle());
 
-    ApiResult<ApiResponse<Movie>> response = await homeRepository
-        .getPopularMovies();
+  // Get popular movies
+  Future<void> getPopularMovies() async {
+    emit(const PopularMoviesState.loading());
+    final response = await _getPopularMoviesUseCase();
+    if (isClosed) return;
     response.when(
-      success: (movies) => emit(RequestsState.success(movies)),
-      failure: (networkExceptions) =>
-          emit(RequestsState.error(networkExceptions)),
+      success: (movies) => emit(PopularMoviesState.success(movies)),
+      failure: (error) => emit(PopularMoviesState.error(error)),
     );
   }
 }

@@ -1,26 +1,33 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/networking/api_response.dart';
+import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/networking/api_result.dart';
-import '../../../../core/networking/requests_state.dart';
-import '../../../../core/models/movie.dart';
-import '../../data/repository/home_repository.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../../domain/entities/movie_entity.dart';
+import '../../domain/usecases/get_upcoming_movies_usecase.dart';
 
-class UpComingMoviesCubit extends Cubit<RequestsState<ApiResponse<Movie>>> {
-  UpComingMoviesCubit({required this.homeRepository})
-    : super(RequestsState.idle());
+part 'upcoming_movies_cubit.freezed.dart';
+part 'upcoming_movies_state.dart';
 
-  final HomeRepository homeRepository;
+class UpcomingMoviesCubit extends Cubit<UpComingMoviesState> {
+  final GetUpcomingMoviesUseCase _getUpcomingMoviesUseCase;
+
+  UpcomingMoviesCubit({
+    required GetUpcomingMoviesUseCase getUpcomingMoviesUseCase,
+  }) : _getUpcomingMoviesUseCase = getUpcomingMoviesUseCase,
+       super(const UpComingMoviesState.idle());
 
   // Get upcoming movies
-  void getUpComingMovies() async {
-    emit(RequestsState.loading());
-    var response = await homeRepository.getUpcomingMovies();
+  Future<void> getUpcomingMovies() async {
+    emit(const UpComingMoviesState.loading());
+    final response = await _getUpcomingMoviesUseCase();
+    if (isClosed) return;
     response.when(
-      success: (ApiResponse<Movie> upComingMovies) =>
-          emit(RequestsState.success(upComingMovies)),
-      failure: (networkExceptions) =>
-          emit(RequestsState.error(networkExceptions)),
+      success: (movies) => emit(UpComingMoviesState.success(movies)),
+      failure: (error) => emit(UpComingMoviesState.error(error)),
     );
   }
+
+  Future<void> getUpComingMovies() => getUpcomingMovies();
 }

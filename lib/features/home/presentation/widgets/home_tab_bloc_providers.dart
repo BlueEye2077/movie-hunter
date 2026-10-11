@@ -19,7 +19,7 @@ class HomeTabBlocProviders extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => getIt<UpComingMoviesCubit>()..getUpComingMovies(),
+          create: (_) => getIt<UpcomingMoviesCubit>()..getUpcomingMovies(),
         ),
         BlocProvider(
           create: (_) => getIt<PopularMoviesCubit>()..getPopularMovies(),

@@ -1,15 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/networking/api_result.dart';
-import '../../../../core/networking/requests_state.dart';
 import '../../../../core/models/genre.dart';
-import '../../data/repository/home_repository.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/networking/network_exceptions.dart';
+import '../../domain/usecases/get_genres_usecase.dart';
 
-class GenresCubit extends Cubit<RequestsState<List<Genre>>> {
-  final HomeRepository homeRepository;
+part 'genres_cubit.freezed.dart';
+part 'genres_state.dart';
 
-  GenresCubit({required this.homeRepository})
-      : super(const RequestsState.idle());
+class GenresCubit extends Cubit<GenresState> {
+  final GetGenresUseCase _getGenresUseCase;
+
+  GenresCubit({required GetGenresUseCase getGenresUseCase})
+      : _getGenresUseCase = getGenresUseCase,
+        super(const GenresState.idle());
 
   void getGenres() async {
     // Avoid redundant network requests if genres are already loaded
@@ -19,13 +24,12 @@ class GenresCubit extends Cubit<RequestsState<List<Genre>>> {
     );
     if (isAlreadyLoaded) return;
 
-    emit(const RequestsState.loading());
-    final result = await homeRepository.getGenres();
+    emit(const GenresState.loading());
+    final result = await _getGenresUseCase();
     if (isClosed) return;
     result.when(
-      success: (genres) => emit(RequestsState.success(genres)),
-      failure: (networkExceptions) =>
-          emit(RequestsState.error(networkExceptions)),
+      success: (genres) => emit(GenresState.success(genres)),
+      failure: (networkExceptions) => emit(GenresState.error(networkExceptions)),
     );
   }
 }
