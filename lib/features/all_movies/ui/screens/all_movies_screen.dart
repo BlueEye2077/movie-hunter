@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theming/colors.dart';
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/models/movie.dart';
-import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
 import '../../data/models/all_movies_args.dart';
 import '../../../../core/common/scroll_index_calculator.dart';
 import '../../logic/cubit/all_movies_cubit.dart';
@@ -27,12 +27,9 @@ class _AllMoviesScreenState extends State<AllMoviesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final genresState = context.watch<GenresCubit>().state;
-    final List<Genre> genres = genresState.when(
-      idle: () => [],
-      loading: () => [],
-      success: (g) => g,
-      error: (_) => [],
+    // Todo: remove GenresCubit from UI after refactoring this feature to enrich MovieEntity in the domain layer
+    final List<GenreEntity> genres = context.select<GenresCubit, List<GenreEntity>>(
+      (cubit) => cubit.state.whenOrNull(success: (g) => g) ?? const [],
     );
 
     return Scaffold(

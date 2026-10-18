@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theming/colors.dart';
-import '../models/genre.dart';
+import '../genres/domain/entities/genre_entity.dart';
 import '../models/movie.dart';
 import '../theming/text_styles.dart';
 import 'movie_shimmer_list_view.dart';
@@ -12,7 +12,7 @@ import 'scroll_index_calculator.dart';
 class MoviesBrowserScaffold extends StatefulWidget {
   final String title;
   final List<Movie> movies;
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
   final bool isLoading;
   final bool isLoadingPagination;
   final VoidCallback? onFetchNextPage;

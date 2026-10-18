@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/movie_list_view_item.dart';
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/models/movie.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
 
 class SearchMovieList extends StatelessWidget {
   final List<Movie> movies;
@@ -20,12 +20,9 @@ class SearchMovieList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (movies.isEmpty) return const SizedBox.shrink();
 
-    final genresState = context.watch<GenresCubit>().state;
-    final List<Genre> genres = genresState.when(
-      idle: () => [],
-      loading: () => [],
-      success: (data) => data,
-      error: (_) => [],
+    // Todo: remove GenresCubit from UI after refactoring this feature to enrich MovieEntity in the domain layer
+    final List<GenreEntity> genres = context.select<GenresCubit, List<GenreEntity>>(
+      (cubit) => cubit.state.whenOrNull(success: (data) => data) ?? const [],
     );
 
     return Column(

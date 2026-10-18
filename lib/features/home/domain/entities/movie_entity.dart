@@ -2,6 +2,8 @@ class MovieEntity {
   final bool? isAdult;
   final String? horizontalPoster;
   final List<int>? genreIds;
+  final List<String>? genreNames;
+
   final int? id;
   final String? originalLanguage;
   final String? originalTitle;
@@ -29,5 +31,42 @@ class MovieEntity {
     this.video,
     this.tmdbRating,
     this.tmdbVoteCount,
+    this.genreNames,
   });
+
+  MovieEntity copyWith({
+    bool? isAdult,
+    String? horizontalPoster,
+    List<int>? genreIds,
+    List<String>? genreNames,
+    int? id,
+    String? originalLanguage,
+    String? originalTitle,
+    String? overview,
+    double? popularity,
+    String? posterPath,
+    String? releaseDate,
+    String? title,
+    bool? video,
+    double? tmdbRating,
+    int? tmdbVoteCount,
+  }) {
+    return MovieEntity(
+      isAdult: isAdult ?? this.isAdult,
+      horizontalPoster: horizontalPoster ?? this.horizontalPoster,
+      genreIds: genreIds ?? this.genreIds,
+      genreNames: genreNames ?? this.genreNames,
+      id: id ?? this.id,
+      originalLanguage: originalLanguage ?? this.originalLanguage,
+      originalTitle: originalTitle ?? this.originalTitle,
+      overview: overview ?? this.overview,
+      popularity: popularity ?? this.popularity,
+      posterPath: posterPath ?? this.posterPath,
+      releaseDate: releaseDate ?? this.releaseDate,
+      title: title ?? this.title,
+      video: video ?? this.video,
+      tmdbRating: tmdbRating ?? this.tmdbRating,
+      tmdbVoteCount: tmdbVoteCount ?? this.tmdbVoteCount,
+    );
+  }
 }

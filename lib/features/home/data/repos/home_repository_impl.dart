@@ -1,10 +1,9 @@
-import 'package:movie_hunter/core/domain/models/paginated_list.dart';
-import 'package:movie_hunter/features/home/domain/entities/movie_entity.dart';
-
-import '../../../../core/models/genre.dart';
+import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../domain/entities/movie_entity.dart';
 import '../../domain/repos/home_repository.dart';
+import '../mappers/movie_mapper.dart';
 import '../web_services/home_api_service.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
@@ -67,17 +66,6 @@ class HomeRepositoryImpl implements HomeRepository {
       return ApiResult.success(
         response.toPaginatedList<MovieEntity>((item) => item.toEntity()),
       );
-    } catch (error) {
-      return ApiResult.failure(NetworkExceptions.getDioException(error));
-    }
-  }
-
-  // Get genres list
-  @override
-  Future<ApiResult<List<Genre>>> getGenres() async {
-    try {
-      var response = await homeApiService.getGenres();
-      return ApiResult.success(response["genres"] ?? []);
     } catch (error) {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }

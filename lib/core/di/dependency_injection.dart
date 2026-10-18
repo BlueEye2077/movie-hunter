@@ -2,7 +2,10 @@ import 'package:get_it/get_it.dart';
 import '../../features/auth/domain/repos/auth_repository.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/home/domain/repos/home_repository.dart';
-import '../../features/home/domain/usecases/get_genres_usecase.dart';
+import '../genres/data/repos/genres_repository_impl.dart';
+import '../genres/data/web_services/genres_api_services.dart';
+import '../genres/domain/repos/genres_repository.dart';
+import '../genres/domain/usecases/get_genres_usecase.dart';
 import '../../features/home/domain/usecases/get_popular_movies_usecase.dart';
 import '../../features/home/domain/usecases/get_top_rated_movies_usecase.dart';
 import '../../features/home/domain/usecases/get_upcoming_movies_usecase.dart';
@@ -22,7 +25,7 @@ import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/categories/logic/cubit/categories_cubit.dart';
 import '../../features/home/data/repos/home_repository_impl.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
-import '../../features/home/presentation/cubit/genres_cubit.dart';
+import '../genres/cubit/genres_cubit.dart';
 import '../../features/home/presentation/cubit/now_playing_movies_cubit.dart';
 import '../../features/home/presentation/cubit/popular_movies_cubit.dart';
 import '../../features/home/presentation/cubit/top_rated_movies_cubit.dart';
@@ -56,19 +59,36 @@ void initGetIt() {
 
   // register home use cases
   getIt.registerLazySingleton<GetUpcomingMoviesUseCase>(
-    () => GetUpcomingMoviesUseCase(homeRepository: getIt()),
+    () => GetUpcomingMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
   getIt.registerLazySingleton<GetPopularMoviesUseCase>(
-    () => GetPopularMoviesUseCase(homeRepository: getIt()),
+    () => GetPopularMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
   getIt.registerLazySingleton<GetTopRatedMoviesUseCase>(
-    () => GetTopRatedMoviesUseCase(homeRepository: getIt()),
+    () => GetTopRatedMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
   getIt.registerLazySingleton<GetNowPlayingMoviesUseCase>(
-    () => GetNowPlayingMoviesUseCase(homeRepository: getIt()),
+    () => GetNowPlayingMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
+  );
+  // ── Genres ──
+  getIt.registerLazySingleton<GenresApiServices>(() => GenresApiServices(dio));
+  getIt.registerLazySingleton<GenresRepository>(
+    () => GenresRepositoryImpl(getIt()),
   );
   getIt.registerLazySingleton<GetGenresUseCase>(
-    () => GetGenresUseCase(homeRepository: getIt()),
+    () => GetGenresUseCase(genresRepository: getIt()),
   );
 
   // register movie cubits
@@ -84,8 +104,8 @@ void initGetIt() {
   getIt.registerFactory<NowPlayingMoviesCubit>(
     () => NowPlayingMoviesCubit(getNowPlayingMoviesUseCase: getIt()),
   );
-  // register genres cubit (singleton)
-  getIt.registerLazySingleton<GenresCubit>(
+  // register genres cubit
+  getIt.registerFactory<GenresCubit>(
     () => GenresCubit(getGenresUseCase: getIt()),
   );
   // register categories cubit

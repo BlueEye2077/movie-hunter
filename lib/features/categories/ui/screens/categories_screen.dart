@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
 import '../../logic/cubit/categories_cubit.dart';
 import '../../logic/cubit/categories_state.dart';
 import '../widgets/categories_grid_view.dart';
@@ -15,12 +15,8 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<CategoriesCubit>()),
-        // Use .value so this screen borrows the singleton GenresCubit without closing it on unmount.
-        BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
-      ],
+    return BlocProvider(
+      create: (context) => getIt<CategoriesCubit>(),
       child: const _CategoriesScreenContent(),
     );
   }

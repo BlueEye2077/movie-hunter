@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/genre.dart';
+import '../genres/domain/entities/genre_entity.dart';
 import '../models/movie.dart';
 import 'movies_browser_grid_view.dart';
 import 'movies_browser_list_view.dart';
@@ -16,7 +16,7 @@ class MoviesBrowserSwitcher extends StatelessWidget {
   });
   final bool isGridView;
   final List<Movie> movies;
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
   final bool isLoadingPagination;
   final int scrolledMovieIndex;
 

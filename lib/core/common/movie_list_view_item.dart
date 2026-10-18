@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../helpers/genres_helper.dart';
-import '../models/genre.dart';
+import '../genres/domain/entities/genre_entity.dart';
+import '../genres/helpers/genres_helper.dart';
 import '../models/movie.dart';
 import '../routing/routes.dart';
 import '../theming/app_strings.dart';
@@ -14,7 +14,7 @@ import 'rating_badge.dart';
 
 class MovieListViewItem extends StatelessWidget {
   final Movie movie;
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
   final VoidCallback? onTap;
 
   const MovieListViewItem({
@@ -76,7 +76,7 @@ class MovieListViewItem extends StatelessWidget {
 
 class _MovieListViewItemDetails extends StatelessWidget {
   final Movie movie;
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
 
   const _MovieListViewItemDetails({
     required this.movie,

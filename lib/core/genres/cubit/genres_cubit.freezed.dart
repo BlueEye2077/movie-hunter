@@ -128,7 +128,7 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  loading,TResult Function( List<Genre> genres)?  success,TResult Function( NetworkExceptions error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  loading,TResult Function( List<GenreEntity> genres)?  success,TResult Function( NetworkExceptions error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Idle() when idle != null:
 return idle();case _Loading() when loading != null:
@@ -152,7 +152,7 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  loading,required TResult Function( List<Genre> genres)  success,required TResult Function( NetworkExceptions error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  loading,required TResult Function( List<GenreEntity> genres)  success,required TResult Function( NetworkExceptions error)  error,}) {final _that = this;
 switch (_that) {
 case _Idle():
 return idle();case _Loading():
@@ -175,7 +175,7 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  loading,TResult? Function( List<Genre> genres)?  success,TResult? Function( NetworkExceptions error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  loading,TResult? Function( List<GenreEntity> genres)?  success,TResult? Function( NetworkExceptions error)?  error,}) {final _that = this;
 switch (_that) {
 case _Idle() when idle != null:
 return idle();case _Loading() when loading != null:
@@ -257,11 +257,11 @@ String toString() {
 
 
 class _Success implements GenresState {
-  const _Success(final  List<Genre> genres): _genres = genres;
+  const _Success(final  List<GenreEntity> genres): _genres = genres;
   
 
- final  List<Genre> _genres;
- List<Genre> get genres {
+ final  List<GenreEntity> _genres;
+ List<GenreEntity> get genres {
   if (_genres is EqualUnmodifiableListView) return _genres;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_genres);
@@ -298,7 +298,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $GenresStateCopyWith<$Re
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- List<Genre> genres
+ List<GenreEntity> genres
 });
 
 
@@ -318,7 +318,7 @@ class __$SuccessCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? genres = null,}) {
   return _then(_Success(
 null == genres ? _self._genres : genres // ignore: cast_nullable_to_non_nullable
-as List<Genre>,
+as List<GenreEntity>,
   ));
 }
 

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/di/dependency_injection.dart';
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/models/movie.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
@@ -11,7 +11,7 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
 import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
 import '../../../home/presentation/widgets/movie_section/movies_section.dart';
 import '../../logic/cubit/similar_movies_cubit.dart';
@@ -23,6 +23,11 @@ class SimilarMoviesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Todo: remove GenresCubit from UI after refactoring this feature to enrich MovieEntity in the domain layer
+    final List<GenreEntity> genres = context.select<GenresCubit, List<GenreEntity>>(
+      (cubit) => cubit.state.whenOrNull(success: (g) => g) ?? const [],
+    );
+
     return BlocProvider(
       create: (context) =>
           getIt<SimilarMoviesCubit>()..getSimilarMovies(movieId),
@@ -61,17 +66,9 @@ class SimilarMoviesSection extends StatelessWidget {
                           ),
                         ),
                       )
-                    : BlocBuilder<GenresCubit, GenresState>(
-                        builder: (context, genresState) {
-                          final genres = genresState.maybeWhen(
-                            success: (g) => g,
-                            orElse: () => <Genre>[],
-                          );
-                          return MoviesListView.showMovies(
-                            movies: movies,
-                            genres: genres,
-                          );
-                        },
+                    : MoviesListView.showMovies(
+                        movies: movies,
+                        genres: genres,
                       ),
               );
             },

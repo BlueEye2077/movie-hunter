@@ -1,9 +1,9 @@
-import '../models/genre.dart';
+import '../domain/entities/genre_entity.dart';
 
 class GenresHelper {
   static List<String> getGenreTitles({
     required List<int>? genreIds,
-    required List<Genre> allGenres,
+    required List<GenreEntity> allGenres,
     int limit = 2,
   }) {
     if (genreIds == null || allGenres.isEmpty) return [];
@@ -14,7 +14,7 @@ class GenresHelper {
               allGenres
                   .firstWhere(
                     (genre) => genre.id == id,
-                    orElse: () => Genre(id: -1, name: ''),
+                    orElse: () => const GenreEntity(id: -1, name: ''),
                   )
                   .name ??
               '',
