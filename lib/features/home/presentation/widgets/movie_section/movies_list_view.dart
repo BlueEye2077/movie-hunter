@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../../core/helpers/genres_helper.dart';
-import '../../../../../core/models/genre.dart';
+import '../../../../../core/genres/domain/entities/genre_entity.dart';
+import '../../../../../core/genres/helpers/genres_helper.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_spacing.dart';
 import '../../../../../core/theming/colors.dart';
+import '../../../domain/entities/movie_entity.dart';
 import 'movie_item.dart';
 
 class MoviesListView extends StatelessWidget {
   // Todo: invastigate this
   final List<dynamic> movies;
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
   final bool isShimmer;
   const MoviesListView.shimmer({super.key})
     : movies = const [],
@@ -21,7 +22,7 @@ class MoviesListView extends StatelessWidget {
   const MoviesListView.showMovies({
     super.key,
     required this.movies,
-    required this.genres,
+    this.genres = const [],
   }) : isShimmer = false;
 
   @override
@@ -60,11 +61,13 @@ class MoviesListView extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(width: 12.w),
           itemBuilder: (context, index) {
             final movie = movies[index];
-            // Genres are guaranteed to be cached by the time movies are displayed
-            final genreNames = GenresHelper.getGenreTitles(
-              allGenres: genres,
-              genreIds: movie.genreIds,
-            );
+            // Todo: fix this after refactoring the other sections
+            final List<String> genreNames = movie is MovieEntity
+                ? (movie.genreNames ?? [])
+                : GenresHelper.getGenreTitles(
+                    allGenres: genres,
+                    genreIds: movie.genreIds,
+                  );
             return MovieItem(
               title: movie.title ?? '',
               genres: genreNames,

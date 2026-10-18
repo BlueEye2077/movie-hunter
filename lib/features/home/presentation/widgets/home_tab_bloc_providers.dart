@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/dependency_injection.dart';
-import '../cubit/genres_cubit.dart';
 import '../cubit/now_playing_movies_cubit.dart';
 import '../cubit/popular_movies_cubit.dart';
 import '../cubit/top_rated_movies_cubit.dart';
@@ -30,8 +29,6 @@ class HomeTabBlocProviders extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<NowPlayingMoviesCubit>()..getNowPlayingMovies(),
         ),
-        // Use .value so this tab borrows the singleton GenresCubit without closing it on unmount.
-        BlocProvider.value(value: getIt<GenresCubit>()..getGenres()),
       ],
       child: child,
     );

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/models/genre.dart';
-import '../../../../../core/models/movie.dart';
 import '../../../../../core/networking/network_exceptions.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/text_styles.dart';
 import '../../../../all_movies/data/models/all_movies_args.dart';
+import '../../../data/mappers/movie_mapper.dart';
 import '../../../domain/entities/movie_entity.dart';
 import 'movies_list_view.dart';
 import 'movies_section.dart';
@@ -18,13 +17,11 @@ class HomeMovieSectionContent extends StatelessWidget {
   final bool isLoading;
   final List<MovieEntity>? movies;
   final NetworkExceptions? error;
-  final List<Genre> genres;
 
   const HomeMovieSectionContent({
     super.key,
     required this.title,
     required this.category,
-    required this.genres,
     this.isLoading = false,
     this.movies,
     this.error,
@@ -67,7 +64,7 @@ class HomeMovieSectionContent extends StatelessWidget {
           category: category,
         ),
       ),
-      child: MoviesListView.showMovies(movies: list, genres: genres),
+      child: MoviesListView.showMovies(movies: list),
     );
   }
 }
