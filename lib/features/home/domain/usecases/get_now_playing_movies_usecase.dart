@@ -1,15 +1,49 @@
-import 'package:movie_hunter/core/domain/models/paginated_list.dart';
-import 'package:movie_hunter/core/networking/api_result.dart';
-import 'package:movie_hunter/features/home/domain/entities/movie_entity.dart';
-
+import '../../../../core/domain/models/paginated_list.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
+import '../../../../core/genres/domain/repos/genres_repository.dart';
+import '../../../../core/genres/helpers/genres_helper.dart';
+import '../../../../core/networking/api_result.dart';
+import '../entities/movie_entity.dart';
 import '../repos/home_repository.dart';
 
 class GetNowPlayingMoviesUseCase {
   final HomeRepository _homeRepository;
-  const GetNowPlayingMoviesUseCase({required HomeRepository homeRepository})
-      : _homeRepository = homeRepository;
+  final GenresRepository _genresRepository;
 
-  Future<ApiResult<PaginatedList<MovieEntity>>> call({int page = 1}) {
-    return _homeRepository.getNowPlayingMovies(page: page);
+  const GetNowPlayingMoviesUseCase({
+    required HomeRepository homeRepository,
+    required GenresRepository genresRepository,
+  }) : _homeRepository = homeRepository,
+       _genresRepository = genresRepository;
+
+  Future<ApiResult<PaginatedList<MovieEntity>>> call({int page = 1}) async {
+    final (allGenresResponse, response) = await (
+      _genresRepository.getGenres(),
+      _homeRepository.getNowPlayingMovies(page: page),
+    ).wait;
+
+    final List<GenreEntity> allGenres =
+        allGenresResponse.whenOrNull(success: (data) => data) ?? [];
+
+    return response.when(
+      success: (data) => ApiResult.success(
+        PaginatedList(
+          page: data.page,
+          results: data.results
+              .map(
+                (e) => e.copyWith(
+                  genreNames: GenresHelper.getGenreTitles(
+                    genreIds: e.genreIds,
+                    allGenres: allGenres,
+                  ),
+                ),
+              )
+              .toList(),
+          totalPages: data.totalPages,
+          totalResultsItems: data.totalResultsItems,
+        ),
+      ),
+      failure: (error) => ApiResult.failure(error),
+    );
   }
 }

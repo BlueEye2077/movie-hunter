@@ -1,16 +1,50 @@
 import '../../../../core/domain/models/paginated_list.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
+import '../../../../core/genres/domain/repos/genres_repository.dart';
+import '../../../../core/genres/helpers/genres_helper.dart';
 import '../../../../core/networking/api_result.dart';
 import '../entities/movie_entity.dart';
 import '../repos/home_repository.dart';
 
 class GetUpcomingMoviesUseCase {
   final HomeRepository _homeRepository;
+  final GenresRepository _genresRepository;
 
-  const GetUpcomingMoviesUseCase({required HomeRepository homeRepository})
-      : _homeRepository = homeRepository;
+  const GetUpcomingMoviesUseCase({
+    required HomeRepository homeRepository,
+    required GenresRepository genresRepository,
+  }) : _homeRepository = homeRepository,
+       _genresRepository = genresRepository;
 
-  Future<ApiResult<PaginatedList<MovieEntity>>> call({int page = 1}) {
-    return _homeRepository.getUpcomingMovies(page: page);
+  Future<ApiResult<PaginatedList<MovieEntity>>> call({int page = 1}) async {
+    final (allGenresResponse, response) = await (
+      _genresRepository.getGenres(),
+      _homeRepository.getUpcomingMovies(page: page),
+    ).wait;
+
+    final List<GenreEntity> allGenres =
+        allGenresResponse.whenOrNull(success: (data) => data) ?? [];
+
+    return response.when(
+      success: (data) => ApiResult.success(
+        PaginatedList(
+          page: data.page,
+          results: data.results
+              .map(
+                (e) => e.copyWith(
+                  genreNames: GenresHelper.getGenreTitles(
+                    genreIds: e.genreIds,
+                    allGenres: allGenres,
+                  ),
+                ),
+              )
+              .toList(),
+          totalPages: data.totalPages,
+          totalResultsItems: data.totalResultsItems,
+        ),
+      ),
+      failure: (error) => ApiResult.failure(error),
+    );
   }
 }
 
