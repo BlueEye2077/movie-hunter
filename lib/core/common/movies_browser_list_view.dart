@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../models/genre.dart';
+import '../genres/domain/entities/genre_entity.dart';
 import '../models/movie.dart';
 import '../theming/app_spacing.dart';
 import 'movie_list_view_item.dart';
@@ -10,7 +10,7 @@ import 'scroll_index_calculator.dart';
 
 class MoviesBrowserListView extends StatefulWidget {
   final List<Movie> movies;
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
   final bool isLoadingMore;
   final int scrolledMovieIndex;
 

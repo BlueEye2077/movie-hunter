@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
@@ -11,7 +11,7 @@ import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
 
 class CategoryCard extends StatelessWidget {
-  final Genre genre;
+  final GenreEntity genre;
   final String? imageUrl;
 
   const CategoryCard({super.key, required this.genre, required this.imageUrl});

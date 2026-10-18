@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../home/domain/repos/home_repository.dart';
@@ -12,7 +12,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 
   CategoriesCubit(this._homeRepository) : super(const CategoriesState.idle());
 
-  Future<void> fetchGenreImages(List<Genre> genres) async {
+  Future<void> fetchGenreImages(List<GenreEntity> genres) async {
     if (_isFetched || genres.isEmpty) return;
 
     emit(const CategoriesState.loading());
@@ -28,11 +28,11 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 
       result.when(
         success: (response) {
-          if (response.results != null && response.results!.isNotEmpty) {
+          if (response.results.isNotEmpty) {
             // Find the first movie with a valid backdrop or poster
-            final movie = response.results!.firstWhere(
+            final movie = response.results.firstWhere(
               (m) => m.horizontalPoster != null || m.posterPath != null,
-              orElse: () => response.results!.first,
+              orElse: () => response.results.first,
             );
             
             genreImages[genre.id ?? 0] = movie.horizontalPoster ?? movie.posterPath ?? '';

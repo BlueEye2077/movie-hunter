@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/theming/app_spacing.dart';
 import 'category_card.dart';
 
 class CategoriesGridView extends StatelessWidget {
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
   final Map<int, String> imagesMap;
 
   const CategoriesGridView({

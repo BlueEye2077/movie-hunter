@@ -5,17 +5,19 @@ import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/models/movie.dart';
-import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
 
 class WatchlistScreen extends StatelessWidget {
   const WatchlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final genresState = context.watch<GenresCubit>().state;
-    final List<Genre> genres = genresState.whenOrNull(success: (g) => g) ?? [];
+    // Todo: remove GenresCubit from UI after refactoring this feature to enrich MovieEntity in the domain layer
+    final List<GenreEntity> genres = context.select<GenresCubit, List<GenreEntity>>(
+      (cubit) => cubit.state.whenOrNull(success: (g) => g) ?? const [],
+    );
 
     return BlocBuilder<WatchlistMoviesCubit, RequestsState<ApiResponse<Movie>>>(
       builder: (context, state) {

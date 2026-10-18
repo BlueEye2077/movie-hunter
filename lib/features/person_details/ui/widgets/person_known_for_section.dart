@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/models/genre.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/models/movie.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../home/presentation/cubit/genres_cubit.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
 import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
 import '../../../home/presentation/widgets/movie_section/movies_section.dart';
 
@@ -24,10 +24,9 @@ class PersonKnownForSection extends StatelessWidget {
       ..sort((a, b) => (b.tmdbRating ?? 0).compareTo(a.tmdbRating ?? 0));
     final topMovies = sorted.take(20).toList();
 
-    final genresState = context.read<GenresCubit>().state;
-    final List<Genre> genres = genresState.maybeWhen(
-      success: (g) => g,
-      orElse: () => [],
+    // Todo: remove GenresCubit from UI after refactoring this feature to enrich MovieEntity in the domain layer
+    final List<GenreEntity> genres = context.select<GenresCubit, List<GenreEntity>>(
+      (cubit) => cubit.state.whenOrNull(success: (g) => g) ?? const [],
     );
 
     return MoviesSection(

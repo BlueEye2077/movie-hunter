@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../models/genre.dart';
+import '../genres/domain/entities/genre_entity.dart';
 import '../models/movie.dart';
 import '../routing/routes.dart';
 import '../theming/colors.dart';
@@ -12,7 +12,7 @@ import 'scroll_index_calculator.dart';
 
 class MoviesBrowserGridView extends StatefulWidget {
   final List<Movie> movies;
-  final List<Genre> genres;
+  final List<GenreEntity> genres;
   final bool isLoadingMore;
   final int scrolledMovieIndex;
 

@@ -7,6 +7,7 @@ import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../home/data/mappers/movie_mapper.dart';
 import '../../../home/domain/entities/movie_entity.dart';
 import '../../../home/domain/repos/home_repository.dart';
 import '../../data/models/all_movies_args.dart';
@@ -18,7 +19,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
   final HomeRepository homeRepository;
 
   AllMoviesCubit({required this.homeRepository})
-    : super(AllMoviesState.idle());
+    : super(const AllMoviesState.idle());
 
   late MovieCategory _category;
   int? _entityId;
@@ -44,7 +45,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
       _totalPages = 1;
     }
 
-    emit(AllMoviesState.successAllMovies());
+    emit(const AllMoviesState.successAllMovies());
   }
 
   void fetchNextPage() async {
@@ -52,7 +53,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
     if (_currentPage >= _totalPages) return;
 
     _isFetching = true;
-    emit(AllMoviesState.loadingPaginationAllMovies());
+    emit(const AllMoviesState.loadingPaginationAllMovies());
 
     ApiResult<PaginatedList<MovieEntity>> result = await getMoviesByCategory(
       _currentPage + 1,
