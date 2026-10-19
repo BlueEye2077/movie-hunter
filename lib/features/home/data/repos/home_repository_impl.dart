@@ -70,20 +70,4 @@ class HomeRepositoryImpl implements HomeRepository {
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
   }
-
-  // Get movies by genre
-  @override
-  Future<ApiResult<PaginatedList<MovieEntity>>> getMoviesByGenre({
-    required int genreId,
-    int page = 1,
-  }) async {
-    try {
-      var response = await homeApiService.getMoviesByGenre(genreId, page);
-      return ApiResult.success(
-        response.toPaginatedList((item) => item.toEntity()),
-      );
-    } catch (error) {
-      return ApiResult.failure(NetworkExceptions.getDioException(error));
-    }
-  }
 }

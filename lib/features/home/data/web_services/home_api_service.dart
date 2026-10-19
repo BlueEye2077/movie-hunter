@@ -27,11 +27,4 @@ abstract class HomeApiService {
   // Get the now playing movies list
   @GET(HomeApiConstants.nowPlaying)
   Future<ApiResponse<Movie>> getNowPlayingMovies(@Query("page") int page);
-
-  // Get movies by genre
-  @GET(HomeApiConstants.discoverMovie)
-  Future<ApiResponse<Movie>> getMoviesByGenre(
-    @Query("with_genres") int genreId,
-    @Query("page") int page,
-  );
 }
