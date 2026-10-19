@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/theming/app_spacing.dart';
+import '../../domain/entities/category_entity.dart';
 import 'category_card.dart';
 
 class CategoriesGridView extends StatelessWidget {
-  final List<GenreEntity> genres;
-  final Map<int, String> imagesMap;
+  final List<CategoryEntity> categories;
 
   const CategoriesGridView({
     super.key,
-    required this.genres,
-    required this.imagesMap,
+    required this.categories,
   });
 
   @override
@@ -27,17 +25,12 @@ class CategoriesGridView extends StatelessWidget {
           mainAxisSpacing: 24.h,
           childAspectRatio: 155 / 80,
         ),
-        itemCount: genres.length,
+        itemCount: categories.length,
         itemBuilder: (context, index) {
-          final genre = genres[index];
-          final imageUrl = imagesMap[genre.id];
-
-          return CategoryCard(
-            genre: genre,
-            imageUrl: imageUrl,
-          );
+          return CategoryCard(category: categories[index]);
         },
       ),
     );
   }
 }
+

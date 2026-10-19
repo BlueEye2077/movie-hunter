@@ -15,8 +15,4 @@ abstract class HomeRepository {
   Future<ApiResult<PaginatedList<MovieEntity>>> getNowPlayingMovies({
     int page = 1,
   });
-  Future<ApiResult<PaginatedList<MovieEntity>>> getMoviesByGenre({
-    required int genreId,
-    int page = 1,
-  });
 }
