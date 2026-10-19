@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../all_movies/data/models/all_movies_args.dart';
+import '../../../home/data/mappers/movie_mapper.dart';
+import '../../domain/entities/category_entity.dart';
 
 class CategoryCard extends StatelessWidget {
-  final GenreEntity genre;
-  final String? imageUrl;
+  final CategoryEntity category;
 
-  const CategoryCard({super.key, required this.genre, required this.imageUrl});
+  const CategoryCard({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,11 @@ class CategoryCard extends StatelessWidget {
           context,
           Routes.allMovies,
           arguments: AllMoviesArgs(
-            title: genre.name ?? 'Unknown',
-            movies: [],
+            title: category.name,
+            // Todo: pass List<MovieEntity> directly once all_movies is refactored to Clean Architecture
+            movies: category.initialMovies.map((e) => e.toMovie()).toList(),
             category: MovieCategory.genreMovies,
-            entityId: genre.id,
+            entityId: category.id,
           ),
         );
       },
@@ -36,9 +37,9 @@ class CategoryCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            if (imageUrl != null && imageUrl!.isNotEmpty)
+            if (category.imageUrl.isNotEmpty)
               CachedNetworkImage(
-                imageUrl: '${ApiConstants.imagesUrl}$imageUrl',
+                imageUrl: '${ApiConstants.imagesUrl}${category.imageUrl}',
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Shimmer.fromColors(
                   baseColor: AppColors.primarySoft,
@@ -53,13 +54,13 @@ class CategoryCard extends StatelessWidget {
 
             // Dark overlay matching the Figma design
             Container(
-              color: AppColors.primaryDark.withValues(alpha: 0.4), // Overlay
+              color: AppColors.primaryDark.withValues(alpha: 0.4),
             ),
 
             // Category Name
             Center(
               child: Text(
-                genre.name ?? 'Unknown',
+                category.name,
                 textAlign: TextAlign.center,
                 style: TextStyles.font12Medium.copyWith(
                   color: AppColors.textWhite,
@@ -73,3 +74,4 @@ class CategoryCard extends StatelessWidget {
     );
   }
 }
+
