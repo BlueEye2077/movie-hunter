@@ -7,6 +7,7 @@ import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../categories/domain/repos/categories_repository.dart';
 import '../../../home/data/mappers/movie_mapper.dart';
 import '../../../home/domain/entities/movie_entity.dart';
 import '../../../home/domain/repos/home_repository.dart';
@@ -17,9 +18,12 @@ part 'all_movies_state.dart';
 
 class AllMoviesCubit extends Cubit<AllMoviesState> {
   final HomeRepository homeRepository;
+  final CategoriesRepository categoriesRepository;
 
-  AllMoviesCubit({required this.homeRepository})
-    : super(const AllMoviesState.idle());
+  AllMoviesCubit({
+    required this.homeRepository,
+    required this.categoriesRepository,
+  }) : super(const AllMoviesState.idle());
 
   late MovieCategory _category;
   int? _entityId;
@@ -43,6 +47,12 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
     _entityId = entityId;
     if (category == MovieCategory.staticList) {
       _totalPages = 1;
+    }
+
+    if (_movies.isEmpty && category != MovieCategory.staticList) {
+      _currentPage = 0;
+      fetchNextPage();
+      return;
     }
 
     emit(const AllMoviesState.successAllMovies());
@@ -87,7 +97,7 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
       case MovieCategory.upcomingMovies:
         return homeRepository.getUpcomingMovies(page: page);
       case MovieCategory.genreMovies:
-        return homeRepository.getMoviesByGenre(
+        return categoriesRepository.getMoviesByGenre(
           genreId: _entityId ?? 0,
           page: page,
         );

@@ -22,7 +22,11 @@ import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
 import '../../features/auth/data/repos/auth_repository_impl.dart';
 import '../../features/auth/data/web_services/auth_api_services.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
-import '../../features/categories/logic/cubit/categories_cubit.dart';
+import '../../features/categories/data/repos/categories_repository_impl.dart';
+import '../../features/categories/data/web_services/categories_api_service.dart';
+import '../../features/categories/domain/repos/categories_repository.dart';
+import '../../features/categories/domain/usecases/get_categories_usecase.dart';
+import '../../features/categories/presentation/cubit/categories_cubit.dart';
 import '../../features/home/data/repos/home_repository_impl.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
 import '../genres/cubit/genres_cubit.dart';
@@ -108,8 +112,23 @@ void initGetIt() {
   getIt.registerFactory<GenresCubit>(
     () => GenresCubit(getGenresUseCase: getIt()),
   );
-  // register categories cubit
-  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
+
+  // ── Categories Feature ──
+  getIt.registerLazySingleton<CategoriesApiService>(
+    () => CategoriesApiService(dio),
+  );
+  getIt.registerLazySingleton<CategoriesRepository>(
+    () => CategoriesRepositoryImpl(categoriesApiService: getIt()),
+  );
+  getIt.registerLazySingleton<GetCategoriesUseCase>(
+    () => GetCategoriesUseCase(
+      categoriesRepository: getIt(),
+      genresRepository: getIt(),
+    ),
+  );
+  getIt.registerFactory<CategoriesCubit>(
+    () => CategoriesCubit(getCategoriesUseCase: getIt()),
+  );
 
   // ── Search Feature ──
   // register search api service
@@ -158,7 +177,10 @@ void initGetIt() {
   // ── All Movies Feature ──
   // register the all movies cubit
   getIt.registerFactory<AllMoviesCubit>(
-    () => AllMoviesCubit(homeRepository: getIt()),
+    () => AllMoviesCubit(
+      homeRepository: getIt(),
+      categoriesRepository: getIt(),
+    ),
   );
 
   // ── Auth Feature ──
