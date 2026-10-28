@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/common/movies_browser_scaffold.dart';
 import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
 import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/models/movie.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
-import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../../core/genres/cubit/genres_cubit.dart';
 import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
 import '../../../home/presentation/widgets/movie_section/movies_section.dart';
 import '../../logic/cubit/similar_movies_cubit.dart';
@@ -45,13 +44,16 @@ class SimilarMoviesSection extends StatelessWidget {
                 onSeeAllTap: movies.isEmpty
                     ? null
                     : () {
-                        Navigator.pushNamed(
+                        Navigator.push(
                           context,
-                          Routes.allMovies,
-                          arguments: AllMoviesArgs(
-                            title: "Similar Movies",
-                            movies: movies,
-                            category: MovieCategory.staticList,
+                          MaterialPageRoute(
+                            builder: (_) => MoviesBrowserScaffold(
+                              title: "Similar Movies",
+                              movies: movies.map((e) => e.toEntity()).toList(),
+                              genres: genres,
+                              isLoading: false,
+                              isLoadingPagination: false,
+                            ),
                           ),
                         );
                       },

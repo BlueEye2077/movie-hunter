@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theming/app_strings.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
+import '../../../all_movies/domain/entities/all_movies_source.dart';
 import '../cubit/popular_movies_cubit.dart';
 import 'movie_section/home_movie_section_content.dart';
 
@@ -17,17 +17,17 @@ class MostPopularMoviesBuilder extends StatelessWidget {
           idle: () => const SizedBox.shrink(),
           loading: () => const HomeMovieSectionContent(
             title: AppStrings.mostPopular,
-            category: MovieCategory.popularMovies,
+            source: AllMoviesSource.popular(),
             isLoading: true,
           ),
           success: (response) => HomeMovieSectionContent(
             title: AppStrings.mostPopular,
-            category: MovieCategory.popularMovies,
+            source: const AllMoviesSource.popular(),
             movies: response.results,
           ),
           error: (error) => HomeMovieSectionContent(
             title: AppStrings.mostPopular,
-            category: MovieCategory.popularMovies,
+            source: const AllMoviesSource.popular(),
             error: error,
           ),
         );

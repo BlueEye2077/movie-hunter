@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/genres/cubit/genres_cubit.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/networking/requests_state.dart';
@@ -9,12 +12,9 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../../core/genres/domain/entities/genre_entity.dart';
-import '../../../../core/models/movie.dart';
-import '../../../../core/genres/cubit/genres_cubit.dart';
+import '../../../../features/search/ui/widgets/empty_search.dart';
 import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
 import '../../../home/presentation/widgets/movie_section/movies_section.dart';
-import '../../../../features/search/ui/widgets/empty_search.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
 
 class ProfileWatchlistSection extends StatelessWidget {

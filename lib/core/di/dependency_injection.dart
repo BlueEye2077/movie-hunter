@@ -1,15 +1,4 @@
 import 'package:get_it/get_it.dart';
-import '../../features/auth/domain/repos/auth_repository.dart';
-import '../../features/auth/domain/usecases/login_usecase.dart';
-import '../../features/home/domain/repos/home_repository.dart';
-import '../genres/data/repos/genres_repository_impl.dart';
-import '../genres/data/web_services/genres_api_services.dart';
-import '../genres/domain/repos/genres_repository.dart';
-import '../genres/domain/usecases/get_genres_usecase.dart';
-import '../../features/home/domain/usecases/get_popular_movies_usecase.dart';
-import '../../features/home/domain/usecases/get_top_rated_movies_usecase.dart';
-import '../../features/home/domain/usecases/get_upcoming_movies_usecase.dart';
-import '../../features/home/domain/usecases/get_now_playing_movies_usecase.dart';
 
 import '../../features/account/data/repository/profile_repository.dart';
 import '../../features/account/data/web_services/profile_api_services.dart';
@@ -18,9 +7,13 @@ import '../../features/account/logic/cubit/favourites_cubit.dart';
 import '../../features/account/logic/cubit/profile_cubit.dart';
 import '../../features/account/logic/cubit/watchlist_cubit.dart';
 import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
-import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
+import '../../features/all_movies/domain/usecases/get_movies_by_genre_usecase.dart';
+import '../../features/all_movies/domain/usecases/get_movies_page_usecase.dart';
+import '../../features/all_movies/presentation/cubit/all_movies_cubit.dart';
 import '../../features/auth/data/repos/auth_repository_impl.dart';
 import '../../features/auth/data/web_services/auth_api_services.dart';
+import '../../features/auth/domain/repos/auth_repository.dart';
+import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/categories/data/repos/categories_repository_impl.dart';
 import '../../features/categories/data/web_services/categories_api_service.dart';
@@ -29,7 +22,11 @@ import '../../features/categories/domain/usecases/get_categories_usecase.dart';
 import '../../features/categories/presentation/cubit/categories_cubit.dart';
 import '../../features/home/data/repos/home_repository_impl.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
-import '../genres/cubit/genres_cubit.dart';
+import '../../features/home/domain/repos/home_repository.dart';
+import '../../features/home/domain/usecases/get_now_playing_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_popular_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_top_rated_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_upcoming_movies_usecase.dart';
 import '../../features/home/presentation/cubit/now_playing_movies_cubit.dart';
 import '../../features/home/presentation/cubit/popular_movies_cubit.dart';
 import '../../features/home/presentation/cubit/top_rated_movies_cubit.dart';
@@ -45,6 +42,11 @@ import '../../features/person_details/logic/cubit/person_details_cubit.dart';
 import '../../features/search/data/repository/search_repository.dart';
 import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
+import '../genres/cubit/genres_cubit.dart';
+import '../genres/data/repos/genres_repository_impl.dart';
+import '../genres/data/web_services/genres_api_services.dart';
+import '../genres/domain/repos/genres_repository.dart';
+import '../genres/domain/usecases/get_genres_usecase.dart';
 import '../networking/dio_factory.dart';
 
 GetIt getIt = GetIt.instance;
@@ -175,12 +177,23 @@ void initGetIt() {
   );
 
   // ── All Movies Feature ──
-  // register the all movies cubit
-  getIt.registerFactory<AllMoviesCubit>(
-    () => AllMoviesCubit(
-      homeRepository: getIt(),
+  getIt.registerLazySingleton<GetMoviesByGenreUseCase>(
+    () => GetMoviesByGenreUseCase(
       categoriesRepository: getIt(),
+      genresRepository: getIt(),
     ),
+  );
+  getIt.registerLazySingleton<GetMoviesPageUseCase>(
+    () => GetMoviesPageUseCase(
+      getUpcomingMoviesUseCase: getIt(),
+      getNowPlayingMoviesUseCase: getIt(),
+      getPopularMoviesUseCase: getIt(),
+      getTopRatedMoviesUseCase: getIt(),
+      getMoviesByGenreUseCase: getIt(),
+    ),
+  );
+  getIt.registerFactory<AllMoviesCubit>(
+    () => AllMoviesCubit(getMoviesPageUseCase: getIt()),
   );
 
   // ── Auth Feature ──
