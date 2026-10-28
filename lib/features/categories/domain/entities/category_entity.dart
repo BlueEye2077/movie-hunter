@@ -1,4 +1,4 @@
-import '../../../home/domain/entities/movie_entity.dart';
+import '../../../../core/domain/entities/movie_entity.dart';
 
 class CategoryEntity {
   final int id;

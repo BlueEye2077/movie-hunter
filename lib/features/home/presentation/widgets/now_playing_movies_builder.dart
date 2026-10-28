@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theming/app_strings.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
+import '../../../all_movies/domain/entities/all_movies_source.dart';
 import '../cubit/now_playing_movies_cubit.dart';
 import 'movie_section/home_movie_section_content.dart';
 
@@ -17,17 +17,17 @@ class NowPlayingMoviesBuilder extends StatelessWidget {
           idle: () => const SizedBox.shrink(),
           loading: () => const HomeMovieSectionContent(
             title: AppStrings.nowPlaying,
-            category: MovieCategory.nowPlayingMovies,
+            source: AllMoviesSource.nowPlaying(),
             isLoading: true,
           ),
           success: (response) => HomeMovieSectionContent(
             title: AppStrings.nowPlaying,
-            category: MovieCategory.nowPlayingMovies,
+            source: const AllMoviesSource.nowPlaying(),
             movies: response.results,
           ),
           error: (error) => HomeMovieSectionContent(
             title: AppStrings.nowPlaying,
-            category: MovieCategory.nowPlayingMovies,
+            source: const AllMoviesSource.nowPlaying(),
             error: error,
           ),
         );

@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../genres/domain/entities/genre_entity.dart';
+
 part 'genre.g.dart';
 
 @JsonSerializable()
@@ -8,6 +10,8 @@ class Genre {
   final String? name;
 
   const Genre({required this.id, required this.name});
+
+  GenreEntity toEntity() => GenreEntity(id: id, name: name);
 
   // fromJson
   factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);

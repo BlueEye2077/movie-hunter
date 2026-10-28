@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../../core/models/movie.dart';
 import '../../logic/cubit/favorite_movies_cubit.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
 import 'profile_stat_card.dart';

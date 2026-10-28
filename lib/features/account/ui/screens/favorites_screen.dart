@@ -34,7 +34,8 @@ class FavoritesScreen extends StatelessWidget {
             return MoviesBrowserScaffold(
               title: AppStrings.favorites,
               genres: genres,
-              movies: response.results ?? [],
+              // todo: manipulate the data in the domain
+              movies: (response.results ?? []).map((e) => e.toEntity()).toList(),
               isLoadingPagination: false,
               isLoading: false,
             );

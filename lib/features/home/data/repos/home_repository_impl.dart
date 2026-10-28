@@ -1,9 +1,8 @@
+import '../../../../core/domain/entities/movie_entity.dart';
 import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../domain/entities/movie_entity.dart';
 import '../../domain/repos/home_repository.dart';
-import '../mappers/movie_mapper.dart';
 import '../web_services/home_api_service.dart';
 
 class HomeRepositoryImpl implements HomeRepository {

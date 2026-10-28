@@ -1,9 +1,9 @@
+import '../../../../core/domain/entities/movie_entity.dart';
 import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/genres/domain/repos/genres_repository.dart';
 import '../../../../core/genres/helpers/genres_helper.dart';
 import '../../../../core/networking/api_result.dart';
-import '../entities/movie_entity.dart';
 import '../repos/home_repository.dart';
 
 class GetUpcomingMoviesUseCase {
@@ -27,24 +27,12 @@ class GetUpcomingMoviesUseCase {
 
     return response.when(
       success: (data) => ApiResult.success(
-        PaginatedList(
-          page: data.page,
-          results: data.results
-              .map(
-                (e) => e.copyWith(
-                  genreNames: GenresHelper.getGenreTitles(
-                    genreIds: e.genreIds,
-                    allGenres: allGenres,
-                  ),
-                ),
-              )
-              .toList(),
-          totalPages: data.totalPages,
-          totalResultsItems: data.totalResultsItems,
+        GenresHelper.enrichPaginatedMovies(
+          paginatedList: data,
+          allGenres: allGenres,
         ),
       ),
       failure: (error) => ApiResult.failure(error),
     );
   }
 }
-

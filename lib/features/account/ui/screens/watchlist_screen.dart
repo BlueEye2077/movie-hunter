@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/common/movies_browser_scaffold.dart';
+import '../../../../core/genres/cubit/genres_cubit.dart';
+import '../../../../core/genres/domain/entities/genre_entity.dart';
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_response.dart';
 import '../../../../core/networking/requests_state.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
-import '../../../../core/genres/domain/entities/genre_entity.dart';
-import '../../../../core/models/movie.dart';
-import '../../../../core/genres/cubit/genres_cubit.dart';
 
 class WatchlistScreen extends StatelessWidget {
   const WatchlistScreen({super.key});
@@ -15,9 +15,10 @@ class WatchlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Todo: remove GenresCubit from UI after refactoring this feature to enrich MovieEntity in the domain layer
-    final List<GenreEntity> genres = context.select<GenresCubit, List<GenreEntity>>(
-      (cubit) => cubit.state.whenOrNull(success: (g) => g) ?? const [],
-    );
+    final List<GenreEntity> genres = context
+        .select<GenresCubit, List<GenreEntity>>(
+          (cubit) => cubit.state.whenOrNull(success: (g) => g) ?? const [],
+        );
 
     return BlocBuilder<WatchlistMoviesCubit, RequestsState<ApiResponse<Movie>>>(
       builder: (context, state) {
@@ -33,7 +34,11 @@ class WatchlistScreen extends StatelessWidget {
             return MoviesBrowserScaffold(
               title: AppStrings.watchlist,
               genres: genres,
-              movies: response.results ?? [],
+              // todo: manipulate the data in the domain
+
+              movies: (response.results ?? [])
+                  .map((e) => e.toEntity())
+                  .toList(),
               isLoadingPagination: false,
               isLoading: false,
             );

@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../domain/entities/movie_entity.dart';
+import '../../../../core/domain/entities/movie_entity.dart';
 import '../../domain/usecases/get_top_rated_movies_usecase.dart';
 
 part 'top_rated_movies_cubit.freezed.dart';

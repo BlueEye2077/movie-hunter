@@ -6,9 +6,9 @@ import '../../features/account/logic/cubit/profile_cubit.dart';
 import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
 import '../../features/account/ui/screens/favorites_screen.dart';
 import '../../features/account/ui/screens/watchlist_screen.dart';
-import '../../features/all_movies/data/models/all_movies_args.dart';
-import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
-import '../../features/all_movies/ui/screens/all_movies_screen.dart';
+import '../../features/all_movies/presentation/cubit/all_movies_cubit.dart';
+import '../../features/all_movies/presentation/models/all_movies_args.dart';
+import '../../features/all_movies/presentation/screens/all_movies_screen.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/sign_up_screen.dart';
@@ -22,9 +22,8 @@ import '../../features/person_details/ui/screens/person_details_screen.dart';
 import '../../features/search/logic/cubit/search_cubit.dart';
 import '../../features/search/ui/screens/search_screen.dart';
 import '../../main_screen.dart';
-import '../../features/home/data/mappers/movie_mapper.dart';
-import '../../features/home/domain/entities/movie_entity.dart';
 import '../di/dependency_injection.dart';
+import '../domain/entities/movie_entity.dart';
 import '../models/movie.dart';
 import 'routes.dart';
 
@@ -86,8 +85,7 @@ class AppRouter {
             create: (_) => getIt<AllMoviesCubit>()
               ..setInitial(
                 movies: args.movies,
-                category: args.category,
-                entityId: args.entityId,
+                source: args.allMoviesSource,
               ),
             child: AllMoviesScreen(args: args),
           ),

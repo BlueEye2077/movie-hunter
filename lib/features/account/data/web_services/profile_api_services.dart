@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
-import '../../../../core/models/movie.dart';
 import '../models/account_details_model.dart';
 import '../models/movie_account_state_response.dart';
 import '../models/movie_action_status_response.dart';

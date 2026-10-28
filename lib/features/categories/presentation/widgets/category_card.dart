@@ -7,8 +7,8 @@ import '../../../../core/networking/api_constants.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../all_movies/data/models/all_movies_args.dart';
-import '../../../home/data/mappers/movie_mapper.dart';
+import '../../../all_movies/domain/entities/all_movies_source.dart';
+import '../../../all_movies/presentation/models/all_movies_args.dart';
 import '../../domain/entities/category_entity.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -25,10 +25,8 @@ class CategoryCard extends StatelessWidget {
           Routes.allMovies,
           arguments: AllMoviesArgs(
             title: category.name,
-            // Todo: pass List<MovieEntity> directly once all_movies is refactored to Clean Architecture
-            movies: category.initialMovies.map((e) => e.toMovie()).toList(),
-            category: MovieCategory.genreMovies,
-            entityId: category.id,
+            movies: category.initialMovies,
+            allMoviesSource: AllMoviesSource.category(genreId: category.id),
           ),
         );
       },
@@ -74,4 +72,3 @@ class CategoryCard extends StatelessWidget {
     );
   }
 }
-

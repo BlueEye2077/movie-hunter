@@ -5,15 +5,15 @@ import '../../../../../core/networking/network_exceptions.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/text_styles.dart';
-import '../../../../all_movies/data/models/all_movies_args.dart';
-import '../../../data/mappers/movie_mapper.dart';
-import '../../../domain/entities/movie_entity.dart';
+import '../../../../all_movies/domain/entities/all_movies_source.dart';
+import '../../../../all_movies/presentation/models/all_movies_args.dart';
+import '../../../../../core/domain/entities/movie_entity.dart';
 import 'movies_list_view.dart';
 import 'movies_section.dart';
 
 class HomeMovieSectionContent extends StatelessWidget {
   final String title;
-  final MovieCategory category;
+  final AllMoviesSource source;
   final bool isLoading;
   final List<MovieEntity>? movies;
   final NetworkExceptions? error;
@@ -21,7 +21,7 @@ class HomeMovieSectionContent extends StatelessWidget {
   const HomeMovieSectionContent({
     super.key,
     required this.title,
-    required this.category,
+    required this.source,
     this.isLoading = false,
     this.movies,
     this.error,
@@ -60,8 +60,8 @@ class HomeMovieSectionContent extends StatelessWidget {
         Routes.allMovies,
         arguments: AllMoviesArgs(
           title: title,
-          movies: list.map((e) => e.toMovie()).toList(),
-          category: category,
+          movies: list,
+          allMoviesSource: source,
         ),
       ),
       child: MoviesListView.showMovies(movies: list),
