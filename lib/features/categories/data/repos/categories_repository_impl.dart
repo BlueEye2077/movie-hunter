@@ -1,8 +1,7 @@
+import '../../../../core/domain/entities/movie_entity.dart';
 import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../../home/data/mappers/movie_mapper.dart';
-import '../../../home/domain/entities/movie_entity.dart';
 import '../../domain/repos/categories_repository.dart';
 import '../web_services/categories_api_service.dart';
 
@@ -38,4 +37,3 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
     }
   }
 }
-

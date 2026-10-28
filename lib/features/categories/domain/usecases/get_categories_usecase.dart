@@ -1,9 +1,9 @@
+import '../../../../core/domain/entities/movie_entity.dart';
 import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/genres/domain/repos/genres_repository.dart';
 import '../../../../core/genres/helpers/genres_helper.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/network_exceptions.dart';
-import '../../../home/domain/entities/movie_entity.dart';
 import '../entities/category_entity.dart';
 import '../repos/categories_repository.dart';
 
@@ -57,9 +57,9 @@ class GetCategoriesUseCase {
           );
           result.when(
             success: (response) {
-              moviesByGenre[genre.id!] = _enrichMovieGenreNames(
-                response.results,
-                genres,
+              moviesByGenre[genre.id!] = GenresHelper.enrichMovies(
+                movies: response.results,
+                allGenres: genres,
               );
             },
             failure: (error) => firstError ??= error,
@@ -73,22 +73,6 @@ class GetCategoriesUseCase {
     }
 
     return ApiResult.success(moviesByGenre);
-  }
-
-  List<MovieEntity> _enrichMovieGenreNames(
-    List<MovieEntity> movies,
-    List<GenreEntity> allGenres,
-  ) {
-    return movies
-        .map(
-          (movie) => movie.copyWith(
-            genreNames: GenresHelper.getGenreTitles(
-              genreIds: movie.genreIds,
-              allGenres: allGenres,
-            ),
-          ),
-        )
-        .toList();
   }
 
   List<CategoryEntity> _buildCategories(

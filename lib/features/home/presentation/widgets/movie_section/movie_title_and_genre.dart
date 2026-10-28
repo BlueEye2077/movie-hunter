@@ -31,6 +31,8 @@ class MovieTitleAndGenre extends StatelessWidget {
         Text(
           genres.take(maxGenres).join(', '),
           style: TextStyles.font10Medium.copyWith(color: AppColors.textGrey),
+          maxLines:1,
+          overflow: .ellipsis,
         ),
       ],
     );

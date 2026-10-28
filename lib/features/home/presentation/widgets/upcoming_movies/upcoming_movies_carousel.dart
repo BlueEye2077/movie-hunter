@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/common/animated_slider_dots.dart';
 import '../../../../../core/networking/api_constants.dart';
 import '../../../../../core/routing/routes.dart';
-import '../../../domain/entities/movie_entity.dart';
+import '../../../../../core/domain/entities/movie_entity.dart';
 import 'upcoming_movie_item.dart';
 
 class UpcomingMoviesCarousel extends StatefulWidget {

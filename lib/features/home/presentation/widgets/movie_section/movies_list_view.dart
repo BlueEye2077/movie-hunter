@@ -7,7 +7,7 @@ import '../../../../../core/genres/helpers/genres_helper.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/app_spacing.dart';
 import '../../../../../core/theming/colors.dart';
-import '../../../domain/entities/movie_entity.dart';
+import '../../../../../core/domain/entities/movie_entity.dart';
 import 'movie_item.dart';
 
 class MoviesListView extends StatelessWidget {

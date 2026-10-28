@@ -1,6 +1,6 @@
 import '../../../../core/domain/models/paginated_list.dart';
 import '../../../../core/networking/api_result.dart';
-import '../entities/movie_entity.dart';
+import '../../../../core/domain/entities/movie_entity.dart';
 
 abstract class HomeRepository {
   Future<ApiResult<PaginatedList<MovieEntity>>> getUpcomingMovies({
