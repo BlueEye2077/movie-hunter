@@ -83,4 +83,3 @@ class _CategoriesApiService implements CategoriesApiService {
 }
 
 // dart format on
-

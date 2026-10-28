@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:movie_hunter/core/domain/models/paginated_list.dart';
+import '../domain/models/paginated_list.dart';
 
 part 'api_response.g.dart';
 
