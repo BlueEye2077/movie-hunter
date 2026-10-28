@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../genres/domain/entities/genre_entity.dart';
-import '../models/movie.dart';
+import '../domain/entities/movie_entity.dart';
 import '../routing/routes.dart';
 import '../theming/colors.dart';
 import 'movies_browser_grid_item.dart';
@@ -11,8 +10,7 @@ import 'movies_browser_grid_item_shimmer.dart';
 import 'scroll_index_calculator.dart';
 
 class MoviesBrowserGridView extends StatefulWidget {
-  final List<Movie> movies;
-  final List<GenreEntity> genres;
+  final List<MovieEntity> movies;
   final bool isLoadingMore;
   final int scrolledMovieIndex;
 
@@ -21,7 +19,6 @@ class MoviesBrowserGridView extends StatefulWidget {
   const MoviesBrowserGridView({
     super.key,
     required this.movies,
-    required this.genres,
     required this.isLoadingMore,
     required this.scrolledMovieIndex,
   });
@@ -40,7 +37,7 @@ class _MoviesBrowserGridViewState extends State<MoviesBrowserGridView> {
     if (_scrollController == null) {
       final offset = ScrollIndexCalculator.getGridViewScrollMovieOffset(
         scrolledMovieIndex: widget.scrolledMovieIndex,
-        fullScreenWidth: MediaQuery.of(context).size.width,
+        fullScreenWidth: MediaQuery.sizeOf(context).width,
       );
       _scrollController = ScrollController(initialScrollOffset: offset);
     }

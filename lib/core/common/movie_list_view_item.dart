@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../domain/entities/movie_entity.dart';
 import '../genres/domain/entities/genre_entity.dart';
 import '../genres/helpers/genres_helper.dart';
-import '../models/movie.dart';
 import '../routing/routes.dart';
 import '../theming/app_strings.dart';
 import '../theming/colors.dart';
@@ -13,7 +13,7 @@ import 'poster_image.dart';
 import 'rating_badge.dart';
 
 class MovieListViewItem extends StatelessWidget {
-  final Movie movie;
+  final MovieEntity movie;
   final List<GenreEntity> genres;
   final VoidCallback? onTap;
 
@@ -75,7 +75,7 @@ class MovieListViewItem extends StatelessWidget {
 }
 
 class _MovieListViewItemDetails extends StatelessWidget {
-  final Movie movie;
+  final MovieEntity movie;
   final List<GenreEntity> genres;
 
   const _MovieListViewItemDetails({
@@ -90,12 +90,14 @@ class _MovieListViewItemDetails extends StatelessWidget {
         : AppStrings.unknown;
     final language = movie.originalLanguage?.toUpperCase() ?? 'EN';
     final isAdult = movie.isAdult ?? false;
-
-    final genreNames = GenresHelper.getGenreTitles(
-      genreIds: movie.genreIds,
-      allGenres: genres,
-      limit: 2,
-    );
+ // todo: manipulate the data in the domain layer
+    final genreNames = (movie.genreNames != null && movie.genreNames!.isNotEmpty)
+        ? movie.genreNames!.take(2).toList()
+        : GenresHelper.getGenreTitles(
+            genreIds: movie.genreIds,
+            allGenres: genres,
+            limit: 2,
+          );
 
     final genresString = genreNames.isNotEmpty
         ? genreNames.join(', ')

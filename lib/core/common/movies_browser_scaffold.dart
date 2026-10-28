@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theming/colors.dart';
+import '../domain/entities/movie_entity.dart';
 import '../genres/domain/entities/genre_entity.dart';
-import '../models/movie.dart';
+import '../theming/colors.dart';
 import '../theming/text_styles.dart';
 import 'movie_shimmer_list_view.dart';
 import 'movies_browser_app_bar.dart';
@@ -11,7 +11,7 @@ import 'scroll_index_calculator.dart';
 
 class MoviesBrowserScaffold extends StatefulWidget {
   final String title;
-  final List<Movie> movies;
+  final List<MovieEntity> movies;
   final List<GenreEntity> genres;
   final bool isLoading;
   final bool isLoadingPagination;
@@ -22,7 +22,7 @@ class MoviesBrowserScaffold extends StatefulWidget {
     super.key,
     required this.title,
     required this.movies,
-    required this.genres,
+    this.genres = const [],
     required this.isLoading,
     required this.isLoadingPagination,
     this.onFetchNextPage,
@@ -57,22 +57,20 @@ class _MoviesBrowserScaffoldState extends State<MoviesBrowserScaffold> {
                 ),
               ),
             )
-          : NotificationListener(
+          : NotificationListener<ScrollNotification>(
               onNotification: (ScrollNotification notification) {
-                if (notification is ScrollEndNotification) {
+                if (notification is ScrollUpdateNotification ||
+                    notification is ScrollEndNotification) {
                   final double pixels = notification.metrics.pixels;
                   final double max = notification.metrics.maxScrollExtent;
-                  final int trigger = 200;
+                  const int trigger = 200;
 
-                  if (pixels >= max - trigger) {
+                  if (max > 0 && pixels >= max - trigger) {
                     widget.onFetchNextPage?.call();
                   }
                 }
                 if (notification is ScrollUpdateNotification) {
-                  // Get the current pixels of the scroll view
                   final double pixels = notification.metrics.pixels;
-
-                  // Get the maximum index of the movies list
                   final int maxMoviesListIndex = widget.movies.isNotEmpty
                       ? widget.movies.length - 1
                       : 0;
@@ -80,7 +78,7 @@ class _MoviesBrowserScaffoldState extends State<MoviesBrowserScaffold> {
                   if (_isGridView) {
                     _currentScrollMovieIndex =
                         ScrollIndexCalculator.getCurrentGridViewScrollMovieIndex(
-                          fullScreenWidth: MediaQuery.of(context).size.width,
+                          fullScreenWidth: MediaQuery.sizeOf(context).width,
                           maxMoviesListIndex: maxMoviesListIndex,
                           maxScrollPixels: pixels,
                         );
