@@ -2,7 +2,6 @@ import '../../../networking/api_result.dart';
 import '../../../networking/network_exceptions.dart';
 import '../../domain/entities/genre_entity.dart';
 import '../../domain/repos/genres_repository.dart';
-import '../mappers/genre_mapper.dart';
 import '../web_services/genres_api_services.dart';
 
 class GenresRepositoryImpl implements GenresRepository {
