@@ -39,9 +39,11 @@ import '../../features/movie_details/logic/cubit/similar_movies_cubit.dart';
 import '../../features/person_details/data/repository/person_repository.dart';
 import '../../features/person_details/data/web_services/person_api_service.dart';
 import '../../features/person_details/logic/cubit/person_details_cubit.dart';
-import '../../features/search/data/repository/search_repository.dart';
+import '../../features/search/data/repos/search_repository_impl.dart';
+import '../../features/search/domain/repos/search_repository.dart';
+import '../../features/search/domain/usecases/search_usecase.dart';
 import '../../features/search/data/web_services/search_api_service.dart';
-import '../../features/search/logic/cubit/search_cubit.dart';
+import '../../features/search/presentation/cubit/search_cubit.dart';
 import '../genres/cubit/genres_cubit.dart';
 import '../genres/data/repos/genres_repository_impl.dart';
 import '../genres/data/web_services/genres_api_services.dart';
@@ -137,11 +139,17 @@ void initGetIt() {
   getIt.registerLazySingleton<SearchApiService>(() => SearchApiService(dio));
   // register search repository
   getIt.registerLazySingleton<SearchRepository>(
-    () => SearchRepository(searchApiService: getIt()),
+    () => SearchRepositoryImpl(searchApiService: getIt()),
+  );
+  getIt.registerLazySingleton<SearchUseCase>(
+    () => SearchUseCase(
+      searchRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
   // register search cubit (factory — fresh instance per search session)
   getIt.registerFactory<SearchCubit>(
-    () => SearchCubit(searchRepository: getIt()),
+    () => SearchCubit(searchUseCase: getIt()),
   );
 
   // ── Movie Details Feature ──

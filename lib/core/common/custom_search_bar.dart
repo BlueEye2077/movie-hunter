@@ -32,7 +32,10 @@ class CustomSearchBar extends StatelessWidget {
             'assets/svgs/search.svg',
             width: 16.w,
             height: 16.w,
-            colorFilter: ColorFilter.mode(AppColors.textGrey, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(
+              AppColors.textGrey,
+              BlendMode.srcIn,
+            ),
           ),
           SizedBox(width: 8.w),
           Expanded(
@@ -55,7 +58,10 @@ class CustomSearchBar extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () => controller?.clear(),
+            onPressed: () {
+              controller?.clear();
+              onChanged?.call('');
+            },
             icon: Icon(Icons.close, color: AppColors.textGrey, size: 20.r),
           ),
         ],

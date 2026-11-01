@@ -52,6 +52,7 @@ abstract final class AppStrings {
   static const String searchErrorSubtitle =
       'Find your movie by Type title,\ncategories, years, etc ';
   static const String anErrorOccurred = 'An error occurred.';
+  static const String retry = 'Retry';
 
   // ── Fallback / Default Values ──
   static const String unknown = 'Unknown';

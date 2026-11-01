@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
+import '../theming/colors.dart';
+import '../theming/text_styles.dart';
 
-class EmptySearch extends StatelessWidget {
+class EmptyStateView extends StatelessWidget {
   final String svgPath;
   final double iconSize;
   final String title;
   final String subtitle;
 
-  const EmptySearch({
+  const EmptyStateView({
     super.key,
     required this.svgPath,
     required this.title,
@@ -47,3 +47,4 @@ class EmptySearch extends StatelessWidget {
     );
   }
 }
+
