@@ -22,12 +22,12 @@ class _SearchApiService implements SearchApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ApiResponse<dynamic>> search(String query) async {
+  Future<ApiResponse<SearchResultModel>> search(String query) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'query': query};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ApiResponse<dynamic>>(
+    final _options = _setStreamType<ApiResponse<SearchResultModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -38,11 +38,11 @@ class _SearchApiService implements SearchApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ApiResponse<dynamic> _value;
+    late ApiResponse<SearchResultModel> _value;
     try {
-      _value = ApiResponse<dynamic>.fromJson(
+      _value = ApiResponse<SearchResultModel>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => SearchResultModel.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
