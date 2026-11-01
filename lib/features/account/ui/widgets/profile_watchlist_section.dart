@@ -12,7 +12,7 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../../features/search/ui/widgets/empty_search.dart';
+import '../../../../core/common/empty_state_view.dart';
 import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
 import '../../../home/presentation/widgets/movie_section/movies_section.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
@@ -46,7 +46,7 @@ class ProfileWatchlistSection extends StatelessWidget {
                 child: SizedBox(
                   height: 200.h,
                   child: const Center(
-                    child: EmptySearch(
+                    child: EmptyStateView(
                       svgPath: 'assets/svgs/no_results_large.svg',
                       iconSize: 60,
                       title: AppStrings.noWatchlist,
