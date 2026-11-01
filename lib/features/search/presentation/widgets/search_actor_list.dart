@@ -3,44 +3,30 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
-import '../../../../core/theming/colors.dart';
-import '../../../../core/theming/text_styles.dart';
-import '../../data/models/actor.dart';
+import '../../domain/entities/person_entity.dart';
 import 'search_actor_item.dart';
+import 'search_section_header.dart';
 
 class SearchActorList extends StatelessWidget {
-  final List<Actor> actors;
+  final List<PersonEntity> actors;
 
   const SearchActorList({super.key, required this.actors});
 
   @override
   Widget build(BuildContext context) {
-    if (actors.isEmpty) return const SizedBox.shrink();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.only(
-            left: AppSpacing.horizontalPadding,
-            right: AppSpacing.horizontalPadding,
-            bottom: 16.h,
-          ),
-          child: Text(
-            AppStrings.actors,
-            style: TextStyles.font16SemiBold.copyWith(color: AppColors.textWhite),
-          ),
-        ),
+        const SearchSectionHeader(title: AppStrings.actors),
         SizedBox(
           height: 90.h,
           child: ListView.separated(
             padding: AppSpacing.screenPadding,
             scrollDirection: Axis.horizontal,
             itemCount: actors.length,
-            separatorBuilder: (context, index) => SizedBox(width: 16.w),
+            separatorBuilder: (_, _) => SizedBox(width: 16.w),
             itemBuilder: (context, index) {
-              final actor = actors[index];
-              return SearchActorItem(actor: actor);
+              return SearchActorItem(actor: actors[index]);
             },
           ),
         ),
@@ -48,3 +34,4 @@ class SearchActorList extends StatelessWidget {
     );
   }
 }
+

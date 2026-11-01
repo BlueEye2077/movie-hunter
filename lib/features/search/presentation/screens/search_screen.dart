@@ -1,15 +1,14 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/custom_search_bar.dart';
+import '../../../../core/constants/hero_tags.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../logic/cubit/search_cubit.dart';
+import '../cubit/search_cubit.dart';
 import '../widgets/search_results.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -20,24 +19,16 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final TextEditingController textController = TextEditingController();
-  Timer? _debounce;
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void dispose() {
-    _debounce?.cancel();
-    textController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
   void _onSearchChanged(String query) {
-    // Waits 500 milliseconds before sending a search request to the API, to avoid unnecessary API calls.
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      if (query.isNotEmpty) {
-        context.read<SearchCubit>().search(query);
-      }
-    });
+    context.read<SearchCubit>().onQueryChanged(query);
   }
 
   @override
@@ -47,7 +38,6 @@ class _SearchScreenState extends State<SearchScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Search bar + Cancel
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: AppSpacing.horizontalPadding,
@@ -57,11 +47,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   Expanded(
                     child: Hero(
-                      tag: 'search_bar',
+                      tag: HeroTags.searchBar,
                       child: Material(
                         type: MaterialType.transparency,
                         child: CustomSearchBar(
-                          controller: textController,
+                          controller: _textController,
                           onChanged: _onSearchChanged,
                           autofocus: true,
                         ),
@@ -69,8 +59,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   SizedBox(width: 16.w),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
                     child: Text(
                       AppStrings.cancel,
                       style: TextStyles.font12Medium.copyWith(
@@ -82,11 +77,11 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             SizedBox(height: 24.h),
-            // Body
-            Expanded(child: const SearchResults()),
+            const Expanded(child: SearchResults()),
           ],
         ),
       ),
     );
   }
 }
+
