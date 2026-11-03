@@ -7,6 +7,7 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
+import '../../../person_details/presentation/models/person_details_args.dart';
 import '../../domain/entities/person_entity.dart';
 
 class SearchActorItem extends StatelessWidget {
@@ -21,7 +22,7 @@ class SearchActorItem extends StatelessWidget {
         Navigator.pushNamed(
           context,
           Routes.personDetails,
-          arguments: (actor.id, actor.name),
+          arguments: PersonDetailsArgs(id: actor.id, name: actor.name),
         );
       },
       child: SizedBox(
@@ -42,6 +43,7 @@ class SearchActorItem extends StatelessWidget {
                       imageUrl:
                           '${ApiConstants.profileImagesUrl}${actor.profilePath}',
                       fit: BoxFit.cover,
+                      memCacheWidth: 192,
                       errorBuilder: (context, error, stackTrace) =>
                           const Icon(Icons.person, color: AppColors.textGrey),
                     )

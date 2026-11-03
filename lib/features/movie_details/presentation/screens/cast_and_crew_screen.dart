@@ -6,6 +6,7 @@ import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
+import '../../../person_details/presentation/models/person_details_args.dart';
 import '../../domain/entities/credit_entity.dart';
 import '../../domain/entities/movie_credits_entity.dart';
 import '../widgets/cast_and_crew_list_item.dart';
@@ -102,7 +103,10 @@ class _CreditsSliverList extends StatelessWidget {
               ? () => Navigator.pushNamed(
                     context,
                     Routes.personDetails,
-                    arguments: (member.id, member.name),
+                    arguments: PersonDetailsArgs(
+                      id: member.id,
+                      name: member.name,
+                    ),
                   )
               : null,
         );
