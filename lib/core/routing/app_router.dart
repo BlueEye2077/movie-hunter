@@ -20,8 +20,9 @@ import '../../features/movie_details/presentation/models/cast_and_crew_args.dart
 import '../../features/movie_details/presentation/screens/cast_and_crew_screen.dart';
 import '../../features/movie_details/presentation/screens/movie_details_screen.dart';
 import '../../features/onboarding/ui/screens/onboarding_screen.dart';
-import '../../features/person_details/logic/cubit/person_details_cubit.dart';
-import '../../features/person_details/ui/screens/person_details_screen.dart';
+import '../../features/person_details/presentation/cubit/person_details_cubit.dart';
+import '../../features/person_details/presentation/models/person_details_args.dart';
+import '../../features/person_details/presentation/screens/person_details_screen.dart';
 import '../../features/search/presentation/cubit/search_cubit.dart';
 import '../../features/search/presentation/screens/search_screen.dart';
 import '../../main_screen.dart';
@@ -66,7 +67,7 @@ class AppRouter {
 
       case Routes.movieDetails:
         final dynamic arg = settings.arguments;
-        // TODO: Remove `Movie` fallback once `account` and `person_details` are refactored to use `MovieEntity`.
+        // TODO: Remove `Movie` fallback once `account` is refactored to use `MovieEntity`.
         final MovieEntity movie = switch (arg) {
           MovieEntity entity => entity,
           Movie legacyMovie => legacyMovie.toEntity(),
@@ -115,20 +116,18 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (_) => getIt<AllMoviesCubit>()
-              ..setInitial(
-                movies: args.movies,
-                source: args.allMoviesSource,
-              ),
+              ..setInitial(movies: args.movies, source: args.allMoviesSource),
             child: AllMoviesScreen(args: args),
           ),
         );
 
       case Routes.personDetails:
-        final args = settings.arguments as (int, String);
+        final args = settings.arguments as PersonDetailsArgs;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => getIt<PersonDetailsCubit>(),
-            child: PersonDetailsScreen(personId: args.$1, personName: args.$2),
+            create: (_) =>
+                getIt<PersonDetailsCubit>()..getPersonDetails(args.id),
+            child: PersonDetailsScreen(args: args),
           ),
         );
 

@@ -6,6 +6,7 @@ import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
+import '../../../person_details/presentation/models/person_details_args.dart';
 import '../../domain/entities/movie_credits_entity.dart';
 import '../models/cast_and_crew_args.dart';
 import 'movie_cast_item.dart';
@@ -71,7 +72,10 @@ class MovieCastAndCrew extends StatelessWidget {
                       ? () => Navigator.pushNamed(
                             context,
                             Routes.personDetails,
-                            arguments: (credit.id, credit.name),
+                            arguments: PersonDetailsArgs(
+                              id: credit.id,
+                              name: credit.name,
+                            ),
                           )
                       : null,
                 );

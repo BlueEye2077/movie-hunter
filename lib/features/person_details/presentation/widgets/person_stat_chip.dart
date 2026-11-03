@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 
-class StatChip extends StatelessWidget {
+class PersonStatChip extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const StatChip({super.key, required this.icon, required this.label});
+  const PersonStatChip({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -29,3 +28,4 @@ class StatChip extends StatelessWidget {
     );
   }
 }
+

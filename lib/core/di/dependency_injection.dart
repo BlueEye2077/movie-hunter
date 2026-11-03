@@ -42,9 +42,11 @@ import '../../features/movie_details/presentation/cubit/movie_credits_cubit.dart
 import '../../features/movie_details/presentation/cubit/movie_details_cubit.dart';
 import '../../features/movie_details/presentation/cubit/movie_trailer_cubit.dart';
 import '../../features/movie_details/presentation/cubit/similar_movies_cubit.dart';
-import '../../features/person_details/data/repository/person_repository.dart';
+import '../../features/person_details/data/repos/person_details_repository_impl.dart';
 import '../../features/person_details/data/web_services/person_api_service.dart';
-import '../../features/person_details/logic/cubit/person_details_cubit.dart';
+import '../../features/person_details/domain/repos/person_details_repository.dart';
+import '../../features/person_details/domain/usecases/get_person_details_usecase.dart';
+import '../../features/person_details/presentation/cubit/person_details_cubit.dart';
 import '../../features/search/data/repos/search_repository_impl.dart';
 import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/domain/repos/search_repository.dart';
@@ -195,12 +197,19 @@ void initGetIt() {
   // register person api service
   getIt.registerLazySingleton<PersonApiService>(() => PersonApiService(dio));
   // register person repository
-  getIt.registerLazySingleton<PersonRepository>(
-    () => PersonRepository(personApiService: getIt()),
+  getIt.registerLazySingleton<PersonDetailsRepository>(
+    () => PersonDetailsRepositoryImpl(personApiService: getIt()),
+  );
+  // register get person details use case
+  getIt.registerLazySingleton<GetPersonDetailsUseCase>(
+    () => GetPersonDetailsUseCase(
+      personDetailsRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
   // register person details cubit
   getIt.registerFactory<PersonDetailsCubit>(
-    () => PersonDetailsCubit(personRepository: getIt()),
+    () => PersonDetailsCubit(getPersonDetailsUseCase: getIt()),
   );
 
   // ── All Movies Feature ──
