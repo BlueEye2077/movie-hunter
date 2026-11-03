@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/app_spacing.dart';
@@ -13,6 +13,11 @@ class MovieStoryLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final trimmed = overview.trim();
+    if (trimmed.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     return Padding(
       padding: AppSpacing.screenPadding,
       child: Column(
@@ -26,7 +31,7 @@ class MovieStoryLine extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            overview,
+            trimmed,
             style: TextStyles.font14Regular.copyWith(
               color: AppColors.textGrey,
               height: 1.6,
@@ -37,3 +42,4 @@ class MovieStoryLine extends StatelessWidget {
     );
   }
 }
+

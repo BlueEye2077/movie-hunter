@@ -7,24 +7,24 @@ class MovieDetailsActionButton extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final VoidCallback onPressed;
+  final String? tooltip;
 
   const MovieDetailsActionButton({
     super.key,
     required this.icon,
     this.iconColor = AppColors.textWhite,
     required this.onPressed,
+    this.tooltip,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 32.w,
-        height: 32.w,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
-        child: Icon(icon, color: iconColor, size: 18.w),
-      ),
+    return IconButton(
+      tooltip: tooltip,
+      onPressed: onPressed,
+      constraints: BoxConstraints(minWidth: 48.w, minHeight: 48.w),
+      icon: Icon(icon, color: iconColor, size: 20.w),
     );
   }
 }
+

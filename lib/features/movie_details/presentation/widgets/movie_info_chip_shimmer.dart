@@ -31,3 +31,4 @@ class MovieInfoChipShimmer extends StatelessWidget {
     );
   }
 }
+

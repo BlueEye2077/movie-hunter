@@ -7,6 +7,7 @@ import '../../../../core/theming/text_styles.dart';
 class MovieInfoChip extends StatelessWidget {
   final IconData icon;
   final String label;
+
   const MovieInfoChip({super.key, required this.icon, required this.label});
 
   @override
@@ -21,3 +22,4 @@ class MovieInfoChip extends StatelessWidget {
     );
   }
 }
+

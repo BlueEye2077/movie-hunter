@@ -8,11 +8,13 @@ import 'poster_gradient_overlay.dart';
 class MoviePosterHeader extends StatelessWidget {
   final String? posterPath;
   final String? backdropPath;
+  final String? heroTag;
 
   const MoviePosterHeader({
     super.key,
     required this.posterPath,
     this.backdropPath,
+    this.heroTag,
   });
 
   @override
@@ -22,17 +24,19 @@ class MoviePosterHeader extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Background blurred poster
-          PosterBackdropImage(imagePath: backdropPath ?? posterPath),
-          // Gradient overlay
-          const PosterGradientOverlay(),
-          // Main poster card
+          Positioned.fill(
+            child: PosterBackdropImage(imagePath: backdropPath ?? posterPath),
+          ),
+          const Positioned.fill(
+            child: PosterGradientOverlay(),
+          ),
           Positioned(
             top: 108.h,
-            child: PosterCard(posterPath: posterPath),
+            child: PosterCard(posterPath: posterPath, heroTag: heroTag),
           ),
         ],
       ),
     );
   }
 }
+

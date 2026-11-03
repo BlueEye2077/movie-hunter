@@ -17,17 +17,19 @@ class MovieCircleActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: 48.w,
-        height: 48.w,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.primarySoft,
+    return Material(
+      color: AppColors.primarySoft,
+      shape: const CircleBorder(),
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onPressed,
+        child: SizedBox(
+          width: 48.w,
+          height: 48.w,
+          child: Icon(icon, color: iconColor, size: 24.w),
         ),
-        child: Icon(icon, color: iconColor, size: 24.w),
       ),
     );
   }
 }
+

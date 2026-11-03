@@ -39,12 +39,13 @@ class WatchlistToggleButton extends StatelessWidget {
               return MovieCircleActionButton(
                 icon: Icons.hourglass_empty,
                 iconColor: Colors.grey,
-                onPressed: () {}, // Disabled during loading to prevent spam
+                onPressed: () {},
               );
             },
             success: (isWatchlisted) {
-              final bookmarkIcon =
-                  isWatchlisted ? Icons.bookmark : Icons.bookmark_border;
+              final bookmarkIcon = isWatchlisted
+                  ? Icons.bookmark
+                  : Icons.bookmark_border;
 
               return AnimatedSwitcher(
                 switchInCurve: Curves.easeOutBack,
@@ -59,12 +60,14 @@ class WatchlistToggleButton extends StatelessWidget {
                 child: MovieCircleActionButton(
                   key: ValueKey<IconData>(bookmarkIcon),
                   icon: bookmarkIcon,
-                  iconColor:
-                      isWatchlisted ? AppColors.primaryBlueAccent : Colors.white,
+                  iconColor: isWatchlisted
+                      ? AppColors.primaryBlueAccent
+                      : Colors.white,
                   onPressed: () {
-                    context
-                        .read<WatchlistCubit>()
-                        .toggleWatchlist(movieId, isWatchlisted);
+                    context.read<WatchlistCubit>().toggleWatchlist(
+                      movieId,
+                      isWatchlisted,
+                    );
                   },
                 ),
               );
@@ -82,3 +85,4 @@ class WatchlistToggleButton extends StatelessWidget {
     );
   }
 }
+

@@ -7,11 +7,13 @@ import '../../../../core/theming/colors.dart';
 
 class PosterCard extends StatelessWidget {
   final String? posterPath;
-  const PosterCard({super.key, this.posterPath});
+  final String? heroTag;
+
+  const PosterCard({super.key, this.posterPath, this.heroTag});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final card = Container(
       width: 205.w,
       height: 287.h,
       decoration: BoxDecoration(
@@ -20,7 +22,7 @@ class PosterCard extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
-        child: posterPath != null
+        child: posterPath != null && posterPath!.trim().isNotEmpty
             ? CachedNetworkImage(
                 imageUrl: '${ApiConstants.imagesUrl}$posterPath',
                 fit: BoxFit.cover,
@@ -30,6 +32,9 @@ class PosterCard extends StatelessWidget {
             : _posterPlaceholder(),
       ),
     );
+
+    if (heroTag == null) return card;
+    return Hero(tag: heroTag!, child: card);
   }
 
   Widget _posterPlaceholder() {
@@ -39,3 +44,4 @@ class PosterCard extends StatelessWidget {
     );
   }
 }
+

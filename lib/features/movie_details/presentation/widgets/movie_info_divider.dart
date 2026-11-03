@@ -16,3 +16,4 @@ class MovieInfoDivider extends StatelessWidget {
     );
   }
 }
+
