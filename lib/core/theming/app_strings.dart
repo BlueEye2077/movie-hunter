@@ -86,4 +86,19 @@ abstract final class AppStrings {
 
   static String yearsOld(int age) => '$age years old';
   static String diedAt(int age) => 'Died at $age';
+
+  // ── Onboarding ──
+  static const String onboardingTitle1 =
+      'Welcome, Bestie. I hope you brought snacks.';
+  static const String onboardingDesc1 =
+      "Welcome to the big leagues. We’ve curated the best stories so you don't have to go on a space mission to find something good.";
+  static const String onboardingTitle2 =
+      'That feeling when the ads finally die.';
+  static const String onboardingDesc2 =
+      'We hate ads more than I hate Francis. Why let a commercial break your focus when you’re busy watching a beautiful mind solve the universe.';
+  static const String onboardingTitle3 =
+      'Resolution so high, you can see my regret.';
+  static const String onboardingDesc3 =
+      'Why watch in potato quality when you can see every single hair on Logan’s grumpy face? We’re talking visuals so crisp they’d make a friendly neighborhood spider dizzy.';
+
 }
