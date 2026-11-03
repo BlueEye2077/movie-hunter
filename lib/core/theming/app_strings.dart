@@ -37,10 +37,15 @@ abstract final class AppStrings {
   static const String directors = 'Directors';
   static const String writers = 'Writers';
   static const String cast = 'Cast';
+  static const String similarMovies = 'Similar Movies';
+  static const String noSimilarMoviesFound = 'No similar movies found';
+  static const String noTrailerAvailable =
+      'No trailer available for this movie';
+  static const String couldNotLaunchYoutube = 'Could not launch YouTube';
+  static const String notAvailableDash = '—';
 
-  // ── Cast and Crew Roles (UI Display) ──
-  static const String roleDirector = 'Director';
-  static const String roleWriter = 'Writer';
+  static String shareMovieMessage(String title, String url) =>
+      '🍿 Grab some popcorn! Check out "$title" on Movie Hunter! 🎬\n$url';
 
   // ── Search ──
   static const String cancel = 'Cancel';
