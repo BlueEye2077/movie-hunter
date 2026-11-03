@@ -12,8 +12,8 @@ class MovieCastItemShimmer extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 40.w,
-          height: 40.w,
+          width: 40.r,
+          height: 40.r,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.primarySoft,
@@ -47,3 +47,4 @@ class MovieCastItemShimmer extends StatelessWidget {
     );
   }
 }
+

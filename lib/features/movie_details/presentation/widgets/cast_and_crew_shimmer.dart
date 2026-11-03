@@ -37,12 +37,10 @@ class CastAndCrewShimmer extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           SizedBox(
-            height: 40.h,
+            height: 44.r,
             child: Shimmer.fromColors(
               baseColor: AppColors.primarySoft,
-              highlightColor: AppColors.primarySoft.withValues(
-                alpha: 0.5,
-              ),
+              highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 clipBehavior: Clip.none,
@@ -59,3 +57,4 @@ class CastAndCrewShimmer extends StatelessWidget {
     );
   }
 }
+

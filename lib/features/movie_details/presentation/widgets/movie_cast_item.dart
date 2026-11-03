@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/api_constants.dart';
-import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 
-class CastAndCrewListItem extends StatelessWidget {
+class MovieCastItem extends StatelessWidget {
   final String name;
   final String role;
   final String? profilePath;
   final VoidCallback? onTap;
 
-  const CastAndCrewListItem({
+  const MovieCastItem({
     super.key,
     required this.name,
     required this.role,
@@ -23,22 +22,20 @@ class CastAndCrewListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppSpacing.horizontalPadding,
-          vertical: 8.h,
-        ),
+      child: SizedBox(
+        width: 140.w,
         child: Row(
           children: [
             ClipOval(
               child: SizedBox(
-                width: 56.w,
-                height: 56.w,
-                child: profilePath != null
+                width: 40.r,
+                height: 40.r,
+                child: profilePath != null && profilePath!.trim().isNotEmpty
                     ? CachedNetworkImage(
-                        imageUrl: '${ApiConstants.imagesUrl}$profilePath',
+                        imageUrl: '${ApiConstants.profileImagesUrl}$profilePath',
+                        memCacheWidth: 120,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
                             _avatarPlaceholder(),
@@ -46,10 +43,11 @@ class CastAndCrewListItem extends StatelessWidget {
                     : _avatarPlaceholder(),
               ),
             ),
-            SizedBox(width: 16.w),
+            SizedBox(width: 8.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     name,
@@ -59,12 +57,13 @@ class CastAndCrewListItem extends StatelessWidget {
                       color: AppColors.textWhite,
                     ),
                   ),
-                  SizedBox(height: 4.h),
                   Text(
                     role,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyles.font12Medium,
+                    style: TextStyles.font10Medium.copyWith(
+                      color: AppColors.textGrey,
+                    ),
                   ),
                 ],
               ),
@@ -78,7 +77,8 @@ class CastAndCrewListItem extends StatelessWidget {
   Widget _avatarPlaceholder() {
     return Container(
       color: AppColors.primarySoft,
-      child: Icon(Icons.person, color: AppColors.textDarkGrey, size: 32.w),
+      child: Icon(Icons.person, color: AppColors.textDarkGrey, size: 24.r),
     );
   }
 }
+

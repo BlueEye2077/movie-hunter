@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/networking/api_constants.dart';
+import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 
-class MovieCastItem extends StatelessWidget {
+class CastAndCrewListItem extends StatelessWidget {
   final String name;
   final String role;
   final String? profilePath;
   final VoidCallback? onTap;
 
-  const MovieCastItem({
+  const CastAndCrewListItem({
     super.key,
     required this.name,
     required this.role,
@@ -22,20 +23,23 @@ class MovieCastItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: SizedBox(
-        width: 140.w,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.horizontalPadding,
+          vertical: 8.h,
+        ),
         child: Row(
           children: [
-            // Avatar
             ClipOval(
               child: SizedBox(
-                width: 40.w,
-                height: 40.w,
-                child: profilePath != null
+                width: 56.r,
+                height: 56.r,
+                child: profilePath != null && profilePath!.trim().isNotEmpty
                     ? CachedNetworkImage(
-                        imageUrl: '${ApiConstants.imagesUrl}$profilePath',
+                        imageUrl: '${ApiConstants.profileImagesUrl}$profilePath',
+                        memCacheWidth: 168,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
                             _avatarPlaceholder(),
@@ -43,12 +47,10 @@ class MovieCastItem extends StatelessWidget {
                     : _avatarPlaceholder(),
               ),
             ),
-            SizedBox(width: 8.w),
-            // Name and role
+            SizedBox(width: 16.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     name,
@@ -58,13 +60,12 @@ class MovieCastItem extends StatelessWidget {
                       color: AppColors.textWhite,
                     ),
                   ),
+                  SizedBox(height: 4.h),
                   Text(
                     role,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyles.font10Medium.copyWith(
-                      color: AppColors.textGrey,
-                    ),
+                    style: TextStyles.font12Medium,
                   ),
                 ],
               ),
@@ -78,7 +79,8 @@ class MovieCastItem extends StatelessWidget {
   Widget _avatarPlaceholder() {
     return Container(
       color: AppColors.primarySoft,
-      child: Icon(Icons.person, color: AppColors.textDarkGrey, size: 24.w),
+      child: Icon(Icons.person, color: AppColors.textDarkGrey, size: 32.r),
     );
   }
 }
+
