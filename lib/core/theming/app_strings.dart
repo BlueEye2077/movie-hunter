@@ -75,4 +75,15 @@ abstract final class AppStrings {
   static const String noWatchlist = 'Nothing saved yet';
   static const String noWatchlistSubtitle =
       'Add movies to your watchlist to watch them later';
+
+  // ── Person Details ──
+  static const String biography = 'Biography';
+  static const String noBiography = 'No biography available.';
+  static const String readMore = 'Read more';
+  static const String showLess = 'Show less';
+  static const String knownFor = 'Known For';
+  static const String noKnownMovies = 'No known movies found';
+
+  static String yearsOld(int age) => '$age years old';
+  static String diedAt(int age) => 'Died at $age';
 }
