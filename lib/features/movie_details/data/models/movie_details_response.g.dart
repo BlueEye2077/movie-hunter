@@ -19,7 +19,7 @@ MovieDetailsResponse _$MovieDetailsResponseFromJson(
   voteAverage: (json['vote_average'] as num?)?.toDouble(),
   voteCount: (json['vote_count'] as num?)?.toInt(),
   genres: (json['genres'] as List<dynamic>?)
-      ?.map((e) => GenreDetail.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 

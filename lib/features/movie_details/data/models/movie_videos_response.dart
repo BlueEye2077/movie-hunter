@@ -1,15 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'movie_video.dart';
+import '../../domain/entities/movie_video_entity.dart';
+import 'movie_video_model.dart';
 
 part 'movie_videos_response.g.dart';
 
 @JsonSerializable()
 class MovieVideosResponse {
   final int? id;
-  final List<MovieVideo>? results;
+  final List<MovieVideoModel>? results;
 
-  MovieVideosResponse({
+  const MovieVideosResponse({
     this.id,
     this.results,
   });
@@ -18,4 +19,7 @@ class MovieVideosResponse {
       _$MovieVideosResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieVideosResponseToJson(this);
+
+  List<MovieVideoEntity> toEntity() =>
+      results?.map((v) => v.toEntity()).toList() ?? const [];
 }
