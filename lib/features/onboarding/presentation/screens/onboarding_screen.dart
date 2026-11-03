@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/helpers/shared_preference_helper.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/colors.dart';
-import '../../data/onboarding_data.dart';
+import '../models/onboarding_item.dart';
 import '../widgets/onboarding_background.dart';
 import '../widgets/onboarding_content_box.dart';
 
@@ -16,6 +17,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
+  static const List<OnboardingItem> _pages = OnboardingItem.pages;
   int _currentIndex = 0;
 
   @override
@@ -25,13 +27,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _onNextPressed() async {
-    if (_currentIndex < onboardingPages.length - 1) {
+    if (_currentIndex < _pages.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     } else {
       await SharedPreferenceHelper.saveSeenOnBoarding();
+      isSeenOnBoarding = true;
       if (!mounted) return;
       Navigator.of(context).pushReplacementNamed(Routes.login);
     }
@@ -48,16 +51,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             _currentIndex = index;
           });
         },
-        itemCount: onboardingPages.length,
+        itemCount: _pages.length,
         itemBuilder: (context, index) {
-          final data = onboardingPages[index];
+          final data = _pages[index];
           return Stack(
             children: [
               OnboardingBackground(data: data),
               OnboardingContentBox(
                 data: data,
                 currentIndex: _currentIndex,
-                totalPages: onboardingPages.length,
+                totalPages: _pages.length,
                 onNextPressed: _onNextPressed,
               ),
             ],

@@ -19,7 +19,7 @@ import '../../features/movie_details/presentation/cubit/similar_movies_cubit.dar
 import '../../features/movie_details/presentation/models/cast_and_crew_args.dart';
 import '../../features/movie_details/presentation/screens/cast_and_crew_screen.dart';
 import '../../features/movie_details/presentation/screens/movie_details_screen.dart';
-import '../../features/onboarding/ui/screens/onboarding_screen.dart';
+import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/person_details/presentation/cubit/person_details_cubit.dart';
 import '../../features/person_details/presentation/models/person_details_args.dart';
 import '../../features/person_details/presentation/screens/person_details_screen.dart';

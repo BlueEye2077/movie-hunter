@@ -6,12 +6,10 @@ import '../../../../core/theming/colors.dart';
 
 class OnboardingNextButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final double progress; // 0.0 to 1.0
 
   const OnboardingNextButton({
     super.key,
     required this.onPressed,
-    required this.progress,
   });
 
   @override
@@ -33,7 +31,7 @@ class OnboardingNextButton extends StatelessWidget {
               height: 24.w,
               width: 24.w,
               colorFilter: const ColorFilter.mode(
-                AppColors.textBlack, // very dark blue
+                AppColors.textBlack,
                 BlendMode.srcIn,
               ),
             ),
@@ -43,3 +41,4 @@ class OnboardingNextButton extends StatelessWidget {
     );
   }
 }
+

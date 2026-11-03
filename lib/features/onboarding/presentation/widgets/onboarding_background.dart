@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theming/colors.dart';
-import '../../data/onboarding_data.dart';
+import '../../../../core/theming/colors.dart';
+import '../models/onboarding_item.dart';
 
 class OnboardingBackground extends StatelessWidget {
-  final OnboardingData data;
+  final OnboardingItem data;
 
   const OnboardingBackground({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     if (data.isFullBleedImage) {
+      final screenHeight = MediaQuery.sizeOf(context).height;
       return Stack(
         children: [
           Positioned(
             top: 0,
-            left: 10,
+            left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.70,
+            height: screenHeight * 0.70,
             child: Image.asset(
               data.imagePath,
               fit: BoxFit.cover,
@@ -29,7 +30,7 @@ class OnboardingBackground extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            height: MediaQuery.of(context).size.height * 0.70,
+            height: screenHeight * 0.70,
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -49,11 +50,15 @@ class OnboardingBackground extends StatelessWidget {
         ],
       );
     } else {
-      return Positioned(
-        top: 59.h,
-        left: 30.w,
-        right: 30.w,
-        child: Image.asset(data.imagePath, fit: BoxFit.contain),
+      return Stack(
+        children: [
+          Positioned(
+            top: 59.h,
+            left: 30.w,
+            right: 30.w,
+            child: Image.asset(data.imagePath, fit: BoxFit.contain),
+          ),
+        ],
       );
     }
   }
