@@ -8,8 +8,8 @@ import '../../../../../core/theming/text_styles.dart';
 import '../../../../all_movies/domain/entities/all_movies_source.dart';
 import '../../../../all_movies/presentation/models/all_movies_args.dart';
 import '../../../../../core/domain/entities/movie_entity.dart';
-import 'movies_list_view.dart';
-import 'movies_section.dart';
+import '../../../../../core/common/movies_list_view.dart';
+import '../../../../../core/common/movies_section.dart';
 
 class HomeMovieSectionContent extends StatelessWidget {
   final String title;

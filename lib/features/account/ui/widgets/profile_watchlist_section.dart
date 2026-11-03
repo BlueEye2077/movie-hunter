@@ -13,8 +13,8 @@ import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../core/common/empty_state_view.dart';
-import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
-import '../../../home/presentation/widgets/movie_section/movies_section.dart';
+import '../../../../core/common/movies_list_view.dart';
+import '../../../../core/common/movies_section.dart';
 import '../../logic/cubit/watchlist_movies_cubit.dart';
 
 class ProfileWatchlistSection extends StatelessWidget {
@@ -60,7 +60,7 @@ class ProfileWatchlistSection extends StatelessWidget {
             return MoviesSection(
               title: AppStrings.watchlist,
               onSeeAllTap: () => Navigator.pushNamed(context, Routes.watchlist),
-              child: MoviesListView.showMovies(movies: movies, genres: genresList),
+              child: MoviesListView.showMovies(movies: movies.map((e) => e.toEntity()).toList(), genres: genresList),
             );
           },
           error: (error) => MoviesSection(
@@ -82,3 +82,4 @@ class ProfileWatchlistSection extends StatelessWidget {
     );
   }
 }
+

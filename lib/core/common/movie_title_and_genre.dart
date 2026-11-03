@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theming/colors.dart';
-import '../../../../../core/theming/text_styles.dart';
+import '../theming/colors.dart';
+import '../theming/text_styles.dart';
 
 class MovieTitleAndGenre extends StatelessWidget {
   final String title;
@@ -31,10 +31,11 @@ class MovieTitleAndGenre extends StatelessWidget {
         Text(
           genres.take(maxGenres).join(', '),
           style: TextStyles.font10Medium.copyWith(color: AppColors.textGrey),
-          maxLines:1,
+          maxLines: 1,
           overflow: .ellipsis,
         ),
       ],
     );
   }
 }
+

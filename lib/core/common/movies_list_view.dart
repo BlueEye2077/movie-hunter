@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../../core/genres/domain/entities/genre_entity.dart';
-import '../../../../../core/genres/helpers/genres_helper.dart';
-import '../../../../../core/routing/routes.dart';
-import '../../../../../core/theming/app_spacing.dart';
-import '../../../../../core/theming/colors.dart';
-import '../../../../../core/domain/entities/movie_entity.dart';
+import '../domain/entities/movie_entity.dart';
+import '../genres/domain/entities/genre_entity.dart';
+import '../genres/helpers/genres_helper.dart';
+import '../routing/routes.dart';
+import '../theming/app_spacing.dart';
+import '../theming/colors.dart';
 import 'movie_item.dart';
 
 class MoviesListView extends StatelessWidget {
-  // Todo: invastigate this
-  final List<dynamic> movies;
+  final List<MovieEntity> movies;
   final List<GenreEntity> genres;
   final bool isShimmer;
+
   const MoviesListView.shimmer({super.key})
-    : movies = const [],
-      genres = const [],
-      isShimmer = true;
+      : movies = const [],
+        genres = const [],
+        isShimmer = true;
+
   const MoviesListView.showMovies({
     super.key,
     required this.movies,
@@ -61,13 +62,11 @@ class MoviesListView extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(width: 12.w),
           itemBuilder: (context, index) {
             final movie = movies[index];
-            // Todo: fix this after refactoring the other sections
-            final List<String> genreNames = movie is MovieEntity
-                ? (movie.genreNames ?? [])
-                : GenresHelper.getGenreTitles(
-                    allGenres: genres,
-                    genreIds: movie.genreIds,
-                  );
+            final List<String> genreNames = movie.genreNames ??
+                GenresHelper.getGenreTitles(
+                  allGenres: genres,
+                  genreIds: movie.genreIds,
+                );
             return MovieItem(
               title: movie.title ?? '',
               genres: genreNames,
@@ -85,3 +84,4 @@ class MoviesListView extends StatelessWidget {
     }
   }
 }
+

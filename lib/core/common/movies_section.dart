@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theming/app_spacing.dart';
-import '../../../../../core/theming/app_strings.dart';
-import '../../../../../core/theming/colors.dart';
-import '../../../../../core/theming/text_styles.dart';
+import '../theming/app_spacing.dart';
+import '../theming/app_strings.dart';
+import '../theming/colors.dart';
+import '../theming/text_styles.dart';
 
 class MoviesSection extends StatelessWidget {
   final String title;
@@ -57,3 +57,4 @@ class MoviesSection extends StatelessWidget {
     );
   }
 }
+

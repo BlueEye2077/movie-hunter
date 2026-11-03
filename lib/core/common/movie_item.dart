@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/common/poster_image.dart';
-import '../../../../../core/common/rating_badge.dart';
-import '../../../../../core/theming/colors.dart';
+import '../theming/colors.dart';
 import 'movie_title_and_genre.dart';
+import 'poster_image.dart';
+import 'rating_badge.dart';
 
 class MovieItem extends StatelessWidget {
   final String title;
