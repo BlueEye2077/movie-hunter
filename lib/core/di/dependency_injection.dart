@@ -31,18 +31,24 @@ import '../../features/home/presentation/cubit/now_playing_movies_cubit.dart';
 import '../../features/home/presentation/cubit/popular_movies_cubit.dart';
 import '../../features/home/presentation/cubit/top_rated_movies_cubit.dart';
 import '../../features/home/presentation/cubit/upcoming_movies_cubit.dart';
-import '../../features/movie_details/data/repository/movie_details_repository.dart';
+import '../../features/movie_details/data/repos/movie_details_repository_impl.dart';
 import '../../features/movie_details/data/web_services/details_api_service.dart';
-import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
-import '../../features/movie_details/logic/cubit/movie_trailer_cubit.dart';
-import '../../features/movie_details/logic/cubit/similar_movies_cubit.dart';
+import '../../features/movie_details/domain/repos/movie_details_repository.dart';
+import '../../features/movie_details/domain/usecases/get_movie_credits_usecase.dart';
+import '../../features/movie_details/domain/usecases/get_movie_details_usecase.dart';
+import '../../features/movie_details/domain/usecases/get_movie_trailer_usecase.dart';
+import '../../features/movie_details/domain/usecases/get_similar_movies_usecase.dart';
+import '../../features/movie_details/presentation/cubit/movie_credits_cubit.dart';
+import '../../features/movie_details/presentation/cubit/movie_details_cubit.dart';
+import '../../features/movie_details/presentation/cubit/movie_trailer_cubit.dart';
+import '../../features/movie_details/presentation/cubit/similar_movies_cubit.dart';
 import '../../features/person_details/data/repository/person_repository.dart';
 import '../../features/person_details/data/web_services/person_api_service.dart';
 import '../../features/person_details/logic/cubit/person_details_cubit.dart';
 import '../../features/search/data/repos/search_repository_impl.dart';
+import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/domain/repos/search_repository.dart';
 import '../../features/search/domain/usecases/search_usecase.dart';
-import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/presentation/cubit/search_cubit.dart';
 import '../genres/cubit/genres_cubit.dart';
 import '../genres/data/repos/genres_repository_impl.dart';
@@ -153,23 +159,36 @@ void initGetIt() {
   );
 
   // ── Movie Details Feature ──
-  // register details api service
   getIt.registerLazySingleton<DetailsApiService>(() => DetailsApiService(dio));
-  // register movie details repository
   getIt.registerLazySingleton<MovieDetailsRepository>(
-    () => MovieDetailsRepository(detailsApiService: getIt()),
+    () => MovieDetailsRepositoryImpl(detailsApiService: getIt()),
   );
-  // register movie details cubit
+  getIt.registerLazySingleton<GetMovieDetailsUseCase>(
+    () => GetMovieDetailsUseCase(movieDetailsRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetMovieCreditsUseCase>(
+    () => GetMovieCreditsUseCase(movieDetailsRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetMovieTrailerUseCase>(
+    () => GetMovieTrailerUseCase(movieDetailsRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetSimilarMoviesUseCase>(
+    () => GetSimilarMoviesUseCase(
+      movieDetailsRepository: getIt(),
+      genresRepository: getIt(),
+    ),
+  );
   getIt.registerFactory<MovieDetailsCubit>(
-    () => MovieDetailsCubit(movieDetailsRepository: getIt()),
+    () => MovieDetailsCubit(getMovieDetailsUseCase: getIt()),
   );
-  // register movie trailer cubit
+  getIt.registerFactory<MovieCreditsCubit>(
+    () => MovieCreditsCubit(getMovieCreditsUseCase: getIt()),
+  );
   getIt.registerFactory<MovieTrailerCubit>(
-    () => MovieTrailerCubit(movieDetailsRepository: getIt()),
+    () => MovieTrailerCubit(getMovieTrailerUseCase: getIt()),
   );
-  // register similar movies cubit
   getIt.registerFactory<SimilarMoviesCubit>(
-    () => SimilarMoviesCubit(movieDetailsRepository: getIt()),
+    () => SimilarMoviesCubit(getSimilarMoviesUseCase: getIt()),
   );
 
   // ── Person Details Feature ──

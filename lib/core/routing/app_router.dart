@@ -12,10 +12,13 @@ import '../../features/all_movies/presentation/screens/all_movies_screen.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/sign_up_screen.dart';
-import '../../features/movie_details/data/models/cast_and_crew_args.dart';
-import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
-import '../../features/movie_details/ui/screens/cast_and_crew_screen.dart';
-import '../../features/movie_details/ui/screens/movie_details_screen.dart';
+import '../../features/movie_details/presentation/cubit/movie_credits_cubit.dart';
+import '../../features/movie_details/presentation/cubit/movie_details_cubit.dart';
+import '../../features/movie_details/presentation/cubit/movie_trailer_cubit.dart';
+import '../../features/movie_details/presentation/cubit/similar_movies_cubit.dart';
+import '../../features/movie_details/presentation/models/cast_and_crew_args.dart';
+import '../../features/movie_details/presentation/screens/cast_and_crew_screen.dart';
+import '../../features/movie_details/presentation/screens/movie_details_screen.dart';
 import '../../features/onboarding/ui/screens/onboarding_screen.dart';
 import '../../features/person_details/logic/cubit/person_details_cubit.dart';
 import '../../features/person_details/ui/screens/person_details_screen.dart';
@@ -62,12 +65,41 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
 
       case Routes.movieDetails:
-        // Todo: temp solution to use in the non refactor modules, we should use the entity class instead of this
         final dynamic arg = settings.arguments;
-        final Movie movie = arg is MovieEntity ? arg.toMovie() : arg as Movie;
+        // TODO: Remove `Movie` fallback once `account` and `person_details` are refactored to use `MovieEntity`.
+        final MovieEntity movie = switch (arg) {
+          MovieEntity entity => entity,
+          Movie legacyMovie => legacyMovie.toEntity(),
+          _ => const MovieEntity(),
+        };
+        final int movieId = movie.id ?? 0;
+
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => getIt<MovieDetailsCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) {
+                  final cubit = getIt<MovieDetailsCubit>();
+                  if (movieId > 0) cubit.fetchMovieDetails(movieId);
+                  return cubit;
+                },
+              ),
+              BlocProvider(
+                create: (_) {
+                  final cubit = getIt<MovieCreditsCubit>();
+                  if (movieId > 0) cubit.fetchMovieCredits(movieId);
+                  return cubit;
+                },
+              ),
+              BlocProvider(create: (_) => getIt<MovieTrailerCubit>()),
+              BlocProvider(
+                create: (_) {
+                  final cubit = getIt<SimilarMoviesCubit>();
+                  if (movieId > 0) cubit.getSimilarMovies(movieId);
+                  return cubit;
+                },
+              ),
+            ],
             child: MovieDetailsScreen(movie: movie),
           ),
         );
@@ -75,7 +107,7 @@ class AppRouter {
       case Routes.castAndCrew:
         final args = settings.arguments as CastAndCrewArgs;
         return MaterialPageRoute(
-          builder: (_) => CastAndCrewScreen(cast: args.cast, crew: args.crew),
+          builder: (_) => CastAndCrewScreen(credits: args.credits),
         );
 
       case Routes.allMovies:

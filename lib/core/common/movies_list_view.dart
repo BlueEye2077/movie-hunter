@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../domain/entities/movie_entity.dart';
+import '../genres/domain/entities/genre_entity.dart';
+import '../genres/helpers/genres_helper.dart';
+import '../routing/routes.dart';
+import '../theming/app_spacing.dart';
+import '../theming/colors.dart';
+import 'movie_item.dart';
+
+class MoviesListView extends StatelessWidget {
+  final List<MovieEntity> movies;
+  final List<GenreEntity> genres;
+  final bool isShimmer;
+
+  const MoviesListView.shimmer({super.key})
+      : movies = const [],
+        genres = const [],
+        isShimmer = true;
+
+  const MoviesListView.showMovies({
+    super.key,
+    required this.movies,
+    this.genres = const [],
+  }) : isShimmer = false;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isShimmer) {
+      return Shimmer.fromColors(
+        baseColor: AppColors.primarySoft,
+        highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
+        child: SizedBox(
+          height: 245.h,
+          child: ListView.separated(
+            padding: AppSpacing.screenPadding,
+            scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.none,
+            itemCount: 5,
+            separatorBuilder: (context, index) => SizedBox(width: 12.w),
+            itemBuilder: (context, index) {
+              return const MovieItem(
+                title: '',
+                genres: [],
+                posterPath: '',
+                rating: 0,
+              );
+            },
+          ),
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: 245.h,
+        child: ListView.separated(
+          padding: AppSpacing.screenPadding,
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
+          itemCount: movies.length,
+          separatorBuilder: (context, index) => SizedBox(width: 12.w),
+          itemBuilder: (context, index) {
+            final movie = movies[index];
+            final List<String> genreNames = movie.genreNames ??
+                GenresHelper.getGenreTitles(
+                  allGenres: genres,
+                  genreIds: movie.genreIds,
+                );
+            return MovieItem(
+              title: movie.title ?? '',
+              genres: genreNames,
+              posterPath: movie.posterPath ?? "",
+              rating: movie.tmdbRating ?? 0,
+              onTap: () => Navigator.pushNamed(
+                context,
+                Routes.movieDetails,
+                arguments: movie,
+              ),
+            );
+          },
+        ),
+      );
+    }
+  }
+}
+

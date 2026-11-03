@@ -59,32 +59,9 @@ class Movie {
     tmdbVoteCount: tmdbVoteCount,
   );
 
-  // TODO: Remove Movie.fromEntity once legacy modules (e.g. movie_details) are refactored to use MovieEntity directly.
-  factory Movie.fromEntity(MovieEntity entity) => Movie(
-    isAdult: entity.isAdult,
-    horizontalPoster: entity.horizontalPoster,
-    genreIds: entity.genreIds,
-    id: entity.id,
-    originalLanguage: entity.originalLanguage,
-    originalTitle: entity.originalTitle,
-    overview: entity.overview,
-    popularity: entity.popularity,
-    posterPath: entity.posterPath,
-    releaseDate: entity.releaseDate,
-    title: entity.title,
-    video: entity.video,
-    tmdbRating: entity.tmdbRating,
-    tmdbVoteCount: entity.tmdbVoteCount,
-  );
-
-  // fromJsom
+  // fromJson
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 
   // toJson
   Map<String, dynamic> toJson() => _$MovieToJson(this);
-}
-
-// TODO: Remove this temporary bridge extension once legacy modules are refactored.
-extension MovieEntityToMovieExtension on MovieEntity {
-  Movie toMovie() => Movie.fromEntity(this);
 }

@@ -8,8 +8,8 @@ import '../../../../core/genres/domain/entities/genre_entity.dart';
 import '../../../../core/models/movie.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
-import '../../../home/presentation/widgets/movie_section/movies_section.dart';
+import '../../../../core/common/movies_list_view.dart';
+import '../../../../core/common/movies_section.dart';
 
 class PersonKnownForSection extends StatelessWidget {
   final List<Movie> movies;
@@ -59,7 +59,10 @@ class PersonKnownForSection extends StatelessWidget {
                 ),
               ),
             )
-          : MoviesListView.showMovies(movies: topMovies, genres: genres),
+          : MoviesListView.showMovies(
+              movies: topMovies.map((e) => e.toEntity()).toList(),
+              genres: genres,
+            ),
     );
   }
 }

@@ -13,8 +13,8 @@ import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../../../../core/common/empty_state_view.dart';
-import '../../../home/presentation/widgets/movie_section/movies_list_view.dart';
-import '../../../home/presentation/widgets/movie_section/movies_section.dart';
+import '../../../../core/common/movies_list_view.dart';
+import '../../../../core/common/movies_section.dart';
 import '../../logic/cubit/favorite_movies_cubit.dart';
 
 class ProfileFavoritesSection extends StatelessWidget {
@@ -62,7 +62,7 @@ class ProfileFavoritesSection extends StatelessWidget {
               title: AppStrings.favorites,
               onSeeAllTap: () => Navigator.pushNamed(context, Routes.favorites),
               child: MoviesListView.showMovies(
-                movies: movies,
+                movies: movies.map((e) => e.toEntity()).toList(),
                 genres: genresList,
               ),
             );
@@ -86,3 +86,4 @@ class ProfileFavoritesSection extends StatelessWidget {
     );
   }
 }
+

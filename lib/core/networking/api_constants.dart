@@ -8,4 +8,10 @@ class ApiConstants {
   static const String tmdbResetPasswordUrl =
       'https://www.themoviedb.org/reset-password';
   static const String tmdbSignupUrl = 'https://www.themoviedb.org/signup';
+
+  static String youtubeWatchUrl(String key) =>
+      'https://www.youtube.com/watch?v=$key';
+
+  static String tmdbMovieWebUrl(int movieId) =>
+      'https://www.themoviedb.org/movie/$movieId';
 }
