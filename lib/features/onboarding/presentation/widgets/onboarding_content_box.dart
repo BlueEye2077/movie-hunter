@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theming/colors.dart';
 import '../../../../core/common/animated_slider_dots.dart';
+import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
-import '../../data/onboarding_data.dart';
+import '../models/onboarding_item.dart';
 import 'onboarding_next_button.dart';
 
 class OnboardingContentBox extends StatelessWidget {
-  final OnboardingData data;
+  final OnboardingItem data;
   final int currentIndex;
   final int totalPages;
   final VoidCallback onNextPressed;
@@ -39,7 +39,6 @@ class OnboardingContentBox extends StatelessWidget {
             ),
             child: Column(
               children: [
-                // Using a key makes it crossfade text softly between pages if animated
                 Text(
                   data.title,
                   key: ValueKey(data.title),
@@ -62,7 +61,6 @@ class OnboardingContentBox extends StatelessWidget {
                       totalDots: totalPages,
                     ),
                     OnboardingNextButton(
-                      progress: (currentIndex + 1) / totalPages,
                       onPressed: onNextPressed,
                     ),
                   ],
@@ -75,3 +73,4 @@ class OnboardingContentBox extends StatelessWidget {
     );
   }
 }
+
