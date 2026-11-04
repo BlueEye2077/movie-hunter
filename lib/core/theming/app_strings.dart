@@ -70,11 +70,18 @@ abstract final class AppStrings {
   static const String favorites = 'Favorites';
   static const String watchlist = 'Watchlist';
   static const String logout = 'Logout';
+  static const String confirmLogout = 'Confirm Logout';
+  static const String confirmLogoutMessage =
+      'Are you sure you want to log out of your account?';
   static const String noFavorites = 'No favorites yet';
   static const String noFavoritesSubtitle = 'Movies you heart will appear here';
   static const String noWatchlist = 'Nothing saved yet';
   static const String noWatchlistSubtitle =
       'Add movies to your watchlist to watch them later';
+  static const String failedToLoadFavorites = 'Failed to load favorite movies';
+  static const String failedToLoadWatchlist = 'Failed to load watchlist movies';
+  static const String sessionExpired =
+      'Session expired. Please log in again.';
 
   // ── Person Details ──
   static const String biography = 'Biography';
