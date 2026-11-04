@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/theming/colors.dart';
-import 'features/account/ui/screens/profile_screen.dart';
-import 'features/account/ui/widgets/profile_tab_bloc_providers.dart';
+import 'features/account/presentation/screens/profile_screen.dart';
+import 'features/account/presentation/widgets/profile_tab_bloc_providers.dart';
 import 'features/categories/presentation/cubit/categories_cubit.dart';
 import 'features/categories/presentation/screens/categories_screen.dart';
 import 'features/home/presentation/screens/home_screen.dart';

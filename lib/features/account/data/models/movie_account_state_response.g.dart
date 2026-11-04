@@ -12,14 +12,4 @@ MovieAccountStateResponse _$MovieAccountStateResponseFromJson(
   id: (json['id'] as num).toInt(),
   favorite: json['favorite'] as bool,
   watchlist: json['watchlist'] as bool,
-  rated: json['rated'],
 );
-
-Map<String, dynamic> _$MovieAccountStateResponseToJson(
-  MovieAccountStateResponse instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'favorite': instance.favorite,
-  'watchlist': instance.watchlist,
-  'rated': instance.rated,
-};

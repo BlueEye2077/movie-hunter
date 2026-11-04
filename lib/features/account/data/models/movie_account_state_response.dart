@@ -1,26 +1,29 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../domain/entities/movie_account_status_entity.dart';
+
 part 'movie_account_state_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class MovieAccountStateResponse {
   final int id;
   final bool favorite;
   final bool watchlist;
 
-  // TMDB "rated" can be a boolean (false) or an object if the user has rated it.
-  // We'll use dynamic to safely parse it without crashing.
-  final dynamic rated;
-
-  MovieAccountStateResponse({
+  const MovieAccountStateResponse({
     required this.id,
     required this.favorite,
     required this.watchlist,
-    this.rated,
   });
 
   factory MovieAccountStateResponse.fromJson(Map<String, dynamic> json) =>
       _$MovieAccountStateResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MovieAccountStateResponseToJson(this);
+  MovieAccountStatusEntity toEntity() {
+    return MovieAccountStatusEntity(
+      movieId: id,
+      isFavorite: favorite,
+      isWatchlisted: watchlist,
+    );
+  }
 }
