@@ -27,8 +27,11 @@ default_platform(:android)
 platform :android do
   desc "Lane for Android Firebase App Distribution"
   lane :firebase_distribution do
+    build_num = ENV["BUILD_NUMBER"]
+    build_arg = build_num ? "--build-number=#{build_num}" : ""
+
     sh "flutter clean"
-    sh "flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons"
+    sh "flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons #{build_arg}".strip
     firebase_app_distribution(
         app: ENV["FIREBASE_APP_ID"],
         firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],

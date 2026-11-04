@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "708777841746",
+    "project_id": "movie-hunter-bc643",
+    "storage_bucket": "movie-hunter-bc643.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708777841746:android:92e9deda081eef390d7b8b",
+        "android_client_info": {
+          "package_name": "com.example.movie_hunter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIgK95vyCKvv82MaASkDTOA29OBWw74DQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
