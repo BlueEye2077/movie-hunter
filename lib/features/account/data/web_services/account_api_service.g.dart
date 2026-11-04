@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile_api_services.dart';
+part of 'account_api_service.dart';
 
 // dart format off
 
@@ -10,8 +10,8 @@ part of 'profile_api_services.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main,avoid_redundant_argument_values
 
-class _ProfileApiServices implements ProfileApiServices {
-  _ProfileApiServices(this._dio, {this.baseUrl, this.errorLogger}) {
+class _AccountApiService implements AccountApiService {
+  _AccountApiService(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://api.themoviedb.org/3/';
   }
 
@@ -22,12 +22,12 @@ class _ProfileApiServices implements ProfileApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AccountDetailsModel> getAccountDetails(String sessionId) async {
+  Future<AccountDetailsResponse> getAccountDetails(String sessionId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AccountDetailsModel>(
+    final _options = _setStreamType<AccountDetailsResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -38,9 +38,9 @@ class _ProfileApiServices implements ProfileApiServices {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AccountDetailsModel _value;
+    late AccountDetailsResponse _value;
     try {
-      _value = AccountDetailsModel.fromJson(_result.data!);
+      _value = AccountDetailsResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -82,13 +82,13 @@ class _ProfileApiServices implements ProfileApiServices {
   Future<MovieActionStatusResponse> toggleFavorite(
     int accountId,
     String sessionId,
-    Map<String, dynamic> body,
+    MarkFavoriteRequest body,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
+    _data.addAll(body.toJson());
     final _options = _setStreamType<MovieActionStatusResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -151,13 +151,13 @@ class _ProfileApiServices implements ProfileApiServices {
   Future<MovieActionStatusResponse> toggleWatchlist(
     int accountId,
     String sessionId,
-    Map<String, dynamic> body,
+    MarkWatchlistRequest body,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
+    _data.addAll(body.toJson());
     final _options = _setStreamType<MovieActionStatusResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -216,6 +216,26 @@ class _ProfileApiServices implements ProfileApiServices {
     return _value;
   }
 
+  @override
+  Future<void> deleteSession(DeleteSessionRequest body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<void>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'authentication/session',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
@@ -245,3 +265,4 @@ class _ProfileApiServices implements ProfileApiServices {
 }
 
 // dart format on
+
