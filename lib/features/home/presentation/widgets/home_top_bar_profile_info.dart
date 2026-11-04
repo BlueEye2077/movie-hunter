@@ -5,11 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/networking/api_constants.dart';
+import '../../../../core/theming/app_assets.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 
 class HomeTopBarProfileInfo extends StatelessWidget {
+  static const int _avatarMemCacheSize = 120;
+
   final String name;
   final String? avatarPath;
 
@@ -17,19 +20,24 @@ class HomeTopBarProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasAvatar = avatarPath != null && avatarPath!.isNotEmpty;
+
     return Row(
       children: [
         CircleAvatar(
           radius: 20.r,
           backgroundColor: AppColors.primarySoft,
-          backgroundImage: avatarPath != null
-              ? CachedNetworkImageProvider(
-                  '${ApiConstants.imagesUrl}$avatarPath',
+          backgroundImage: hasAvatar
+              ? ResizeImage(
+                  CachedNetworkImageProvider(
+                    '${ApiConstants.profileImagesUrl}$avatarPath',
+                  ),
+                  width: _avatarMemCacheSize,
                 )
               : null,
-          child: avatarPath == null
+          child: !hasAvatar
               ? SvgPicture.asset(
-                  'assets/svgs/person.svg',
+                  AppAssets.personSvg,
                   width: 24.w,
                   height: 24.w,
                   colorFilter: const ColorFilter.mode(

@@ -1,12 +1,18 @@
 import 'package:get_it/get_it.dart';
 
-import '../../features/account/data/repository/profile_repository.dart';
-import '../../features/account/data/web_services/profile_api_services.dart';
-import '../../features/account/logic/cubit/favorite_movies_cubit.dart';
-import '../../features/account/logic/cubit/favourites_cubit.dart';
-import '../../features/account/logic/cubit/profile_cubit.dart';
-import '../../features/account/logic/cubit/watchlist_cubit.dart';
-import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
+import '../../features/account/data/repos/account_repository_impl.dart';
+import '../../features/account/data/web_services/account_api_service.dart';
+import '../../features/account/domain/repos/account_repository.dart';
+import '../../features/account/domain/usecases/get_account_details_usecase.dart';
+import '../../features/account/domain/usecases/get_account_movies_usecase.dart';
+import '../../features/account/domain/usecases/get_movie_account_status_usecase.dart';
+import '../../features/account/domain/usecases/logout_usecase.dart';
+import '../../features/account/domain/usecases/update_movie_account_list_usecase.dart';
+import '../../features/account/domain/usecases/watch_account_movie_changes_usecase.dart';
+import '../../features/account/presentation/cubit/account_details_cubit.dart';
+import '../../features/account/presentation/cubit/account_movies_cubit.dart';
+import '../../features/account/presentation/cubit/logout_cubit.dart';
+import '../../features/account/presentation/cubit/movie_account_status_cubit.dart';
 import '../../features/all_movies/domain/usecases/get_movies_by_genre_usecase.dart';
 import '../../features/all_movies/domain/usecases/get_movies_page_usecase.dart';
 import '../../features/all_movies/presentation/cubit/all_movies_cubit.dart';
@@ -244,29 +250,56 @@ void initGetIt() {
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt()));
 
   // ── Account Feature ──
-  getIt.registerLazySingleton<ProfileApiServices>(
-    () => ProfileApiServices(dio),
+  getIt.registerLazySingleton<AccountApiService>(
+    () => AccountApiService(dio),
   );
-  getIt.registerLazySingleton<ProfileRepository>(
-    () => ProfileRepository(profileApiService: getIt()),
+  getIt.registerLazySingleton<AccountRepository>(
+    () => AccountRepositoryImpl(accountApiService: getIt()),
   );
-  getIt.registerFactory<ProfileCubit>(
-    () => ProfileCubit(profileRepository: getIt()),
+  getIt.registerLazySingleton<GetAccountDetailsUseCase>(
+    () => GetAccountDetailsUseCase(accountRepository: getIt()),
   );
-  getIt.registerLazySingleton<FavoriteMoviesCubit>(
-    () => FavoriteMoviesCubit(profileRepository: getIt()),
+  getIt.registerLazySingleton<GetAccountMoviesUseCase>(
+    () => GetAccountMoviesUseCase(
+      accountRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
-  getIt.registerLazySingleton<WatchlistMoviesCubit>(
-    () => WatchlistMoviesCubit(profileRepository: getIt()),
+  getIt.registerLazySingleton<GetMovieAccountStatusUseCase>(
+    () => GetMovieAccountStatusUseCase(accountRepository: getIt()),
+  );
+  getIt.registerLazySingleton<UpdateMovieAccountListUseCase>(
+    () => UpdateMovieAccountListUseCase(accountRepository: getIt()),
+  );
+  getIt.registerLazySingleton<WatchAccountMovieChangesUseCase>(
+    () => WatchAccountMovieChangesUseCase(accountRepository: getIt()),
+  );
+  getIt.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(accountRepository: getIt()),
   );
 
-  // ── Favourites Feature ──
-  getIt.registerFactory<FavouritesCubit>(
-    () => FavouritesCubit(profileRepository: getIt()),
+  getIt.registerFactory<AccountDetailsCubit>(
+    () => AccountDetailsCubit(getAccountDetailsUseCase: getIt()),
   );
-
-  // ── Watchlist Feature ──
-  getIt.registerFactory<WatchlistCubit>(
-    () => WatchlistCubit(profileRepository: getIt()),
+  getIt.registerFactory<FavoriteMoviesCubit>(
+    () => FavoriteMoviesCubit(
+      getAccountMoviesUseCase: getIt(),
+      watchAccountMovieChangesUseCase: getIt(),
+    ),
+  );
+  getIt.registerFactory<WatchlistMoviesCubit>(
+    () => WatchlistMoviesCubit(
+      getAccountMoviesUseCase: getIt(),
+      watchAccountMovieChangesUseCase: getIt(),
+    ),
+  );
+  getIt.registerFactory<MovieAccountStatusCubit>(
+    () => MovieAccountStatusCubit(
+      getMovieAccountStatusUseCase: getIt(),
+      updateMovieAccountListUseCase: getIt(),
+    ),
+  );
+  getIt.registerFactory<LogoutCubit>(
+    () => LogoutCubit(logoutUseCase: getIt()),
   );
 }

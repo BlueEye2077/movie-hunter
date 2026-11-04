@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/di/dependency_injection.dart';
-import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../account/logic/cubit/watchlist_cubit.dart';
-import '../../../account/logic/cubit/watchlist_state.dart';
+import '../../../account/presentation/cubit/movie_account_status_cubit.dart';
 import 'movie_circle_action_button.dart';
 
 class WatchlistToggleButton extends StatelessWidget {
@@ -15,74 +12,53 @@ class WatchlistToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<WatchlistCubit>()..isMovieWatchlisted(movieId),
-      child: BlocConsumer<WatchlistCubit, WatchlistState>(
-        listener: (context, state) {
-          state.maybeWhen(
-            error: (failure) {
-              ScaffoldMessenger.of(context).clearSnackBars();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  duration: const Duration(seconds: 2),
-                  content: Text(NetworkExceptions.getErrorMessage(failure)),
-                  backgroundColor: AppColors.secondaryRed,
-                ),
-              );
-            },
-            orElse: () {},
-          );
-        },
-        builder: (context, state) {
-          return state.maybeWhen(
-            loading: () {
-              return MovieCircleActionButton(
-                icon: Icons.hourglass_empty,
-                iconColor: Colors.grey,
-                onPressed: () {},
-              );
-            },
-            success: (isWatchlisted) {
-              final bookmarkIcon = isWatchlisted
-                  ? Icons.bookmark
-                  : Icons.bookmark_border;
+    return BlocBuilder<MovieAccountStatusCubit, MovieAccountStatusState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          loading: () => MovieCircleActionButton(
+            icon: Icons.hourglass_empty,
+            iconColor: AppColors.textGrey,
+            onPressed: () {},
+          ),
+          success: (status) {
+            final isWatchlisted = status.isWatchlisted;
+            final bookmarkIcon = isWatchlisted
+                ? Icons.bookmark
+                : Icons.bookmark_border;
 
-              return AnimatedSwitcher(
-                switchInCurve: Curves.easeOutBack,
-                switchOutCurve: Curves.easeIn,
-                duration: const Duration(milliseconds: 300),
-                transitionBuilder: (child, animation) {
-                  return ScaleTransition(
-                    scale: animation,
-                    child: FadeTransition(opacity: animation, child: child),
+            return AnimatedSwitcher(
+              switchInCurve: Curves.easeOutBack,
+              switchOutCurve: Curves.easeIn,
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return ScaleTransition(
+                  scale: animation,
+                  child: FadeTransition(opacity: animation, child: child),
+                );
+              },
+              child: MovieCircleActionButton(
+                key: ValueKey<IconData>(bookmarkIcon),
+                icon: bookmarkIcon,
+                iconColor: isWatchlisted
+                    ? AppColors.primaryBlueAccent
+                    : AppColors.textWhite,
+                onPressed: () {
+                  context.read<MovieAccountStatusCubit>().toggleWatchlist(
+                    movieId,
                   );
                 },
-                child: MovieCircleActionButton(
-                  key: ValueKey<IconData>(bookmarkIcon),
-                  icon: bookmarkIcon,
-                  iconColor: isWatchlisted
-                      ? AppColors.primaryBlueAccent
-                      : Colors.white,
-                  onPressed: () {
-                    context.read<WatchlistCubit>().toggleWatchlist(
-                      movieId,
-                      isWatchlisted,
-                    );
-                  },
-                ),
-              );
+              ),
+            );
+          },
+          orElse: () => MovieCircleActionButton(
+            icon: Icons.bookmark_border,
+            iconColor: AppColors.textWhite,
+            onPressed: () {
+              context.read<MovieAccountStatusCubit>().loadStatus(movieId);
             },
-            orElse: () {
-              return MovieCircleActionButton(
-                icon: Icons.bookmark_border,
-                iconColor: Colors.white,
-                onPressed: () {},
-              );
-            },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
-

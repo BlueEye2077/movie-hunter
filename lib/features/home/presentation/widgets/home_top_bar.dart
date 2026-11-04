@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/networking/requests_state.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_assets.dart';
 import '../../../../core/theming/colors.dart';
-import '../../../account/data/models/account_details_model.dart';
-import '../../../account/logic/cubit/profile_cubit.dart';
+import '../../../account/presentation/cubit/account_details_cubit.dart';
 import 'home_top_bar_profile_info.dart';
 import 'home_top_bar_shimmer.dart';
 
@@ -19,18 +18,14 @@ class HomeTopBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        BlocBuilder<ProfileCubit, RequestsState<AccountDetailsModel>>(
+        BlocBuilder<AccountDetailsCubit, AccountDetailsState>(
           builder: (context, state) {
             return state.maybeWhen(
               loading: () => const HomeTopBarShimmer(),
-              success: (userData) {
-                final name = userData.name ?? userData.username ?? '';
-                final avatarPath = userData.avatar?.tmdb?.avatarPath;
-                return HomeTopBarProfileInfo(
-                  name: name,
-                  avatarPath: avatarPath,
-                );
-              },
+              success: (account) => HomeTopBarProfileInfo(
+                name: account.displayName,
+                avatarPath: account.avatarPath,
+              ),
               orElse: () =>
                   const HomeTopBarProfileInfo(name: '', avatarPath: null),
             );
@@ -49,7 +44,7 @@ class HomeTopBar extends StatelessWidget {
             },
             child: Center(
               child: SvgPicture.asset(
-                'assets/svgs/heart.svg',
+                AppAssets.heartSvg,
                 width: 20.w,
                 height: 20.w,
                 colorFilter: const ColorFilter.mode(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/account/logic/cubit/favorite_movies_cubit.dart';
-import '../../features/account/logic/cubit/profile_cubit.dart';
-import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
-import '../../features/account/ui/screens/favorites_screen.dart';
-import '../../features/account/ui/screens/watchlist_screen.dart';
+import '../../features/account/domain/entities/account_movie_list_type.dart';
+import '../../features/account/presentation/cubit/account_details_cubit.dart';
+import '../../features/account/presentation/cubit/account_movies_cubit.dart';
+import '../../features/account/presentation/cubit/movie_account_status_cubit.dart';
+import '../../features/account/presentation/screens/account_movies_screen.dart';
 import '../../features/all_movies/presentation/cubit/all_movies_cubit.dart';
 import '../../features/all_movies/presentation/models/all_movies_args.dart';
 import '../../features/all_movies/presentation/screens/all_movies_screen.dart';
@@ -28,7 +28,6 @@ import '../../features/search/presentation/screens/search_screen.dart';
 import '../../main_screen.dart';
 import '../di/dependency_injection.dart';
 import '../domain/entities/movie_entity.dart';
-import '../models/movie.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -41,7 +40,8 @@ class AppRouter {
         // and to avoid unnecessary rebuilds when switching between tabs.
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<ProfileCubit>()..getAccountDetails(),
+            create: (context) =>
+                getIt<AccountDetailsCubit>()..getAccountDetails(),
             child: const MainScreen(),
           ),
         );
@@ -66,11 +66,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
 
       case Routes.movieDetails:
-        final dynamic arg = settings.arguments;
-        // TODO: Remove `Movie` fallback once `account` is refactored to use `MovieEntity`.
-        final MovieEntity movie = switch (arg) {
+        final MovieEntity movie = switch (settings.arguments) {
           MovieEntity entity => entity,
-          Movie legacyMovie => legacyMovie.toEntity(),
           _ => const MovieEntity(),
         };
         final int movieId = movie.id ?? 0;
@@ -97,6 +94,13 @@ class AppRouter {
                 create: (_) {
                   final cubit = getIt<SimilarMoviesCubit>();
                   if (movieId > 0) cubit.getSimilarMovies(movieId);
+                  return cubit;
+                },
+              ),
+              BlocProvider(
+                create: (_) {
+                  final cubit = getIt<MovieAccountStatusCubit>();
+                  if (movieId > 0) cubit.loadStatus(movieId);
                   return cubit;
                 },
               ),
@@ -133,17 +137,21 @@ class AppRouter {
 
       case Routes.favorites:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: getIt<FavoriteMoviesCubit>()..getFavoriteMovies(),
-            child: const FavoritesScreen(),
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<FavoriteMoviesCubit>()..fetchInitialMovies(),
+            child: const AccountMoviesScreen<FavoriteMoviesCubit>(
+              listType: AccountMovieListType.favorites,
+            ),
           ),
         );
 
       case Routes.watchlist:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: getIt<WatchlistMoviesCubit>()..getWatchlistMovies(),
-            child: const WatchlistScreen(),
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<WatchlistMoviesCubit>()..fetchInitialMovies(),
+            child: const AccountMoviesScreen<WatchlistMoviesCubit>(
+              listType: AccountMovieListType.watchlist,
+            ),
           ),
         );
 
