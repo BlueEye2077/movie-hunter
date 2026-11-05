@@ -34,6 +34,33 @@ class MovieEntity {
     this.genreNames,
   });
 
+  /// The user-facing movie title, falling back to original title if empty.
+  String get displayTitle => (title != null && title!.isNotEmpty)
+      ? title!
+      : (originalTitle ?? '');
+
+  /// Extracts the 4-digit release year from `releaseDate` (e.g. "2024").
+  String get releaseYear {
+    if (releaseDate != null && releaseDate!.length >= 4) {
+      return releaseDate!.substring(0, 4);
+    }
+    return '';
+  }
+
+  /// Uppercase original language code (e.g. "EN").
+  String get formattedLanguage => originalLanguage?.toUpperCase() ?? 'EN';
+
+  /// Safe adult movie boolean flag.
+  bool get isAdultMovie => isAdult ?? false;
+
+  /// Top 2 genre names if populated by domain use cases.
+  List<String> get topTwoGenres {
+    if (genreNames != null && genreNames!.isNotEmpty) {
+      return genreNames!.take(2).toList();
+    }
+    return const [];
+  }
+
   MovieEntity copyWith({
     bool? isAdult,
     String? horizontalPoster,
@@ -70,4 +97,3 @@ class MovieEntity {
     );
   }
 }
-
