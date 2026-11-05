@@ -44,7 +44,13 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
       return;
     }
 
-    emit(AllMoviesState.successAllMovies(List.unmodifiable(_movies)));
+    emit(
+      AllMoviesState.successAllMovies(
+        movies: List.unmodifiable(_movies),
+        paginationError: null,
+        isLoadingPagination: false,
+      ),
+    );
   }
 
   Future<void> fetchNextPage() async {
@@ -56,8 +62,10 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
     emit(
       isInitialLoad
           ? const AllMoviesState.loadingAllMovies()
-          : AllMoviesState.loadingPaginationAllMovies(
-              List.unmodifiable(_movies),
+          : AllMoviesState.successAllMovies(
+              movies: List.unmodifiable(_movies),
+              paginationError: null,
+              isLoadingPagination: true,
             ),
     );
 
@@ -81,9 +89,11 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
         _isFetching = false;
         final unmodifiableMovies = List<MovieEntity>.unmodifiable(_movies);
         emit(
-          isInitialLoad
-              ? AllMoviesState.successAllMovies(unmodifiableMovies)
-              : AllMoviesState.successPaginationAllMovies(unmodifiableMovies),
+          AllMoviesState.successAllMovies(
+            movies: unmodifiableMovies,
+            paginationError: null,
+            isLoadingPagination: false,
+          ),
         );
       },
       failure: (NetworkExceptions networkExceptions) {
@@ -91,9 +101,10 @@ class AllMoviesCubit extends Cubit<AllMoviesState> {
         emit(
           isInitialLoad
               ? AllMoviesState.errorAllMovies(networkExceptions)
-              : AllMoviesState.errorPaginationAllMovies(
-                  List.unmodifiable(_movies),
-                  networkExceptions,
+              : AllMoviesState.successAllMovies(
+                  movies: List.unmodifiable(_movies),
+                  paginationError: networkExceptions,
+                  isLoadingPagination: false,
                 ),
         );
       },
