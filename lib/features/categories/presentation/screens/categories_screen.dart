@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/common/error_retry_view.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
 import '../../../../core/theming/text_styles.dart';
 import '../cubit/categories_cubit.dart';
@@ -21,7 +22,7 @@ class CategoriesScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'Categories',
+          AppStrings.categories,
           style: TextStyles.font16SemiBold.copyWith(color: AppColors.textWhite),
         ),
       ),
@@ -30,35 +31,19 @@ class CategoriesScreen extends StatelessWidget {
           return state.when(
             idle: () => const CategoriesShimmer(),
             loading: () => const CategoriesShimmer(),
-            success: (categories) =>
-                CategoriesGridView(categories: categories),
-            error: (error) => Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      NetworkExceptions.getErrorMessage(error),
-                      textAlign: TextAlign.center,
+            success: (categories) => categories.isEmpty
+                ? Center(
+                    child: Text(
+                      AppStrings.noCategoriesFound,
                       style: TextStyles.font16SemiBold.copyWith(
-                        color: AppColors.textWhite,
+                        color: AppColors.textWhiteGrey,
                       ),
                     ),
-                    SizedBox(height: 16.h),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<CategoriesCubit>().getCategories();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryBlueAccent,
-                        foregroundColor: AppColors.textWhite,
-                      ),
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
-              ),
+                  )
+                : CategoriesGridView(categories: categories),
+            error: (error) => ErrorRetryView(
+              message: NetworkExceptions.getErrorMessage(error),
+              onRetry: () => context.read<CategoriesCubit>().getCategories(),
             ),
           );
         },
