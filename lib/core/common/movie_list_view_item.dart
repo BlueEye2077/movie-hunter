@@ -6,6 +6,7 @@ import '../domain/entities/movie_entity.dart';
 import '../genres/domain/entities/genre_entity.dart';
 import '../genres/helpers/genres_helper.dart';
 import '../routing/routes.dart';
+import '../theming/app_assets.dart';
 import '../theming/app_strings.dart';
 import '../theming/colors.dart';
 import '../theming/text_styles.dart';
@@ -85,14 +86,17 @@ class _MovieListViewItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final year = movie.releaseDate != null && movie.releaseDate!.length >= 4
-        ? movie.releaseDate!.substring(0, 4)
+    final title = movie.displayTitle.isNotEmpty
+        ? movie.displayTitle
         : AppStrings.unknown;
-    final language = movie.originalLanguage?.toUpperCase() ?? 'EN';
-    final isAdult = movie.isAdult ?? false;
- // todo: manipulate the data in the domain layer
-    final genreNames = (movie.genreNames != null && movie.genreNames!.isNotEmpty)
-        ? movie.genreNames!.take(2).toList()
+    final year = movie.releaseYear.isNotEmpty
+        ? movie.releaseYear
+        : AppStrings.unknown;
+    final language = movie.formattedLanguage;
+    final isAdult = movie.isAdultMovie;
+
+    final genreNames = movie.topTwoGenres.isNotEmpty
+        ? movie.topTwoGenres
         : GenresHelper.getGenreTitles(
             genreIds: movie.genreIds,
             allGenres: genres,
@@ -107,7 +111,7 @@ class _MovieListViewItemDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          movie.title ?? movie.originalTitle ?? AppStrings.unknown,
+          title,
           style: TextStyles.font16SemiBold.copyWith(
             color: AppColors.textWhite,
           ),
@@ -116,7 +120,7 @@ class _MovieListViewItemDetails extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         _MovieInfoRow(
-          svgIcon: 'assets/svgs/calendar.svg',
+          svgIcon: AppAssets.calendarSvg,
           text: year,
         ),
         SizedBox(height: 8.h),

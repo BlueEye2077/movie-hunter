@@ -108,4 +108,7 @@ abstract final class AppStrings {
   static const String onboardingDesc3 =
       'Why watch in potato quality when you can see every single hair on Logan’s grumpy face? We’re talking visuals so crisp they’d make a friendly neighborhood spider dizzy.';
 
+  // ── Categories ──
+  static const String categories = 'Categories';
+  static const String noCategoriesFound = 'No categories found';
 }
