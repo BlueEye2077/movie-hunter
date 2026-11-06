@@ -67,8 +67,9 @@ abstract class NetworkExceptions with _$NetworkExceptions {
           final msg = ErrorModel.fromJson(item).statusMessage;
           if (msg != null && msg.isNotEmpty) errorMessages.add(msg);
         } else if (item is Map) {
-          final msg =
-              ErrorModel.fromJson(Map<String, dynamic>.from(item)).statusMessage;
+          final msg = ErrorModel.fromJson(
+            Map<String, dynamic>.from(item),
+          ).statusMessage;
           if (msg != null && msg.isNotEmpty) errorMessages.add(msg);
         } else if (item != null) {
           errorMessages.add(item.toString());
@@ -144,6 +145,10 @@ abstract class NetworkExceptions with _$NetworkExceptions {
             case DioExceptionType.connectionError:
               networkExceptions =
                   const NetworkExceptions.noInternetConnection();
+              break;
+
+            case DioExceptionType.transformTimeout:
+              networkExceptions = const NetworkExceptions.requestTimeout();
               break;
           }
         } else if (error is SocketException) {
