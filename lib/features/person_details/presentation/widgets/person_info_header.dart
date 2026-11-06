@@ -22,46 +22,48 @@ class PersonInfoHeader extends StatelessWidget {
 
     return Padding(
       padding: AppSpacing.screenPadding,
-      child: Column(
-        children: [
-          _PersonAvatar(profilePath: person.profilePath),
-          SizedBox(height: 16.h),
-          Text(
-            person.name,
-            textAlign: TextAlign.center,
-            style: TextStyles.font18SemiBold,
-          ),
-          if (person.knownForDepartment != null) ...[
-            SizedBox(height: 4.h),
-            Text(person.knownForDepartment!, style: TextStyles.font12Medium),
-          ],
-          SizedBox(height: 20.h),
-          // Stats chips (wrap to a new line instead of overflowing)
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 16.w,
-            runSpacing: 8.h,
-            children: [
-              if (person.formattedBirthday != null)
-                PersonStatChip(
-                  icon: Icons.cake_outlined,
-                  label: person.formattedBirthday!,
-                ),
-              if (age != null)
-                PersonStatChip(
-                  icon: Icons.hourglass_bottom_outlined,
-                  label: person.isDeceased
-                      ? AppStrings.diedAt(age)
-                      : AppStrings.yearsOld(age),
-                ),
-              if (person.placeOfBirth != null)
-                PersonStatChip(
-                  icon: Icons.place_outlined,
-                  label: person.placeOfBirth!,
-                ),
+      child: Center(
+        child: Column(
+          children: [
+            _PersonAvatar(profilePath: person.profilePath),
+            SizedBox(height: 16.h),
+            Text(
+              person.name,
+              textAlign: TextAlign.center,
+              style: TextStyles.font18SemiBold,
+            ),
+            if (person.knownForDepartment != null) ...[
+              SizedBox(height: 4.h),
+              Text(person.knownForDepartment!, style: TextStyles.font12Medium),
             ],
-          ),
-        ],
+            SizedBox(height: 20.h),
+            // Stats chips (wrap to a new line instead of overflowing)
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 16.w,
+              runSpacing: 8.h,
+              children: [
+                if (person.formattedBirthday != null)
+                  PersonStatChip(
+                    icon: Icons.cake_outlined,
+                    label: person.formattedBirthday!,
+                  ),
+                if (age != null)
+                  PersonStatChip(
+                    icon: Icons.hourglass_bottom_outlined,
+                    label: person.isDeceased
+                        ? AppStrings.diedAt(age)
+                        : AppStrings.yearsOld(age),
+                  ),
+                if (person.placeOfBirth != null)
+                  PersonStatChip(
+                    icon: Icons.place_outlined,
+                    label: person.placeOfBirth!,
+                  ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
