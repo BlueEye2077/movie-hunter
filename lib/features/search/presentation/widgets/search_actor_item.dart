@@ -1,6 +1,7 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/common/app_network_image.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/routing/routes.dart';
@@ -39,12 +40,12 @@ class SearchActorItem extends StatelessWidget {
               clipBehavior: Clip.hardEdge,
               child: (actor.profilePath != null &&
                       actor.profilePath!.trim().isNotEmpty)
-                  ? CachedNetworkImage(
+                  ? AppNetworkImage(
                       imageUrl:
                           '${ApiConstants.profileImagesUrl}${actor.profilePath}',
                       fit: BoxFit.cover,
                       memCacheWidth: 192,
-                      errorBuilder: (context, error, stackTrace) =>
+                      errorWidget: (context, error) =>
                           const Icon(Icons.person, color: AppColors.textGrey),
                     )
                   : const Icon(Icons.person, color: AppColors.textGrey),

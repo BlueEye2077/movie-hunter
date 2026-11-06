@@ -1,6 +1,7 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/common/app_network_image.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/app_spacing.dart';
@@ -37,12 +38,11 @@ class CastAndCrewListItem extends StatelessWidget {
                 width: 56.r,
                 height: 56.r,
                 child: profilePath != null && profilePath!.trim().isNotEmpty
-                    ? CachedNetworkImage(
+                    ? AppNetworkImage(
                         imageUrl: '${ApiConstants.profileImagesUrl}$profilePath',
                         memCacheWidth: 168,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            _avatarPlaceholder(),
+                        errorWidget: (context, error) => _avatarPlaceholder(),
                       )
                     : _avatarPlaceholder(),
               ),

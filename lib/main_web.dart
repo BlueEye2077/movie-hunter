@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/constants/constants.dart';
+import 'core/di/dependency_injection.dart';
+import 'core/helpers/secure_storage_helper.dart';
+import 'core/helpers/shared_preference_helper.dart';
+import 'core/routing/app_router.dart';
+import 'movie_hunter_app.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferenceHelper.prefsInit();
+  await checkIfLoggedInUser();
+  checkSeenOnBoarding();
+  await ScreenUtil.ensureScreenSize();
+  initGetIt();
+  runApp(
+    MovieHunterApp(
+      appRouter: AppRouter(),
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {.touch, .mouse, .trackpad},
+      ),
+    ),
+  );
+}
+
+Future<void> checkIfLoggedInUser() async {
+  String? sessionId = await SecureStorageHelper.getSessionId();
+  if (sessionId != null) {
+    isLoggedInUser = true;
+  } else {
+    isLoggedInUser = false;
+  }
+}
+
+void checkSeenOnBoarding() {
+  bool seenOnBoardingValue = SharedPreferenceHelper.getSeenOnBoarding();
+  isSeenOnBoarding = seenOnBoardingValue;
+}

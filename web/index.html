@@ -119,5 +119,12 @@
   
   <script src="flutter_bootstrap.js" async=""></script>
 
+<script>
+  window.addEventListener("message", function (event) {
+    if (event.data && event.data.type === "go-back") {
+      window.history.back();
+    }
+  });
+</script>
 
 </body></html>

@@ -12,8 +12,13 @@ import 'core/theming/movie_hunter_theme.dart';
 
 class MovieHunterApp extends StatelessWidget {
   final AppRouter appRouter;
+  final ScrollBehavior? scrollBehavior;
 
-  const MovieHunterApp({super.key, required this.appRouter});
+  const MovieHunterApp({
+    super.key,
+    required this.appRouter,
+    this.scrollBehavior,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +32,7 @@ class MovieHunterApp extends StatelessWidget {
           lazy: false,
           create: (context) => getIt<GenresCubit>()..getGenres(),
           child: MaterialApp(
+            scrollBehavior: scrollBehavior,
             title: AppStrings.appName,
             debugShowCheckedModeBanner: false,
             theme: kMovieHunterTheme,

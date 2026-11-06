@@ -1,6 +1,7 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/common/app_network_image.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/colors.dart';
@@ -33,12 +34,11 @@ class MovieCastItem extends StatelessWidget {
                 width: 40.r,
                 height: 40.r,
                 child: profilePath != null && profilePath!.trim().isNotEmpty
-                    ? CachedNetworkImage(
+                    ? AppNetworkImage(
                         imageUrl: '${ApiConstants.profileImagesUrl}$profilePath',
                         memCacheWidth: 120,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            _avatarPlaceholder(),
+                        errorWidget: (context, error) => _avatarPlaceholder(),
                       )
                     : _avatarPlaceholder(),
               ),

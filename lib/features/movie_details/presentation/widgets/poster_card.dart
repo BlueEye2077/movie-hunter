@@ -1,7 +1,7 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/common/app_network_image.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/colors.dart';
 
@@ -23,11 +23,10 @@ class PosterCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: posterPath != null && posterPath!.trim().isNotEmpty
-            ? CachedNetworkImage(
+            ? AppNetworkImage(
                 imageUrl: '${ApiConstants.imagesUrl}$posterPath',
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) =>
-                    _posterPlaceholder(),
+                errorWidget: (context, error) => _posterPlaceholder(),
               )
             : _posterPlaceholder(),
       ),
@@ -44,4 +43,3 @@ class PosterCard extends StatelessWidget {
     );
   }
 }
-

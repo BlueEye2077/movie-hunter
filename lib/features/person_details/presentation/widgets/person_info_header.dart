@@ -1,6 +1,7 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/common/app_network_image.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/app_spacing.dart';
@@ -81,11 +82,11 @@ class _PersonAvatar extends StatelessWidget {
         width: 110.w,
         height: 110.w,
         child: profilePath != null
-            ? CachedNetworkImage(
+            ? AppNetworkImage(
                 imageUrl: '${ApiConstants.imagesUrl}$profilePath',
                 memCacheWidth: _memCacheWidth,
                 fit: BoxFit.cover,
-                errorBuilder: (_, _, _) => const _AvatarPlaceholder(),
+                errorWidget: (_, _) => const _AvatarPlaceholder(),
               )
             : const _AvatarPlaceholder(),
       ),

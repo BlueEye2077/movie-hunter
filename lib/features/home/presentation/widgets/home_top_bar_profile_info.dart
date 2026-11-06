@@ -1,8 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../core/helpers/app_image_provider.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/app_assets.dart';
@@ -28,11 +29,9 @@ class HomeTopBarProfileInfo extends StatelessWidget {
           radius: 20.r,
           backgroundColor: AppColors.primarySoft,
           backgroundImage: hasAvatar
-              ? ResizeImage(
-                  CachedNetworkImageProvider(
-                    '${ApiConstants.profileImagesUrl}$avatarPath',
-                  ),
-                  width: _avatarMemCacheSize,
+              ? appImageProvider(
+                  '${ApiConstants.profileImagesUrl}$avatarPath',
+                  maxWidth: _avatarMemCacheSize,
                 )
               : null,
           child: !hasAvatar

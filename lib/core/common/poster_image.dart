@@ -1,10 +1,10 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../networking/api_constants.dart';
 import '../theming/colors.dart';
+import 'app_network_image.dart';
 
 class PosterImage extends StatelessWidget {
   final String? imageUrl;
@@ -34,15 +34,15 @@ class PosterImage extends StatelessWidget {
         height: height,
         width: width,
         child: (imageUrl != null && imageUrl!.trim().isNotEmpty)
-            ? CachedNetworkImage(
+            ? AppNetworkImage(
                 imageUrl: "${ApiConstants.imagesUrl}$imageUrl",
                 fit: BoxFit.cover,
-                placeholder: (context, url) => Shimmer.fromColors(
+                placeholder: (context) => Shimmer.fromColors(
                   baseColor: AppColors.primarySoft,
                   highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
                   child: Container(color: AppColors.primarySoft),
                 ),
-                errorBuilder: (context, url, error) => _buildPlaceholder(),
+                errorWidget: (context, error) => _buildPlaceholder(),
               )
             : _buildPlaceholder(),
       ),
@@ -52,11 +52,7 @@ class PosterImage extends StatelessWidget {
   Widget _buildPlaceholder() {
     return Container(
       color: AppColors.primarySoft,
-      child: Icon(
-        Icons.movie,
-        color: AppColors.textDarkGrey,
-        size: 40.w,
-      ),
+      child: Icon(Icons.movie, color: AppColors.textDarkGrey, size: 40.w),
     );
   }
 }

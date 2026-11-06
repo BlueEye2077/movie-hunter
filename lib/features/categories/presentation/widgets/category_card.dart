@@ -1,7 +1,8 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../../core/common/app_network_image.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/routing/routes.dart';
@@ -36,15 +37,15 @@ class CategoryCard extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             if (category.imageUrl.isNotEmpty)
-              CachedNetworkImage(
+              AppNetworkImage(
                 imageUrl: '${ApiConstants.imagesUrl}${category.imageUrl}',
                 fit: BoxFit.cover,
-                placeholder: (context, url) => Shimmer.fromColors(
+                placeholder: (context) => Shimmer.fromColors(
                   baseColor: AppColors.primarySoft,
                   highlightColor: AppColors.textDarkGrey,
                   child: Container(color: AppColors.primarySoft),
                 ),
-                errorBuilder: (context, url, error) =>
+                errorWidget: (context, error) =>
                     Container(color: AppColors.primarySoft),
               )
             else

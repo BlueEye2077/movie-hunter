@@ -1,7 +1,7 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/helpers/app_image_provider.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/text_styles.dart';
 
@@ -25,9 +25,8 @@ class UpcomingMovieItem extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.r),
-
             image: DecorationImage(
-              image: CachedNetworkImageProvider(posterUrl),
+              image: appImageProvider(posterUrl),
               fit: BoxFit.cover,
             ),
           ),

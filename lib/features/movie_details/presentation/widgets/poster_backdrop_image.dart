@@ -1,6 +1,6 @@
-import 'package:cached_network_image_ce/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/common/app_network_image.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/colors.dart';
 
@@ -14,14 +14,13 @@ class PosterBackdropImage extends StatelessWidget {
     if (imagePath == null || imagePath!.trim().isEmpty) {
       return const ColoredBox(color: AppColors.primaryDark);
     }
-    return CachedNetworkImage(
+    return AppNetworkImage(
       imageUrl: '${ApiConstants.imagesUrl}$imagePath',
       fit: BoxFit.cover,
       color: AppColors.primaryDark.withValues(alpha: 0.40),
       colorBlendMode: BlendMode.darken,
-      errorBuilder: (context, error, stackTrace) =>
+      errorWidget: (context, error) =>
           const ColoredBox(color: AppColors.primaryDark),
     );
   }
 }
-
