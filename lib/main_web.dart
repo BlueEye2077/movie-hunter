@@ -19,6 +19,7 @@ void main() async {
     MovieHunterApp(
       appRouter: AppRouter(),
       scrollBehavior: const MaterialScrollBehavior().copyWith(
+        scrollbars: false,
         dragDevices: {.touch, .mouse, .trackpad},
       ),
     ),
