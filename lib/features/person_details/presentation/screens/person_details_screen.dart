@@ -20,7 +20,10 @@ class PersonDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.primaryDark,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryDark,
+        // to remove the shadow under the app bar and make it transparent
+        scrolledUnderElevation: 0,
+        surfaceTintColor: AppColors.primaryDark,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(
