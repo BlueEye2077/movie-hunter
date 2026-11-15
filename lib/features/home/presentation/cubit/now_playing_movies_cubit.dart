@@ -20,6 +20,7 @@ class NowPlayingMoviesCubit extends Cubit<NowPlayingMoviesState> {
 
   // Get now playing movies
   Future<void> getNowPlayingMovies() async {
+    if (state is _Loading) return;
     emit(const NowPlayingMoviesState.loading());
     final response = await _getNowPlayingMoviesUseCase();
     if (isClosed) return;

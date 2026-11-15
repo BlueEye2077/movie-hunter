@@ -20,6 +20,7 @@ class UpcomingMoviesCubit extends Cubit<UpComingMoviesState> {
 
   // Get upcoming movies
   Future<void> getUpcomingMovies() async {
+    if (state is _Loading) return;
     emit(const UpComingMoviesState.loading());
     final response = await _getUpcomingMoviesUseCase();
     if (isClosed) return;
@@ -29,5 +30,4 @@ class UpcomingMoviesCubit extends Cubit<UpComingMoviesState> {
     );
   }
 
-  Future<void> getUpComingMovies() => getUpcomingMovies();
 }
