@@ -110,13 +110,15 @@ class AppRouter {
         );
 
       case Routes.castAndCrew:
-        final args = settings.arguments as CastAndCrewArgs;
+        final args = settings.arguments;
+        if (args is! CastAndCrewArgs) return null;
         return MaterialPageRoute(
           builder: (_) => CastAndCrewScreen(credits: args.credits),
         );
 
       case Routes.allMovies:
-        final args = settings.arguments as AllMoviesArgs;
+        final args = settings.arguments;
+        if (args is! AllMoviesArgs) return null;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (_) => getIt<AllMoviesCubit>()
@@ -126,7 +128,8 @@ class AppRouter {
         );
 
       case Routes.personDetails:
-        final args = settings.arguments as PersonDetailsArgs;
+        final args = settings.arguments;
+        if (args is! PersonDetailsArgs) return null;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (_) =>
@@ -158,5 +161,15 @@ class AppRouter {
       default:
         return null;
     }
+  }
+
+  Route<dynamic> onUnknownRoute(RouteSettings settings) {
+    return MaterialPageRoute(
+      builder: (_) => Scaffold(
+        body: Center(
+          child: Text('No route defined for ${settings.name}'),
+        ),
+      ),
+    );
   }
 }

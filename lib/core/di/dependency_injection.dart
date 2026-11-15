@@ -58,11 +58,9 @@ import '../../features/search/data/web_services/search_api_service.dart';
 import '../../features/search/domain/repos/search_repository.dart';
 import '../../features/search/domain/usecases/search_usecase.dart';
 import '../../features/search/presentation/cubit/search_cubit.dart';
-import '../genres/cubit/genres_cubit.dart';
 import '../genres/data/repos/genres_repository_impl.dart';
 import '../genres/data/web_services/genres_api_services.dart';
 import '../genres/domain/repos/genres_repository.dart';
-import '../genres/domain/usecases/get_genres_usecase.dart';
 import '../networking/dio_factory.dart';
 
 GetIt getIt = GetIt.instance;
@@ -109,9 +107,6 @@ void initGetIt() {
   getIt.registerLazySingleton<GenresRepository>(
     () => GenresRepositoryImpl(getIt()),
   );
-  getIt.registerLazySingleton<GetGenresUseCase>(
-    () => GetGenresUseCase(genresRepository: getIt()),
-  );
 
   // register movie cubits
   getIt.registerFactory<UpcomingMoviesCubit>(
@@ -125,10 +120,6 @@ void initGetIt() {
   );
   getIt.registerFactory<NowPlayingMoviesCubit>(
     () => NowPlayingMoviesCubit(getNowPlayingMoviesUseCase: getIt()),
-  );
-  // register genres cubit
-  getIt.registerFactory<GenresCubit>(
-    () => GenresCubit(getGenresUseCase: getIt()),
   );
 
   // ── Categories Feature ──

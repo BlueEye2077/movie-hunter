@@ -34,17 +34,28 @@ class AuthRepositoryImpl implements AuthRepository {
         );
       }
 
-      await authApiService.login(
-        LoginRequestModel(
-          username: username,
-          password: password,
-          requestToken: requestToken,
-        ),
-      );
+      final CreateRequestTokenResponseModel loginResponse =
+          await authApiService.login(
+            LoginRequestModel(
+              username: username,
+              password: password,
+              requestToken: requestToken,
+            ),
+          );
+      if (loginResponse.success != true) {
+        return ApiResult.failure(
+          const NetworkExceptions.defaultError("Failed to validate login"),
+        );
+      }
+      final String validatedToken =
+          (loginResponse.requestToken != null &&
+              loginResponse.requestToken!.isNotEmpty)
+          ? loginResponse.requestToken!
+          : requestToken;
 
       final CreateNewSessionResponseModel sessionResponse = await authApiService
           .createSession(
-            CreateSessionRequestModel(requestToken: requestToken),
+            CreateSessionRequestModel(requestToken: validatedToken),
           );
 
       final sessionId = sessionResponse.sessionId;

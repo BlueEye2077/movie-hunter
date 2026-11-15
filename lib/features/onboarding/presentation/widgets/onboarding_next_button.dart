@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../core/theming/app_assets.dart';
 import '../../../../core/theming/colors.dart';
 
 class OnboardingNextButton extends StatelessWidget {
@@ -27,7 +28,7 @@ class OnboardingNextButton extends StatelessWidget {
           child: RotatedBox(
             quarterTurns: 2, // Rotate 180 degrees
             child: SvgPicture.asset(
-              'assets/svgs/arrow_back.svg',
+              AppAssets.arrowBackSvg,
               height: 24.w,
               width: 24.w,
               colorFilter: const ColorFilter.mode(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../domain/entities/movie_entity.dart';
-import '../genres/domain/entities/genre_entity.dart';
 import '../theming/app_spacing.dart';
 import 'movie_list_view_item.dart';
 import 'movie_shimmer_list_view.dart';
@@ -10,14 +9,12 @@ import 'scroll_index_calculator.dart';
 
 class MoviesBrowserListView extends StatefulWidget {
   final List<MovieEntity> movies;
-  final List<GenreEntity> genres;
   final bool isLoadingMore;
   final int scrolledMovieIndex;
 
   const MoviesBrowserListView({
     super.key,
     required this.movies,
-    this.genres = const [],
     required this.isLoadingMore,
     required this.scrolledMovieIndex,
   });
@@ -62,10 +59,7 @@ class _MoviesBrowserListViewState extends State<MoviesBrowserListView> {
         if (index == widget.movies.length) {
           return const MovieShimmerListView(itemCount: 3);
         }
-        return MovieListViewItem(
-          movie: widget.movies[index],
-          genres: widget.genres,
-        );
+        return MovieListViewItem(movie: widget.movies[index]);
       },
     );
   }

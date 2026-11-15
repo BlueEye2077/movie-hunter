@@ -4,6 +4,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../domain/entities/movie_entity.dart';
 import '../routing/routes.dart';
+import '../theming/app_strings.dart';
 import '../theming/colors.dart';
 import 'movies_browser_grid_item.dart';
 import 'movies_browser_grid_item_shimmer.dart';
@@ -73,13 +74,15 @@ class _MoviesBrowserGridViewState extends State<MoviesBrowserGridView> {
         }
 
         final movie = widget.movies[index];
-        final releaseDate = movie.releaseDate;
-        final year = (releaseDate == null || releaseDate.length < 4)
-            ? '—'
-            : releaseDate.substring(0, 4);
+        final year = movie.releaseYear.isNotEmpty
+            ? movie.releaseYear
+            : AppStrings.notAvailableDash;
+        final title = movie.displayTitle.isNotEmpty
+            ? movie.displayTitle
+            : AppStrings.unknown;
         return MoviesBrowserGridItem(
           posterPath: movie.posterPath ?? '',
-          title: movie.title ?? movie.originalTitle ?? 'Unknown',
+          title: title,
           year: year,
           onTap: () => Navigator.pushNamed(
             context,

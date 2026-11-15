@@ -1,3 +1,4 @@
+import '../../../../core/theming/app_assets.dart';
 import '../../../../core/theming/app_strings.dart';
 
 class OnboardingItem {
@@ -17,19 +18,19 @@ class OnboardingItem {
     OnboardingItem(
       title: AppStrings.onboardingTitle1,
       description: AppStrings.onboardingDesc1,
-      imagePath: 'assets/images/onboarding_background.png',
+      imagePath: AppAssets.onboardingBackgroundPng,
       isFullBleedImage: true,
     ),
     OnboardingItem(
       title: AppStrings.onboardingTitle2,
       description: AppStrings.onboardingDesc2,
-      imagePath: 'assets/images/onboarding_2.png',
+      imagePath: AppAssets.onboarding2Png,
       isFullBleedImage: false,
     ),
     OnboardingItem(
       title: AppStrings.onboardingTitle3,
       description: AppStrings.onboardingDesc3,
-      imagePath: 'assets/images/onboarding_3.png',
+      imagePath: AppAssets.onboarding3Png,
       isFullBleedImage: false,
     ),
   ];

@@ -1,6 +1,10 @@
 abstract final class AppStrings {
   // ── App ──
   static const String appName = 'Movie Hunter';
+  static const String home = 'Home';
+  static const String profile = 'Profile';
+  static const String searchHint = 'Search a title..';
+  static const String noMoviesFound = 'No movies found.';
 
   // ── Home ──
   static const String helloGuestUser = 'Hello, guest ';
@@ -42,6 +46,7 @@ abstract final class AppStrings {
   static const String noTrailerAvailable =
       'No trailer available for this movie';
   static const String couldNotLaunchYoutube = 'Could not launch YouTube';
+  static const String couldNotLaunchUrl = 'Could not open the link';
   static const String notAvailableDash = '—';
 
   static String shareMovieMessage(String title, String url) =>

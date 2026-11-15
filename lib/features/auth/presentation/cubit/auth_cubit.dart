@@ -15,6 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._loginUseCase) : super(const AuthState.idle());
 
   Future<void> login(String username, String password) async {
+    if (state is _Loading) return;
     emit(const AuthState.loading());
     final ApiResult<UserSessionEntity> result = await _loginUseCase(
       username.trim(),
