@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/helpers/url_launcher_helper.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
@@ -27,13 +27,6 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   bool _isObscure = true;
-
-  Future<void> _launchForgotPassword() async {
-    final Uri url = Uri.parse(ApiConstants.tmdbResetPasswordUrl);
-    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      debugPrint('Could not launch $url');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +75,10 @@ class _LoginFormState extends State<LoginForm> {
           ),
           SizedBox(height: 8.h),
           GestureDetector(
-            onTap: _launchForgotPassword,
+            onTap: () => launchExternalUrl(
+              context,
+              ApiConstants.tmdbResetPasswordUrl,
+            ),
             child: Text(
               AppStrings.forgotPassword,
               style: TextStyles.font12Medium.copyWith(

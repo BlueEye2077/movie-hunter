@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/helpers/url_launcher_helper.dart';
 import '../../../../core/networking/api_constants.dart';
-import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
@@ -11,13 +10,6 @@ import '../../../../core/theming/text_styles.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
-
-  Future<void> _launchTMDBRegistration() async {
-    final Uri url = Uri.parse(ApiConstants.tmdbSignupUrl);
-    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-      debugPrint('Could not launch $url');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +51,10 @@ class SignUpScreen extends StatelessWidget {
                       width: double.infinity,
                       height: 56.h,
                       child: ElevatedButton(
-                        onPressed: _launchTMDBRegistration,
+                        onPressed: () => launchExternalUrl(
+                          context,
+                          ApiConstants.tmdbSignupUrl,
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryBlueAccent,
                           shape: RoundedRectangleBorder(
@@ -80,7 +75,7 @@ class SignUpScreen extends StatelessWidget {
                       height: 56.h,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, Routes.login);
+                          Navigator.pop(context);
                         },
                         style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(
