@@ -24,7 +24,9 @@ class MovieDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final movieId = movie.id ?? 0;
-    final title = movie.title ?? movie.originalTitle ?? AppStrings.unknown;
+    final title = movie.displayTitle.isNotEmpty
+        ? movie.displayTitle
+        : AppStrings.unknown;
 
     return Scaffold(
       backgroundColor: AppColors.primaryDark,
@@ -99,8 +101,9 @@ SliverToBoxAdapter _buildSliverToBoxAdapter(MovieEntity movie) {
           if (movie.id != null && movie.id! > 0)
             MovieActionButtons(
               movieId: movie.id!,
-              movieTitle:
-                  movie.title ?? movie.originalTitle ?? AppStrings.unknown,
+              movieTitle: movie.displayTitle.isNotEmpty
+                  ? movie.displayTitle
+                  : AppStrings.unknown,
             ),
           SizedBox(height: 24.h),
           MovieStoryLine(overview: movie.overview ?? ''),

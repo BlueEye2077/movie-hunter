@@ -11,17 +11,11 @@ class MovieInfoSection extends StatelessWidget {
 
   const MovieInfoSection({super.key, required this.movie});
 
-  static String? _safeYear(String? date) {
-    if (date == null || date.isEmpty) return null;
-    final parsed = DateTime.tryParse(date);
-    if (parsed != null) return parsed.year.toString();
-    if (date.length >= 4) return date.substring(0, 4);
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final fallbackYear = _safeYear(movie.releaseDate);
+    final fallbackYear = movie.releaseYear.isNotEmpty
+        ? movie.releaseYear
+        : null;
     final fallbackGenre =
         movie.genreNames != null && movie.genreNames!.isNotEmpty
         ? movie.genreNames!.first
