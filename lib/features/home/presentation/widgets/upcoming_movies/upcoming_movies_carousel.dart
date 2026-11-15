@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/common/animated_slider_dots.dart';
+import '../../../../../core/domain/entities/movie_entity.dart';
 import '../../../../../core/networking/api_constants.dart';
 import '../../../../../core/routing/routes.dart';
-import '../../../../../core/domain/entities/movie_entity.dart';
+import '../../../../../core/theming/app_strings.dart';
 import 'upcoming_movie_item.dart';
 
 class UpcomingMoviesCarousel extends StatefulWidget {
@@ -69,7 +70,9 @@ class _UpcomingMoviesCarouselState extends State<UpcomingMoviesCarousel> {
               child: UpcomingMovieItem(
                 posterUrl:
                     '${ApiConstants.imagesUrl}${movie.horizontalPoster ?? movie.posterPath ?? ''}',
-                title: movie.title ?? 'No title',
+                title: movie.displayTitle.isNotEmpty
+                    ? movie.displayTitle
+                    : AppStrings.unknown,
                 releaseDate: movie.releaseDate ?? '',
               ),
             );
