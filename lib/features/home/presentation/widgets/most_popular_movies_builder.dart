@@ -29,6 +29,7 @@ class MostPopularMoviesBuilder extends StatelessWidget {
             title: AppStrings.mostPopular,
             source: const AllMoviesSource.popular(),
             error: error,
+            onRetry: () => context.read<PopularMoviesCubit>().getPopularMovies()
           ),
         );
       },

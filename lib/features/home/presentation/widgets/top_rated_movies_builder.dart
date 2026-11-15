@@ -29,6 +29,8 @@ class TopRatedMoviesBuilder extends StatelessWidget {
             title: AppStrings.topRated,
             source: const AllMoviesSource.topRated(),
             error: error,
+            onRetry: () =>
+                context.read<TopRatedMoviesCubit>().getTopRatedMovies(),
           ),
         );
       },
