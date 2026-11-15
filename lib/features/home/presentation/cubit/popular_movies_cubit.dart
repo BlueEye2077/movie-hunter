@@ -20,6 +20,7 @@ class PopularMoviesCubit extends Cubit<PopularMoviesState> {
 
   // Get popular movies
   Future<void> getPopularMovies() async {
+    if (state is _Loading) return;
     emit(const PopularMoviesState.loading());
     final response = await _getPopularMoviesUseCase();
     if (isClosed) return;

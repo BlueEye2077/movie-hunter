@@ -31,7 +31,7 @@ class UpcomingMoviesShimmer extends StatelessWidget {
               autoPlay: false,
             ),
           ),
-          const SizedBox(height: 11),
+          SizedBox(height: 11.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(5, (index) {

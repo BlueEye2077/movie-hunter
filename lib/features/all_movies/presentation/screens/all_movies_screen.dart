@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/common/movies_browser_scaffold.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../../core/theming/colors.dart';
 import '../cubit/all_movies_cubit.dart';
 import '../models/all_movies_args.dart';
 
@@ -29,6 +30,7 @@ class AllMoviesScreen extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
+                backgroundColor: AppColors.secondaryRed,
                 content: Text(
                   NetworkExceptions.getErrorMessage(state.paginationError!),
                 ),
@@ -64,7 +66,8 @@ class AllMoviesScreen extends StatelessWidget {
             movies: const [],
             isLoading: false,
             isLoadingPagination: false,
-            emptyMessage: NetworkExceptions.getErrorMessage(networkExceptions),
+            errorMessage: NetworkExceptions.getErrorMessage(networkExceptions),
+            onRetry: () => context.read<AllMoviesCubit>().fetchNextPage(),
           ),
         );
       },

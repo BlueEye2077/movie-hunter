@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/common/error_retry_view.dart';
 import '../../../../../core/networking/network_exceptions.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/theming/colors.dart';
@@ -17,6 +18,7 @@ class HomeMovieSectionContent extends StatelessWidget {
   final bool isLoading;
   final List<MovieEntity>? movies;
   final NetworkExceptions? error;
+  final VoidCallback? onRetry;
 
   const HomeMovieSectionContent({
     super.key,
@@ -25,6 +27,7 @@ class HomeMovieSectionContent extends StatelessWidget {
     this.isLoading = false,
     this.movies,
     this.error,
+    this.onRetry,
   });
 
   @override
@@ -38,14 +41,19 @@ class HomeMovieSectionContent extends StatelessWidget {
         title: title,
         child: SizedBox(
           height: 245.h,
-          child: Center(
-            child: Text(
-              NetworkExceptions.getErrorMessage(error!),
-              style: TextStyles.font14Regular.copyWith(
-                color: AppColors.textWhite,
-              ),
-            ),
-          ),
+          child: onRetry != null
+              ? ErrorRetryView(
+                  message: NetworkExceptions.getErrorMessage(error!),
+                  onRetry: onRetry!,
+                )
+              : Center(
+                  child: Text(
+                    NetworkExceptions.getErrorMessage(error!),
+                    style: TextStyles.font14Regular.copyWith(
+                      color: AppColors.textWhite,
+                    ),
+                  ),
+                ),
         ),
       );
     }
