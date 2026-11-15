@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../domain/entities/movie_entity.dart';
-import '../genres/domain/entities/genre_entity.dart';
 import '../theming/app_spacing.dart';
+import '../theming/app_strings.dart';
 import '../theming/colors.dart';
 import '../theming/text_styles.dart';
 import 'movie_shimmer_list_view.dart';
@@ -16,7 +16,6 @@ import 'scroll_index_calculator.dart';
 class MoviesBrowserScaffold extends StatefulWidget {
   final String title;
   final List<MovieEntity> movies;
-  final List<GenreEntity> genres;
   final bool isLoading;
   final bool isLoadingPagination;
   final VoidCallback? onFetchNextPage;
@@ -26,7 +25,6 @@ class MoviesBrowserScaffold extends StatefulWidget {
     super.key,
     required this.title,
     required this.movies,
-    this.genres = const [],
     required this.isLoading,
     required this.isLoadingPagination,
     this.onFetchNextPage,
@@ -82,7 +80,7 @@ class _MoviesBrowserScaffoldState extends State<MoviesBrowserScaffold> {
           : widget.movies.isEmpty
           ? Center(
               child: Text(
-                widget.emptyMessage ?? 'No movies found.',
+                widget.emptyMessage ?? AppStrings.noMoviesFound,
                 style: TextStyles.font18Regular.copyWith(
                   color: AppColors.textWhite,
                 ),
@@ -126,7 +124,6 @@ class _MoviesBrowserScaffoldState extends State<MoviesBrowserScaffold> {
               child: MoviesBrowserSwitcher(
                 isGridView: _isGridView,
                 movies: widget.movies,
-                genres: widget.genres,
                 isLoadingPagination: widget.isLoadingPagination,
                 scrolledMovieIndex: _currentScrollMovieIndex,
               ),
