@@ -51,6 +51,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   /// Performs the search operation using the provided query. It emits different states based on the result of the search operation.
   Future<void> search(String query) async {
+    _debounceTimer?.cancel();
     _latestQuery = query;
     emit(const SearchState.loading());
     final response = await _searchUseCase(query);
@@ -79,6 +80,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   /// Retries the last non-empty query after an error.
   void retry() {
+    if (state is _Loading) return;
     if (_latestQuery.isNotEmpty) {
       search(_latestQuery);
     }

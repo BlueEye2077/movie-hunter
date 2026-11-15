@@ -17,6 +17,7 @@ class SimilarMoviesCubit extends Cubit<SimilarMoviesState> {
       super(const SimilarMoviesState.idle());
 
   Future<void> getSimilarMovies(int movieId) async {
+    if (state is _Loading) return;
     emit(const SimilarMoviesState.loading());
 
     final result = await _getSimilarMoviesUseCase(movieId);

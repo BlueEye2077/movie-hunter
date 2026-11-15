@@ -17,6 +17,7 @@ class MovieCreditsCubit extends Cubit<MovieCreditsState> {
       super(const MovieCreditsState.idle());
 
   Future<void> fetchMovieCredits(int movieId) async {
+    if (state is _Loading) return;
     emit(const MovieCreditsState.loading());
 
     final result = await _getMovieCreditsUseCase(movieId);

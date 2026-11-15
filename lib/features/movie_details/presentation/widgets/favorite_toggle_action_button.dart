@@ -51,7 +51,12 @@ class FavoriteToggleActionButton extends StatelessWidget {
             icon: favIcon,
             iconColor: AppColors.secondaryRed,
             onPressed: () {
-              context.read<MovieAccountStatusCubit>().toggleFavorite(movieId);
+              final cubit = context.read<MovieAccountStatusCubit>();
+              state.maybeWhen(
+                loading: () {},
+                success: (_) => cubit.toggleFavorite(movieId),
+                orElse: () => cubit.loadStatus(movieId),
+              );
             },
           ),
         );
