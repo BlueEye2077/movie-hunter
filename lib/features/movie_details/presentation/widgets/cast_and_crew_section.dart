@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../core/common/error_retry_view.dart';
 import '../../../../core/networking/network_exceptions.dart';

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../core/common/movie_list_view_item.dart';
 import '../../../../core/domain/entities/movie_entity.dart';
