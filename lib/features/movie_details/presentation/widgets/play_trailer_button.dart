@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/helpers/url_launcher_helper.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/theming/app_strings.dart';
@@ -20,20 +20,12 @@ class PlayTrailerButton extends StatelessWidget {
     return BlocConsumer<MovieTrailerCubit, MovieTrailerState>(
       listener: (context, state) {
         state.whenOrNull(
-          success: (youtubeKey) async {
-            final url = Uri.parse(ApiConstants.youtubeWatchUrl(youtubeKey));
-            if (await canLaunchUrl(url)) {
-              await launchUrl(url, mode: LaunchMode.externalApplication);
-            } else {
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(AppStrings.couldNotLaunchYoutube),
-                    backgroundColor: AppColors.secondaryRed,
-                  ),
-                );
-              }
-            }
+          success: (youtubeKey) {
+            launchExternalUrl(
+              context,
+              ApiConstants.youtubeWatchUrl(youtubeKey),
+              errorMessage: AppStrings.couldNotLaunchYoutube,
+            );
           },
           noTrailer: () {
             ScaffoldMessenger.of(context).clearSnackBars();

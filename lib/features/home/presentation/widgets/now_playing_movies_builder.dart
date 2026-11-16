@@ -29,6 +29,7 @@ class NowPlayingMoviesBuilder extends StatelessWidget {
             title: AppStrings.nowPlaying,
             source: const AllMoviesSource.nowPlaying(),
             error: error,
+            onRetry: () => context.read<NowPlayingMoviesCubit>().getNowPlayingMovies()
           ),
         );
       },

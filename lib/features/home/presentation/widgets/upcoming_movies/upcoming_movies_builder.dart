@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/common/error_retry_view.dart';
 import '../../../../../core/networking/network_exceptions.dart';
-import '../../../../../core/theming/text_styles.dart';
 import '../../cubit/upcoming_movies_cubit.dart';
 import 'upcoming_movies_carousel.dart';
 import 'upcoming_movies_shimmer.dart';
@@ -26,11 +26,10 @@ class UpcomingMoviesBuilder extends StatelessWidget {
           },
           error: (error) => SizedBox(
             height: 174.h,
-            child: Center(
-              child: Text(
-                NetworkExceptions.getErrorMessage(error),
-                style: TextStyles.font14Regular,
-              ),
+            child: ErrorRetryView(
+              message: NetworkExceptions.getErrorMessage(error),
+              onRetry: () =>
+                  context.read<UpcomingMoviesCubit>().getUpcomingMovies(),
             ),
           ),
         );

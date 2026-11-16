@@ -49,28 +49,55 @@ class ProfileLogoutButton extends StatelessWidget {
           orElse: () => false,
         );
 
-        return SizedBox(
-          width: double.infinity,
-          height: 56.h,
-          child: ElevatedButton.icon(
-            onPressed: isLoading ? null : () => _onLogoutPressed(context),
-            icon: const Icon(Icons.logout_rounded, size: 24),
-            label: Text(
-              AppStrings.logout,
-              style: TextStyles.font16SemiBold.copyWith(
-                color: AppColors.secondaryRed,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.secondaryRed.withValues(alpha: 0.1),
-              foregroundColor: AppColors.secondaryRed,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r),
-                side: BorderSide(
-                  color: AppColors.secondaryRed.withValues(alpha: 0.5),
-                  width: 1,
-                ),
+        return Material(
+          color: AppColors.primarySoft,
+          borderRadius: BorderRadius.circular(16.r),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(16.r),
+            onTap: isLoading ? null : () => _onLogoutPressed(context),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+              child: Row(
+                children: [
+                  Container(
+                    width: 40.w,
+                    height: 40.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.secondaryRed.withValues(alpha: 0.12),
+                    ),
+                    child: Center(
+                      child: isLoading
+                          ? SizedBox(
+                              width: 18.w,
+                              height: 18.w,
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: AppColors.secondaryRed,
+                              ),
+                            )
+                          : Icon(
+                              Icons.logout_rounded,
+                              color: AppColors.secondaryRed,
+                              size: 20.w,
+                            ),
+                    ),
+                  ),
+                  SizedBox(width: 14.w),
+                  Expanded(
+                    child: Text(
+                      AppStrings.logout,
+                      style: TextStyles.font16SemiBold.copyWith(
+                        color: AppColors.textWhite,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    color: AppColors.textGrey,
+                    size: 22.w,
+                  ),
+                ],
               ),
             ),
           ),

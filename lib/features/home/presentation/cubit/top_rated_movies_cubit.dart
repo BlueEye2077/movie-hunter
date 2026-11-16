@@ -20,6 +20,7 @@ class TopRatedMoviesCubit extends Cubit<TopRatedMoviesState> {
 
   // Get top rated movies
   Future<void> getTopRatedMovies() async {
+    if (state is _Loading) return;
     emit(const TopRatedMoviesState.loading());
     final response = await _getTopRatedMoviesUseCase();
     if (isClosed) return;

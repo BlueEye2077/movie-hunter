@@ -26,8 +26,11 @@ class HomeTopBar extends StatelessWidget {
                 name: account.displayName,
                 avatarPath: account.avatarPath,
               ),
-              orElse: () =>
-                  const HomeTopBarProfileInfo(name: '', avatarPath: null),
+              orElse: () => GestureDetector(
+                onTap: () =>
+                    context.read<AccountDetailsCubit>().retryIfNeeded(),
+                child: const HomeTopBarProfileInfo(name: '', avatarPath: null),
+              ),
             );
           },
         ),

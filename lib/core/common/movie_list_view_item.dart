@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../domain/entities/movie_entity.dart';
-import '../genres/domain/entities/genre_entity.dart';
-import '../genres/helpers/genres_helper.dart';
 import '../routing/routes.dart';
 import '../theming/app_assets.dart';
 import '../theming/app_strings.dart';
@@ -15,13 +13,11 @@ import 'rating_badge.dart';
 
 class MovieListViewItem extends StatelessWidget {
   final MovieEntity movie;
-  final List<GenreEntity> genres;
   final VoidCallback? onTap;
 
   const MovieListViewItem({
     super.key,
     required this.movie,
-    this.genres = const [],
     this.onTap,
   });
 
@@ -63,10 +59,7 @@ class MovieListViewItem extends StatelessWidget {
             SizedBox(width: 16.w),
             // Movie Details
             Expanded(
-              child: _MovieListViewItemDetails(
-                movie: movie,
-                genres: genres,
-              ),
+              child: _MovieListViewItemDetails(movie: movie),
             ),
           ],
         ),
@@ -77,12 +70,8 @@ class MovieListViewItem extends StatelessWidget {
 
 class _MovieListViewItemDetails extends StatelessWidget {
   final MovieEntity movie;
-  final List<GenreEntity> genres;
 
-  const _MovieListViewItemDetails({
-    required this.movie,
-    this.genres = const [],
-  });
+  const _MovieListViewItemDetails({required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +84,7 @@ class _MovieListViewItemDetails extends StatelessWidget {
     final language = movie.formattedLanguage;
     final isAdult = movie.isAdultMovie;
 
-    final genreNames = movie.topTwoGenres.isNotEmpty
-        ? movie.topTwoGenres
-        : GenresHelper.getGenreTitles(
-            genreIds: movie.genreIds,
-            allGenres: genres,
-            limit: 2,
-          );
+    final genreNames = movie.topTwoGenres;
 
     final genresString = genreNames.isNotEmpty
         ? genreNames.join(', ')

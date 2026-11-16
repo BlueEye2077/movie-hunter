@@ -17,6 +17,7 @@ class MovieTrailerCubit extends Cubit<MovieTrailerState> {
       super(const MovieTrailerState.idle());
 
   Future<void> getMovieTrailer(int movieId) async {
+    if (state is _Loading) return;
     if (_cachedTrailerKey != null) {
       emit(const MovieTrailerState.idle());
       emit(MovieTrailerState.success(_cachedTrailerKey!));

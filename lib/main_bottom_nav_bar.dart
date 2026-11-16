@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
+import 'core/theming/app_assets.dart';
+import 'core/theming/app_strings.dart';
 import 'core/theming/colors.dart';
 import 'core/theming/text_styles.dart';
 
@@ -38,7 +40,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
         BottomBarItem(
           backgroundColor: AppColors.primarySoft,
           icon: SvgPicture.asset(
-            'assets/svgs/home.svg',
+            AppAssets.homeSvg,
             width: 24.w,
             height: 24.w,
             colorFilter: const ColorFilter.mode(
@@ -47,7 +49,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
             ),
           ),
           selectedIcon: SvgPicture.asset(
-            'assets/svgs/home.svg',
+            AppAssets.homeSvg,
             width: 24.w,
             height: 24.w,
             colorFilter: const ColorFilter.mode(
@@ -58,7 +60,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
           selectedColor: AppColors.primarySoft,
           unSelectedColor: AppColors.textGrey,
           title: Text(
-            'Home',
+            AppStrings.home,
             style: TextStyles.font12Medium.copyWith(
               color: AppColors.primaryBlueAccent,
             ),
@@ -67,7 +69,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
         BottomBarItem(
           backgroundColor: AppColors.primarySoft,
           icon: SvgPicture.asset(
-            'assets/svgs/category.svg',
+            AppAssets.categorySvg,
             width: 24.w,
             height: 24.w,
             colorFilter: const ColorFilter.mode(
@@ -76,7 +78,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
             ),
           ),
           selectedIcon: SvgPicture.asset(
-            'assets/svgs/category.svg',
+            AppAssets.categorySvg,
             width: 24.w,
             height: 24.w,
             colorFilter: const ColorFilter.mode(
@@ -87,7 +89,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
           selectedColor: AppColors.primarySoft,
           unSelectedColor: AppColors.textGrey,
           title: Text(
-            'Categories',
+            AppStrings.categories,
             style: TextStyles.font12Medium.copyWith(
               color: AppColors.primaryBlueAccent,
             ),
@@ -96,7 +98,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
         BottomBarItem(
           backgroundColor: AppColors.primarySoft,
           icon: SvgPicture.asset(
-            'assets/svgs/person.svg',
+            AppAssets.personSvg,
             width: 24.w,
             height: 24.w,
             colorFilter: const ColorFilter.mode(
@@ -105,7 +107,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
             ),
           ),
           selectedIcon: SvgPicture.asset(
-            'assets/svgs/person.svg',
+            AppAssets.personSvg,
             width: 24.w,
             height: 24.w,
             colorFilter: const ColorFilter.mode(
@@ -116,7 +118,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
           selectedColor: AppColors.primarySoft,
           unSelectedColor: AppColors.textGrey,
           title: Text(
-            'Profile',
+            AppStrings.profile,
             style: TextStyles.font12Medium.copyWith(
               color: AppColors.primaryBlueAccent,
             ),

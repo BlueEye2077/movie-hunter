@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/constants/constants.dart';
-import 'core/di/dependency_injection.dart';
-import 'core/genres/cubit/genres_cubit.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
 import 'core/theming/app_strings.dart';
@@ -28,17 +25,14 @@ class MovieHunterApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return BlocProvider(
-          lazy: false,
-          create: (context) => getIt<GenresCubit>()..getGenres(),
-          child: MaterialApp(
-            scrollBehavior: scrollBehavior,
-            title: AppStrings.appName,
-            debugShowCheckedModeBanner: false,
-            theme: kMovieHunterTheme,
-            initialRoute: getInitialRoute(),
-            onGenerateRoute: appRouter.generateRoute,
-          ),
+        return MaterialApp(
+          scrollBehavior: scrollBehavior,
+          title: AppStrings.appName,
+          debugShowCheckedModeBanner: false,
+          theme: kMovieHunterTheme,
+          initialRoute: getInitialRoute(),
+          onGenerateRoute: appRouter.generateRoute,
+          onUnknownRoute: appRouter.onUnknownRoute,
         );
       },
     );

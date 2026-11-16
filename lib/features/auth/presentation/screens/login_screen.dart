@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_assets.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/colors.dart';
 import '../cubit/auth_cubit.dart';
@@ -53,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 16.h),
-                SvgPicture.asset('assets/svgs/app_logo.svg', height: 80.h),
+                SvgPicture.asset(AppAssets.appLogoSvg, height: 80.h),
                 SizedBox(height: 24.h),
                 const WelcomeText(),
                 SizedBox(height: 48.h),
@@ -72,12 +74,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       state.whenOrNull(
-                        success: (session) => Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          Routes.mainScreen,
-                          // Tells Flutter: "Do not keep any previous route. Wipe them all out."
-                          (route) => false,
-                        ),
+                        success: (session) {
+                          TextInput.finishAutofillContext();
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            Routes.mainScreen,
+                            // Tells Flutter: "Do not keep any previous route. Wipe them all out."
+                            (route) => false,
+                          );
+                        },
                         error: (networkExceptions) {
                           ScaffoldMessenger.of(context).clearSnackBars();
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -87,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   networkExceptions,
                                 ),
                               ),
+                              backgroundColor: AppColors.secondaryRed,
                             ),
                           );
                         },

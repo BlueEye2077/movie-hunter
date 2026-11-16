@@ -17,6 +17,7 @@ class PersonDetailsCubit extends Cubit<PersonDetailsState> {
       super(const PersonDetailsState.idle());
 
   Future<void> getPersonDetails(int personId) async {
+    if (state is _Loading) return;
     emit(const PersonDetailsState.loading());
     final result = await _getPersonDetailsUseCase(personId);
     if (isClosed) return;

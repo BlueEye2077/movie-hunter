@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/common/empty_state_view.dart';
 import '../../../../core/common/error_retry_view.dart';
 import '../../../../core/networking/network_exceptions.dart';
+import '../../../../core/theming/app_assets.dart';
 import '../../../../core/theming/app_spacing.dart';
 import '../../../../core/theming/app_strings.dart';
 import '../../../../core/theming/colors.dart';
@@ -36,7 +37,7 @@ class SearchResults extends StatelessWidget {
             child: Padding(
               padding: AppSpacing.screenPadding,
               child: const EmptyStateView(
-                svgPath: 'assets/svgs/no_results_large.svg',
+                svgPath: AppAssets.noResultsLargeSvg,
                 title: AppStrings.searchErrorTitle,
                 subtitle: AppStrings.searchErrorSubtitle,
               ),
