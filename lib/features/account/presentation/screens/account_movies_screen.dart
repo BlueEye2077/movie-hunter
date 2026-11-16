@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/common/error_retry_view.dart';
-import '../../../../core/common/movies_browser_app_bar.dart';
 import '../../../../core/common/movies_browser_scaffold.dart';
 import '../../../../core/networking/network_exceptions.dart';
 import '../../../../core/theming/colors.dart';
@@ -20,7 +18,33 @@ class AccountMoviesScreen<C extends AccountMoviesCubit>
   Widget build(BuildContext context) {
     final title = listType.title;
 
-    return BlocBuilder<C, AccountMoviesState>(
+    return BlocConsumer<C, AccountMoviesState>(
+      listenWhen: (previous, current) {
+        final prevError = previous.whenOrNull(
+          success: (_, _, _, paginationError) => paginationError,
+        );
+        final currError = current.whenOrNull(
+          success: (_, _, _, paginationError) => paginationError,
+        );
+        return currError != null && currError != prevError;
+      },
+      listener: (context, state) {
+        final paginationError = state.whenOrNull(
+          success: (_, _, _, error) => error,
+        );
+        if (paginationError != null) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                backgroundColor: AppColors.secondaryRed,
+                content: Text(
+                  NetworkExceptions.getErrorMessage(paginationError),
+                ),
+              ),
+            );
+        }
+      },
       builder: (context, state) {
         return state.when(
           idle: () => MoviesBrowserScaffold(
@@ -40,27 +64,22 @@ class AccountMoviesScreen<C extends AccountMoviesCubit>
               title: title,
               movies: movies,
               isLoading: false,
-              isLoadingPagination: isLoadingPagination,
+             isLoadingPagination: isLoadingPagination,
               emptyMessage: listType.emptyTitle,
               onFetchNextPage: () => context.read<C>().fetchNextPage(),
             );
           },
-          error: (error) => Scaffold(
-            backgroundColor: AppColors.primaryDark,
-            appBar: MoviesBrowserAppBar(
-              title: title,
-              isGridView: false,
-              onViewChanged: (_) {},
-            ),
-            body: ErrorRetryView(
-              message: NetworkExceptions.getErrorMessage(error),
-              onRetry: () =>
-                  context.read<C>().fetchInitialMovies(forceReload: true),
-            ),
+          error: (error) => MoviesBrowserScaffold(
+            title: title,
+            movies: const [],
+            isLoading: false,
+            isLoadingPagination: false,
+            errorMessage: NetworkExceptions.getErrorMessage(error),
+            onRetry: () =>
+                context.read<C>().fetchInitialMovies(forceReload: true),
           ),
         );
       },
     );
   }
 }
-
