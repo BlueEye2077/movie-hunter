@@ -30,63 +30,67 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: widget.formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          CustomTextField(
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return AppStrings.pleaseEnterUsername;
-              }
-              return null;
-            },
-            controller: widget.usernameController,
-            label: AppStrings.username,
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.next,
-          ),
-          SizedBox(height: 24.h),
-          CustomTextField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return AppStrings.pleaseEnterPassword;
-              }
-              return null;
-            },
-            controller: widget.passwordController,
-            label: AppStrings.password,
-            obscureText: _isObscure,
-            suffixIcon: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _isObscure = !_isObscure;
-                });
+    return AutofillGroup(
+      onDisposeAction: AutofillContextAction.cancel,
+      child: Form(
+        key: widget.formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            CustomTextField(
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return AppStrings.pleaseEnterUsername;
+                }
+                return null;
               },
-              child: Icon(
-                _isObscure ? Icons.visibility_off : Icons.visibility,
-                color: AppColors.textGrey,
-                size: 20.sp,
+              controller: widget.usernameController,
+              label: AppStrings.username,
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.next,
+              autofillHints: const [AutofillHints.username],
+            ),
+            SizedBox(height: 24.h),
+            CustomTextField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return AppStrings.pleaseEnterPassword;
+                }
+                return null;
+              },
+              controller: widget.passwordController,
+              label: AppStrings.password,
+              keyboardType: TextInputType.visiblePassword,
+              autofillHints: const [AutofillHints.password],
+              obscureText: _isObscure,
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isObscure = !_isObscure;
+                  });
+                },
+                child: Icon(
+                  _isObscure ? Icons.visibility_off : Icons.visibility,
+                  color: AppColors.textGrey,
+                  size: 20.sp,
+                ),
+              ),
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => widget.onLoginSubmitted(),
+            ),
+            SizedBox(height: 8.h),
+            GestureDetector(
+              onTap: () =>
+                  launchExternalUrl(context, ApiConstants.tmdbResetPasswordUrl),
+              child: Text(
+                AppStrings.forgotPassword,
+                style: TextStyles.font12Medium.copyWith(
+                  color: AppColors.primaryBlueAccent,
+                ),
               ),
             ),
-            textInputAction: TextInputAction.done,
-            onFieldSubmitted: (_) => widget.onLoginSubmitted(),
-          ),
-          SizedBox(height: 8.h),
-          GestureDetector(
-            onTap: () => launchExternalUrl(
-              context,
-              ApiConstants.tmdbResetPasswordUrl,
-            ),
-            child: Text(
-              AppStrings.forgotPassword,
-              style: TextStyles.font12Medium.copyWith(
-                color: AppColors.primaryBlueAccent,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
