@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/theming/colors.dart';
@@ -49,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       // Bottom navigation bar
       bottomNavigationBar: MainBottomNavBar(
+        currentIndex: _selectedIndex,
         onTabSelected: (index) {
           context.read<AccountDetailsCubit>().retryIfNeeded();
           setState(() {

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'network_exceptions.dart';
@@ -9,6 +9,7 @@ part of 'network_exceptions.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NetworkExceptions);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NetworkExceptions);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions()';
+    return 'NetworkExceptions()';
 }
 
 
@@ -287,7 +288,7 @@ class RequestCancelled implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCancelled);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCancelled);
 }
 
 
@@ -296,7 +297,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.requestCancelled()';
+    return 'NetworkExceptions.requestCancelled()';
 }
 
 
@@ -324,16 +325,18 @@ $UnauthorizedRequestCopyWith<UnauthorizedRequest> get copyWith => _$Unauthorized
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnauthorizedRequest&&(identical(other.reason, reason) || other.reason == reason));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is UnauthorizedRequest&&(identical(other.reason, reason) || other.reason == reason));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,reason);
+int get hashCode {
+    return Object.hash(runtimeType,reason);
+}
 
 @override
 String toString() {
-  return 'NetworkExceptions.unauthorizedRequest(reason: $reason)';
+    return 'NetworkExceptions.unauthorizedRequest(reason: $reason)';
 }
 
 
@@ -385,7 +388,7 @@ class BadRequest implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BadRequest);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is BadRequest);
 }
 
 
@@ -394,7 +397,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.badRequest()';
+    return 'NetworkExceptions.badRequest()';
 }
 
 
@@ -422,16 +425,18 @@ $NotFoundCopyWith<NotFound> get copyWith => _$NotFoundCopyWithImpl<NotFound>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotFound&&(identical(other.reason, reason) || other.reason == reason));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NotFound&&(identical(other.reason, reason) || other.reason == reason));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,reason);
+int get hashCode {
+    return Object.hash(runtimeType,reason);
+}
 
 @override
 String toString() {
-  return 'NetworkExceptions.notFound(reason: $reason)';
+    return 'NetworkExceptions.notFound(reason: $reason)';
 }
 
 
@@ -483,7 +488,7 @@ class MethodNotAllowed implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MethodNotAllowed);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is MethodNotAllowed);
 }
 
 
@@ -492,7 +497,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.methodNotAllowed()';
+    return 'NetworkExceptions.methodNotAllowed()';
 }
 
 
@@ -515,7 +520,7 @@ class NotAcceptable implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotAcceptable);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NotAcceptable);
 }
 
 
@@ -524,7 +529,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.notAcceptable()';
+    return 'NetworkExceptions.notAcceptable()';
 }
 
 
@@ -547,7 +552,7 @@ class RequestTimeout implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestTimeout);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestTimeout);
 }
 
 
@@ -556,7 +561,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.requestTimeout()';
+    return 'NetworkExceptions.requestTimeout()';
 }
 
 
@@ -579,7 +584,7 @@ class SendTimeout implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendTimeout);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SendTimeout);
 }
 
 
@@ -588,7 +593,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.sendTimeout()';
+    return 'NetworkExceptions.sendTimeout()';
 }
 
 
@@ -616,16 +621,18 @@ $UnprocessableEntityCopyWith<UnprocessableEntity> get copyWith => _$Unprocessabl
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnprocessableEntity&&(identical(other.reason, reason) || other.reason == reason));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is UnprocessableEntity&&(identical(other.reason, reason) || other.reason == reason));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,reason);
+int get hashCode {
+    return Object.hash(runtimeType,reason);
+}
 
 @override
 String toString() {
-  return 'NetworkExceptions.unprocessableEntity(reason: $reason)';
+    return 'NetworkExceptions.unprocessableEntity(reason: $reason)';
 }
 
 
@@ -677,7 +684,7 @@ class Conflict implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Conflict);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Conflict);
 }
 
 
@@ -686,7 +693,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.conflict()';
+    return 'NetworkExceptions.conflict()';
 }
 
 
@@ -709,7 +716,7 @@ class InternalServerError implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InternalServerError);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is InternalServerError);
 }
 
 
@@ -718,7 +725,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.internalServerError()';
+    return 'NetworkExceptions.internalServerError()';
 }
 
 
@@ -741,7 +748,7 @@ class NotImplemented implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotImplemented);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NotImplemented);
 }
 
 
@@ -750,7 +757,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.notImplemented()';
+    return 'NetworkExceptions.notImplemented()';
 }
 
 
@@ -773,7 +780,7 @@ class ServiceUnavailable implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ServiceUnavailable);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ServiceUnavailable);
 }
 
 
@@ -782,7 +789,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.serviceUnavailable()';
+    return 'NetworkExceptions.serviceUnavailable()';
 }
 
 
@@ -805,7 +812,7 @@ class NoInternetConnection implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NoInternetConnection);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is NoInternetConnection);
 }
 
 
@@ -814,7 +821,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.noInternetConnection()';
+    return 'NetworkExceptions.noInternetConnection()';
 }
 
 
@@ -837,7 +844,7 @@ class FormatException implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FormatException);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is FormatException);
 }
 
 
@@ -846,7 +853,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.formatException()';
+    return 'NetworkExceptions.formatException()';
 }
 
 
@@ -869,7 +876,7 @@ class UnableToProcess implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnableToProcess);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is UnableToProcess);
 }
 
 
@@ -878,7 +885,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.unableToProcess()';
+    return 'NetworkExceptions.unableToProcess()';
 }
 
 
@@ -906,16 +913,18 @@ $DefaultErrorCopyWith<DefaultError> get copyWith => _$DefaultErrorCopyWithImpl<D
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DefaultError&&(identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is DefaultError&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error);
+int get hashCode {
+    return Object.hash(runtimeType,error);
+}
 
 @override
 String toString() {
-  return 'NetworkExceptions.defaultError(error: $error)';
+    return 'NetworkExceptions.defaultError(error: $error)';
 }
 
 
@@ -967,7 +976,7 @@ class UnexpectedError implements NetworkExceptions {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UnexpectedError);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is UnexpectedError);
 }
 
 
@@ -976,7 +985,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NetworkExceptions.unexpectedError()';
+    return 'NetworkExceptions.unexpectedError()';
 }
 
 

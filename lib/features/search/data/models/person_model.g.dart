@@ -20,4 +20,3 @@ Map<String, dynamic> _$PersonModelToJson(PersonModel instance) =>
       'original_name': instance.originalName,
       'profile_path': instance.profilePath,
     };
-

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'all_movies_cubit.dart';
@@ -9,6 +9,7 @@ part of 'all_movies_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$AllMoviesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AllMoviesState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AllMoviesState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AllMoviesState()';
+    return 'AllMoviesState()';
 }
 
 
@@ -197,7 +198,7 @@ class Idle implements AllMoviesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Idle);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is Idle);
 }
 
 
@@ -206,7 +207,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AllMoviesState.idle()';
+    return 'AllMoviesState.idle()';
 }
 
 
@@ -229,7 +230,7 @@ class LoadingAllMovies implements AllMoviesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingAllMovies);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingAllMovies);
 }
 
 
@@ -238,7 +239,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AllMoviesState.loadingAllMovies()';
+    return 'AllMoviesState.loadingAllMovies()';
 }
 
 
@@ -251,7 +252,7 @@ String toString() {
 
 
 class SuccessAllMovies implements AllMoviesState {
-  const SuccessAllMovies({required final  List<MovieEntity> movies, this.paginationError, this.isLoadingPagination = false}): _movies = movies;
+  const SuccessAllMovies({required  List<MovieEntity> movies, this.paginationError, this.isLoadingPagination = false}): _movies = movies;
   
 
  final  List<MovieEntity> _movies;
@@ -274,16 +275,18 @@ $SuccessAllMoviesCopyWith<SuccessAllMovies> get copyWith => _$SuccessAllMoviesCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SuccessAllMovies&&const DeepCollectionEquality().equals(other._movies, _movies)&&(identical(other.paginationError, paginationError) || other.paginationError == paginationError)&&(identical(other.isLoadingPagination, isLoadingPagination) || other.isLoadingPagination == isLoadingPagination));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SuccessAllMovies&&const DeepCollectionEquality().equals(other.movies, _movies)&&(identical(other.paginationError, paginationError) || other.paginationError == paginationError)&&(identical(other.isLoadingPagination, isLoadingPagination) || other.isLoadingPagination == isLoadingPagination));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_movies),paginationError,isLoadingPagination);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_movies),paginationError,isLoadingPagination);
+}
 
 @override
 String toString() {
-  return 'AllMoviesState.successAllMovies(movies: $movies, paginationError: $paginationError, isLoadingPagination: $isLoadingPagination)';
+    return 'AllMoviesState.successAllMovies(movies: $movies, paginationError: $paginationError, isLoadingPagination: $isLoadingPagination)';
 }
 
 
@@ -354,16 +357,18 @@ $ErrorAllMoviesCopyWith<ErrorAllMovies> get copyWith => _$ErrorAllMoviesCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorAllMovies&&(identical(other.networkExceptions, networkExceptions) || other.networkExceptions == networkExceptions));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is ErrorAllMovies&&(identical(other.networkExceptions, networkExceptions) || other.networkExceptions == networkExceptions));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,networkExceptions);
+int get hashCode {
+    return Object.hash(runtimeType,networkExceptions);
+}
 
 @override
 String toString() {
-  return 'AllMoviesState.errorAllMovies(networkExceptions: $networkExceptions)';
+    return 'AllMoviesState.errorAllMovies(networkExceptions: $networkExceptions)';
 }
 
 

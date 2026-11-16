@@ -6,8 +6,8 @@ class GetMovieDetailsUseCase {
   final MovieDetailsRepository _movieDetailsRepository;
 
   const GetMovieDetailsUseCase({
-    required MovieDetailsRepository movieDetailsRepository,
-  }) : _movieDetailsRepository = movieDetailsRepository;
+    required this._movieDetailsRepository,
+  });
 
   Future<ApiResult<MovieDetailsEntity>> call(int movieId) {
     return _movieDetailsRepository.getMovieDetails(movieId);

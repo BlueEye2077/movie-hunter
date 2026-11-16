@@ -14,10 +14,9 @@ class GetCategoriesUseCase {
   final GenresRepository _genresRepository;
 
   GetCategoriesUseCase({
-    required CategoriesRepository categoriesRepository,
-    required GenresRepository genresRepository,
-  }) : _categoriesRepository = categoriesRepository,
-       _genresRepository = genresRepository;
+    required this._categoriesRepository,
+    required this._genresRepository,
+  });
 
   Future<ApiResult<List<CategoryEntity>>> call() async {
     final genresResult = await _genresRepository.getGenres();

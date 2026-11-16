@@ -5,8 +5,8 @@ class LogoutUseCase {
   final AccountRepository _accountRepository;
 
   const LogoutUseCase({
-    required AccountRepository accountRepository,
-  }) : _accountRepository = accountRepository;
+    required this._accountRepository,
+  });
 
   Future<ApiResult<void>> call() {
     return _accountRepository.logout();

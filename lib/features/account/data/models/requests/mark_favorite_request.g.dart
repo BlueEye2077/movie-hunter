@@ -13,4 +13,3 @@ Map<String, dynamic> _$MarkFavoriteRequestToJson(
   'media_id': instance.mediaId,
   'favorite': instance.favorite,
 };
-

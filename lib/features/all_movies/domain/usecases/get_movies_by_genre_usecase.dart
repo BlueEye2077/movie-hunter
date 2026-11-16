@@ -11,10 +11,9 @@ class GetMoviesByGenreUseCase {
   final GenresRepository _genresRepository;
 
   const GetMoviesByGenreUseCase({
-    required CategoriesRepository categoriesRepository,
-    required GenresRepository genresRepository,
-  }) : _categoriesRepository = categoriesRepository,
-       _genresRepository = genresRepository;
+    required this._categoriesRepository,
+    required this._genresRepository,
+  });
 
   Future<ApiResult<PaginatedList<MovieEntity>>> call({
     required int genreId,

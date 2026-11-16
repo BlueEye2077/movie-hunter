@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../domain/entities/movie_entity.dart';
 import 'movies_browser_grid_view.dart';

@@ -25,8 +25,7 @@ class AccountRepositoryImpl implements AccountRepository {
   final StreamController<AccountMovieChange> _movieChangesController =
       StreamController<AccountMovieChange>.broadcast();
 
-  AccountRepositoryImpl({required AccountApiService accountApiService})
-    : _accountApiService = accountApiService;
+  AccountRepositoryImpl({required this._accountApiService});
 
   @override
   Stream<AccountMovieChange> get movieChanges => _movieChangesController.stream;

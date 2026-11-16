@@ -12,9 +12,8 @@ part 'person_details_state.dart';
 class PersonDetailsCubit extends Cubit<PersonDetailsState> {
   final GetPersonDetailsUseCase _getPersonDetailsUseCase;
 
-  PersonDetailsCubit({required GetPersonDetailsUseCase getPersonDetailsUseCase})
-    : _getPersonDetailsUseCase = getPersonDetailsUseCase,
-      super(const PersonDetailsState.idle());
+  PersonDetailsCubit({required this._getPersonDetailsUseCase})
+    : super(const PersonDetailsState.idle());
 
   Future<void> getPersonDetails(int personId) async {
     if (state is _Loading) return;

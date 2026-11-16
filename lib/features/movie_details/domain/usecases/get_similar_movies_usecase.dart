@@ -10,10 +10,9 @@ class GetSimilarMoviesUseCase {
   final GenresRepository _genresRepository;
 
   const GetSimilarMoviesUseCase({
-    required MovieDetailsRepository movieDetailsRepository,
-    required GenresRepository genresRepository,
-  })  : _movieDetailsRepository = movieDetailsRepository,
-        _genresRepository = genresRepository;
+    required this._movieDetailsRepository,
+    required this._genresRepository,
+  });
 
   Future<ApiResult<List<MovieEntity>>> call(int movieId) async {
     final (genresResult, moviesResult) = await (

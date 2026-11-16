@@ -12,9 +12,8 @@ part 'categories_state.dart';
 class CategoriesCubit extends Cubit<CategoriesState> {
   final GetCategoriesUseCase _getCategoriesUseCase;
 
-  CategoriesCubit({required GetCategoriesUseCase getCategoriesUseCase})
-    : _getCategoriesUseCase = getCategoriesUseCase,
-      super(const CategoriesState.idle());
+  CategoriesCubit({required this._getCategoriesUseCase})
+    : super(const CategoriesState.idle());
 
   Future<void> getCategories() async {
     if (state is _Success || state is _Loading) return;

@@ -11,10 +11,9 @@ class GetAccountMoviesUseCase {
   final GenresRepository _genresRepository;
 
   const GetAccountMoviesUseCase({
-    required AccountRepository accountRepository,
-    required GenresRepository genresRepository,
-  }) : _accountRepository = accountRepository,
-       _genresRepository = genresRepository;
+    required this._accountRepository,
+    required this._genresRepository,
+  });
 
   Future<ApiResult<PaginatedList<MovieEntity>>> call({
     required AccountMovieListType listType,

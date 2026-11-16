@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../core/common/custom_search_bar.dart';
 import '../../../../core/constants/hero_tags.dart';

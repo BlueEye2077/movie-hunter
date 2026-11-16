@@ -8,8 +8,8 @@ class GetMovieCreditsUseCase {
   final MovieDetailsRepository _movieDetailsRepository;
 
   const GetMovieCreditsUseCase({
-    required MovieDetailsRepository movieDetailsRepository,
-  }) : _movieDetailsRepository = movieDetailsRepository;
+    required this._movieDetailsRepository,
+  });
 
   Future<ApiResult<MovieCreditsEntity>> call(int movieId) async {
     final response = await _movieDetailsRepository.getMovieCredits(movieId);

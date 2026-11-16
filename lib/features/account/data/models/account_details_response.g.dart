@@ -34,4 +34,3 @@ GravatarModel _$GravatarModelFromJson(Map<String, dynamic> json) =>
 
 TmdbAvatarModel _$TmdbAvatarModelFromJson(Map<String, dynamic> json) =>
     TmdbAvatarModel(avatarPath: json['avatar_path'] as String?);
-

@@ -6,8 +6,8 @@ class UpdateMovieAccountListUseCase {
   final AccountRepository _accountRepository;
 
   const UpdateMovieAccountListUseCase({
-    required AccountRepository accountRepository,
-  }) : _accountRepository = accountRepository;
+    required this._accountRepository,
+  });
 
   Future<ApiResult<void>> call({
     required AccountMovieListType listType,
