@@ -14,9 +14,8 @@ class UpcomingMoviesCubit extends Cubit<UpComingMoviesState> {
   final GetUpcomingMoviesUseCase _getUpcomingMoviesUseCase;
 
   UpcomingMoviesCubit({
-    required GetUpcomingMoviesUseCase getUpcomingMoviesUseCase,
-  }) : _getUpcomingMoviesUseCase = getUpcomingMoviesUseCase,
-       super(const UpComingMoviesState.idle());
+    required this._getUpcomingMoviesUseCase,
+  }) : super(const UpComingMoviesState.idle());
 
   // Get upcoming movies
   Future<void> getUpcomingMovies() async {

@@ -6,8 +6,7 @@ import '../repos/auth_repository.dart';
 class LoginUseCase {
   final AuthRepository _authRepository;
 
-  LoginUseCase({required AuthRepository authRepository})
-    : _authRepository = authRepository;
+  LoginUseCase({required this._authRepository});
 
   Future<ApiResult<UserSessionEntity>> call(
     String username,

@@ -5,8 +5,8 @@ class WatchAccountMovieChangesUseCase {
   final AccountRepository _accountRepository;
 
   const WatchAccountMovieChangesUseCase({
-    required AccountRepository accountRepository,
-  }) : _accountRepository = accountRepository;
+    required this._accountRepository,
+  });
 
   Stream<AccountMovieChange> call() {
     return _accountRepository.movieChanges;

@@ -10,8 +10,8 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
   final Map<int, PaginatedList<MovieEntity>> _firstPageCache = {};
 
   CategoriesRepositoryImpl({
-    required CategoriesApiService categoriesApiService,
-  }) : _categoriesApiService = categoriesApiService;
+    required this._categoriesApiService,
+  });
 
   @override
   Future<ApiResult<PaginatedList<MovieEntity>>> getMoviesByGenre({

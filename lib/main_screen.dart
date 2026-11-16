@@ -49,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       // Bottom navigation bar
       bottomNavigationBar: MainBottomNavBar(
+        currentIndex: _selectedIndex,
         onTabSelected: (index) {
           context.read<AccountDetailsCubit>().retryIfNeeded();
           setState(() {

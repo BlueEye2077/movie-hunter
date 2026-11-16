@@ -9,31 +9,26 @@ import 'core/theming/app_strings.dart';
 import 'core/theming/colors.dart';
 import 'core/theming/text_styles.dart';
 
-class MainBottomNavBar extends StatefulWidget {
-  final ValueChanged<int> onTabSelected;
-
-  const MainBottomNavBar({super.key, required this.onTabSelected});
-
-  @override
-  State<MainBottomNavBar> createState() => _MainBottomNavBarState();
-}
-
-class _MainBottomNavBarState extends State<MainBottomNavBar> {
+class MainBottomNavBar extends StatelessWidget {
   static const List<_NavBarItem> _items = [
     _NavBarItem(iconPath: AppAssets.homeSvg, label: AppStrings.home),
     _NavBarItem(iconPath: AppAssets.categorySvg, label: AppStrings.categories),
     _NavBarItem(iconPath: AppAssets.personSvg, label: AppStrings.profile),
   ];
 
-  int _selectedIndex = 0;
+  final int currentIndex;
+  final ValueChanged<int> onTabSelected;
+
+  const MainBottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTabSelected,
+  });
 
   void _handleTap(int index) {
-    if (_selectedIndex != index) {
-      setState(() {
-        _selectedIndex = index;
-      });
+    if (index != currentIndex) {
+      onTabSelected(index);
     }
-    widget.onTabSelected(index);
   }
 
   @override
@@ -54,18 +49,14 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
             ),
             child: Padding(
               padding: EdgeInsets.only(bottom: additionalBottomPadding),
-              child: MediaQuery.removePadding(
-                context: context,
-                removeBottom: true,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                    _items.length,
-                    (index) => _BubbleNavItem(
-                      item: _items[index],
-                      isSelected: _selectedIndex == index,
-                      onTap: () => _handleTap(index),
-                    ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                  _items.length,
+                  (index) => _BubbleNavItem(
+                    item: _items[index],
+                    isSelected: currentIndex == index,
+                    onTap: () => _handleTap(index),
                   ),
                 ),
               ),
@@ -143,17 +134,19 @@ class _BubbleNavItem extends StatelessWidget {
                     alignment: Alignment.center,
                     firstChild: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text(
-                        item.label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyles.font12Medium.copyWith(
-                          color: AppColors.primaryBlueAccent,
+                      child: ExcludeSemantics(
+                        child: Text(
+                          item.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.font12Medium.copyWith(
+                            color: AppColors.primaryBlueAccent,
+                          ),
                         ),
                       ),
                     ),
                     secondChild: const SizedBox.shrink(),
-                    duration: const Duration(milliseconds: 250),
+                    duration: const Duration(milliseconds: 200),
                     sizeCurve: Curves.fastOutSlowIn,
                     firstCurve: Curves.fastOutSlowIn,
                     secondCurve: Curves.fastOutSlowIn.flipped,

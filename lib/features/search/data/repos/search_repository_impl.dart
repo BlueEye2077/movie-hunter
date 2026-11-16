@@ -10,8 +10,7 @@ import '../web_services/search_api_service.dart';
 class SearchRepositoryImpl implements SearchRepository {
   final SearchApiService _searchApiService;
 
-  const SearchRepositoryImpl({required SearchApiService searchApiService})
-    : _searchApiService = searchApiService;
+  const SearchRepositoryImpl({required this._searchApiService});
 
   @override
   Future<ApiResult<SearchResultsEntity>> search(String query) async {

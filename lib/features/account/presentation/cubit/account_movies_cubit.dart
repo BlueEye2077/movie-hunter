@@ -25,11 +25,10 @@ abstract class AccountMoviesCubit extends Cubit<AccountMoviesState> {
   final List<MovieEntity> _movies = [];
 
   AccountMoviesCubit({
-    required GetAccountMoviesUseCase getAccountMoviesUseCase,
+    required this._getAccountMoviesUseCase,
     required WatchAccountMovieChangesUseCase watchAccountMovieChangesUseCase,
     required this.listType,
-  }) : _getAccountMoviesUseCase = getAccountMoviesUseCase,
-       super(const AccountMoviesState.idle()) {
+  }) : super(const AccountMoviesState.idle()) {
     _changesSubscription = watchAccountMovieChangesUseCase().listen(
       _onMovieChange,
     );

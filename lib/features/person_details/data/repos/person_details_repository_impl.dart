@@ -9,8 +9,8 @@ class PersonDetailsRepositoryImpl implements PersonDetailsRepository {
   final PersonApiService _personApiService;
 
   const PersonDetailsRepositoryImpl({
-    required PersonApiService personApiService,
-  }) : _personApiService = personApiService;
+    required this._personApiService,
+  });
 
   @override
   Future<ApiResult<PersonDetailsEntity>> getPersonDetails(

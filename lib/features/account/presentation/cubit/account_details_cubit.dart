@@ -13,9 +13,8 @@ class AccountDetailsCubit extends Cubit<AccountDetailsState> {
   final GetAccountDetailsUseCase _getAccountDetailsUseCase;
 
   AccountDetailsCubit({
-    required GetAccountDetailsUseCase getAccountDetailsUseCase,
-  }) : _getAccountDetailsUseCase = getAccountDetailsUseCase,
-       super(const AccountDetailsState.idle());
+    required this._getAccountDetailsUseCase,
+  }) : super(const AccountDetailsState.idle());
 
   Future<void> getAccountDetails() async {
     if (state is _Loading) return;

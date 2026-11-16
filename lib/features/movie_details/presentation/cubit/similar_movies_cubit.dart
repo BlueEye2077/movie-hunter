@@ -12,9 +12,8 @@ part 'similar_movies_state.dart';
 class SimilarMoviesCubit extends Cubit<SimilarMoviesState> {
   final GetSimilarMoviesUseCase _getSimilarMoviesUseCase;
 
-  SimilarMoviesCubit({required GetSimilarMoviesUseCase getSimilarMoviesUseCase})
-    : _getSimilarMoviesUseCase = getSimilarMoviesUseCase,
-      super(const SimilarMoviesState.idle());
+  SimilarMoviesCubit({required this._getSimilarMoviesUseCase})
+    : super(const SimilarMoviesState.idle());
 
   Future<void> getSimilarMovies(int movieId) async {
     if (state is _Loading) return;
