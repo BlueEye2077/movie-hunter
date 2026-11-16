@@ -11,10 +11,10 @@ MovieCreditsResponse _$MovieCreditsResponseFromJson(
 ) => MovieCreditsResponse(
   id: (json['id'] as num?)?.toInt(),
   cast: (json['cast'] as List<dynamic>?)
-      ?.map((e) => CastMember.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => CastMemberModel.fromJson(e as Map<String, dynamic>))
       .toList(),
   crew: (json['crew'] as List<dynamic>?)
-      ?.map((e) => CrewMember.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => CrewMemberModel.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 

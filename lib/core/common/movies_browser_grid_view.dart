@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../domain/entities/movie_entity.dart';
+import '../routing/routes.dart';
+import '../theming/app_strings.dart';
+import '../theming/colors.dart';
+import 'movies_browser_grid_item.dart';
+import 'movies_browser_grid_item_shimmer.dart';
+import 'scroll_index_calculator.dart';
+
+class MoviesBrowserGridView extends StatefulWidget {
+  final List<MovieEntity> movies;
+  final bool isLoadingMore;
+  final int scrolledMovieIndex;
+
+  static const int _shimmerCount = 5;
+
+  const MoviesBrowserGridView({
+    super.key,
+    required this.movies,
+    required this.isLoadingMore,
+    required this.scrolledMovieIndex,
+  });
+
+  @override
+  State<MoviesBrowserGridView> createState() => _MoviesBrowserGridViewState();
+}
+
+class _MoviesBrowserGridViewState extends State<MoviesBrowserGridView> {
+  ScrollController? _scrollController;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (_scrollController == null) {
+      final offset = ScrollIndexCalculator.getGridViewScrollMovieOffset(
+        scrolledMovieIndex: widget.scrolledMovieIndex,
+        fullScreenWidth: MediaQuery.sizeOf(context).width,
+      );
+      _scrollController = ScrollController(initialScrollOffset: offset);
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      controller: _scrollController,
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 8.w,
+        mainAxisSpacing: 16.h,
+        childAspectRatio: 100 / 185,
+      ),
+      itemCount: widget.isLoadingMore
+          ? widget.movies.length + MoviesBrowserGridView._shimmerCount
+          : widget.movies.length,
+      itemBuilder: (context, index) {
+        if (index >= widget.movies.length) {
+          return Shimmer.fromColors(
+            baseColor: AppColors.primarySoft,
+            highlightColor: AppColors.primarySoft.withValues(alpha: 0.5),
+            child: const MoviesBrowserGridItemShimmer(),
+          );
+        }
+
+        final movie = widget.movies[index];
+        final year = movie.releaseYear.isNotEmpty
+            ? movie.releaseYear
+            : AppStrings.notAvailableDash;
+        final title = movie.displayTitle.isNotEmpty
+            ? movie.displayTitle
+            : AppStrings.unknown;
+        return MoviesBrowserGridItem(
+          posterPath: movie.posterPath ?? '',
+          title: title,
+          year: year,
+          onTap: () => Navigator.pushNamed(
+            context,
+            Routes.movieDetails,
+            arguments: movie,
+          ),
+        );
+      },
+    );
+  }
+}

@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/theming/app_spacing.dart';
+import '../../../../core/theming/app_strings.dart';
+import '../../../../core/theming/colors.dart';
+import '../../../../core/theming/text_styles.dart';
+
+class MovieStoryLine extends StatelessWidget {
+  final String overview;
+
+  const MovieStoryLine({super.key, required this.overview});
+
+  @override
+  Widget build(BuildContext context) {
+    final trimmed = overview.trim();
+    if (trimmed.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: AppSpacing.screenPadding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppStrings.storyLine,
+            style: TextStyles.font16SemiBold.copyWith(
+              color: AppColors.textWhite,
+            ),
+          ),
+          SizedBox(height: 8.h),
+          Text(
+            trimmed,
+            style: TextStyles.font14Regular.copyWith(
+              color: AppColors.textGrey,
+              height: 1.6,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

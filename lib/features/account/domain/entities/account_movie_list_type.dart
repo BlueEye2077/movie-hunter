@@ -1,0 +1,2 @@
+enum AccountMovieListType { favorites, watchlist }
+

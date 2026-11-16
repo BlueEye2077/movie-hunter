@@ -23,11 +23,16 @@ class SecureStorageHelper {
     await _storage.write(key: _accountIdKey, value: accountId.toString());
   }
 
-  static Future<String?> getAccountId() async {
-    return await _storage.read(key: _accountIdKey);
+  static Future<int?> getAccountId() async {
+    final accountId = await _storage.read(key: _accountIdKey);
+    return accountId != null ? int.tryParse(accountId) : null;
   }
 
   static Future<void> deleteAccountId() async {
     await _storage.delete(key: _accountIdKey);
+  }
+
+  static Future<void> clearAll() async {
+    await _storage.deleteAll();
   }
 }

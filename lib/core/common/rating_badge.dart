@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../theming/app_assets.dart';
 import '../theming/colors.dart';
 import '../theming/text_styles.dart';
 
@@ -21,7 +22,7 @@ class RatingBadge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            'assets/svgs/star.svg',
+            AppAssets.starSvg,
             width: 12.w,
             height: 12.w,
             colorFilter: const ColorFilter.mode(

@@ -1,35 +1,66 @@
 import 'package:get_it/get_it.dart';
 
-import '../../features/account/data/repository/profile_repository.dart';
-import '../../features/account/data/web_services/profile_api_services.dart';
-import '../../features/account/logic/cubit/favorite_movies_cubit.dart';
-import '../../features/account/logic/cubit/favourites_cubit.dart';
-import '../../features/account/logic/cubit/profile_cubit.dart';
-import '../../features/account/logic/cubit/watchlist_cubit.dart';
-import '../../features/account/logic/cubit/watchlist_movies_cubit.dart';
-import '../../features/all_movies/logic/cubit/all_movies_cubit.dart';
-import '../../features/auth/data/repository/auth_repository.dart';
+import '../../features/account/data/repos/account_repository_impl.dart';
+import '../../features/account/data/web_services/account_api_service.dart';
+import '../../features/account/domain/repos/account_repository.dart';
+import '../../features/account/domain/usecases/get_account_details_usecase.dart';
+import '../../features/account/domain/usecases/get_account_movies_usecase.dart';
+import '../../features/account/domain/usecases/get_movie_account_status_usecase.dart';
+import '../../features/account/domain/usecases/logout_usecase.dart';
+import '../../features/account/domain/usecases/update_movie_account_list_usecase.dart';
+import '../../features/account/domain/usecases/watch_account_movie_changes_usecase.dart';
+import '../../features/account/presentation/cubit/account_details_cubit.dart';
+import '../../features/account/presentation/cubit/account_movies_cubit.dart';
+import '../../features/account/presentation/cubit/logout_cubit.dart';
+import '../../features/account/presentation/cubit/movie_account_status_cubit.dart';
+import '../../features/all_movies/domain/usecases/get_movies_by_genre_usecase.dart';
+import '../../features/all_movies/domain/usecases/get_movies_page_usecase.dart';
+import '../../features/all_movies/presentation/cubit/all_movies_cubit.dart';
+import '../../features/auth/data/repos/auth_repository_impl.dart';
 import '../../features/auth/data/web_services/auth_api_services.dart';
-import '../../features/auth/logic/cubit/auth_cubit.dart';
-import '../../features/categories/logic/cubit/categories_cubit.dart';
-import '../../features/home/data/repository/home_repository.dart';
+import '../../features/auth/domain/repos/auth_repository.dart';
+import '../../features/auth/domain/usecases/login_usecase.dart';
+import '../../features/auth/presentation/cubit/auth_cubit.dart';
+import '../../features/categories/data/repos/categories_repository_impl.dart';
+import '../../features/categories/data/web_services/categories_api_service.dart';
+import '../../features/categories/domain/repos/categories_repository.dart';
+import '../../features/categories/domain/usecases/get_categories_usecase.dart';
+import '../../features/categories/presentation/cubit/categories_cubit.dart';
+import '../../features/home/data/repos/home_repository_impl.dart';
 import '../../features/home/data/web_services/home_api_service.dart';
-import '../../features/home/logic/cubit/genres_cubit.dart';
-import '../../features/home/logic/cubit/now_playing_movies_cubit.dart';
-import '../../features/home/logic/cubit/popular_movies_cubit.dart';
-import '../../features/home/logic/cubit/top_rated_movies_cubit.dart';
-import '../../features/home/logic/cubit/upcoming_movies_cubit.dart';
-import '../../features/movie_details/data/repository/movie_details_repository.dart';
+import '../../features/home/domain/repos/home_repository.dart';
+import '../../features/home/domain/usecases/get_now_playing_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_popular_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_top_rated_movies_usecase.dart';
+import '../../features/home/domain/usecases/get_upcoming_movies_usecase.dart';
+import '../../features/home/presentation/cubit/now_playing_movies_cubit.dart';
+import '../../features/home/presentation/cubit/popular_movies_cubit.dart';
+import '../../features/home/presentation/cubit/top_rated_movies_cubit.dart';
+import '../../features/home/presentation/cubit/upcoming_movies_cubit.dart';
+import '../../features/movie_details/data/repos/movie_details_repository_impl.dart';
 import '../../features/movie_details/data/web_services/details_api_service.dart';
-import '../../features/movie_details/logic/cubit/movie_details_cubit.dart';
-import '../../features/movie_details/logic/cubit/movie_trailer_cubit.dart';
-import '../../features/movie_details/logic/cubit/similar_movies_cubit.dart';
-import '../../features/person_details/data/repository/person_repository.dart';
+import '../../features/movie_details/domain/repos/movie_details_repository.dart';
+import '../../features/movie_details/domain/usecases/get_movie_credits_usecase.dart';
+import '../../features/movie_details/domain/usecases/get_movie_details_usecase.dart';
+import '../../features/movie_details/domain/usecases/get_movie_trailer_usecase.dart';
+import '../../features/movie_details/domain/usecases/get_similar_movies_usecase.dart';
+import '../../features/movie_details/presentation/cubit/movie_credits_cubit.dart';
+import '../../features/movie_details/presentation/cubit/movie_details_cubit.dart';
+import '../../features/movie_details/presentation/cubit/movie_trailer_cubit.dart';
+import '../../features/movie_details/presentation/cubit/similar_movies_cubit.dart';
+import '../../features/person_details/data/repos/person_details_repository_impl.dart';
 import '../../features/person_details/data/web_services/person_api_service.dart';
-import '../../features/person_details/logic/cubit/person_details_cubit.dart';
-import '../../features/search/data/repository/search_repository.dart';
+import '../../features/person_details/domain/repos/person_details_repository.dart';
+import '../../features/person_details/domain/usecases/get_person_details_usecase.dart';
+import '../../features/person_details/presentation/cubit/person_details_cubit.dart';
+import '../../features/search/data/repos/search_repository_impl.dart';
 import '../../features/search/data/web_services/search_api_service.dart';
-import '../../features/search/logic/cubit/search_cubit.dart';
+import '../../features/search/domain/repos/search_repository.dart';
+import '../../features/search/domain/usecases/search_usecase.dart';
+import '../../features/search/presentation/cubit/search_cubit.dart';
+import '../genres/data/repos/genres_repository_impl.dart';
+import '../genres/data/web_services/genres_api_services.dart';
+import '../genres/domain/repos/genres_repository.dart';
 import '../networking/dio_factory.dart';
 
 GetIt getIt = GetIt.instance;
@@ -43,112 +74,223 @@ void initGetIt() {
   getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   // register home repository
   getIt.registerLazySingleton<HomeRepository>(
-    () => HomeRepository(homeApiService: getIt()),
+    () => HomeRepositoryImpl(homeApiService: getIt()),
   );
-  // register upcoming movies cubit
-  getIt.registerLazySingleton<UpComingMoviesCubit>(
-    () => UpComingMoviesCubit(homeRepository: getIt()),
+
+  // register home use cases
+  getIt.registerLazySingleton<GetUpcomingMoviesUseCase>(
+    () => GetUpcomingMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
-  // register popular movies cubit
-  getIt.registerLazySingleton<PopularMoviesCubit>(
-    () => PopularMoviesCubit(homeRepository: getIt()),
+  getIt.registerLazySingleton<GetPopularMoviesUseCase>(
+    () => GetPopularMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
-  // register top rated movies cubit
-  getIt.registerLazySingleton<TopRatedMoviesCubit>(
-    () => TopRatedMoviesCubit(homeRepository: getIt()),
+  getIt.registerLazySingleton<GetTopRatedMoviesUseCase>(
+    () => GetTopRatedMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
-  // register now playing movies cubit
-  getIt.registerLazySingleton<NowPlayingMoviesCubit>(
-    () => NowPlayingMoviesCubit(homeRepository: getIt()),
+  getIt.registerLazySingleton<GetNowPlayingMoviesUseCase>(
+    () => GetNowPlayingMoviesUseCase(
+      homeRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
-  // register genres cubit
-  getIt.registerLazySingleton<GenresCubit>(
-    () => GenresCubit(homeRepository: getIt()),
+  // ── Genres ──
+  getIt.registerLazySingleton<GenresApiServices>(() => GenresApiServices(dio));
+  getIt.registerLazySingleton<GenresRepository>(
+    () => GenresRepositoryImpl(getIt()),
   );
-  // register categories cubit
-  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
+
+  // register movie cubits
+  getIt.registerFactory<UpcomingMoviesCubit>(
+    () => UpcomingMoviesCubit(getUpcomingMoviesUseCase: getIt()),
+  );
+  getIt.registerFactory<PopularMoviesCubit>(
+    () => PopularMoviesCubit(getPopularMoviesUseCase: getIt()),
+  );
+  getIt.registerFactory<TopRatedMoviesCubit>(
+    () => TopRatedMoviesCubit(getTopRatedMoviesUseCase: getIt()),
+  );
+  getIt.registerFactory<NowPlayingMoviesCubit>(
+    () => NowPlayingMoviesCubit(getNowPlayingMoviesUseCase: getIt()),
+  );
+
+  // ── Categories Feature ──
+  getIt.registerLazySingleton<CategoriesApiService>(
+    () => CategoriesApiService(dio),
+  );
+  getIt.registerLazySingleton<CategoriesRepository>(
+    () => CategoriesRepositoryImpl(categoriesApiService: getIt()),
+  );
+  getIt.registerLazySingleton<GetCategoriesUseCase>(
+    () => GetCategoriesUseCase(
+      categoriesRepository: getIt(),
+      genresRepository: getIt(),
+    ),
+  );
+  getIt.registerFactory<CategoriesCubit>(
+    () => CategoriesCubit(getCategoriesUseCase: getIt()),
+  );
 
   // ── Search Feature ──
   // register search api service
   getIt.registerLazySingleton<SearchApiService>(() => SearchApiService(dio));
   // register search repository
   getIt.registerLazySingleton<SearchRepository>(
-    () => SearchRepository(searchApiService: getIt()),
+    () => SearchRepositoryImpl(searchApiService: getIt()),
+  );
+  getIt.registerLazySingleton<SearchUseCase>(
+    () => SearchUseCase(
+      searchRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
   // register search cubit (factory — fresh instance per search session)
   getIt.registerFactory<SearchCubit>(
-    () => SearchCubit(searchRepository: getIt()),
+    () => SearchCubit(searchUseCase: getIt()),
   );
 
   // ── Movie Details Feature ──
-  // register details api service
   getIt.registerLazySingleton<DetailsApiService>(() => DetailsApiService(dio));
-  // register movie details repository
   getIt.registerLazySingleton<MovieDetailsRepository>(
-    () => MovieDetailsRepository(detailsApiService: getIt()),
+    () => MovieDetailsRepositoryImpl(detailsApiService: getIt()),
   );
-  // register movie details cubit
+  getIt.registerLazySingleton<GetMovieDetailsUseCase>(
+    () => GetMovieDetailsUseCase(movieDetailsRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetMovieCreditsUseCase>(
+    () => GetMovieCreditsUseCase(movieDetailsRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetMovieTrailerUseCase>(
+    () => GetMovieTrailerUseCase(movieDetailsRepository: getIt()),
+  );
+  getIt.registerLazySingleton<GetSimilarMoviesUseCase>(
+    () => GetSimilarMoviesUseCase(
+      movieDetailsRepository: getIt(),
+      genresRepository: getIt(),
+    ),
+  );
   getIt.registerFactory<MovieDetailsCubit>(
-    () => MovieDetailsCubit(movieDetailsRepository: getIt()),
+    () => MovieDetailsCubit(getMovieDetailsUseCase: getIt()),
   );
-  // register movie trailer cubit
+  getIt.registerFactory<MovieCreditsCubit>(
+    () => MovieCreditsCubit(getMovieCreditsUseCase: getIt()),
+  );
   getIt.registerFactory<MovieTrailerCubit>(
-    () => MovieTrailerCubit(movieDetailsRepository: getIt()),
+    () => MovieTrailerCubit(getMovieTrailerUseCase: getIt()),
   );
-  // register similar movies cubit
   getIt.registerFactory<SimilarMoviesCubit>(
-    () => SimilarMoviesCubit(movieDetailsRepository: getIt()),
+    () => SimilarMoviesCubit(getSimilarMoviesUseCase: getIt()),
   );
 
   // ── Person Details Feature ──
   // register person api service
   getIt.registerLazySingleton<PersonApiService>(() => PersonApiService(dio));
   // register person repository
-  getIt.registerLazySingleton<PersonRepository>(
-    () => PersonRepository(personApiService: getIt()),
+  getIt.registerLazySingleton<PersonDetailsRepository>(
+    () => PersonDetailsRepositoryImpl(personApiService: getIt()),
+  );
+  // register get person details use case
+  getIt.registerLazySingleton<GetPersonDetailsUseCase>(
+    () => GetPersonDetailsUseCase(
+      personDetailsRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
   // register person details cubit
   getIt.registerFactory<PersonDetailsCubit>(
-    () => PersonDetailsCubit(personRepository: getIt()),
+    () => PersonDetailsCubit(getPersonDetailsUseCase: getIt()),
   );
 
   // ── All Movies Feature ──
-  // register the all movies cubit
+  getIt.registerLazySingleton<GetMoviesByGenreUseCase>(
+    () => GetMoviesByGenreUseCase(
+      categoriesRepository: getIt(),
+      genresRepository: getIt(),
+    ),
+  );
+  getIt.registerLazySingleton<GetMoviesPageUseCase>(
+    () => GetMoviesPageUseCase(
+      getUpcomingMoviesUseCase: getIt(),
+      getNowPlayingMoviesUseCase: getIt(),
+      getPopularMoviesUseCase: getIt(),
+      getTopRatedMoviesUseCase: getIt(),
+      getMoviesByGenreUseCase: getIt(),
+    ),
+  );
   getIt.registerFactory<AllMoviesCubit>(
-    () => AllMoviesCubit(homeRepository: getIt(), profileRepository: getIt()),
+    () => AllMoviesCubit(getMoviesPageUseCase: getIt()),
   );
 
   // ── Auth Feature ──
   getIt.registerLazySingleton<AuthApiService>(() => AuthApiService(dio));
   getIt.registerLazySingleton<AuthRepository>(
-    () => AuthRepository(authApiService: getIt()),
+    () => AuthRepositoryImpl(authApiService: getIt()),
   );
-  getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepository: getIt()));
+
+  getIt.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(authRepository: getIt()),
+  );
+  getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt()));
 
   // ── Account Feature ──
-  getIt.registerLazySingleton<ProfileApiServices>(
-    () => ProfileApiServices(dio),
+  getIt.registerLazySingleton<AccountApiService>(
+    () => AccountApiService(dio),
   );
-  getIt.registerLazySingleton<ProfileRepository>(
-    () => ProfileRepository(profileApiService: getIt()),
+  getIt.registerLazySingleton<AccountRepository>(
+    () => AccountRepositoryImpl(accountApiService: getIt()),
   );
-  getIt.registerFactory<ProfileCubit>(
-    () => ProfileCubit(profileRepository: getIt()),
+  getIt.registerLazySingleton<GetAccountDetailsUseCase>(
+    () => GetAccountDetailsUseCase(accountRepository: getIt()),
   );
-  getIt.registerLazySingleton<FavoriteMoviesCubit>(
-    () => FavoriteMoviesCubit(profileRepository: getIt()),
+  getIt.registerLazySingleton<GetAccountMoviesUseCase>(
+    () => GetAccountMoviesUseCase(
+      accountRepository: getIt(),
+      genresRepository: getIt(),
+    ),
   );
-  getIt.registerLazySingleton<WatchlistMoviesCubit>(
-    () => WatchlistMoviesCubit(profileRepository: getIt()),
+  getIt.registerLazySingleton<GetMovieAccountStatusUseCase>(
+    () => GetMovieAccountStatusUseCase(accountRepository: getIt()),
+  );
+  getIt.registerLazySingleton<UpdateMovieAccountListUseCase>(
+    () => UpdateMovieAccountListUseCase(accountRepository: getIt()),
+  );
+  getIt.registerLazySingleton<WatchAccountMovieChangesUseCase>(
+    () => WatchAccountMovieChangesUseCase(accountRepository: getIt()),
+  );
+  getIt.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(accountRepository: getIt()),
   );
 
-  // ── Favourites Feature ──
-  getIt.registerFactory<FavouritesCubit>(
-    () => FavouritesCubit(profileRepository: getIt()),
+  getIt.registerFactory<AccountDetailsCubit>(
+    () => AccountDetailsCubit(getAccountDetailsUseCase: getIt()),
   );
-
-  // ── Watchlist Feature ──
-  getIt.registerFactory<WatchlistCubit>(
-    () => WatchlistCubit(profileRepository: getIt()),
+  getIt.registerFactory<FavoriteMoviesCubit>(
+    () => FavoriteMoviesCubit(
+      getAccountMoviesUseCase: getIt(),
+      watchAccountMovieChangesUseCase: getIt(),
+    ),
+  );
+  getIt.registerFactory<WatchlistMoviesCubit>(
+    () => WatchlistMoviesCubit(
+      getAccountMoviesUseCase: getIt(),
+      watchAccountMovieChangesUseCase: getIt(),
+    ),
+  );
+  getIt.registerFactory<MovieAccountStatusCubit>(
+    () => MovieAccountStatusCubit(
+      getMovieAccountStatusUseCase: getIt(),
+      updateMovieAccountListUseCase: getIt(),
+    ),
+  );
+  getIt.registerFactory<LogoutCubit>(
+    () => LogoutCubit(logoutUseCase: getIt()),
   );
 }

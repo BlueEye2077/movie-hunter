@@ -48,3 +48,7 @@ app.*.map.json
 .agents
 skills-lock.json
 GEMINI.md
+
+.kotlin/
+**/android/.kotlin/
+/android/fastlane/report.xml

@@ -26,6 +26,7 @@ class MovieHunterApp extends StatelessWidget {
           theme: kMovieHunterTheme,
           initialRoute: getInitialRoute(),
           onGenerateRoute: appRouter.generateRoute,
+          onUnknownRoute: appRouter.onUnknownRoute,
         );
       },
     );

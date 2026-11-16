@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../theming/app_assets.dart';
+import '../theming/app_strings.dart';
 import '../theming/colors.dart';
 import '../theming/text_styles.dart';
 
@@ -29,10 +31,13 @@ class CustomSearchBar extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            'assets/svgs/search.svg',
+            AppAssets.searchSvg,
             width: 16.w,
             height: 16.w,
-            colorFilter: ColorFilter.mode(AppColors.textGrey, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(
+              AppColors.textGrey,
+              BlendMode.srcIn,
+            ),
           ),
           SizedBox(width: 8.w),
           Expanded(
@@ -44,7 +49,7 @@ class CustomSearchBar extends StatelessWidget {
                 color: AppColors.textWhite,
               ),
               decoration: InputDecoration(
-                hintText: 'Search a title..',
+                hintText: AppStrings.searchHint,
                 hintStyle: TextStyles.font14Medium.copyWith(
                   color: AppColors.textGrey,
                 ),
@@ -55,7 +60,10 @@ class CustomSearchBar extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () => controller?.clear(),
+            onPressed: () {
+              controller?.clear();
+              onChanged?.call('');
+            },
             icon: Icon(Icons.close, color: AppColors.textGrey, size: 20.r),
           ),
         ],

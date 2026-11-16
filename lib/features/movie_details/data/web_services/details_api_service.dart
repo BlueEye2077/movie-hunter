@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../../core/models/movie.dart';
 import '../../../../core/networking/api_constants.dart';
 import '../../../../core/networking/api_response.dart';
-import '../../../home/data/models/movie.dart';
 import '../models/movie_credits_response.dart';
 import '../models/movie_details_response.dart';
 import '../models/movie_videos_response.dart';
@@ -17,25 +17,21 @@ abstract class DetailsApiService {
 
   @GET(DetailsApiConstants.movieDetails)
   Future<MovieDetailsResponse> getMovieDetails(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 
   @GET(DetailsApiConstants.movieCredits)
   Future<MovieCreditsResponse> getMovieCredits(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 
   @GET(DetailsApiConstants.movieVideos)
   Future<MovieVideosResponse> getMovieVideos(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 
   @GET(DetailsApiConstants.similarMovies)
   Future<ApiResponse<Movie>> getSimilarMovies(
-    @Header("Authorization") String token,
     @Path("movie_id") int movieId,
   );
 }

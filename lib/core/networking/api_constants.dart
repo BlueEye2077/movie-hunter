@@ -3,5 +3,15 @@ import '../env/env.dart';
 class ApiConstants {
   static const String baseUrl = 'https://api.themoviedb.org/3/';
   static const String imagesUrl = 'https://image.tmdb.org/t/p/w500';
+  static const String profileImagesUrl = 'https://image.tmdb.org/t/p/w200';
   static final String apiKey = Env.tmdbApiKey;
+  static const String tmdbResetPasswordUrl =
+      'https://www.themoviedb.org/reset-password';
+  static const String tmdbSignupUrl = 'https://www.themoviedb.org/signup';
+
+  static String youtubeWatchUrl(String key) =>
+      'https://www.youtube.com/watch?v=$key';
+
+  static String tmdbMovieWebUrl(int movieId) =>
+      'https://www.themoviedb.org/movie/$movieId';
 }

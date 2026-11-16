@@ -10,7 +10,7 @@ MovieVideosResponse _$MovieVideosResponseFromJson(Map<String, dynamic> json) =>
     MovieVideosResponse(
       id: (json['id'] as num?)?.toInt(),
       results: (json['results'] as List<dynamic>?)
-          ?.map((e) => MovieVideo.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MovieVideoModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

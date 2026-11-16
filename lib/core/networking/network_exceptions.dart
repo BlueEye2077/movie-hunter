@@ -48,14 +48,42 @@ abstract class NetworkExceptions with _$NetworkExceptions {
   const factory NetworkExceptions.unexpectedError() = UnexpectedError;
 
   static NetworkExceptions handleResponse(Response? response) {
-    List<ErrorModel> listOfErrors = List.from(
-      response?.data,
-    ).map((e) => ErrorModel.fromJson(e)).toList();
-    String allErrors = listOfErrors
-        .map((e) => e.statusMessage)
-        .toString()
-        .replaceAll("(", "")
-        .replaceAll(")", "");
+    String allErrors = "";
+    final data = response?.data;
+    if (data is Map<String, dynamic>) {
+      final errorModel = ErrorModel.fromJson(data);
+      if (errorModel.statusMessage != null &&
+          errorModel.statusMessage!.isNotEmpty) {
+        allErrors = errorModel.statusMessage!;
+      } else if (data['errors'] is List) {
+        allErrors = (data['errors'] as List).join(", ");
+      } else {
+        allErrors = response?.statusMessage ?? "Unknown error";
+      }
+    } else if (data is Iterable) {
+      final errorMessages = <String>[];
+      for (final item in data) {
+        if (item is Map<String, dynamic>) {
+          final msg = ErrorModel.fromJson(item).statusMessage;
+          if (msg != null && msg.isNotEmpty) errorMessages.add(msg);
+        } else if (item is Map) {
+          final msg = ErrorModel.fromJson(
+            Map<String, dynamic>.from(item),
+          ).statusMessage;
+          if (msg != null && msg.isNotEmpty) errorMessages.add(msg);
+        } else if (item != null) {
+          errorMessages.add(item.toString());
+        }
+      }
+      allErrors = errorMessages.isNotEmpty
+          ? errorMessages.join(", ")
+          : (response?.statusMessage ?? "Unknown error");
+    } else if (data is String) {
+      allErrors = data;
+    } else {
+      allErrors = response?.statusMessage ?? "Unknown error";
+    }
+
     int statusCode = response?.statusCode ?? 0;
     switch (statusCode) {
       case 400:
@@ -64,6 +92,8 @@ abstract class NetworkExceptions with _$NetworkExceptions {
         return NetworkExceptions.unauthorizedRequest(allErrors);
       case 404:
         return NetworkExceptions.notFound(allErrors);
+      case 405:
+        return const NetworkExceptions.methodNotAllowed();
       case 409:
         return const NetworkExceptions.conflict();
       case 408:
@@ -116,6 +146,10 @@ abstract class NetworkExceptions with _$NetworkExceptions {
               networkExceptions =
                   const NetworkExceptions.noInternetConnection();
               break;
+
+            case DioExceptionType.transformTimeout:
+              networkExceptions = const NetworkExceptions.requestTimeout();
+              break;
           }
         } else if (error is SocketException) {
           networkExceptions = const NetworkExceptions.noInternetConnection();
@@ -156,7 +190,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
         errorMessage = "Service unavailable";
       },
       methodNotAllowed: () {
-        errorMessage = "Method Allowed";
+        errorMessage = "Method Not Allowed";
       },
       badRequest: () {
         errorMessage = "Bad request";
