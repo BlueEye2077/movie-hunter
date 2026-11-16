@@ -13,10 +13,9 @@ class GetPersonDetailsUseCase {
   final GenresRepository _genresRepository;
 
   const GetPersonDetailsUseCase({
-    required PersonDetailsRepository personDetailsRepository,
-    required GenresRepository genresRepository,
-  }) : _personDetailsRepository = personDetailsRepository,
-       _genresRepository = genresRepository;
+    required this._personDetailsRepository,
+    required this._genresRepository,
+  });
 
   Future<ApiResult<PersonDetailsEntity>> call(int personId) async {
     final (genresResult, personResult) = await (

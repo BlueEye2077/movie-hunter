@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'account_movies_cubit.dart';
@@ -9,6 +9,7 @@ part of 'account_movies_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$AccountMoviesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountMoviesState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountMoviesState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AccountMoviesState()';
+    return 'AccountMoviesState()';
 }
 
 
@@ -43,6 +44,18 @@ $AccountMoviesStateCopyWith(AccountMoviesState _, $Res Function(AccountMoviesSta
 
 /// Adds pattern-matching-related methods to [AccountMoviesState].
 extension AccountMoviesStatePatterns on AccountMoviesState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
 @optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Idle value)?  idle,TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
@@ -55,6 +68,19 @@ return error(_that);case _:
 
 }
 }
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
 @optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Idle value)  idle,required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
@@ -67,6 +93,18 @@ return error(_that);case _:
 
 }
 }
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
 @optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Idle value)?  idle,TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
@@ -79,6 +117,18 @@ return error(_that);case _:
 
 }
 }
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  loading,TResult Function( List<MovieEntity> movies,  int totalResults,  bool isLoadingPagination,  NetworkExceptions? paginationError)?  success,TResult Function( NetworkExceptions error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Idle() when idle != null:
@@ -90,6 +140,19 @@ return error(_that.error);case _:
 
 }
 }
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
 @optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  loading,required TResult Function( List<MovieEntity> movies,  int totalResults,  bool isLoadingPagination,  NetworkExceptions? paginationError)  success,required TResult Function( NetworkExceptions error)  error,}) {final _that = this;
 switch (_that) {
 case _Idle():
@@ -101,6 +164,18 @@ return error(_that.error);case _:
 
 }
 }
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  loading,TResult? Function( List<MovieEntity> movies,  int totalResults,  bool isLoadingPagination,  NetworkExceptions? paginationError)?  success,TResult? Function( NetworkExceptions error)?  error,}) {final _that = this;
 switch (_that) {
 case _Idle() when idle != null:
@@ -129,7 +204,7 @@ class _Idle implements AccountMoviesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Idle);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Idle);
 }
 
 
@@ -138,7 +213,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AccountMoviesState.idle()';
+    return 'AccountMoviesState.idle()';
 }
 
 
@@ -161,7 +236,7 @@ class _Loading implements AccountMoviesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
 }
 
 
@@ -170,7 +245,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'AccountMoviesState.loading()';
+    return 'AccountMoviesState.loading()';
 }
 
 
@@ -183,7 +258,7 @@ String toString() {
 
 
 class _Success implements AccountMoviesState {
-  const _Success({required final  List<MovieEntity> movies, required this.totalResults, this.isLoadingPagination = false, this.paginationError}): _movies = movies;
+  const _Success({required  List<MovieEntity> movies, required this.totalResults, this.isLoadingPagination = false, this.paginationError}): _movies = movies;
   
 
  final  List<MovieEntity> _movies;
@@ -207,16 +282,18 @@ _$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&const DeepCollectionEquality().equals(other._movies, _movies)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults)&&(identical(other.isLoadingPagination, isLoadingPagination) || other.isLoadingPagination == isLoadingPagination)&&(identical(other.paginationError, paginationError) || other.paginationError == paginationError));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&const DeepCollectionEquality().equals(other.movies, _movies)&&(identical(other.totalResults, totalResults) || other.totalResults == totalResults)&&(identical(other.isLoadingPagination, isLoadingPagination) || other.isLoadingPagination == isLoadingPagination)&&(identical(other.paginationError, paginationError) || other.paginationError == paginationError));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_movies),totalResults,isLoadingPagination,paginationError);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_movies),totalResults,isLoadingPagination,paginationError);
+}
 
 @override
 String toString() {
-  return 'AccountMoviesState.success(movies: $movies, totalResults: $totalResults, isLoadingPagination: $isLoadingPagination, paginationError: $paginationError)';
+    return 'AccountMoviesState.success(movies: $movies, totalResults: $totalResults, isLoadingPagination: $isLoadingPagination, paginationError: $paginationError)';
 }
 
 
@@ -288,16 +365,18 @@ _$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error);
+int get hashCode {
+    return Object.hash(runtimeType,error);
+}
 
 @override
 String toString() {
-  return 'AccountMoviesState.error(error: $error)';
+    return 'AccountMoviesState.error(error: $error)';
 }
 
 
@@ -345,4 +424,3 @@ $NetworkExceptionsCopyWith<$Res> get error {
 }
 
 // dart format on
-

@@ -18,11 +18,9 @@ class MovieAccountStatusCubit extends Cubit<MovieAccountStatusState> {
   bool _isUpdating = false;
 
   MovieAccountStatusCubit({
-    required GetMovieAccountStatusUseCase getMovieAccountStatusUseCase,
-    required UpdateMovieAccountListUseCase updateMovieAccountListUseCase,
-  }) : _getMovieAccountStatusUseCase = getMovieAccountStatusUseCase,
-       _updateMovieAccountListUseCase = updateMovieAccountListUseCase,
-       super(const MovieAccountStatusState.idle());
+    required this._getMovieAccountStatusUseCase,
+    required this._updateMovieAccountListUseCase,
+  }) : super(const MovieAccountStatusState.idle());
 
   Future<void> loadStatus(int movieId) async {
     if (state is _Loading) return;

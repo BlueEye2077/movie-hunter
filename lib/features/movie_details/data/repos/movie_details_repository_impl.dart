@@ -11,8 +11,8 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
   final DetailsApiService _detailsApiService;
 
   const MovieDetailsRepositoryImpl({
-    required DetailsApiService detailsApiService,
-  }) : _detailsApiService = detailsApiService;
+    required this._detailsApiService,
+  });
 
   @override
   Future<ApiResult<MovieDetailsEntity>> getMovieDetails(int movieId) async {

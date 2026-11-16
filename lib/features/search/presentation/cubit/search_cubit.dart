@@ -19,11 +19,9 @@ class SearchCubit extends Cubit<SearchState> {
   String _latestQuery = '';
 
   SearchCubit({
-    required SearchUseCase searchUseCase,
-    Duration debounceDuration = const Duration(milliseconds: 400),
-  }) : _searchUseCase = searchUseCase,
-       _debounceDuration = debounceDuration,
-       super(const SearchState.idle());
+    required this._searchUseCase,
+    this._debounceDuration = const Duration(milliseconds: 400),
+  }) : super(const SearchState.idle());
 
   String get currentQuery => _latestQuery;
 

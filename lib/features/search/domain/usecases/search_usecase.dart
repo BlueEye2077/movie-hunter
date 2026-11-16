@@ -10,10 +10,9 @@ class SearchUseCase {
   final GenresRepository _genresRepository;
 
   const SearchUseCase({
-    required SearchRepository searchRepository,
-    required GenresRepository genresRepository,
-  })  : _searchRepository = searchRepository,
-        _genresRepository = genresRepository;
+    required this._searchRepository,
+    required this._genresRepository,
+  });
 
   Future<ApiResult<SearchResultsEntity>> call(String query) async {
     final trimmedQuery = query.trim();

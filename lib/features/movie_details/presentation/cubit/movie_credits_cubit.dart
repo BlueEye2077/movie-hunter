@@ -12,9 +12,8 @@ part 'movie_credits_state.dart';
 class MovieCreditsCubit extends Cubit<MovieCreditsState> {
   final GetMovieCreditsUseCase _getMovieCreditsUseCase;
 
-  MovieCreditsCubit({required GetMovieCreditsUseCase getMovieCreditsUseCase})
-    : _getMovieCreditsUseCase = getMovieCreditsUseCase,
-      super(const MovieCreditsState.idle());
+  MovieCreditsCubit({required this._getMovieCreditsUseCase})
+    : super(const MovieCreditsState.idle());
 
   Future<void> fetchMovieCredits(int movieId) async {
     if (state is _Loading) return;

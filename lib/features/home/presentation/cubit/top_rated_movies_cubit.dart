@@ -14,9 +14,8 @@ class TopRatedMoviesCubit extends Cubit<TopRatedMoviesState> {
   final GetTopRatedMoviesUseCase _getTopRatedMoviesUseCase;
 
   TopRatedMoviesCubit({
-    required GetTopRatedMoviesUseCase getTopRatedMoviesUseCase,
-  }) : _getTopRatedMoviesUseCase = getTopRatedMoviesUseCase,
-       super(const TopRatedMoviesState.idle());
+    required this._getTopRatedMoviesUseCase,
+  }) : super(const TopRatedMoviesState.idle());
 
   // Get top rated movies
   Future<void> getTopRatedMovies() async {

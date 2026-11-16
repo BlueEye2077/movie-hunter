@@ -14,9 +14,8 @@ class PopularMoviesCubit extends Cubit<PopularMoviesState> {
   final GetPopularMoviesUseCase _getPopularMoviesUseCase;
 
   PopularMoviesCubit({
-    required GetPopularMoviesUseCase getPopularMoviesUseCase,
-  }) : _getPopularMoviesUseCase = getPopularMoviesUseCase,
-       super(const PopularMoviesState.idle());
+    required this._getPopularMoviesUseCase,
+  }) : super(const PopularMoviesState.idle());
 
   // Get popular movies
   Future<void> getPopularMovies() async {

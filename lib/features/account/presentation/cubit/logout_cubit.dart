@@ -11,9 +11,8 @@ part 'logout_state.dart';
 class LogoutCubit extends Cubit<LogoutState> {
   final LogoutUseCase _logoutUseCase;
 
-  LogoutCubit({required LogoutUseCase logoutUseCase})
-    : _logoutUseCase = logoutUseCase,
-      super(const LogoutState.idle());
+  LogoutCubit({required this._logoutUseCase})
+    : super(const LogoutState.idle());
 
   Future<void> logout() async {
     if (state is _Loading) return;

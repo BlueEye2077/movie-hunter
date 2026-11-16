@@ -12,9 +12,8 @@ part 'movie_details_state.dart';
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   final GetMovieDetailsUseCase _getMovieDetailsUseCase;
 
-  MovieDetailsCubit({required GetMovieDetailsUseCase getMovieDetailsUseCase})
-    : _getMovieDetailsUseCase = getMovieDetailsUseCase,
-      super(const MovieDetailsState.idle());
+  MovieDetailsCubit({required this._getMovieDetailsUseCase})
+    : super(const MovieDetailsState.idle());
 
   Future<void> fetchMovieDetails(int movieId) async {
     if (state is _Loading) return;

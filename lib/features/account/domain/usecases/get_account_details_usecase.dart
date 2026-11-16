@@ -6,8 +6,8 @@ class GetAccountDetailsUseCase {
   final AccountRepository _accountRepository;
 
   const GetAccountDetailsUseCase({
-    required AccountRepository accountRepository,
-  }) : _accountRepository = accountRepository;
+    required this._accountRepository,
+  });
 
   Future<ApiResult<AccountEntity>> call() {
     return _accountRepository.getAccountDetails();

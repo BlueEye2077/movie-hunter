@@ -11,10 +11,9 @@ class GetTopRatedMoviesUseCase {
   final GenresRepository _genresRepository;
 
   const GetTopRatedMoviesUseCase({
-    required HomeRepository homeRepository,
-    required GenresRepository genresRepository,
-  }) : _homeRepository = homeRepository,
-       _genresRepository = genresRepository;
+    required this._homeRepository,
+    required this._genresRepository,
+  });
 
   Future<ApiResult<PaginatedList<MovieEntity>>> call({int page = 1}) async {
     final (allGenresResponse, response) = await (

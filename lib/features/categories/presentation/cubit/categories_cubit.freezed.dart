@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'categories_cubit.dart';
@@ -9,6 +9,7 @@ part of 'categories_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$CategoriesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoriesState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is CategoriesState);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'CategoriesState()';
+    return 'CategoriesState()';
 }
 
 
@@ -203,7 +204,7 @@ class _Idle implements CategoriesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Idle);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Idle);
 }
 
 
@@ -212,7 +213,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'CategoriesState.idle()';
+    return 'CategoriesState.idle()';
 }
 
 
@@ -235,7 +236,7 @@ class _Loading implements CategoriesState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
 }
 
 
@@ -244,7 +245,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'CategoriesState.loading()';
+    return 'CategoriesState.loading()';
 }
 
 
@@ -257,7 +258,7 @@ String toString() {
 
 
 class _Success implements CategoriesState {
-  const _Success(final  List<CategoryEntity> categories): _categories = categories;
+  const _Success( List<CategoryEntity> categories): _categories = categories;
   
 
  final  List<CategoryEntity> _categories;
@@ -278,16 +279,18 @@ _$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&const DeepCollectionEquality().equals(other._categories, _categories));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&const DeepCollectionEquality().equals(other.categories, _categories));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories));
+}
 
 @override
 String toString() {
-  return 'CategoriesState.success(categories: $categories)';
+    return 'CategoriesState.success(categories: $categories)';
 }
 
 
@@ -344,16 +347,18 @@ _$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error);
+int get hashCode {
+    return Object.hash(runtimeType,error);
+}
 
 @override
 String toString() {
-  return 'CategoriesState.error(error: $error)';
+    return 'CategoriesState.error(error: $error)';
 }
 
 

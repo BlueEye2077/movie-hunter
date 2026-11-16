@@ -13,4 +13,3 @@ Map<String, dynamic> _$MarkWatchlistRequestToJson(
   'media_id': instance.mediaId,
   'watchlist': instance.watchlist,
 };
-

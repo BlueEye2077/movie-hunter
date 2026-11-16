@@ -6,8 +6,8 @@ class GetMovieTrailerUseCase {
   final MovieDetailsRepository _movieDetailsRepository;
 
   const GetMovieTrailerUseCase({
-    required MovieDetailsRepository movieDetailsRepository,
-  }) : _movieDetailsRepository = movieDetailsRepository;
+    required this._movieDetailsRepository,
+  });
 
   Future<ApiResult<String?>> call(int movieId) async {
     final response = await _movieDetailsRepository.getMovieVideos(movieId);

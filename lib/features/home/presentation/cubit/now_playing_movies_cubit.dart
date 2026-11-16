@@ -14,9 +14,8 @@ class NowPlayingMoviesCubit extends Cubit<NowPlayingMoviesState> {
   final GetNowPlayingMoviesUseCase _getNowPlayingMoviesUseCase;
 
   NowPlayingMoviesCubit({
-    required GetNowPlayingMoviesUseCase getNowPlayingMoviesUseCase,
-  }) : _getNowPlayingMoviesUseCase = getNowPlayingMoviesUseCase,
-       super(const NowPlayingMoviesState.idle());
+    required this._getNowPlayingMoviesUseCase,
+  }) : super(const NowPlayingMoviesState.idle());
 
   // Get now playing movies
   Future<void> getNowPlayingMovies() async {

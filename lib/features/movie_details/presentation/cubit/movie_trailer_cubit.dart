@@ -12,9 +12,8 @@ class MovieTrailerCubit extends Cubit<MovieTrailerState> {
   final GetMovieTrailerUseCase _getMovieTrailerUseCase;
   String? _cachedTrailerKey;
 
-  MovieTrailerCubit({required GetMovieTrailerUseCase getMovieTrailerUseCase})
-    : _getMovieTrailerUseCase = getMovieTrailerUseCase,
-      super(const MovieTrailerState.idle());
+  MovieTrailerCubit({required this._getMovieTrailerUseCase})
+    : super(const MovieTrailerState.idle());
 
   Future<void> getMovieTrailer(int movieId) async {
     if (state is _Loading) return;
