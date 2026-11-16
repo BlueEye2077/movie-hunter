@@ -18,6 +18,7 @@ class AccountDetailsCubit extends Cubit<AccountDetailsState> {
        super(const AccountDetailsState.idle());
 
   Future<void> getAccountDetails() async {
+    if (state is _Loading) return;
     emit(const AccountDetailsState.loading());
     final result = await _getAccountDetailsUseCase();
     if (isClosed) return;
@@ -25,6 +26,12 @@ class AccountDetailsCubit extends Cubit<AccountDetailsState> {
       success: (account) => emit(AccountDetailsState.success(account)),
       failure: (error) => emit(AccountDetailsState.error(error)),
     );
+  }
+
+  void retryIfNeeded() {
+    if (state is _Idle || state is _Error) {
+      getAccountDetails();
+    }
   }
 }
 

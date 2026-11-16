@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/theming/colors.dart';
+import 'features/account/presentation/cubit/account_details_cubit.dart';
 import 'features/account/presentation/screens/profile_screen.dart';
 import 'features/account/presentation/widgets/profile_tab_bloc_providers.dart';
 import 'features/categories/presentation/cubit/categories_cubit.dart';
@@ -49,6 +50,7 @@ class _MainScreenState extends State<MainScreen> {
       // Bottom navigation bar
       bottomNavigationBar: MainBottomNavBar(
         onTabSelected: (index) {
+          context.read<AccountDetailsCubit>().retryIfNeeded();
           setState(() {
             _selectedIndex = index;
             _visitedTabs[index] = true;

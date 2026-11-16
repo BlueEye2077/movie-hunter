@@ -19,10 +19,13 @@ class ProfileHeader extends StatelessWidget {
             username: account.username,
             avatarPath: account.avatarPath,
           ),
-          orElse: () => const ProfileHeaderContent(
-            name: '',
-            username: '',
-            avatarPath: null,
+          orElse: () => GestureDetector(
+            onTap: () => context.read<AccountDetailsCubit>().retryIfNeeded(),
+            child: const ProfileHeaderContent(
+              name: '',
+              username: '',
+              avatarPath: null,
+            ),
           ),
         );
       },

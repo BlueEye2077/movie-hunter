@@ -95,19 +95,25 @@ class AccountRepositoryImpl implements AccountRepository {
     required bool isAdded,
   }) {
     return _withAccountAndSession((accountId, sessionId) async {
-      switch (listType) {
-        case AccountMovieListType.favorites:
+      final response = switch (listType) {
+        AccountMovieListType.favorites =>
           await _accountApiService.toggleFavorite(
             accountId,
             sessionId,
             MarkFavoriteRequest(mediaId: movieId, favorite: isAdded),
-          );
-        case AccountMovieListType.watchlist:
+          ),
+        AccountMovieListType.watchlist =>
           await _accountApiService.toggleWatchlist(
             accountId,
             sessionId,
             MarkWatchlistRequest(mediaId: movieId, watchlist: isAdded),
-          );
+          ),
+      };
+      if (response.success == false) {
+        final message = response.statusMessage;
+        throw (message != null && message.isNotEmpty)
+            ? NetworkExceptions.defaultError(message)
+            : const NetworkExceptions.unexpectedError();
       }
       _movieChangesController.add(
         AccountMovieChange(
@@ -139,6 +145,7 @@ class AccountRepositoryImpl implements AccountRepository {
       isLoggedInUser = false;
       return ApiResult.success(null);
     } catch (error) {
+      if (error is NetworkExceptions) return ApiResult.failure(error);
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
   }
@@ -172,6 +179,7 @@ class AccountRepositoryImpl implements AccountRepository {
       final data = await action(sessionId);
       return ApiResult.success(data);
     } catch (error) {
+      if (error is NetworkExceptions) return ApiResult.failure(error);
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
   }
@@ -192,6 +200,7 @@ class AccountRepositoryImpl implements AccountRepository {
       final data = await action(accountId, sessionId);
       return ApiResult.success(data);
     } catch (error) {
+      if (error is NetworkExceptions) return ApiResult.failure(error);
       return ApiResult.failure(NetworkExceptions.getDioException(error));
     }
   }

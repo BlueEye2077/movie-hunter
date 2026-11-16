@@ -16,6 +16,7 @@ class LogoutCubit extends Cubit<LogoutState> {
       super(const LogoutState.idle());
 
   Future<void> logout() async {
+    if (state is _Loading) return;
     emit(const LogoutState.loading());
     final result = await _logoutUseCase();
     if (isClosed) return;

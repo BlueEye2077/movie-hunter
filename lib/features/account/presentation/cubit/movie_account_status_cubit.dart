@@ -25,6 +25,7 @@ class MovieAccountStatusCubit extends Cubit<MovieAccountStatusState> {
        super(const MovieAccountStatusState.idle());
 
   Future<void> loadStatus(int movieId) async {
+    if (state is _Loading) return;
     emit(const MovieAccountStatusState.loading());
     final result = await _getMovieAccountStatusUseCase(movieId);
     if (isClosed) return;
