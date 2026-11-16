@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final ValueChanged<String>? onFieldSubmitted;
+  final Iterable<String>? autofillHints;
 
   const CustomTextField({
     super.key,
@@ -24,11 +25,13 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.textInputAction,
     this.onFieldSubmitted,
+    this.autofillHints,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofillHints: autofillHints,
       validator: validator,
       controller: controller,
       obscureText: obscureText,
