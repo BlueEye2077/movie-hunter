@@ -39,6 +39,26 @@ jobs:
         ruby-version: 'ruby'
         bundler-cache: true
         working-directory: android
+
+    - name: Generate Envied config
+      env:
+        TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      run: |
+        VAL="${TMDB_API_KEY#\"}"
+        VAL="${VAL%\"}"
+        VAL="$(printf '%s' "$VAL" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+        if [ -z "$VAL" ]; then
+          echo "Error: TMDB_API_KEY secret is empty." >&2
+          exit 1
+        fi
+        case "$VAL" in
+          Bearer\ *) ;;
+          *) VAL="Bearer $VAL" ;;
+        esac
+        printf 'TMDB_API_KEY="%s"\n' "$VAL" > .env
+        flutter pub get
+        dart run build_runner build --delete-conflicting-outputs
+        rm -f .env
         
     - name: Build and Distribute App
       env:
